@@ -21,17 +21,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import EditIcon from '@material-ui/icons/Edit';
 import BrightnessMediumIcon from '@material-ui/icons/BrightnessMedium';
 import CreateIcon from '@material-ui/icons/Create';
-//import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-//import TodayIcon from '@material-ui/icons/Today';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import LocalAirportOutlinedIcon from '@material-ui/icons/LocalAirportOutlined';
-//import TreeItem from '@material-ui/lab/TreeItem';
 import DeviceHubIcon from '@material-ui/icons/DeviceHub';
-//import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import PublishIcon from '@material-ui/icons/Publish';
 import Switch from '@material-ui/core/Switch';
-//import MaterialUIPickers from './date';
 import FullScreenDialog from './Agartala Airport';
 import FullScreenDialog1 from './Indore Airport';
 import FullScreenDialog2 from './Kolkata Airport';
@@ -41,22 +36,9 @@ import FullScreenDialog13 from './Area3.js';
 import FullScreenDialog14 from './Area4.js';
 import FullScreenDialog15 from './Area5.js';
 import FullScreenDialog16 from './Area6.js';
-import Divider from '@material-ui/core/Divider';
-import Dialog from '@material-ui/core/Dialog';
-import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 const drawerWidth = 240;
-const styles = {
-  heroContainer: {
-    height: 800,
-    backgroundImage: `url(${"https://images.unsplash.com/photo-1503795558777-38b60c1e5009?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    width: `calc(100vw + 48px)`,
-    margin: -24,
-    padding: 24,
-  }
- };
+
 const useStyles = makeStyles(theme => ({
   speedDial: {
     position: 'absolute',
@@ -192,9 +174,7 @@ const actions = [
   { icon: <ShareIcon />, name: 'Share' },
   { icon: <FavoriteIcon />, name: 'Like' },
 ];
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+
 
 
 export default function PrimarySearchAppBar() {
@@ -241,23 +221,7 @@ const lightTheme = createMuiTheme({
   const handleClick = () => {
     setClose(!close);
   };
-  const [a, seta] = React.useState(false);
-  const handlea= () => {
-    seta(!a);
-  };
-  const [b, setb] = React.useState(false);
-  const handleb= () => {
-    seta(!b);
-  };
-  const [c, setc] = React.useState(false);
-  const handlec= () => {
-    seta(!c);
-  };
-  const [d, setd] = React.useState(false);
-  const handled= () => {
-    seta(!d);
-  };
-
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
