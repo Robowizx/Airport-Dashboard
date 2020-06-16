@@ -37,6 +37,10 @@ import FullScreenDialog14 from './Area4.js';
 import FullScreenDialog15 from './Area5.js';
 import FullScreenDialog16 from './Area6.js';
 import Slide from '@material-ui/core/Slide';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Badge from '@material-ui/core/Badge';
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -277,7 +281,8 @@ const lightTheme = createMuiTheme({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-     
+     <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
 
@@ -292,29 +297,23 @@ const lightTheme = createMuiTheme({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+     
       <MenuItem>
-        <IconButton color="inherit">
-          
-            <AccessAlarmIcon />
-          
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton  color="inherit">
-          
-            <CreateIcon />
-          
+        
+          <IconButton aria-label="show 17 new notifications" color="inherit">
+              <Badge badgeContent={17} color="#f50057">
+            <NotificationsIcon/>
+          </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
       <MenuItem>
         <IconButton  color="inherit">
           
-            <BrightnessMediumIcon/>
+            <AccountCircle />
           
         </IconButton>
-        <p>Notifications</p>
+        <p>Account</p>
       </MenuItem>
     </Menu>
   );
@@ -388,6 +387,32 @@ const lightTheme = createMuiTheme({
            
             Light<Switch checked ={darkMode} onChange={ ()=> setDarkMode(!darkMode)}/>Dark
            
+          </div>
+ <IconButton aria-label="show 17 new notifications" color="inherit">
+              <Badge badgeContent={17} color="#f50057">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+             <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
           </div>
          
           </Toolbar>
