@@ -16,7 +16,7 @@ Dasboard software for sih
     cd Frontend
     npm i 
   ```
-5) run react dev-server
+4) run react dev-server
   ```shell 
     npm start 
   ```
