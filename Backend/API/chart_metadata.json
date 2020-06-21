@@ -36,10 +36,6 @@
     },
 
     "stacked_column":{
-      "theme":{
-        "mode" : "light",
-        "palette" : "palette0"
-      },
       "title":{
         "text": "",
         "align": "center"
