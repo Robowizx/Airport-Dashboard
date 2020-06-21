@@ -5,6 +5,7 @@
         "type": "donut"
         }   
     },
+    
     "group_column": {
       "series": [],
       "chart": {
@@ -32,5 +33,46 @@
     "fill": {
       "opacity": 1
     }
+    },
+
+    "stacked_column":{
+      "theme":{
+        "mode" : "light",
+        "palette" : "palette0"
+      },
+      "title":{
+        "text": "",
+        "align": "center"
+      },
+      "series": [],
+      "chart": {
+        "type": "bar",
+        "height": 350,
+        "stacked": true,
+        "toolbar": {
+          "show": true
+        },
+        "zoom": {
+          "enabled": false
+        }
+      },
+      "plotOptions": {
+        "bar": {
+          "horizontal": false
+        }
+      },
+      "dataLabels": {
+        "enabled": false
+      },
+      "xaxis": {
+        "categories": []
+      },
+      "legend": {
+        "position": "bottom",
+        "offsetY": 5
+      },
+      "fill": {
+        "opacity": 1
+      }
     }
 }

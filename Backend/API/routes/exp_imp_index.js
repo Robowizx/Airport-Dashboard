@@ -45,7 +45,7 @@ router.get('/:air/exp/by_device',(req,res)=>{
             // res.json(documents);
             // console.log(group_column);
             console.log(impdata,expdata,area);
-
+            console.log({option: JSON.stringify(group_column)});
             res.render("chart_template",{option: JSON.stringify(group_column)});
         }
     })

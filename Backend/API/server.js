@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const routes = require('./routes/exp_imp_index');
+const route = require('./routes/res_his');
 const db = require('./db')
 const body_parser = require("body-parser");
 
@@ -12,7 +13,7 @@ app.set('view engine', 'pug');
 app.use(body_parser.json());
 app.use(express.static('./Public'));
 app.use('/',routes);
-
+app.use('/',route);
 
 const dbName = "AirportDB";
 const collectionName = "Agartala"
