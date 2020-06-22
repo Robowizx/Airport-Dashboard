@@ -1,36 +1,59 @@
 {
-    "donut": {
-        "series": [],
-        "chart": {
-        "type": "donut"
-        }   
-    },
-    "group_column": {
-      "series": [],
-      "chart": {
-      "type": "bar",
-      "height": 350
-    },
-    "plotOptions": {
-      "bar": {
-        "horizontal": false,
-        "columnWidth": "55%",
-        "endingShape": "rounded"
+  "stacked_column": {
+    "series": [
+      {
+        "name": "",
+        "data": []
+      },
+      {
+        "name": "",
+        "data": []
       }
-    },
-    "dataLabels": {
-      "enabled": false
-    },
-    "stroke": {
-      "show": true,
-      "width": 2,
-      "colors": ["transparent"]
-    },
+    ],
     "xaxis": {
       "categories": []
     },
+
+    "chart": {
+      "type": "bar",
+      "height": 350,
+      "stacked": true,
+      "toolbar": {
+        "show": true
+      },
+      "zoom": {
+        "enabled": true
+      }
+    },
+    "responsive": [
+      {
+        "breakpoint": 480,
+        "options": {
+          "legend": {
+            "position": "bottom",
+            "offsetX": -10,
+            "offsetY": 0
+          }
+        }
+      }
+    ],
+    "plotOptions": {
+      "bar": {
+        "horizontal": false,
+        "columnWidth": "45%"
+      }
+    },
+
+    "legend": {
+      "position": "right",
+      "offsetY": 40
+    },
     "fill": {
-      "opacity": 1
+      "opacity": 2,
+      "type": "solid"
+    },
+    "dataLabels": {
+      "enabled": false
     }
-    }
+  }
 }
