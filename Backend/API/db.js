@@ -4,7 +4,7 @@ const MongoClient = require("mongodb").MongoClient;
 const dbname = "AirportDB";
 const url = "mongodb+srv://dbAAI:maverick123@cluster0-qkpve.mongodb.net/AirportDB?retryWrites=true&w=majority";
 // Options for mongoDB
-const mongoOptions = {useNewUrlParser : true};
+const mongoOptions = {useNewUrlParser : true, useUnifiedTopology: true};
 
 const state = {
     db : null
@@ -20,6 +20,7 @@ const connect = (cb) =>{
                 cb(err);
             else{
                 state.db = client.db(dbname);
+                state['client'] = client;
                 cb();
             }
         });
@@ -32,4 +33,8 @@ const getDB = ()=>{
     return state.db;
 }
 
-module.exports = {getDB,connect};
+const getClient = ()=>{
+    return state.client;
+}
+
+module.exports = {getDB,connect,getClient};
