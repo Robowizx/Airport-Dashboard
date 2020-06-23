@@ -35,7 +35,10 @@
     }
     },
 
-    "stacked_column":{
+    "dynamic_column":{
+      "theme": {
+       
+      },
       "title":{
         "text": "",
         "align": "center"
@@ -43,13 +46,14 @@
       "series": [],
       "chart": {
         "type": "bar",
-        "height": 350,
+        "height": 400,
         "stacked": true,
+        "stackType": "100%",
         "toolbar": {
           "show": true
         },
         "zoom": {
-          "enabled": false
+          "enabled": true
         }
       },
       "plotOptions": {
@@ -58,17 +62,23 @@
         }
       },
       "dataLabels": {
-        "enabled": false
+        "enabled": true,
+        "textAnchor": "middle"
       },
       "xaxis": {
         "categories": []
       },
       "legend": {
-        "position": "bottom",
-        "offsetY": 5
+        "position": "right",
+        "offsetX": 0,
+        "offsetY": 150,
+        "markers":{
+          "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
+        }
       },
       "fill": {
-        "opacity": 1
+        "opacity": 1,
+        "colors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
       }
     }
 }

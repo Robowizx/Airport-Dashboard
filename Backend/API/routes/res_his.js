@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { stacked_column } = require("../chart_metadata.json");
+const { dynamic_column } = require("../chart_metadata.json");
 const db = require("../db");
 
 router.get("/:air/res/by_device", (req, res) => {
@@ -51,11 +51,11 @@ router.get("/:air/res/by_device", (req, res) => {
             data: excellent,
           }
         );
-        stacked_column.series = series;
-        stacked_column.xaxis.categories = area;
-        stacked_column.title.text = "Responses By Device";
+        dynamic_column.series = series;
+        dynamic_column.xaxis.categories = area;
+        dynamic_column.title.text = "Responses By Device";
         res.render("chart_template", {
-          option: JSON.stringify(stacked_column),
+          option: JSON.stringify(dynamic_column),
         });
       }
     });
@@ -109,11 +109,11 @@ router.get("/:air/res/by_survey", (req, res) => {
             data: excellent,
           }
         );
-        stacked_column.series = series;
-        stacked_column.xaxis.categories = area;
-        stacked_column.title.text = "Responses By Survey";
+        dynamic_column.series = series;
+        dynamic_column.xaxis.categories = area;
+        dynamic_column.title.text = "Responses By Survey";
         res.render("chart_template", {
-          option: JSON.stringify(stacked_column),
+          option: JSON.stringify(dynamic_column),
         });
       }
     });
@@ -167,11 +167,11 @@ router.get("/:air/res/by_group", (req, res) => {
             data: excellent,
           }
         );
-        stacked_column.series = series;
-        stacked_column.xaxis.categories = area;
-        stacked_column.title.text = "Responses By Group";
+        dynamic_column.series = series;
+        dynamic_column.xaxis.categories = area;
+        dynamic_column.title.text = "Responses By Group";
         res.render("chart_template", {
-          option: JSON.stringify(stacked_column),
+          option: JSON.stringify(dynamic_column),
         });
       }
     });

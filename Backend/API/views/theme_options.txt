@@ -1,0 +1,8 @@
+// single color which can be shaded from dark to ligth or vis-verse
+// usefull in some of places
+ "monochrome": {
+          "enabled": true,
+          "color": "#ffcb1f",
+          "shadeTo": "dark",
+          "shadeIntensity": 0.65
+}
