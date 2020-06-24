@@ -215,7 +215,6 @@ html
               enabled: true
           },
           stacked: true,
-          stackType: '100%',
           toolbar: {
         show: true
       }
@@ -243,7 +242,7 @@ html
         },
         yaxis: {
           labels: {
-            show: false
+            show: true
           }
         },
         title: {
@@ -259,7 +258,10 @@ html
           y: {
             title: {
               formatter: function (val, opts) {
-                return opts.w.globals.labels[opts.dataPointIndex]
+                //- return opts.w.globals.labels[opts.dataPointIndex]
+            let percent = opts.w.globals.seriesPercent[opts.seriesIndex][opts.dataPointIndex];
+            percentage =  percent.toFixed(0) + '%'
+            return (opts.w.globals.labels[opts.dataPointIndex] + " (" + percentage + ")");
               }
             }
           }

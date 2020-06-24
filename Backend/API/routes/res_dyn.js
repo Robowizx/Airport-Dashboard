@@ -3,13 +3,10 @@ const router = express.Router();
 const db = require("../db");
 
 router.get("/:air/res/:type", (req, res) => {
-  const dates = req.query.date;
-  const airport = req.params.air;
   const type = req.params.type +".responses";
-
   db.getDB()
-    .collection(airport)
-    .find({ date: dates })
+    .collection(req.params.air)
+    .find({ date: req.query.date })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err) console.log(err);
