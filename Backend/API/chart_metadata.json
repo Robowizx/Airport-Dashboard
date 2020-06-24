@@ -79,6 +79,11 @@
       "fill": {
         "opacity": 1,
         "colors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
+      },
+      "tooltip":{
+        "marker":{
+          "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
+        }
       }
-    }
+  }
 }
