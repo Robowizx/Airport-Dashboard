@@ -7,6 +7,11 @@ router.get('/:air/exp/:sec',(req,res)=>{
 
     let db_query = { _id:0};
     db_query[`${req.params.sec}.responses`] = 1;
+    console.log(db_query)
+    let expdata=[];
+    let impdata = [];
+    let area = [];
+    let series = [];
     db.getDB().collection(req.params.air).find({date: req.query.date}).project(db_query).toArray((err,documents)=>{
         if(err)
             console.log(err);
@@ -14,15 +19,11 @@ router.get('/:air/exp/:sec',(req,res)=>{
 
             console.log(documents);
             let resp = documents[0][`${req.params.sec}`].responses;
-            let expdata=[];
-            let impdata = [];
-            let area = [];
-            let series = [];
 
             for (i=0;i<resp.length;i+=2){
                 // console.log(resp[i]);
                 // console.log(resp[i]['Exp. Index']);
-                expdata.push(resp[i]['Exp. Index']);
+                expdata.push(resp[i]['Exp Index']);
                 area.push(resp[i].area);
                 if(req.params.sec == 'by_device'){
                     if(typeof(resp[i]['Improvement Index']) =='undefined')
