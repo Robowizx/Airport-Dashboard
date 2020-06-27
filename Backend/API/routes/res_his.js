@@ -7,7 +7,7 @@ router.get("/:air/resh/:type", (req, res) => {
   const type = req.params.type +".responses";
   db.getDB()
     .collection(req.params.air)
-    .find({ date: req.query.date })
+    .find({ date: req.query.date, type: req.query.dev})
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err) console.log(err);

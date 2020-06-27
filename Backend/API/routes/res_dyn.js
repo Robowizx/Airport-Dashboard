@@ -4,9 +4,10 @@ const db = require("../db");
 
 router.get("/:air/res/:type", (req, res) => {
   const type = req.params.type +".responses";
+  const dt = req.query.dev;
   db.getDB()
     .collection(req.params.air)
-    .find({ date: req.query.date })
+    .find({ date: req.query.date, type: req.query.dev })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err) console.log(err);
@@ -83,7 +84,7 @@ router.get("/:air/res/:type", (req, res) => {
             quarters: excellentA
           }
         );
-        res.render("chart_template_dynamic",{option:JSON.stringify(series)});
+        res.render("chart_template_dynamic",{option:JSON.stringify(series),dtype: dt});
       }
     });
 });

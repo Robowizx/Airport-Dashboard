@@ -88,6 +88,7 @@ html
             div(id='chart')
             div(id='chart-quarter')
     script.
+        var device = "#{dtype}";
         var options = {
           series: [{
           data: makeData()
@@ -185,7 +186,7 @@ html
           }
         },
         title: {
-          text: 'All Responses',
+          text: 'All Responses for Device '+device,
           offsetX: 15
         },
         subtitle: {
@@ -298,10 +299,4 @@ html
       
       chart.addEventListener('updated', function (chart) {
         updateQuarterChart(chart, 'barQuarter');
-      });
-      
-      document.querySelector("#model").addEventListener("change", function (e) {
-        chart.updateSeries([{
-          data: makeData()
-        }]);
       });
