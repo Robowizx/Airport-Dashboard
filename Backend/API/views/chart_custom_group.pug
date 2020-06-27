@@ -1,0 +1,41 @@
+doctype html
+html
+    head
+        script(src='/Javascript/apexcharts.js')
+        link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
+    body
+         script.
+                var options = {
+                dataLabels: {
+                enabled: true,
+                textAnchor: 'start',
+                style: {
+                colors: ['#fff']
+                 },
+                formatter: function (val, opt) {
+                return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val+#{topArea,leastArea};
+                },
+                offsetX: 0,
+                dropShadow: {
+                enabled: true
+                }
+                },
+                tooltip: {
+                theme: 'dark',
+                x: {
+                show: false
+                },
+                y: {
+                title: {
+                    formatter: function () {
+                     return #{topData,leastData};
+                 }
+                }
+                }
+                }               
+                }
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+      
+      
+     
