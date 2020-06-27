@@ -1,59 +1,52 @@
 {
-  "stacked_column": {
+  "custom_group": {
     "series": [
       {
-        "name": "",
         "data": []
       },
       {
-        "name": "",
         "data": []
       }
     ],
+    "chart": {
+      "type": "bar",
+      "height": 430
+    },
+    "plotOptions": {
+      "bar": {
+        "horizontal": true,
+        "dataLabels": {
+          "position": "top"
+        }
+      }
+    },
+    "dataLabels": {
+      "enabled": true,
+
+      "offsetX": -6,
+      "style": {
+        "fontSize": "10px",
+        "colors": ["#fff"]
+      }
+    },
+    "stroke": {
+      "show": true,
+      "width": 1,
+      "colors": ["#fff"]
+    },
     "xaxis": {
       "categories": []
     },
-
-    "chart": {
-      "type": "bar",
-      "height": 350,
-      "stacked": true,
-      "toolbar": {
-        "show": true
-      },
-      "zoom": {
-        "enabled": true
-      }
-    },
-    "responsive": [
-      {
-        "breakpoint": 480,
-        "options": {
-          "legend": {
-            "position": "bottom",
-            "offsetX": -10,
-            "offsetY": 0
-          }
-        }
-      }
-    ],
-    "plotOptions": {
-      "bar": {
-        "horizontal": false,
-        "columnWidth": "45%"
-      }
-    },
-
     "legend": {
-      "position": "right",
-      "offsetY": 40
+      "onItemHover": {
+        "highlightDataSeries": true
+      },
+      "position": "bottom"
     },
-    "fill": {
-      "opacity": 2,
-      "type": "solid"
-    },
-    "dataLabels": {
-      "enabled": false
+    "title": {
+      "text": "Top and Least Device",
+      "align": "left",
+      "floating": true
     }
   }
 }
