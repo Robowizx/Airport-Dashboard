@@ -1,8 +1,10 @@
 //code for serving API goes here.
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 4000;
-const exp_chart = require('./routes/exp_imp_index');
+const PORT = process.env.PORT || 3000;
+const routes = require('./routes/exp_imp_index');
+const route = require('./routes/res_dyn');
+const routeh = require('./routes/res_his');
 const db = require('./db')
 const body_parser = require("body-parser");
 
