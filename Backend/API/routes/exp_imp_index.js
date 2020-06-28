@@ -7,12 +7,12 @@ router.get('/:air/exp/:sec',(req,res)=>{
 
     let db_query = { _id:0};
     db_query[`${req.params.sec}.responses`] = 1;
-    db.getDB().collection(req.params.air).find({date: req.query.date}).project(db_query).toArray((err,documents)=>{
+    db.getDB().collection(req.params.air).find({date: req.query.date, type: req.query.type}).project(db_query).toArray((err,documents)=>{
         if(err)
             console.log(err);
         else{
 
-            console.log(documents);
+            console.log(documents[0][`${req.params.sec}`]);
             let resp = documents[0][`${req.params.sec}`].responses;
             let expdata=[];
             let impdata = [];
@@ -22,7 +22,7 @@ router.get('/:air/exp/:sec',(req,res)=>{
             for (i=0;i<resp.length;i+=2){
                 // console.log(resp[i]);
                 // console.log(resp[i]['Exp. Index']);
-                expdata.push(resp[i]['Exp. Index']);
+                expdata.push(resp[i]['Exp Index']);
                 area.push(resp[i].area);
                 if(req.params.sec == 'by_device'){
                     if(typeof(resp[i]['Improvement Index']) =='undefined')
@@ -33,7 +33,7 @@ router.get('/:air/exp/:sec',(req,res)=>{
             }
             
             series.push({
-                            name:'Exp. Index',
+                            name:'Exp Index',
                             data: expdata
                         });
 
