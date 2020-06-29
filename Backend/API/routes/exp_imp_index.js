@@ -7,17 +7,16 @@ router.get('/:air/exp/:sec',(req,res)=>{
 
     let db_query = { _id:0};
     db_query[`${req.params.sec}.responses`] = 1;
-    console.log(db_query)
     let expdata=[];
     let impdata = [];
     let area = [];
     let series = [];
-    db.getDB().collection(req.params.air).find({date: req.query.date}).project(db_query).toArray((err,documents)=>{
+    db.getDB().collection(req.params.air).find({date: req.query.date, type: req.query.type}).project(db_query).toArray((err,documents)=>{
         if(err)
             console.log(err);
         else{
 
-            console.log(documents);
+            console.log(documents[0][`${req.params.sec}`]);
             let resp = documents[0][`${req.params.sec}`].responses;
 
             for (i=0;i<resp.length;i+=2){
@@ -34,7 +33,7 @@ router.get('/:air/exp/:sec',(req,res)=>{
             }
             
             series.push({
-                            name:'Exp. Index',
+                            name:'Exp Index',
                             data: expdata
                         });
 
