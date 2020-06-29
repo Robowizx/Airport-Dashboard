@@ -1,5 +1,12 @@
 {
-    "donut": {
+  "bullet":{
+        "title": "",
+        "subtitle": "",
+        "ranges": [],
+        "measures": [],
+        "markers": []
+    } , 
+  "donut": {
         "series": [],
         "chart": {
         "type": "donut"

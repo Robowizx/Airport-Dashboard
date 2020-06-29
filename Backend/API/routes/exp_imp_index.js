@@ -3,7 +3,7 @@ const router = express.Router();
 const {group_column} = require('../chart_metadata.json');
 const db = require('../db');
 
-router.get('/:air/exp/:sec',(req,res)=>{
+router.get('/:air/:dev/exp/:sec',(req,res)=>{
 
     let db_query = { _id:0};
     db_query[`${req.params.sec}.responses`] = 1;
@@ -12,7 +12,7 @@ router.get('/:air/exp/:sec',(req,res)=>{
     let impdata = [];
     let area = [];
     let series = [];
-    db.getDB().collection(req.params.air).find({date: req.query.date}).project(db_query).toArray((err,documents)=>{
+    db.getDB().collection(req.params.air).find({date: req.query.date,type: req.params.dev}).project(db_query).toArray((err,documents)=>{
         if(err)
             console.log(err);
         else{

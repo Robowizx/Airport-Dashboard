@@ -8,5 +8,6 @@ html
         div(id='chart',style="max-width:650px; margin: 35px auto")
     script.
         var options = !{option};
+        console.log(!{option});
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();

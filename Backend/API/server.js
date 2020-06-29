@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 4000;
-const exp_chart = require('./routes/exp_imp_index');
+const exp_chart = require('./routes/bullet_exp');
 const db = require('./db')
 const body_parser = require("body-parser");
 
