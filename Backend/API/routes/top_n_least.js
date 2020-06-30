@@ -11,11 +11,16 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
 
   db.getDB()
     .collection(airport)
-    .find(
-      { type: type },
-      { date: dates },
-      { projection: { by_device: 1, by_survey: 1, by_group: 1 } }
-    )
+    .find({ date: dates, type: type })
+    .project({
+      _id: 0,
+      ["by_device.top"]: 1,
+      ["by_device.least"]: 1,
+      ["by_survey.top"]: 1,
+      ["by_survey.least"]: 1,
+      ["by_group.top"]: 1,
+      ["by_group.least"]: 1,
+    })
     .toArray((err, documents) => {
       {
         if (err) console.log(err);
@@ -69,8 +74,10 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
           //   topData: topData,
           //   leastData: leastData,
           // });
-          res.render("chart_template", {
+          res.render("chart_custom_group", {
             option: JSON.stringify(custom_group),
+            area: JSON.stringify({ leastArea: leastArea, topArea: topArea }),
+            series: JSON.stringify({ leastData: leastData, topData: topData }),
           });
         }
       }

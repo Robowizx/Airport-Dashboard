@@ -4,36 +4,32 @@ html
         script(src='/Javascript/apexcharts.js')
         link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
     body
-         script.
-                var options = {
-                dataLabels: {
-                enabled: true,
-                textAnchor: 'start',
-                style: {
-                colors: ['#fff']
-                 },
-                formatter: function (val, opt) {
-                return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val+#{topArea,leastArea};
-                },
-                offsetX: 0,
-                dropShadow: {
-                enabled: true
-                }
-                },
-                tooltip: {
-                theme: 'dark',
-                x: {
-                show: false
-                },
-                y: {
-                title: {
-                    formatter: function () {
-                     return #{topData,leastData};
-                 }
-                }
-                }
-                }               
-                }
+        div(id='chart',style="max-width:650px; margin: 35px auto")
+    script.
+        var options = !{option};
+        options.dataLabels['formatter'] = (val,{seriesIndex,dataPointIndex,w})=>{
+            let area = !{area};  
+            if(seriesIndex)
+                return `${area.leastArea[dataPointIndex]}`; 
+            else
+                return `${area.topArea[dataPointIndex]}`;     
+        };
+
+        options.tooltip['custom']=(val,{series,seriesIndex,dataPointIndex,w})=>{
+            let area=!{area};
+            let series=!{series};
+            '<div class="arrow_box">' +"<span>"
+                if(seriesIndex)
+                return `${area.leastArea[dataPointIndex]}` +
+                 ": " +
+                 `${series.topData[seriesIndex][dataPointIndex]}` ; 
+                 else
+                return `${area.topArea[dataPointIndex]}` +
+                  ": " +
+                 `${series.leastData[seriesIndex][dataPointIndex]}` ; 
+                 +"</span>"+
+                 "</div>"    
+                     };
                 var chart = new ApexCharts(document.querySelector("#chart"), options);
                 chart.render();
       

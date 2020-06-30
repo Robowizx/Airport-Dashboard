@@ -8,6 +8,7 @@
         "data": []
       }
     ],
+    "colors": ["#F47B20", "#005596"],
     "chart": {
       "type": "bar",
       "height": 430
