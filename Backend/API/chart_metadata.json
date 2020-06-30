@@ -26,7 +26,7 @@
       "offsetX":-6,
       "style": {
         "fontSize": "10px",
-        "colors": ["#000"]
+        "colors": ["#fff"]
       }
     },
     "tooltip":{

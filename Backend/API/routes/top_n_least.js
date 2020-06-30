@@ -65,8 +65,10 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
             documents[0].by_group.least.area
           );
           for(let i=0;i<3;i++){
-            if(topData[i]<10 || leastData[i]<10){
-              custom_group.dataLabels.offsetX = 40;
+            if(topData[i]<10.0 || leastData[i]<10.0){
+              custom_group.dataLabels.offsetX = 36;
+              custom_group.dataLabels.style.colors = ["#000"];
+              break;
             }
           }
           categories.push("By Device", "By Survey", "By Group");
