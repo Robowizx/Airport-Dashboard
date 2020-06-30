@@ -7,7 +7,7 @@ html
         div(id='chart',style="max-width:650px; margin: 35px auto")
     script.
         var options = !{option};
-        options.dataLabels['formatter'] = (val,{seriesIndex,dataPointIndex,w})=>{
+        options.dataLabels['formatter'] = (val,{seriesIndex,dataPointIndex})=>{
             let area = !{area};  
             if(seriesIndex)
                 return `${area.leastArea[dataPointIndex]}`; 
@@ -15,23 +15,15 @@ html
                 return `${area.topArea[dataPointIndex]}`;     
         };
 
-        options.tooltip['custom']=(val,{series,seriesIndex,dataPointIndex,w})=>{
-            let area=!{area};
-            let series=!{series};
-            '<div class="arrow_box">' +"<span>"
-                if(seriesIndex)
-                return `${area.leastArea[dataPointIndex]}` +
-                 ": " +
-                 `${series.topData[seriesIndex][dataPointIndex]}` ; 
-                 else
-                return `${area.topArea[dataPointIndex]}` +
-                  ": " +
-                 `${series.leastData[seriesIndex][dataPointIndex]}` ; 
-                 +"</span>"+
-                 "</div>"    
-                     };
-                var chart = new ApexCharts(document.querySelector("#chart"), options);
-                chart.render();
+        options.tooltip.y.formatter = (val,{seriesIndex,dataPointIndex})=>{
+            let area = !{area};
+            if(seriesIndex)
+                return `${val}(${area.leastArea[dataPointIndex]})`; 
+            else
+                return `${val}(${area.topArea[dataPointIndex]})`;
+        };
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
       
       
      

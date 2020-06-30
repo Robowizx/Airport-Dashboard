@@ -9,6 +9,7 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
   const airport = req.params.air;
   const type = req.params.type;
 
+  console.log('finiding');
   db.getDB()
     .collection(airport)
     .find({ date: dates, type: type })
@@ -63,6 +64,11 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
             documents[0].by_survey.least.area,
             documents[0].by_group.least.area
           );
+          for(let i=0;i<3;i++){
+            if(topData[i]<10 || leastData[i]<10){
+              custom_group.dataLabels.offsetX = 40;
+            }
+          }
           categories.push("By Device", "By Survey", "By Group");
           custom_group.series = series;
           custom_group.xaxis.categories = categories;
@@ -76,8 +82,7 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
           // });
           res.render("chart_custom_group", {
             option: JSON.stringify(custom_group),
-            area: JSON.stringify({ leastArea: leastArea, topArea: topArea }),
-            series: JSON.stringify({ leastData: leastData, topData: topData }),
+            area: JSON.stringify({ leastArea: leastArea, topArea: topArea })
           });
         }
       }
