@@ -3,13 +3,13 @@ const router = express.Router();
 const db = require('../db');
 const {bullet} = require('../chart_metadata.json');
 
-router.get('/:air/:dev/exp',(req,res)=>{
+router.get('/:air/exp',(req,res)=>{
 
     let db_query = { _id:0,general:1 };
     bullet.ranges=[];
     bullet.markers = [];
     bullet.measures = [];
-    db.getDB().collection(req.params.air).find({date: req.query.date,type: req.params.dev}).project(db_query).toArray((err,documents)=>{
+    db.getDB().collection(req.params.air).find({date: req.query.date,type: req.query.type}).project(db_query).toArray((err,documents)=>{
         if(err)
             console.log(err);
         else{
