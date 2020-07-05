@@ -55,4 +55,4 @@ app.get('/',(req,res)=>{
 });
 
 //declaring server port
-app.listen(PORT, () => console.log(`Server listening at http://localhost:${PORT}`));  
+app.listen(PORT, () => serverLog.info(`Server listening at http://localhost:${PORT}`));  
