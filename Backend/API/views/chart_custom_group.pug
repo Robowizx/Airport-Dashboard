@@ -1,0 +1,30 @@
+doctype html
+html
+    head
+        script(src='/Javascript/apexcharts.js')
+        link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
+    body
+        div(id='chart',style="max-width:650px; margin: 35px auto")
+    script.
+        var options = !{option};
+        options.dataLabels['formatter'] = (val,{seriesIndex,dataPointIndex})=>{
+            let area = !{area};  
+            if(seriesIndex)
+                return `${area.leastArea[dataPointIndex]}`; 
+            else
+                return `${area.topArea[dataPointIndex]}`;     
+        };
+
+        options.tooltip.y.formatter = (val,{seriesIndex,dataPointIndex})=>{
+            let area = !{area};
+            if(seriesIndex)
+                return `${val}(${area.leastArea[dataPointIndex]})`; 
+            else
+                return `${val}(${area.topArea[dataPointIndex]})`;
+        };
+        console.log(options.dataLabels.offsetX);
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+      
+     
