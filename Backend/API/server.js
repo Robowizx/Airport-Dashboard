@@ -2,7 +2,8 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
-const routes = require("./routes/top_n_least");
+const top_least_route = require('./routes/top_n_least');
+const time_route = require("./routes/top_least_timeseries");
 const db = require("./db");
 const body_parser = require("body-parser");
 
@@ -11,7 +12,9 @@ app.set("view engine", "pug");
 
 app.use(body_parser.json());
 app.use(express.static("./Public"));
-app.use("/", routes);
+
+app.use("/", top_least_route);
+app.use("/", time_route);
 
 const dbName = "AirportDB";
 const collectionName = "Agartala";

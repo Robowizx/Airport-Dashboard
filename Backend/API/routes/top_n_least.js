@@ -4,15 +4,11 @@ const pug = require("pug");
 const { custom_group } = require("../chart_metadata.json");
 const db = require("../db");
 
-router.get("/:air/:type/:top_and_least/", (req, res) => {
-  const dates = req.query.date;
-  const airport = req.params.air;
-  const type = req.params.type;
-
+router.get("/:air/top_and_least/", (req, res) => {
   console.log('finiding');
   db.getDB()
-    .collection(airport)
-    .find({ date: dates, type: type })
+    .collection(req.params.air)
+    .find({ date: req.query.date, type: req.query.type })
     .project({
       _id: 0,
       ["by_device.top"]: 1,
@@ -74,14 +70,8 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
           categories.push("By Device", "By Survey", "By Group");
           custom_group.series = series;
           custom_group.xaxis.categories = categories;
-          // custom_group.plotOptions.bar.dataLabels.labels = ["Top", "Least"];
           console.log(topData, leastData);
-          // res.render("chart_custom_group", {
-          //   topArea: topArea,
-          //   leastArea: leastArea,
-          //   topData: topData,
-          //   leastData: leastData,
-          // });
+
           res.render("chart_custom_group", {
             option: JSON.stringify(custom_group),
             area: JSON.stringify({ leastArea: leastArea, topArea: topArea })
