@@ -1,9 +1,17 @@
+//importing express
 const express = require("express");
 const router = express.Router();
+
+//importing chart options skeleton
 const { line, brush } = require("../chart_metadata.json");
+
+//importing DB module
 const db = require("../db");
+
+//importing moment for date computation
 const moment = require("moment");
 
+//top_least_series chart route code
 router.get("/:air/top_least_timeseries/:sec", (req, res) => {
   console.log("please wait its connecting...");
   db.getDB()
@@ -15,7 +23,10 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
     .project({ _id: 0, date: 1, [`${req.params.sec}.top`]: 1, [`${req.params.sec}.least`]: 1 })
     .toArray((err, documents) => {
       {
-        if (err) console.log(err);
+        if (err){
+          console.log(err);
+          res.status(400).send(err);
+        }  
         else {
           var topData = [];
           var leastData = [];
@@ -61,7 +72,7 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
           brush.series = seriesBrush;
           // console.log(topData, leastData);
           // console.log(topArea, leastArea);
-          res.render("chart_top_least_timeseries", {
+          res.status(200).render("chart_top_least_timeseries", {
             option1: JSON.stringify(line),
             option2: JSON.stringify(brush),
             area: JSON.stringify({ leastArea: leastArea, topArea: topArea })

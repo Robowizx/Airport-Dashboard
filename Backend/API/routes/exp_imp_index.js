@@ -1,15 +1,23 @@
+//importing express
 const express = require('express');
 const router = express.Router();
+
+//importing chart options skeleton
 const {group_column} = require('../chart_metadata.json');
+
+//importing DB module
 const db = require('../db');
 
+//exp chart route code
 router.get('/:air/exp/:sec',(req,res)=>{
 
     let db_query = { _id:0};
     db_query[`${req.params.sec}.responses`] = 1;
     db.getDB().collection(req.params.air).find({date: req.query.date, type: req.query.type}).project(db_query).toArray((err,documents)=>{
-        if(err)
+        if(err){
             console.log(err);
+            res.status(400).send(err);
+        }    
         else{
 
             console.log(documents[0][`${req.params.sec}`]);
@@ -50,7 +58,7 @@ router.get('/:air/exp/:sec',(req,res)=>{
             // console.log(group_column);
             console.log(impdata,expdata,area);
 
-            res.render("chart_template",{option: JSON.stringify(group_column)});
+            res.status(200).render("chart_template",{option: JSON.stringify(group_column)});
         }
     })
 });

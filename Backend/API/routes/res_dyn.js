@@ -1,7 +1,11 @@
+//importing express
 const express = require("express");
 const router = express.Router();
+
+//importing DB module
 const db = require("../db");
 
+//resp_dyn chart route code
 router.get("/:air/res/:type", (req, res) => {
   const type = req.params.type +".responses";
   const dt = req.query.dev;
@@ -10,7 +14,10 @@ router.get("/:air/res/:type", (req, res) => {
     .find({ date: req.query.date, type: req.query.dev })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
-      if (err) console.log(err);
+      if (err){
+        console.log(err);
+        res.status(400).send(err);
+      }  
       else {
         var badC=poorC=averageC=goodC=excellentC=0;
         var resp;
@@ -84,7 +91,7 @@ router.get("/:air/res/:type", (req, res) => {
             quarters: excellentA
           }
         );
-        res.render("chart_template_dynamic",{option:JSON.stringify(series),dtype: dt});
+        res.status(200).render("chart_template_dynamic",{option:JSON.stringify(series),dtype: dt});
       }
     });
 });

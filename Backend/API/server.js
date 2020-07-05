@@ -1,25 +1,42 @@
-//code for serving API goes here.
+//importing express and setting port
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
+
+//importing routes
 const exp_chart = require('./routes/exp_imp_index');
 const res_dyn = require('./routes/res_dyn');
 const res_stk = require('./routes/res_his');
 const donut = require('./routes/donut');
-const db = require('./db')
+const top_least = require('./routes/top_n_least');
+const top_least_series = require('./routes/top_least_timeseries');
+
+//importing DB module
+const db = require('./db');
+
+//importing parser
 const body_parser = require("body-parser");
 
+//setting view engine
 app.set('views', './views');
 app.set('view engine', 'pug');
 app.set('view cache',true);
 
+//setting parser for post requests
 app.use(body_parser.json());
+
+//declaring static resources
 app.use(express.static('./Public'));
+
+//adding routes
 app.use(exp_chart);
 app.use(res_dyn);
 app.use(res_stk);
 app.use(donut);
+app.use(top_least);
+app.use(top_least_series);
 
+//checking connection to DB
 db.connect((err)=>{
     if(err){
         console.error('unable to connect: '+err);
@@ -29,8 +46,10 @@ db.connect((err)=>{
     }
 });
 
+//dummy home route
 app.get('/',(req,res)=>{
     res.status(200).send('Server is up and running');
 });
 
+//declaring server port
 app.listen(PORT, () => console.log(`Server listening at http://localhost:${PORT}`));  

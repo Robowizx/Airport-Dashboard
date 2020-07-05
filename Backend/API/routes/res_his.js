@@ -1,8 +1,14 @@
+//importing express
 const express = require("express");
 const router = express.Router();
+
+//importing chart options skeleton
 const { dynamic_column } = require("../chart_metadata.json");
+
+//importing DB module
 const db = require("../db");
 
+//res_his chart route code
 router.get("/:air/resh/:type", (req, res) => {
   const type = req.params.type +".responses";
   db.getDB()
@@ -10,7 +16,10 @@ router.get("/:air/resh/:type", (req, res) => {
     .find({ date: req.query.date, type: req.query.dev})
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
-      if (err) console.log(err);
+      if (err){
+        console.log(err);
+        res.status(400).send(err);
+      }  
       else {
         var resp;
         if (type === "by_device.responses"){
@@ -65,7 +74,7 @@ router.get("/:air/resh/:type", (req, res) => {
         );
         dynamic_column.series = series;
         dynamic_column.xaxis.categories = area;
-        res.render("chart_template", {
+        res.status(200).render("chart_template", {
           option: JSON.stringify(dynamic_column),
         });
       }

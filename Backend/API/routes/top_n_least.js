@@ -1,9 +1,14 @@
+//importing express
 const express = require("express");
 const router = express.Router();
-const pug = require("pug");
+
+//importing chart option skeleton
 const { custom_group } = require("../chart_metadata.json");
+
+//importing DB module
 const db = require("../db");
 
+//top_least chart route code
 router.get("/:air/top_and_least/", (req, res) => {
   console.log('finiding');
   db.getDB()
@@ -20,7 +25,10 @@ router.get("/:air/top_and_least/", (req, res) => {
     })
     .toArray((err, documents) => {
       {
-        if (err) console.log(err);
+        if (err){
+          console.log(err);
+          res.status(400).send(err);
+        }  
         else {
           var topData = [];
           var leastData = [];
@@ -72,7 +80,7 @@ router.get("/:air/top_and_least/", (req, res) => {
           custom_group.xaxis.categories = categories;
           console.log(topData, leastData);
 
-          res.render("chart_custom_group", {
+          res.status(200).render("chart_custom_group", {
             option: JSON.stringify(custom_group),
             area: JSON.stringify({ leastArea: leastArea, topArea: topArea })
           });
