@@ -106,5 +106,179 @@
           "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
         }
       }
+  },
+  "custom_group": {
+    "series": [
+      {
+        "data": []
+      },
+      {
+        "data": []
+      }
+    ],
+    "colors": ["#F47B20", "#005596"],
+    "chart": {
+      "type": "bar",
+      "height": 430
+    },
+    "plotOptions": {
+      "bar": {
+        "horizontal": true,
+        "dataLabels": {
+          "position": "top"
+        }
+      }
+    },
+    "dataLabels": {
+      "enabled": true,
+
+      "offsetX": -6,
+      "style": {
+        "fontSize": "10px",
+        "colors": ["#000"]
+      }
+    },
+    "tooltip": {
+      "enabled": true,
+      "y": {
+        "formatter": null
+      }
+    },
+    "stroke": {
+      "show": true,
+      "width": 1,
+      "colors": ["#fff"]
+    },
+    "xaxis": {
+      "categories": []
+    },
+    "legend": {
+      "onItemHover": {
+        "highlightDataSeries": true
+      },
+      "position": "bottom"
+    },
+    "title": {
+      "text": "Top and Least Device",
+      "align": "left",
+      "floating": true
+    }
+  },
+  "line": {
+    "series": [
+      {
+        "name": "",
+        "data": []
+      },
+      {
+        "name": "",
+        "data": []
+      }
+    ],
+    "chart": {
+      "height": 350,
+      "type": "line",
+      "id": "chart1",
+      "dropShadow": {
+        "enabled": true,
+        "color": "#000",
+        "top": 18,
+        "left": 7,
+        "blur": 10,
+        "opacity": 0.2
+      },
+      "toolbar": {
+        "show": false
+      }
+    },
+    "colors": ["#77B6EA", "#545454"],
+    "stroke": {
+      "curve": "smooth"
+    },
+    "title": {
+      "text": "Top And Least Timeseries",
+      "align": "left"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7",
+      "row": {
+        "colors": ["#f3f3f3", "transparent"],
+        "opacity": 0.5
+      }
+    },
+    "markers": {
+      "size": [4, 7],
+      "shape": "circle"
+    },
+    "xaxis": {
+      "type": "datetime",
+      "categories": [],
+      "title": {
+        "text": "DATES"
+      }
+    },
+    "yaxis": {
+      "title": {
+        "text": "VALUES"
+      },
+      "min": 0,
+      "max": 100
+    },
+    "dataLabels": {
+      "enabled": true
+    },
+    "tooltip": {
+      "enabled": true,
+      "y": {
+        "formatter": null
+      }
+    },
+    "legend": {
+      "position": "top",
+      "horizontalAlign": "right",
+      "floating": true,
+      "offsetY": -25,
+      "offsetX": -5
+    }
+  },
+
+  "brush": {
+    "series": [],
+    "chart": {
+      "id": "chart2",
+      "height": 130,
+      "type": "area",
+      "brush": {
+        "target": "chart1",
+        "enabled": true
+      },
+      "selection": {
+        "enabled": true,
+        "xaxis": {
+          "min": [],
+          "max": []
+        }
+      }
+    },
+    "colors": ["#008FFB"],
+    "fill": {
+      "type": "gradient",
+      "gradient": {
+        "opacityFrom": 0.91,
+        "opacityTo": 0.1
+      }
+    },
+    "legend": {
+      "show": true
+    },
+    "xaxis": {
+      "type": "datetime",
+      "tooltip": {
+        "enabled": false
+      }
+    },
+    "yaxis": {
+      "tickAmount": 2
+    }
   }
 }
