@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
+//importing logger
+const serverLog = require('./logger');
+
 //importing DB module
 const db = require("../db");
 
@@ -9,13 +12,23 @@ const db = require("../db");
 router.get("/:air/res/:type", (req, res) => {
   const type = req.params.type +".responses";
   const dt = req.query.dev;
+  serverLog.info(`REQUESTED Response Dynamic chart with Airport=${req.params.air}, `+
+                 `Section=${req.params.type}, `+
+                 `Date=${req.query.dt}, `+
+                 `Type=${req.query.dev}`
+                );
+
   db.getDB()
     .collection(req.params.air)
     .find({ date: req.query.date, type: req.query.dev })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err){
-        console.log(err);
+        serverLog.error(`Res_Dyn chart DATABASE ERROR with Airport=${req.params.air}, `+
+                        `Section=${req.params.type}, `+
+                        `Date=${req.query.dt}, `+
+                        `Type=${req.query.dev} -> ${err}`
+                       );
         res.status(400).send(err);
       }  
       else {

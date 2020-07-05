@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
+//importing logger
+const serverLog = require('./logger');
+
 //importing chart option skeleton
 const { custom_group } = require("../chart_metadata.json");
 
@@ -10,7 +13,12 @@ const db = require("../db");
 
 //top_least chart route code
 router.get("/:air/top_and_least/", (req, res) => {
-  console.log('finiding');
+
+  serverLog.info(`REQUESTED Top and Least chart with Airport=${req.params.air}, `+
+                  `Date=${req.query.date}, `+
+                  `Type=${req.query.type}`
+                );
+
   db.getDB()
     .collection(req.params.air)
     .find({ date: req.query.date, type: req.query.type })
@@ -26,7 +34,10 @@ router.get("/:air/top_and_least/", (req, res) => {
     .toArray((err, documents) => {
       {
         if (err){
-          console.log(err);
+          serverLog.error(`Top_Least chart DATABASE ERROR with Airport=${req.params.air}, `+
+                          `Date=${req.query.date}, `+
+                          `Type=${req.query.type} -> ${err}`
+                         );
           res.status(400).send(err);
         }  
         else {
@@ -78,7 +89,7 @@ router.get("/:air/top_and_least/", (req, res) => {
           categories.push("By Device", "By Survey", "By Group");
           custom_group.series = series;
           custom_group.xaxis.categories = categories;
-          console.log(topData, leastData);
+          //console.log(topData, leastData);
 
           res.status(200).render("chart_custom_group", {
             option: JSON.stringify(custom_group),

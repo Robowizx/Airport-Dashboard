@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
+//importing logger
+const serverLog = require('./logger');
+
 //importing chart options skeleton
 const { line, brush } = require("../chart_metadata.json");
 
@@ -13,7 +16,14 @@ const moment = require("moment");
 
 //top_least_series chart route code
 router.get("/:air/top_least_timeseries/:sec", (req, res) => {
-  console.log("please wait its connecting...");
+
+  serverLog.info(`REQUESTED Top_Least time series chart with Airport=${req.params.air}, `+
+                 `Section=${req.params.sec}, `+
+                 `SDate=${req.query.sdate}, `+
+                 `EDate=${req.query.edate}, `+
+                 `Type=${req.query.type}`
+                );
+
   db.getDB()
     .collection(req.params.air)
     .find({
@@ -24,7 +34,12 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
     .toArray((err, documents) => {
       {
         if (err){
-          console.log(err);
+          serverLog.error(`Top_Least time series chart DATABASE ERROR with Airport=${req.params.air}, `+
+                 `Section=${req.params.sec}, `+
+                 `SDate=${req.query.sdate}, `+
+                 `EDate=${req.query.edate}, `+
+                 `Type=${req.query.type} -> ${err}`
+                );
           res.status(400).send(err);
         }  
         else {

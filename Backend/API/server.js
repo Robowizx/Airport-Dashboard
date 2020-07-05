@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+//importing logger
+const serverLog = require('./logger');
+
 //importing routes
 const exp_chart = require('./routes/exp_imp_index');
 const res_dyn = require('./routes/res_dyn');

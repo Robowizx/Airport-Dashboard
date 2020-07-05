@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 
+//importing logger
+const serverLog = require('./logger');
+
 //importing chart options skeleton
 const { dynamic_column } = require("../chart_metadata.json");
 
@@ -11,13 +14,23 @@ const db = require("../db");
 //res_his chart route code
 router.get("/:air/resh/:type", (req, res) => {
   const type = req.params.type +".responses";
+  serverLog.info(`REQUESTED Response histogram chart with Airport=${req.params.air},`+
+                 `Section=${req.params.type}, `+
+                 `Date=${req.query.date}, `+
+                 `Type=${req.query.dev}`
+                );
+
   db.getDB()
     .collection(req.params.air)
     .find({ date: req.query.date, type: req.query.dev})
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err){
-        console.log(err);
+        serverLog.error(`Response histogram chart DATABASE ERROR with Airport=${req.params.air},`+
+                 `Section=${req.params.type}, `+
+                 `Date=${req.query.date}, `+
+                 `Type=${req.query.dev} -> ${err}`
+                );
         res.status(400).send(err);
       }  
       else {
