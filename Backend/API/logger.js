@@ -1,5 +1,5 @@
 //importing winston and moment module
-const moment = require('moment');
+const moment = require('moment-timezone');
 const {createLogger,format,transports} = require('winston');
 const {combine,timestamp,printf,colorize} = format;
 

@@ -12,7 +12,7 @@ const { line, brush } = require("../chart_metadata.json");
 const db = require("../db");
 
 //importing moment for date computation
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 //top_least_series chart route code
 router.get("/:air/top_least_timeseries/:sec", (req, res) => {

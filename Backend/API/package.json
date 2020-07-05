@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "mongodb": "^3.5.9",
     "pug": "^3.0.0",
