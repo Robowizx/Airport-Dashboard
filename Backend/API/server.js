@@ -42,10 +42,10 @@ app.use(top_least_series);
 //checking connection to DB
 db.connect((err)=>{
     if(err){
-        console.error('unable to connect: '+err);
+        serverLog.error(`Unable to connect to Database -> ${err}`);
         process.exit(1);
     } else {
-        console.log("DB is online");
+        serverLog.info(`Database is online.`);
     }
 });
 
