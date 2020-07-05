@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 //importing logger
-const serverLog = require('./logger');
+const serverLog = require('../logger');
 
 //importing DB module
 const db = require("../db");

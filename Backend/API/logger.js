@@ -26,4 +26,4 @@ const serverLog = createLogger({
                 new transports.File(options.record)]
 });
 
- module.exports = {serverLog}; 
+ module.exports = serverLog; 

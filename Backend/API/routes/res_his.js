@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 //importing logger
-const serverLog = require('./logger');
+const serverLog = require('../logger');
 
 //importing chart options skeleton
 const { dynamic_column } = require("../chart_metadata.json");
