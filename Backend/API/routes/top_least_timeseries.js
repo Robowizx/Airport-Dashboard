@@ -59,8 +59,8 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
             "DD MMM YYYY"
           );
           brush.series = seriesBrush;
-          // console.log(topData, leastData);
-          // console.log(topArea, leastArea);
+          console.log(topData, leastData);
+          console.log(topArea, leastArea);
           res.render("chart_top_least_timeseries", {
             option1: JSON.stringify(line),
             option2: JSON.stringify(brush),

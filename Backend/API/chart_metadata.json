@@ -8,7 +8,10 @@
         "data": []
       }
     ],
-    "colors": ["#F47B20", "#005596"],
+    "colors": [
+      "#F47B20",
+      "#005596"
+    ],
     "chart": {
       "type": "bar",
       "height": 430
@@ -23,11 +26,12 @@
     },
     "dataLabels": {
       "enabled": true,
-
       "offsetX": -6,
       "style": {
         "fontSize": "10px",
-        "colors": ["#000"]
+        "colors": [
+          "#000"
+        ]
       }
     },
     "tooltip": {
@@ -39,7 +43,9 @@
     "stroke": {
       "show": true,
       "width": 1,
-      "colors": ["#fff"]
+      "colors": [
+        "#fff"
+      ]
     },
     "xaxis": {
       "categories": []
@@ -56,7 +62,6 @@
       "floating": true
     }
   },
-
   "line": {
     "series": [
       {
@@ -84,7 +89,10 @@
         "show": false
       }
     },
-    "colors": ["#77B6EA", "#545454"],
+    "colors": [
+      "#77B6EA",
+      "#545454"
+    ],
     "stroke": {
       "curve": "smooth"
     },
@@ -95,12 +103,18 @@
     "grid": {
       "borderColor": "#e7e7e7",
       "row": {
-        "colors": ["#f3f3f3", "transparent"],
+        "colors": [
+          "#f3f3f3",
+          "transparent"
+        ],
         "opacity": 0.5
       }
     },
     "markers": {
-      "size": [4, 7],
+      "size": [
+        4,
+        7
+      ],
       "shape": "circle"
     },
     "xaxis": {
@@ -134,65 +148,66 @@
       "offsetX": -5
     }
   },
-  "line_chart":{
+  "line_chart": {
     "series": [
-    {
-       "name": "",
-      "data":[]
-    }
-           
-  ],
+      {
+        "name": "",
+        "data": []
+      }
+    ],
     "xaxis": {
-    "type": "datetime"
-  },
- 
-    "chart": {
-       "id": "chart2",
-   " height": 350,
-    "type": "line",
-    "dropShadow": {
-      "enabled": true,
-      "color": "#000",
-      "top": 18,
-      "left": 7,
-      "blur": 10,
-      "opacity": 0.2
+      "type": "datetime"
     },
-    "toolbar": {
-      "show": false
+    "chart": {
+      "id": "chart2",
+      "group": "social",
+      "height": 350,
+      "type": "line",
+      "dropShadow": {
+        "enabled": true,
+        "color": "#000",
+        "top": 18,
+        "left": 7,
+        "blur": 10,
+        "opacity": 0.2
+      },
+      "toolbar": {
+        "show": false
+      }
+    },
+    " colors": [
+      "#77B6EA",
+      "#545454"
+    ],
+    "dataLabels": {
+      "enabled": false
+    },
+    "stroke": {
+      "curve": "smooth"
+    },
+    "title": {
+      "text": "",
+      "align": "left"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7",
+      "row": {
+        "colors": [
+          "#f3f3f3",
+          "transparent"
+        ],
+        "opacity": 0.5
+      }
+    },
+    "markers": {
+      "size": 1
+    },
+    "legend": {
+      "position": "top",
+      "horizontalAlign": "right",
+      " floating": true
     }
   },
-   
- " colors": ["#77B6EA", "#545454"],
-  "dataLabels": {
-    "enabled": false
-  },
-  "stroke": {
-    "curve": "smooth"
-  },
-  "title": {
-    "text": "",
-    "align": "left"
-  },
-  "grid": {
-    "borderColor": "#e7e7e7",
-    "row": {
-      "colors": ["#f3f3f3", "transparent"], 
-      "opacity": 0.5
-    }
-  },
-  "markers": {
-    "size": 1
-  },
-
-  
-  "legend": {
-    "position": "top",
-    "horizontalAlign": "right",
-   " floating": true
-    }
-  },
-
   "brush": {
     "series": [],
     "chart": {
@@ -211,7 +226,9 @@
         }
       }
     },
-    "colors": ["#008FFB"],
+    "colors": [
+      "#008FFB"
+    ],
     "fill": {
       "type": "gradient",
       "gradient": {
