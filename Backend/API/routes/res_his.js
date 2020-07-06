@@ -4,25 +4,25 @@ const { dynamic_column } = require("../chart_metadata.json");
 const db = require("../db");
 
 router.get("/:air/resh/:type", (req, res) => {
-  const type = req.params.type +".responses";
+  const type = req.params.type + ".responses";
   db.getDB()
     .collection(req.params.air)
-    .find({ date: req.query.date, type: req.query.dev})
+    .find({ date: req.query.date, type: req.query.dev })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err) console.log(err);
       else {
         var resp;
-        if (type === "by_device.responses"){
-          resp = documents[0].by_device.responses
+        if (type === "by_device.responses") {
+          resp = documents[0].by_device.responses;
           dynamic_column.title.text = "Responses By Device";
         }
-        if (type === "by_survey.responses"){
-          resp = documents[0].by_survey.responses
+        if (type === "by_survey.responses") {
+          resp = documents[0].by_survey.responses;
           dynamic_column.title.text = "Responses By Survey";
         }
-        if (type === "by_group.responses"){
-          resp = documents[0].by_group.responses
+        if (type === "by_group.responses") {
+          resp = documents[0].by_group.responses;
           dynamic_column.title.text = "Responses By Group";
         }
 

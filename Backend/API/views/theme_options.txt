@@ -9,3 +9,5 @@
 
 
 {date:{$regex: '2020-03-*'},type: 'EL'}
+
+{$and:[ {date:{$gte:'2020-03-04'}}, {date:{$lte:'2020-04-03'}}],type:'SC'}

@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require("../db");
 
 router.get("/:air/res/:type", (req, res) => {
-  const type = req.params.type +".responses";
+  const type = req.params.type + ".responses";
   const dt = req.query.dev;
   db.getDB()
     .collection(req.params.air)
@@ -12,7 +12,7 @@ router.get("/:air/res/:type", (req, res) => {
     .toArray((err, documents) => {
       if (err) console.log(err);
       else {
-        var badC=poorC=averageC=goodC=excellentC=0;
+        var badC = (poorC = averageC = goodC = excellentC = 0);
         var resp;
         var series = [];
 
@@ -23,11 +23,11 @@ router.get("/:air/res/:type", (req, res) => {
         var excellentA = [];
 
         if (type === "by_device.responses")
-          resp = documents[0].by_device.responses
+          resp = documents[0].by_device.responses;
         if (type === "by_survey.responses")
-          resp = documents[0].by_survey.responses
+          resp = documents[0].by_survey.responses;
         if (type === "by_group.responses")
-          resp = documents[0].by_group.responses
+          resp = documents[0].by_group.responses;
 
         for (i = 0; i < resp.length; i += 2) {
           badC += resp[i]["Bad"];
@@ -38,53 +38,56 @@ router.get("/:air/res/:type", (req, res) => {
 
           badA.push({
             x: resp[i]["area"],
-            y: resp[i]["Bad"]
+            y: resp[i]["Bad"],
           });
 
           poorA.push({
             x: resp[i]["area"],
-            y: resp[i]["Poor"]
+            y: resp[i]["Poor"],
           });
 
           averageA.push({
             x: resp[i]["area"],
-            y: resp[i]["Average"]
+            y: resp[i]["Average"],
           });
 
           goodA.push({
             x: resp[i]["area"],
-            y: resp[i]["Good"]
+            y: resp[i]["Good"],
           });
 
           excellentA.push({
             x: resp[i]["area"],
-            y: resp[i]["Excellent"]
+            y: resp[i]["Excellent"],
           });
         }
-        
+
         series.push(
           {
             y: badC,
-            quarters: badA
+            quarters: badA,
           },
           {
             y: poorC,
-            quarters: poorA
+            quarters: poorA,
           },
           {
             y: averageC,
-            quarters: averageA
+            quarters: averageA,
           },
           {
             y: goodC,
-            quarters: goodA
+            quarters: goodA,
           },
           {
             y: excellentC,
-            quarters: excellentA
+            quarters: excellentA,
           }
         );
-        res.render("chart_template_dynamic",{option:JSON.stringify(series),dtype: dt});
+        res.render("chart_template_dynamic", {
+          option: JSON.stringify(series),
+          dtype: dt,
+        });
       }
     });
 });
