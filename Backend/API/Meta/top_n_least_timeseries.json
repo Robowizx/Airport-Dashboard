@@ -11,7 +11,7 @@
           }
         ],
         "chart": {
-          "height": 350,
+          "height": 300,
           "type": "line",
           "id": "chart1",
           "dropShadow": {
@@ -68,18 +68,15 @@
         },
         "legend": {
           "position": "top",
-          "horizontalAlign": "right",
-          "floating": true,
-          "offsetY": -25,
-          "offsetX": -5
+          "horizontalAlign": "right"
         }
     },
     "brush": {
         "series": [],
         "chart": {
           "id": "chart2",
-          "group":"top_least",
           "height": 150,
+          "offsetY":-50,
           "type": "area",
           "brush": {
             "target": "chart1",
@@ -117,6 +114,9 @@
           }
         },
         "yaxis": {
+          "title": {
+            "text": "VALUES"
+          },
           "tickAmount": 2
         }
       }
