@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-router.get("/:air/res/:type", (req, res) => {
-  const type = req.params.type + ".responses";
+router.get("/:air/res/:sec", (req, res) => {
+  const type = req.params.sec + ".responses";
   const dt = req.query.dev;
   db.getDB()
     .collection(req.params.air)
@@ -13,21 +13,13 @@ router.get("/:air/res/:type", (req, res) => {
       if (err) console.log(err);
       else {
         var badC = (poorC = averageC = goodC = excellentC = 0);
-        var resp;
+        var resp = documents[0][`${req.params.sec}`].responses;
         var series = [];
-
         var badA = [];
         var poorA = [];
         var averageA = [];
         var goodA = [];
         var excellentA = [];
-
-        if (type === "by_device.responses")
-          resp = documents[0].by_device.responses;
-        if (type === "by_survey.responses")
-          resp = documents[0].by_survey.responses;
-        if (type === "by_group.responses")
-          resp = documents[0].by_group.responses;
 
         for (i = 0; i < resp.length; i += 2) {
           badC += resp[i]["Bad"];
