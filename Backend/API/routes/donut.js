@@ -1,11 +1,25 @@
+//importing express
 const express = require("express");
 const router = express.Router();
+
+//importing logger
+const serverLog = require('../logger');
+
+//importing chart options skeleton
 const { donut } = require("../chart_metadata.json");
+
+//importing DB module
 const db = require("../db");
 
+//donut chart route code
 router.get("/:air/res_donut/", (req, res) => {
+
   const dates = req.query.date;
   const airport = req.params.air;
+  serverLog.info(`REQUESTED Response donut chart requested with Airport=${airport}, `+
+                 `Date=${dates}, `+
+                 `Type=${req.query.type}`
+                );
 
   db.getDB()
     .collection(airport)
@@ -13,7 +27,13 @@ router.get("/:air/res_donut/", (req, res) => {
     .project({_id: 0, ["general.all_responses"]:1})
     .toArray((err, documents) => {
       {
-        if (err) console.log(err);
+        if (err){
+          serverLog.error(`Donut chart DATABASE ERROR with Airport=${airport}, `+
+                          `Date=${dates}, `+
+                          `Type=${req.query.type} -> ${err}`
+                         );
+          res.status(400).send(err);
+        }  
         else {
           donut.series.push(documents[0].general.all_responses[0].Excellent);
           donut.series.push(documents[0].general.all_responses[0].Good);
@@ -21,9 +41,8 @@ router.get("/:air/res_donut/", (req, res) => {
           donut.series.push(documents[0].general.all_responses[0].Poor);
           donut.series.push(documents[0].general.all_responses[0].Bad);
           donut.labels = ["Excellent", "Good", "Average", "Poor", "Bad"];
-          console.log(documents[0].general.all_responses);
 
-          res.render("chart_template", {
+          res.status(200).render("chart_template", {
             option: JSON.stringify(donut),
           });
         }
