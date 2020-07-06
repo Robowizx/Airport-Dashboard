@@ -1,0 +1,49 @@
+{
+    "series": [],
+    "chart": {
+    "type": "bar",
+    "height": 430
+  },
+  "plotOptions": {
+    "bar": {
+      "horizontal": true,
+      "dataLabels": {
+        "position": "top"
+      }
+    }
+  },
+  "dataLabels": {
+    "enabled": true,
+
+    "offsetX": -6,
+    "style": {
+      "fontSize": "10px",
+      "colors": ["#000"]
+    }
+  },
+  "tooltip": {
+    "enabled": true,
+    "y": {
+      "formatter": null
+    }
+  },
+  "stroke": {
+    "show": true,
+    "width": 1,
+    "colors": ["#fff"]
+  },
+  "xaxis": {
+    "categories": []
+  },
+  "legend": {
+    "onItemHover": {
+      "highlightDataSeries": true
+    },
+    "position": "bottom"
+  },
+  "title": {
+    "text": "Top and Least Device",
+    "align": "left",
+    "floating": true
+  }
+}

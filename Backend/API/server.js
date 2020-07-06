@@ -7,12 +7,12 @@ const PORT = process.env.PORT || 4000;
 const serverLog = require('./logger');
 
 //importing routes
-const exp_chart = require('./routes/exp_imp_index');
-const res_dyn = require('./routes/res_dyn');
-const res_stk = require('./routes/res_his');
-const donut = require('./routes/donut');
-const top_least = require('./routes/top_n_least');
-const top_least_series = require('./routes/top_least_timeseries');
+const exp_chart = require('./Routes/exp_imp_index');
+const res_dyn = require('./Routes/res_dyn');
+const res_stk = require('./Routes/res_his');
+const donut = require('./Routes/donut');
+const top_least = require('./Routes/top_n_least');
+const top_least_series = require('./Routes/top_least_timeseries');
 
 //importing DB module
 const db = require('./db');

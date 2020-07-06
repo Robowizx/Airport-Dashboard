@@ -6,7 +6,7 @@ const router = express.Router();
 const serverLog = require('../logger');
 
 //importing chart options skeleton
-const { line, brush } = require("../chart_metadata.json");
+const { line, brush } = require("../Meta/top_n_least_timeseries.json");
 
 //importing DB module
 const db = require("../db");

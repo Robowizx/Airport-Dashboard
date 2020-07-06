@@ -6,7 +6,7 @@ const router = express.Router();
 const serverLog = require('../logger');
 
 //importing chart options skeleton
-const { dynamic_column } = require("../chart_metadata.json");
+const dynamic_column  = require("../Meta/res_his.json");
 
 //importing DB module
 const db = require("../db");

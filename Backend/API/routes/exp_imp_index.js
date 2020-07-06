@@ -6,7 +6,7 @@ const router = express.Router();
 const serverLog = require('../logger');
 
 //importing chart options skeleton
-const {group_column} = require('../chart_metadata.json');
+const group_column = require('../Meta/exp_imp_index.json');
 
 //importing DB module
 const db = require('../db');

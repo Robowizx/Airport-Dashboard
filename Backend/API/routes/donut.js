@@ -6,7 +6,7 @@ const router = express.Router();
 const serverLog = require('../logger');
 
 //importing chart options skeleton
-const { donut } = require("../chart_metadata.json");
+const donut  = require("../Meta/donut.json");
 
 //importing DB module
 const db = require("../db");
