@@ -150,10 +150,7 @@
   },
   "line_chart": {
     "series": [
-      {
-        "name": "",
-        "data": []
-      }
+      
     ],
     "xaxis": {
       "type": "datetime"
@@ -161,7 +158,7 @@
     "chart": {
       "id": "chart2",
       "group": "social",
-      "height": 350,
+      "height": 160,
       "type": "line",
       "dropShadow": {
         "enabled": true,
@@ -172,7 +169,7 @@
         "opacity": 0.2
       },
       "toolbar": {
-        "show": false
+        "show": true
       }
     },
     " colors": [
