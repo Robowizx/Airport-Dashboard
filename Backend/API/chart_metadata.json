@@ -134,6 +134,64 @@
       "offsetX": -5
     }
   },
+  "line_chart":{
+    "series": [
+    {
+       "name": "",
+      "data":[]
+    }
+           
+  ],
+    "xaxis": {
+    "type": "datetime"
+  },
+ 
+    "chart": {
+       "id": "chart2",
+   " height": 350,
+    "type": "line",
+    "dropShadow": {
+      "enabled": true,
+      "color": "#000",
+      "top": 18,
+      "left": 7,
+      "blur": 10,
+      "opacity": 0.2
+    },
+    "toolbar": {
+      "show": false
+    }
+  },
+   
+ " colors": ["#77B6EA", "#545454"],
+  "dataLabels": {
+    "enabled": false
+  },
+  "stroke": {
+    "curve": "smooth"
+  },
+  "title": {
+    "text": "",
+    "align": "left"
+  },
+  "grid": {
+    "borderColor": "#e7e7e7",
+    "row": {
+      "colors": ["#f3f3f3", "transparent"], 
+      "opacity": 0.5
+    }
+  },
+  "markers": {
+    "size": 1
+  },
+
+  
+  "legend": {
+    "position": "top",
+    "horizontalAlign": "right",
+   " floating": true
+    }
+  },
 
   "brush": {
     "series": [],

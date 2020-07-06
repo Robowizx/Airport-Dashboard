@@ -1,0 +1,20 @@
+//chart template
+doctype html
+html
+    head
+        script(src='/Javascript/apexcharts.js')
+        link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
+    body
+        - var ar = !{area}
+        each area in ar
+            div(id=`${area}`,style="max-width:650px; margin: 35px auto")
+    script.
+        var options = !{option};
+        var areas = !{area};
+        var series = !{series};
+        for(int i=0;i<areas.length;i++){
+            let x = series.findIndex(a => a.name === areas[i]);
+            options.series = [series[x]]        
+            var chart = new ApexCharts(document.querySelector(`#${areas[i]}`), options);
+            chart.render();
+        }
