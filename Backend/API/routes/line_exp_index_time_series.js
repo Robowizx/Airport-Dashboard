@@ -12,7 +12,7 @@ const {line_chart} = require('../Meta/line_exp_index_time_series.json');
 const db = require('../db');
 
 //importing moment for date computation
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 //exp time series chart route code
 router.get('/:air/exp_series/:sec',(req,res)=>{
