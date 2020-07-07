@@ -13,7 +13,7 @@ const res_stk = require("./Routes/res_his");
 const donut = require("./Routes/donut");
 const top_least = require("./Routes/top_n_least");
 const top_least_series = require("./Routes/top_least_timeseries");
-const Exp_Index_Series = require("./routes/line_exp_index_time_series");
+const Exp_Index_Series = require("./Routes/line_exp_index_time_series");
 
 //importing DB module
 const db = require("./db");
