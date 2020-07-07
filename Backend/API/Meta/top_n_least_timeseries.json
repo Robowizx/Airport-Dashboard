@@ -62,6 +62,9 @@
         },
         "tooltip": {
           "enabled": true,
+          "x":{
+            "format": "dd MMM yyyy"
+          },
           "y": {
             "formatter": null
           }
