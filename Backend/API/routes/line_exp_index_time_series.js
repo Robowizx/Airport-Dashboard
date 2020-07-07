@@ -43,7 +43,7 @@ router.get('/:air/exp_series/:sec',(req,res)=>{
             console.log(documents[0][`${req.params.sec}`]);
             let area = [];
             let series = [];
-             var seriesBrush = [];
+            
             documents.forEach(d=>{
                 date = moment(d.date).add(1, 'd');
                 // date = moment(d.date).format('DD MMM YYYY');
