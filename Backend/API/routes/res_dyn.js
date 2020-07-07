@@ -4,10 +4,10 @@ const db = require("../db");
 
 router.get("/:air/res/:sec", (req, res) => {
   const type = req.params.sec + ".responses";
-  const dt = req.query.dev;
+  const dt = req.query.type;
   db.getDB()
     .collection(req.params.air)
-    .find({ date: req.query.date, type: req.query.dev })
+    .find({ date: req.query.date, type: req.query.type })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err) console.log(err);

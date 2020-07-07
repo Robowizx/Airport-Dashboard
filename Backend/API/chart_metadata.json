@@ -1,11 +1,4 @@
-{
-    "donut": {
-        "series": [],
-        "chart": {
-        "type": "donut"
-        }   
-    },
-    
+{   
     "group_column": {
       "series": [],
       "chart": {
@@ -90,10 +83,10 @@
   "allResponseTime":{
     "series": [],
       "chart": {
-      "height": 450,
-      "type": "line",
+      "height": 250,
+      "id": "test",
       "group":"timeResponses",
-      "stackType": "100%",
+      "type": "line",
       "dropShadow": {
         "enabled": true,
         "color": "#000",
@@ -131,7 +124,12 @@
       "strokeWidth": 0.5
     },
     "xaxis": {
-      "categories": []
+      "type": "datetime",
+      "labels":{
+        "offsetX": 0,
+        "offsetY": 0,
+        "format": "dd MMM"
+      }
     },
     "yaxis": {
       "min": 0,
@@ -141,7 +139,7 @@
       "position": "bottom",
      "horizontalAlign": "right",
       "floating": false,
-      "offsetY": 0,
+      "offsetY": 4,
       "offsetX": -5
     },
     "tooltip":{

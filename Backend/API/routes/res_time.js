@@ -4,15 +4,14 @@ const moment = require("moment");
 const { allResponseTime } = require("../chart_metadata.json");
 const db = require("../db");
 
-//getting data from server in the form of date wise is done
-
 router.get("/:air/restime/:sec", (req, res) => {
   const type = req.params.sec + ".responses";
+  const dev = req.query.type;
   db.getDB()
     .collection(req.params.air)
     .find(
       {
-        type: req.query.type,
+        type: dev,
         $and: [
           { date: { $lte: req.query.edate } },
           { date: { $gte: req.query.sdate } },
@@ -25,53 +24,54 @@ router.get("/:air/restime/:sec", (req, res) => {
     .toArray((err, documents) => {
       if (err) console.log(err);
       else {
-        //test print of airport name
-        console.log(req.params.air);
-
-        var bad = [],poor = [],good = [], average = [], excellent = [], dates = [], series = [], area = [];
+        let series = [],
+          area = [];
         for (i = 0; i < documents.length; i++) {
-          //date value
-          dates.push(moment(documents[i].date).format("DD MMM"));
-          var resp = documents[i][`${req.params.sec}`].responses;
-          
-          // for (j = 0; j < resp.length; j += 2) {
-          //   //perticular area responses in thier coresponding array
-          //   console.log(resp[j].area);
-          // }
-          area.push(resp[0].area);
-          excellent.push(resp[0].Excellent);
-          good.push(resp[0].Good);
-          average.push(resp[0].Average);
-          bad.push(resp[0].Bad);
-          poor.push(resp[0].Poor);
-        }
-        series.push(
-          {
-            name: "Bad",
-            data: bad,
-          },
-          {
-            name: "Poor",
-            data: poor,
-          },
-          {
-            name: "Average",
-            data: average,
-          },
-          {
-            name: "Good",
-            data: good,
-          },
-          {
-            name: "Excellent",
-            data: excellent,
+          let date = moment(documents[i].date).format("DD MMM");
+          let resp = documents[i][`${req.params.sec}`].responses;
+          for (j = 0; j < resp.length; j += 2) {
+            if (!area.includes(resp[j].area)) {
+              area.push(resp[j].area);
+              series.push({
+                id: resp[j].area,
+                val: [
+                  {
+                    name: "Bad",
+                    data: [[date, resp[j].Bad]],
+                  },
+                  {
+                    name: "Poor",
+                    data: [[date, resp[j].Poor]],
+                  },
+                  {
+                    name: "Average",
+                    data: [[date, resp[j].Average]],
+                  },
+                  {
+                    name: "Good",
+                    data: [[date, resp[j].Good]],
+                  },
+                  {
+                    name: "Excellent",
+                    data: [[date, resp[j].Excellent]],
+                  },
+                ],
+              });
+            } else {
+              let x = series.findIndex((x) => x.id === resp[j].area);
+              series[x].val[0].data.push([date, resp[j].Bad]);
+              series[x].val[1].data.push([date, resp[j].Poor]);
+              series[x].val[2].data.push([date, resp[j].Average]);
+              series[x].val[3].data.push([date, resp[j].Good]);
+              series[x].val[4].data.push([date, resp[j].Excellent]);
+            }
           }
-        );
-        allResponseTime.series = series;
-        allResponseTime.xaxis.categories = dates;
-        // allResponseTime.title.text = `All Respponses For ${resp[0].area}`;
-        res.render("chart_template", {
+        }
+        res.render("chart_template_all_res_time", {
           option: JSON.stringify(allResponseTime),
+          series: JSON.stringify(series),
+          area: JSON.stringify(area),
+          device: dev
         });
       }
     });
