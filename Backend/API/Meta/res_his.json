@@ -1,0 +1,51 @@
+{
+    "theme": {
+     
+    },
+    "title":{
+      "text": "",
+      "align": "center"
+    },
+    "series": [],
+    "chart": {
+      "type": "bar",
+      "height": 400,
+      "stacked": true,
+      "stackType": "100%",
+      "toolbar": {
+        "show": true
+      },
+      "zoom": {
+        "enabled": true
+      }
+    },
+    "plotOptions": {
+      "bar": {
+        "horizontal": false
+      }
+    },
+    "dataLabels": {
+      "enabled": true,
+      "textAnchor": "middle"
+    },
+    "xaxis": {
+      "categories": []
+    },
+    "legend": {
+      "position": "right",
+      "offsetX": 0,
+      "offsetY": 150,
+      "markers":{
+        "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
+      }
+    },
+    "fill": {
+      "opacity": 1,
+      "colors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
+    },
+    "tooltip":{
+      "marker":{
+        "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
+      }
+    }
+}

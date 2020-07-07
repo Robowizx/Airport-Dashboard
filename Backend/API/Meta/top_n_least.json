@@ -1,5 +1,4 @@
 {
-  "custom_group": {
     "series": [
       {
         "data": []
@@ -27,7 +26,13 @@
       "offsetX": -6,
       "style": {
         "fontSize": "10px",
-        "colors": ["#fff"]
+        "colors": ["#000"]
+      }
+    },
+    "tooltip": {
+      "enabled": true,
+      "y": {
+        "formatter": null
       }
     },
     "stroke": {
@@ -50,4 +55,3 @@
       "floating": true
     }
   }
-}

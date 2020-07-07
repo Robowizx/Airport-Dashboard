@@ -1,17 +1,27 @@
+//importing express
 const express = require("express");
 const router = express.Router();
-const pug = require("pug");
-const { custom_group } = require("../chart_metadata.json");
+
+//importing logger
+const serverLog = require('../logger');
+
+//importing chart option skeleton
+const custom_group = require("../Meta/top_n_least.json");
+
+//importing DB module
 const db = require("../db");
 
-router.get("/:air/:type/:top_and_least/", (req, res) => {
-  const dates = req.query.date;
-  const airport = req.params.air;
-  const type = req.params.type;
+//top_least chart route code
+router.get("/:air/top_and_least/", (req, res) => {
+
+  serverLog.info(`REQUESTED Top and Least chart with Airport=${req.params.air}, `+
+                  `Date=${req.query.date}, `+
+                  `Type=${req.query.type}`
+                );
 
   db.getDB()
-    .collection(airport)
-    .find({ date: dates, type: type })
+    .collection(req.params.air)
+    .find({ date: req.query.date, type: req.query.type })
     .project({
       _id: 0,
       ["by_device.top"]: 1,
@@ -23,7 +33,13 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
     })
     .toArray((err, documents) => {
       {
-        if (err) console.log(err);
+        if (err){
+          serverLog.error(`Top_Least chart DATABASE ERROR with Airport=${req.params.air}, `+
+                          `Date=${req.query.date}, `+
+                          `Type=${req.query.type} -> ${err}`
+                         );
+          res.status(400).send(err);
+        }  
         else {
           var topData = [];
           var leastData = [];
@@ -63,21 +79,21 @@ router.get("/:air/:type/:top_and_least/", (req, res) => {
             documents[0].by_survey.least.area,
             documents[0].by_group.least.area
           );
+          for(let i=0;i<3;i++){
+            if(topData[i]<10.0 || leastData[i]<10.0){
+              custom_group.dataLabels.offsetX = 36;
+              custom_group.dataLabels.style.colors = ["#000"];
+              break;
+            }
+          }
           categories.push("By Device", "By Survey", "By Group");
           custom_group.series = series;
           custom_group.xaxis.categories = categories;
-          // custom_group.plotOptions.bar.dataLabels.labels = ["Top", "Least"];
-          console.log(topData, leastData);
-          // res.render("chart_custom_group", {
-          //   topArea: topArea,
-          //   leastArea: leastArea,
-          //   topData: topData,
-          //   leastData: leastData,
-          // });
-          res.render("chart_custom_group", {
+          //console.log(topData, leastData);
+
+          res.status(200).render("chart_custom_group", {
             option: JSON.stringify(custom_group),
-            area: JSON.stringify({ leastArea: leastArea, topArea: topArea }),
-            series: JSON.stringify({ leastData: leastData, topData: topData }),
+            area: JSON.stringify({ leastArea: leastArea, topArea: topArea })
           });
         }
       }
