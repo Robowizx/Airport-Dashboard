@@ -85,5 +85,67 @@
           "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
         }
       }
+  },
+
+  "allResponseTime":{
+    "series": [],
+      "chart": {
+      "height": 450,
+      "type": "line",
+      "group":"timeResponses",
+      "stackType": "100%",
+      "dropShadow": {
+        "enabled": true,
+        "color": "#000",
+        "top": 18,
+        "left": 7,
+       "blur": 10,
+        "opacity": 0.2
+      },
+      "toolbar": {
+        "show": true
+      }
+    },
+    "colors": ["#77B6EA", "#9FD405","#ff6361","#bc5090","#ffa600"],
+    "dataLabels": {
+      "enabled": false
+    },
+    "stroke": {
+      "curve": "smooth",
+      "width": 2
+    },
+    "title": {
+      "text": "",
+      "align": "left"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7",
+      "row": {
+        "colors": ["#f3f3f3", "transparent"],
+        "opacity": 0.5
+      }
+    },
+    "markers": {
+      "size": 0.4,
+      "strokeColors": "#000",
+      "strokeWidth": 0.5
+    },
+    "xaxis": {
+      "categories": []
+    },
+    "yaxis": {
+      "min": 0,
+      "max": 100
+    },
+    "legend": {
+      "position": "bottom",
+     "horizontalAlign": "right",
+      "floating": false,
+      "offsetY": 0,
+      "offsetX": -5
+    },
+    "tooltip":{
+      "enabled": true
+    }
   }
 }
