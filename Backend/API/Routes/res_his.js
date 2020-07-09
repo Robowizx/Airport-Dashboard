@@ -34,8 +34,9 @@ router.get("/:air/resh/:type", (req, res) => {
         res.status(400).send(err);
       }
       else if(Object.keys(documents).length==0){
+        console.log(documents);
         serverLog.warn(`Response hitogram chart DATA NOT FOUND with Airport=${req.params.air}, `+
-                        `Section=${req.params.sec}, `+
+                        `Section=${req.params.type}, `+
                         `Type=${req.query.dev}, `+
                         `Date=${req.query.date}`
                        );

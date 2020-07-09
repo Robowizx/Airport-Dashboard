@@ -14,34 +14,34 @@ router.get("/:air/res/:type", (req, res) => {
   const dt = req.query.dev;
   serverLog.info(`REQUESTED Response Dynamic chart with Airport=${req.params.air}, `+
                  `Section=${req.params.type}, `+
-                 `Date=${req.query.dt}, `+
+                 `Date=${req.query.date}, `+
                  `Type=${req.query.dev}`
                 );
 
   db.getDB()
     .collection(req.params.air)
-    .find({ date: req.query.date, type: req.query.type })
+    .find({ date: req.query.date, type: req.query.dev })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err){
         serverLog.error(`Res_Dyn chart DATABASE ERROR with Airport=${req.params.air}, `+
                         `Section=${req.params.type}, `+
-                        `Date=${req.query.dt}, `+
-                        `Type=${req.query.dev} -> ${err}`
+                        `Date=${req.query.date}, `+
+                        `Type=${req.query.type} -> ${err}`
                        );
         res.status(500).send(err);
       }
       else if(Object.keys(documents).length==0){
         serverLog.warn(`Res_Dyn chart DATA NOT FOUND with Airport=${req.params.air}, `+
-                        `Section=${req.params.sec}, `+
+                        `Section=${req.params.type}, `+
                         `Type=${req.query.dev}, `+
-                        `Date=${req.query.dt}`
+                        `Date=${req.query.date}`
                        );
         res.status(404).send("404 data not found");               
       }  
       else {
         var badC = (poorC = averageC = goodC = excellentC = 0);
-        var resp = documents[0][`${req.params.sec}`].responses;
+        var resp = documents[0][`${req.params.type}`].responses;
         var series = [];
         var badA = [];
         var poorA = [];

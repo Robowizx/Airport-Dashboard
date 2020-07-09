@@ -95,7 +95,6 @@ router.get("/:air/allRes_TS/", (req, res) => {
           );
           //allRes_TS.yaxis.min = min(documents[0].general.all_responses[0]);
           //allRes_TS.yaxis.max = max(documents[0].general.all_responses[0]);
-          console.log(documents[0].general.all_responses);
 
           res.status(200).render("chart_template", {
             option: JSON.stringify(allRes_TS),
