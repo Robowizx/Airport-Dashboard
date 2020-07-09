@@ -10,6 +10,7 @@ const serverLog = require('./logger');
 const exp_chart = require('./Routes/exp_imp_index');
 const res_dyn = require('./Routes/res_dyn');
 const res_stk = require('./Routes/res_his');
+const res_time = require('./Routes/res_time');
 const donut = require('./Routes/donut');
 const top_least = require('./Routes/top_n_least');
 const top_least_series = require('./Routes/top_least_timeseries');
@@ -40,6 +41,7 @@ app.use(donut);
 app.use(top_least);
 app.use(top_least_series);
 app.use(Exp_Index_Series);
+app.use(res_time);
 
 //checking connection to DB
 db.connect((err)=>{

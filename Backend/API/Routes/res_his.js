@@ -22,7 +22,7 @@ router.get("/:air/resh/:type", (req, res) => {
 
   db.getDB()
     .collection(req.params.air)
-    .find({ date: req.query.date, type: req.query.dev})
+    .find({ date: req.query.date, type: req.query.type })
     .project({ _id: 0, [type]: 1 })
     .toArray((err, documents) => {
       if (err){
@@ -32,19 +32,27 @@ router.get("/:air/resh/:type", (req, res) => {
                  `Type=${req.query.dev} -> ${err}`
                 );
         res.status(400).send(err);
+      }
+      else if(Object.keys(documents).length==0){
+        serverLog.warn(`Response hitogram chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                        `Section=${req.params.sec}, `+
+                        `Type=${req.query.dev}, `+
+                        `Date=${req.query.date}`
+                       );
+        res.status(404).send("404 data not found");               
       }  
       else {
         var resp;
-        if (type === "by_device.responses"){
-          resp = documents[0].by_device.responses
+        if (type === "by_device.responses") {
+          resp = documents[0].by_device.responses;
           dynamic_column.title.text = "Responses By Device";
         }
-        if (type === "by_survey.responses"){
-          resp = documents[0].by_survey.responses
+        if (type === "by_survey.responses") {
+          resp = documents[0].by_survey.responses;
           dynamic_column.title.text = "Responses By Survey";
         }
-        if (type === "by_group.responses"){
-          resp = documents[0].by_group.responses
+        if (type === "by_group.responses") {
+          resp = documents[0].by_group.responses;
           dynamic_column.title.text = "Responses By Group";
         }
 

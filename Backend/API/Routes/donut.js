@@ -33,6 +33,13 @@ router.get("/:air/res_donut/", (req, res) => {
                           `Type=${req.query.type} -> ${err}`
                          );
           res.status(400).send(err);
+        }
+        else if(Object.keys(documents).length==0){
+          serverLog.warn(`Donut chart DATA NOT FOUND with Airport=${airport}, `+
+                          `Type=${req.query.type}, `+
+                          `Date=${dates}`
+                         );
+          res.status(404).send("404 data not found");               
         }  
         else {
           donut.series.push(documents[0].general.all_responses[0].Excellent);

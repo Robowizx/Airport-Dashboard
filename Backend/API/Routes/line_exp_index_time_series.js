@@ -28,16 +28,24 @@ router.get('/:air/exp_series/:sec',(req,res)=>{
     db_query[`${req.params.sec}.responses`] = 1;
     
     db.getDB().collection(req.params.air).find({date: {$gte:req.query.sdate,$lt:req.query.edate}, type: req.query.type}).project(db_query).toArray((err,documents)=>{
-        if(err)
-            {
+        if(err){
                 serverLog.error(`Exp time series chart DATABASE ERROR with Airport=${req.params.air}, `+
                  `Section=${req.params.sec}, `+
                  `SDate=${req.query.sdate}, `+
                  `EDate=${req.query.edate}, `+
                  `Type=${req.query.type} -> ${err}`
                 );
-          res.status(400).send(err);
-            }
+                res.status(400).send(err);
+        }
+        else if(Object.keys(documents).length==0){
+            serverLog.warn(`Exp time series chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                            `Section=${req.params.sec}, `+
+                            `Type=${req.query.type}, `+
+                            `SDate=${req.query.sdate}, `+
+                            `EDate=${req.query.edate}`
+                           );
+            res.status(404).send("404 data not found");               
+        }
         else{
 
             console.log(documents[0][`${req.params.sec}`]);
