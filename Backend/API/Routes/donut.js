@@ -32,7 +32,7 @@ router.get("/:air/res_donut/", (req, res) => {
                           `Date=${dates}, `+
                           `Type=${req.query.type} -> ${err}`
                          );
-          res.status(400).send(err);
+          res.status(500).send(err);
         }
         else if(Object.keys(documents).length==0){
           serverLog.warn(`Donut chart DATA NOT FOUND with Airport=${airport}, `+

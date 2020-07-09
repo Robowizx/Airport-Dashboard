@@ -29,7 +29,7 @@ router.get('/:air/exp/:sec',(req,res)=>{
                             `Date=${req.query.date}, `+
                             `Type=${req.query.type} -> ${err}`
                            );
-            res.status(400).send(err);
+            res.status(500).send(err);
         }
         else if(Object.keys(documents).length==0){
             serverLog.warn(`Exp/Imp chart DATA NOT FOUND with Airport=${req.params.air}, `+

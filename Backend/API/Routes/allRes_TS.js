@@ -38,7 +38,7 @@ router.get("/:air/allRes_TS/", (req, res) => {
                         `SDate=${req.query.sdate}, `+
                         `EDate=${req.query.edate} -> ${err}`
                        );
-          res.status(400).send(err);
+          res.status(500).send(err);
         }
         else if(Object.keys(documents).length==0){
           serverLog.warn(`all responses time series chart DATA NOT FOUND with Airport=${airport}, `+

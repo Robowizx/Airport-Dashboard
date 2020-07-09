@@ -29,7 +29,7 @@ router.get("/:air/res/:type", (req, res) => {
                         `Date=${req.query.dt}, `+
                         `Type=${req.query.dev} -> ${err}`
                        );
-        res.status(400).send(err);
+        res.status(500).send(err);
       }
       else if(Object.keys(documents).length==0){
         serverLog.warn(`Res_Dyn chart DATA NOT FOUND with Airport=${req.params.air}, `+
