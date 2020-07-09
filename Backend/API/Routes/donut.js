@@ -12,7 +12,7 @@ const donut  = require("../Meta/donut.json");
 const db = require("../db");
 
 //donut chart route code
-router.get("/:air/res_donut/", (req, res) => {
+router.get("/:air/res_donut", (req, res) => {
 
   const dates = req.query.date;
   const airport = req.params.air;
@@ -42,11 +42,13 @@ router.get("/:air/res_donut/", (req, res) => {
           res.status(404).send("404 data not found");               
         }  
         else {
-          donut.series.push(documents[0].general.all_responses[0].Excellent);
-          donut.series.push(documents[0].general.all_responses[0].Good);
-          donut.series.push(documents[0].general.all_responses[0].Average);
-          donut.series.push(documents[0].general.all_responses[0].Poor);
-          donut.series.push(documents[0].general.all_responses[0].Bad);
+          let data = [];
+          data.push(documents[0].general.all_responses[0].Excellent);
+          data.push(documents[0].general.all_responses[0].Good);
+          data.push(documents[0].general.all_responses[0].Average);
+          data.push(documents[0].general.all_responses[0].Poor);
+          data.push(documents[0].general.all_responses[0].Bad);
+          donut.series = data;
           donut.labels = ["Excellent", "Good", "Average", "Poor", "Bad"];
 
           res.status(200).render("chart_template", {
