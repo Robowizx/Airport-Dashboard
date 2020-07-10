@@ -2,7 +2,7 @@
 
 const MongoClient = require("mongodb").MongoClient;
 const dbname = "AirportDB";
-const url = "mongodb+srv://dbAAI:maverick123@cluster0-qkpve.mongodb.net/AirportDB?retryWrites=true&w=majority";
+const url = "connection string here";
 // Options for mongoDB
 const mongoOptions = {useNewUrlParser : true,useUnifiedTopology: true};
 
