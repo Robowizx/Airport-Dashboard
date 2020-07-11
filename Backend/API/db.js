@@ -5,10 +5,10 @@ const MongoClient = require("mongodb").MongoClient;
 const dbname = "AirportDB";
 
 //database connection uri
-const uri = "connection string here";
+const uri = `mongodb+srv://${process.env.UNAME}:${process.env.PASS}@cluster0-qkpve.mongodb.net/${dbname}?retryWrites=true&w=majority`;
 
 // Options for mongoDB
-const mongoOptions = {useNewUrlParser : true, useUnifiedTopology: true};
+const mongoOptions = { useNewUrlParser : true, useUnifiedTopology: true };
 
 //state to hold DB connection object
 const state = {

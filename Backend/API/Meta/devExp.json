@@ -11,6 +11,25 @@
         "bar":{
             "dataLabels":{
                 "position":"top"
+            },
+            "colors":{
+                "ranges":[
+                    {
+                       "from":0,
+                       "to":33,
+                       "color":"#ff3300" 
+                    },
+                    {
+                        "from":34,
+                        "to":66,
+                        "color":"#ffff00" 
+                    },
+                    {
+                        "from":67,
+                        "to":100,
+                        "color":"#39e600" 
+                    }
+                ]
             }
         }
     },
