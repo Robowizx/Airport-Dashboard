@@ -1,11 +1,31 @@
 {
     "series":[{
-        "name":"Experience Index Till Date",
+        "name":"Good",
+        "data":[]
+    },
+    {
+        "name":"Average",
+        "data":[]
+    },
+    {
+        "name":"Bad",
         "data":[]
     }],
+    "colors":["#33cc33","#e6e600","#e60000"],
     "chart":{
         "type":"bar",
         "height":350
+    },
+    "legend":{
+        "show":true,
+        "showForNullSeries":true,
+        "position":"right",
+        "onItemClick":{
+            "toggleDataSeries": false
+        },
+        "onItemHover":{
+            "highlightDataSeries":false
+        }
     },
     "plotOptions":{
         "bar":{
@@ -17,17 +37,17 @@
                     {
                        "from":0,
                        "to":33,
-                       "color":"#ff3300" 
+                       "color":"#e60000" 
                     },
                     {
                         "from":34,
                         "to":66,
-                        "color":"#ffff00" 
+                        "color":"#e6e600" 
                     },
                     {
                         "from":67,
                         "to":100,
-                        "color":"#39e600" 
+                        "color":"#33cc33" 
                     }
                 ]
             }
@@ -68,10 +88,15 @@
     },
     "yaxis":{
         "title":{
-            "text":"Experience Index",
+            "text":"Experience Index till date",
             "style":{
                 "fontSize":"14px"
             }
+        }
+    },
+    "tooltip":{
+        "marker":{
+            "show":false
         }
     }
 }
