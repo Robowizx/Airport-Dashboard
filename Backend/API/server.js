@@ -16,6 +16,7 @@ const top_least = require('./Routes/top_n_least');
 const top_least_series = require('./Routes/top_least_timeseries');
 const Exp_Index_Series = require('./Routes/line_exp_index_time_series');
 const allRes_TS = require('./Routes/allRes_TS');
+const devexp = require('./Routes/devExp');
 
 //importing DB module
 const db = require("./db");
@@ -44,6 +45,7 @@ app.use(top_least_series);
 app.use(Exp_Index_Series);
 app.use(res_time);
 app.use(allRes_TS);
+app.use(devexp);
 
 //checking connection to DB
 db.connect((err) => {

@@ -1,0 +1,58 @@
+{
+    "series":[{
+        "name":"Experience Index Till Date",
+        "data":[]
+    }],
+    "chart":{
+        "type":"bar",
+        "height":350
+    },
+    "plotOptions":{
+        "bar":{
+            "dataLabels":{
+                "position":"top"
+            }
+        }
+    },
+    "dataLabels":{
+        "enabled":true,
+        "style":{
+            "fontSize":"12px",
+            "colors":["#000000"]
+        },
+        "offsetY":-20
+    },
+    "xaxis":{
+        "categories":[],
+        "position": "bottom",
+        "crosshairs":{
+            "fill":{
+                "type":"gradient",
+                "gradient":{
+                    "colorForm":"#D8E3F0",
+                    "colorTo":"#BED1E6",
+                    "stops":[0,100],
+                    "opacityFrom":0.4,
+                    "opacityTo":0.5
+                }
+            }
+        },
+        "tooltip":{
+            "enabled": true
+        },
+        "title":{
+            "text":"Devices",
+            "style":{
+                "fontSize":"14px"
+            }
+        }
+    },
+    "yaxis":{
+        "title":{
+            "text":"Experience Index",
+            "style":{
+                "fontSize":"14px"
+            }
+        }
+    }
+}
