@@ -42,7 +42,7 @@ router.get('/:air/devExp',(req,res)=>{
                 options.series[0].data = data;
                 options.xaxis.categories = names;
 
-                res.status(200).render('chart_template',{option: JSON.stringify(options)});
+                res.status(200).render('dev_exp_template',{option: JSON.stringify(options)});
             }
       });           
 });
