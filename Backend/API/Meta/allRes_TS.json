@@ -1,0 +1,59 @@
+{
+  "allRes_TS": {
+    "series": [],
+    "chart": {
+      "height": 350,
+      "type": "line",
+      "dropShadow": {
+        "enabled": true,
+        "color": "#000",
+        "top": 18,
+        "left": 7,
+        "blur": 10,
+        "opacity": 0.2
+      },
+      "toolbar": {
+        "show": true
+      }
+    },
+    "colors": ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+    "stroke": {
+      "curve": "smooth"
+    },
+    "title": {
+      "text": ".",
+      "align": "center"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7",
+      "row": {
+        "colors": ["#f3f3f3", "transparent"],
+        "opacity": 0.5
+      }
+    },
+    "markers": {
+      "size": 1
+    },
+    "xaxis": {
+      "categories": {
+        "min": [],
+        "max": []
+      },
+      "title": {
+        "text": "Date-Month"
+      }
+    },
+    "yaxis": {
+      "title": {
+        "text": "Responses"
+      }
+    },
+    "legend": {
+      "position": "top",
+      "horizontalAlign": "center",
+      "floating": false,
+      "offsetY": -25,
+      "offsetX": -5
+    }
+  }
+}

@@ -3,10 +3,10 @@ const express = require("express");
 const router = express.Router();
 
 //importing logger
-const serverLog = require('../logger');
+const serverLog = require("../logger");
 
 //importing chart options skeleton
-const { line, brush } = require("../chart_metadata.json");
+const { line, brush } = require("../Meta/top_n_least_timeseries.json");
 
 //importing DB module
 const db = require("../db");
@@ -16,13 +16,13 @@ const moment = require("moment-timezone");
 
 //top_least_series chart route code
 router.get("/:air/top_least_timeseries/:sec", (req, res) => {
-
-  serverLog.info(`REQUESTED Top_Least time series chart with Airport=${req.params.air}, `+
-                 `Section=${req.params.sec}, `+
-                 `SDate=${req.query.sdate}, `+
-                 `EDate=${req.query.edate}, `+
-                 `Type=${req.query.type}`
-                );
+  serverLog.info(
+    `REQUESTED Top_Least time series chart with Airport=${req.params.air}, ` +
+      `Section=${req.params.sec}, ` +
+      `SDate=${req.query.sdate}, ` +
+      `EDate=${req.query.edate}, ` +
+      `Type=${req.query.type}`
+  );
 
   db.getDB()
     .collection(req.params.air)
@@ -30,19 +30,34 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
       date: { $gte: req.query.sdate, $lte: req.query.edate },
       type: req.query.type,
     })
-    .project({ _id: 0, date: 1, [`${req.params.sec}.top`]: 1, [`${req.params.sec}.least`]: 1 })
+    .project({
+      _id: 0,
+      date: 1,
+      [`${req.params.sec}.top`]: 1,
+      [`${req.params.sec}.least`]: 1,
+    })
     .toArray((err, documents) => {
       {
         if (err){
-          serverLog.error(`Top_Least time series chart DATABASE ERROR with Airport=${req.params.air}, `+
-                 `Section=${req.params.sec}, `+
-                 `SDate=${req.query.sdate}, `+
-                 `EDate=${req.query.edate}, `+
-                 `Type=${req.query.type} -> ${err}`
-                );
+          serverLog.error(
+            `Top_Least time series chart DATABASE ERROR with Airport=${req.params.air}, ` +
+              `Section=${req.params.sec}, ` +
+              `SDate=${req.query.sdate}, ` +
+              `EDate=${req.query.edate}, ` +
+              `Type=${req.query.type} -> ${err}`
+          );
           res.status(400).send(err);
-        }  
-        else {
+        }
+        else if(Object.keys(documents).length==0){
+          serverLog.warn(`Top_Least time series chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                          `Section=${req.params.sec}, `+
+                          `Type=${req.query.type}, `+
+                          `SDate=${req.query.sdate}, `+
+                          `EDate=${req.query.edate}`
+                         );
+          res.status(404).send("404 data not found");               
+        } 
+        else{
           var topData = [];
           var leastData = [];
           var series = [];
@@ -53,8 +68,8 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
             date = d.date;
             topArea.push(d.by_device.top.area);
             leastArea.push(d.by_device.least.area);
-            topData.push([new Date(date).getTime(),d.by_device.top.exp]);
-            leastData.push([new Date(date).getTime(),d.by_device.least.exp]);
+            topData.push([new Date(date).getTime(), d.by_device.top.exp]);
+            leastData.push([new Date(date).getTime(), d.by_device.least.exp]);
           });
           series.push(
             {
@@ -90,7 +105,7 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
           res.status(200).render("chart_top_least_timeseries", {
             option1: JSON.stringify(line),
             option2: JSON.stringify(brush),
-            area: JSON.stringify({ leastArea: leastArea, topArea: topArea })
+            area: JSON.stringify({ leastArea: leastArea, topArea: topArea }),
           });
         }
       }

@@ -6,7 +6,7 @@ const router = express.Router();
 const serverLog = require('../logger');
 
 //importing chart option skeleton
-const { custom_group } = require("../chart_metadata.json");
+const custom_group = require("../Meta/top_n_least.json");
 
 //importing DB module
 const db = require("../db");
@@ -39,6 +39,13 @@ router.get("/:air/top_and_least/", (req, res) => {
                           `Type=${req.query.type} -> ${err}`
                          );
           res.status(400).send(err);
+        }
+        else if(Object.keys(documents).length==0){
+          serverLog.warn(`Top_Least chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                          `Type=${req.query.type}, `+
+                          `Date=${req.query.date}`
+                         );
+          res.status(404).send("404 data not found");               
         }  
         else {
           var topData = [];

@@ -6,7 +6,7 @@ const router = express.Router();
 const serverLog = require('../logger');
 
 //importing chart options skeleton
-const {group_column} = require('../chart_metadata.json');
+const group_column = require('../Meta/exp_imp_index.json');
 
 //importing DB module
 const db = require('../db');
@@ -29,8 +29,16 @@ router.get('/:air/exp/:sec',(req,res)=>{
                             `Date=${req.query.date}, `+
                             `Type=${req.query.type} -> ${err}`
                            );
-            res.status(400).send(err);
-        }    
+            res.status(500).send(err);
+        }
+        else if(Object.keys(documents).length==0){
+            serverLog.warn(`Exp/Imp chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                            `Section=${req.params.sec}, `+
+                            `Type=${req.query.type}, `+
+                            `EDate=${req.query.date}`
+                           );
+            res.status(404).send("404 data not found");               
+          }    
         else{
 
             //console.log(documents[0][`${req.params.sec}`]);

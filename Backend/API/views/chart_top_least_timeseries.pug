@@ -2,11 +2,11 @@
 doctype html
 html
     head
-        script(src='/Javascript/apexcharts.js')
+        script(src='/Javascript/apexcharts.min.js')
         link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
     body
-        div(id='chart',style="max-width:650px; margin: 35px auto")
-        div(id='chart2',style="max-width:650px; margin: 35px auto")
+        div(id='chart',style="max-width:650px")
+        div(id='chart2',style="max-width:650px")
     script.
         var options = !{option1};
         options.tooltip.y.formatter = (val,{seriesIndex,dataPointIndex})=>{
@@ -16,7 +16,6 @@ html
             else
                 return `${val}(${area.topArea[dataPointIndex]})`;
         };
-        
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
         var options2 = !{option2};

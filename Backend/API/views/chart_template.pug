@@ -2,10 +2,10 @@
 doctype html
 html
     head
-        script(src='/Javascript/apexcharts.js')
+        script(src='/Javascript/apexcharts.min.js')
         link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
     body
-        div(id='chart',style="max-width:650px; margin: 35px auto")
+        div(id='chart',style="max-width:650px; margin: 35px 0px")
     script.
         var options = !{option};
         var chart = new ApexCharts(document.querySelector("#chart"), options);
