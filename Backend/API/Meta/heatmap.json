@@ -1,0 +1,15 @@
+{   "heatmap" : {
+    "series": [],
+    "chart": {
+    "height": 350,
+    "type": "heatmap"
+    },
+    "dataLabels": {
+    "enabled": false
+    },
+    "colors": ["#008FFB"],
+    "title": {
+    "text": "HeatMap Chart (Single color)"
+    }
+    }
+}

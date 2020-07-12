@@ -11,7 +11,7 @@ const db = require('../db');
 const options = require('../Meta/top-least-guage.json');
 const { min } = require('moment-timezone');
 
-router.get('/:air/:type',(req,res)=>{
+router.get('/:air/guage/:type',(req,res)=>{
 
     if(req.params.type !='maxExp' && req.params.type != 'minExp'){
         serverLog.warn(`BAD REQUEST of top-least-guage chart with Type=${req.params.type}`);

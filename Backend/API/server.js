@@ -18,6 +18,8 @@ const Exp_Index_Series = require('./Routes/line_exp_index_time_series');
 const allRes_TS = require('./Routes/allRes_TS');
 const devexp = require('./Routes/devExp');
 const top_least_guage = require('./Routes/top_least_gauge');
+const exp_till_date = require('./Routes/exp_till_date_timeseries');
+const heatmap = require('./Routes/resp_heatmap');
 
 //importing DB module
 const db = require("./db");
@@ -48,6 +50,8 @@ app.use(res_time);
 app.use(allRes_TS);
 app.use(devexp);
 app.use(top_least_guage);
+app.use(exp_till_date);
+app.use(heatmap);
 
 //checking connection to DB
 db.connect((err) => {
