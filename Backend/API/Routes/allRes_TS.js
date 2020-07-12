@@ -56,11 +56,12 @@ router.get("/:air/allRes_TS/", (req, res) => {
           var Poor = [];
           var Bad = [];
           documents.forEach((d) => {
-            Excellent.push(d.general.all_responses[0].Excellent);
-            Good.push(d.general.all_responses[0].Good);
-            Average.push(d.general.all_responses[0].Average);
-            Poor.push(d.general.all_responses[0].Poor);
-            Bad.push(d.general.all_responses[0].Bad);
+            date = moment(d.date).add(1, 'd');
+            Excellent.push([new Date(date).getTime(),d.general.all_responses[0].Excellent]);
+            Good.push([new Date(date).getTime(),d.general.all_responses[0].Good]);
+            Average.push([new Date(date).getTime(),d.general.all_responses[0].Average]);
+            Poor.push([new Date(date).getTime(),d.general.all_responses[0].Poor]);
+            Bad.push([new Date(date).getTime(),d.general.all_responses[0].Bad]);
           });
           series.push(
             {
@@ -86,13 +87,6 @@ router.get("/:air/allRes_TS/", (req, res) => {
           );
           allRes_TS.series = series;
           //   allRes_TS.labels = ["Excellent", "Good", "Average", "Poor", "Bad"];
-
-          allRes_TS.xaxis.categories.min = moment(req.query.sdate).format(
-            "DD MMM YYYY"
-          );
-          allRes_TS.xaxis.categories.max = moment(req.query.edate).format(
-            "DD MMM YYYY"
-          );
           //allRes_TS.yaxis.min = min(documents[0].general.all_responses[0]);
           //allRes_TS.yaxis.max = max(documents[0].general.all_responses[0]);
 

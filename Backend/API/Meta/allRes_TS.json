@@ -35,13 +35,7 @@
       "size": 1
     },
     "xaxis": {
-      "categories": {
-        "min": [],
-        "max": []
-      },
-      "title": {
-        "text": "Date-Month"
-      }
+      "type": "datetime"
     },
     "yaxis": {
       "title": {

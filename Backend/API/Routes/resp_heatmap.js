@@ -50,7 +50,7 @@ router.get('/:air/total_resp',(req,res)=>{
             let series = [];
             let dev = [];
             documents.forEach(d=>{
-                date = moment(d.date).add(1, 'd').format('Mo DD');
+                date = moment(d.date).add(1, 'd');
                 // date = moment(d.date).format('DD MMM YYYY');
                 // resdata.push([new Date(date).getTime(),d.general.all_responses[0]['Total Responses']]);
                 if(!dev.includes(d.type)){
@@ -59,7 +59,7 @@ router.get('/:air/total_resp',(req,res)=>{
                     series.push(
                               {
                                   name:d.type,
-                                  data:[[date,d.general.all_responses[0]['Total Responses']]]
+                                  data:[[new Date(date).getTime(),d.general.all_responses[0]['Total Responses']]]
                               });
                   
                    }
@@ -67,7 +67,7 @@ router.get('/:air/total_resp',(req,res)=>{
                 else{
                                 
                     let x = series.findIndex(x => x.name === d.type);
-                    series[x].data.push([date,d.general.all_responses[0]['Total Responses']]);
+                    series[x].data.push([new Date(date).getTime(),d.general.all_responses[0]['Total Responses']]);
                     
                     }
              })

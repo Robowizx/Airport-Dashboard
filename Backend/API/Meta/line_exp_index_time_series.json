@@ -13,6 +13,7 @@
       "height": 350,
       "type": "line",
       "id": "chart1",
+      "group": "social",
       "dropShadow": {
         "enabled": true,
         "color": "#000",
@@ -22,10 +23,9 @@
         "opacity": 0.2
       },
       "toolbar": {
-        "show": true
+        "show": false
       }
     },
-    "colors": ["#e67e22", "#d35400"],
     "stroke": {
       "curve": "smooth"
     },
@@ -39,11 +39,7 @@
       "shape": "circle"
     },
     "xaxis": {
-      "type": "datetime",
-      
-      "title": {
-        "text": "Month"
-      }
+      "type": "datetime"
     },
     "yaxis": {
       "title": {

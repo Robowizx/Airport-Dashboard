@@ -40,7 +40,10 @@ router.get('/:air/exp/:sec',(req,res)=>{
             res.status(404).send("404 data not found");               
           }    
         else{
-
+            let expdata = [];
+            let impdata = [];
+            let area = [];
+            let series = [];
             //console.log(documents[0][`${req.params.sec}`]);
             let resp = documents[0][`${req.params.sec}`].responses;
 
@@ -63,10 +66,10 @@ router.get('/:air/exp/:sec',(req,res)=>{
                         });
 
             if(req.params.sec == 'by_device'){
-                series.push({
-                            name:'Improvement Index',
-                            data: impdata
-                           });        
+            series.push({
+                        name:'Improvement Index',
+                        data: impdata
+                        });        
             }
 
             group_column.series = series;
