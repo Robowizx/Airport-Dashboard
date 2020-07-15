@@ -1,0 +1,10 @@
+DateTime==4.3
+dnspython==1.16.0
+Flask==1.1.2
+httplib2==0.14.0
+numpy==1.19.0
+pandas==1.0.5
+pymongo==3.10.1
+python-dotenv==0.14.0
+requests==2.22.0
+xlrd==1.2.0
