@@ -8,6 +8,7 @@
 /Backend/API/node_modules
 /Frontend/.pnp
 /Frontend/.pnp.js
+/Backend/Cleanup/venv
 
 # testing
 /Frontend/coverage
@@ -21,6 +22,7 @@
 /Frontend/.env.development.local
 /Frontend/.env.test.local
 /Frontend/.env.production.local
+/Backend/Cleanup/.env
 
 /Frontend/npm-debug.log*
 /Frontend/yarn-debug.log*
