@@ -10,7 +10,6 @@ const {Application,AccessToken} = require('../model');
 //importing JWT module
 const jwt = require('jsonwebtoken');
 const uid = require('uid2');
-const key = "icAKI50fOLKCwjIzOZAnrD0R9QE3C5ik";
 
 router.get("/auth",(req,res)=>{
     Application.findOne({oauth_id: req.query.client_id},(err,app)=>{
@@ -42,7 +41,7 @@ router.get("/auth",(req,res)=>{
                         audience: decode.issuer,
                         nonce: uid(32)
                       };
-                      let AToken = jwt.sign(payload,key,{expiresIn:"30m"});
+                      let AToken = jwt.sign(payload,process.env.KEY,{expiresIn:"30m"});
                       AccessToken.exists({application: req.query.client_id},(err,flag)=>{
                           if(err){
                             serverLog.error(`Authentication DATABASE ERROR with client_id=${req.query.client_id} -> ${err}`);
