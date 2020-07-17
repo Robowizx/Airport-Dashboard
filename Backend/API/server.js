@@ -30,6 +30,7 @@ const top_least_guage = require('./Routes/top_least_gauge');
 const exp_till_date = require('./Routes/exp_till_date_timeseries');
 const heatmap = require('./Routes/resp_heatmap');
 const auth = require('./Routes/auth');
+const gateKeeper = require('./Routes/gateKeeper');
 
 //importing DB module
 const db = require("./db");
@@ -52,6 +53,7 @@ app.use(express.static("./Public"));
 app.use(helmet());
 app.use(auth);
 app.use('/chart',
+        gateKeeper,
         exp_chart,
         res_dyn,
         res_stk,
@@ -62,9 +64,9 @@ app.use('/chart',
         res_time,
         allRes_TS,
         devexp,
-        top_least_guage,
         exp_till_date,
-        heatmap
+        heatmap,
+        top_least_guage
        );
 
 //checking connection to DB
