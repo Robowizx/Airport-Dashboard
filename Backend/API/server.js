@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+//setting up env file
+require('dotenv').config();
+
 //importing mongoose
 const mongoose = require('mongoose');
 
