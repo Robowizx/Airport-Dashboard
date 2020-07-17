@@ -16,7 +16,7 @@ export const bToken = async ()=>{
         'Authorization': "Bearer " + BToken
         }
     });
-    const { AToken } = await response.json();
+    const { AToken } = await response.text();
     return AToken;
 }
 
