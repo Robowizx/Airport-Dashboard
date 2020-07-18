@@ -1,6 +1,11 @@
-//importing express and setting port
+//importing express, https modules, certificates... and setting port
+const https = require('https');
 const express = require("express");
 const app = express();
+const fs = require('fs');
+const privateKey = fs.readFileSync('backend_pkey.key','utf8');
+const certificate = fs.readFileSync('backend_certificate.crt','utf8');
+const httpsServer = https.createServer({key: privateKey,cert:certificate},app);
 const PORT = process.env.PORT || 4000;
 
 //setting up env file
@@ -86,6 +91,4 @@ app.get("/", (req, res) => {
 });
 
 //declaring server port
-app.listen(PORT, () =>
-  serverLog.info(`Server listening at http://localhost:${PORT}`)
-);
+httpsServer.listen(PORT, () => serverLog.info(`Server listening at https://localhost:${PORT}`));

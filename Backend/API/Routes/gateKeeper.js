@@ -6,7 +6,7 @@ const serverlog = require('../logger');
 
 const GateKeeper = (req,res,next)=>{
     if(req.headers.authorization && req.headers.authorization.split('')[0] == 'Basic'){
-        const key = Buffer.from(req.headers.authorization.split(' ')[1],'base64').toString('ascii');
+        const key = Buffer.from(req.headers.authorization.split(' ')[1],'base64').toString('utf8');
         Application.findOne({oauth_secret: key},(err,doc)=>{
             if(err){
                 serverlog.error(`GateKeeper DATABASE ERROR -> ${err}`);
