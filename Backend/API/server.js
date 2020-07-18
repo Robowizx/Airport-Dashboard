@@ -35,25 +35,17 @@ const gateKeeper = require('./Routes/gateKeeper');
 //importing DB module
 const db = require("./db");
 
-//importing parser
-//const body_parser = require("body-parser");
-
 //setting view engine
 app.set("views", "./views");
 app.set("view engine", "pug");
 app.set("view cache", true);
-
-//setting parser for post requests
-//app.use(body_parser.json());
 
 //declaring static resources
 app.use(express.static("./Public"));
 
 //adding routes
 app.use(helmet());
-app.use(auth);
-app.use('/chart',
-        gateKeeper,
+app.use(gateKeeper,
         exp_chart,
         res_dyn,
         res_stk,
