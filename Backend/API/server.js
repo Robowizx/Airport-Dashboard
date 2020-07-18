@@ -29,7 +29,6 @@ const devexp = require('./Routes/devExp');
 const top_least_guage = require('./Routes/top_least_gauge');
 const exp_till_date = require('./Routes/exp_till_date_timeseries');
 const heatmap = require('./Routes/resp_heatmap');
-const auth = require('./Routes/auth');
 const gateKeeper = require('./Routes/gateKeeper');
 
 //importing DB module
@@ -45,6 +44,7 @@ app.use(express.static("./Public"));
 
 //adding routes
 app.use(helmet());
+
 app.use(gateKeeper,
         exp_chart,
         res_dyn,
@@ -64,17 +64,21 @@ app.use(gateKeeper,
 //checking connection to DB
 db.connect((err) => {
   if (err) {
-    serverLog.error(`Unable to connect to Database -> ${err}`);
-    process.exit(1);
+    serverLog.error(`Unable to connect to AirportDB -> ${err}`);
+    process.exit(0);
   } else {
     serverLog.info(`Airport Database is online.`);
   }
 });
-mongoose.connect(`mongodb+srv://${process.env.UNAME}:${process.env.PASS}@cluster0-qkpve.mongodb.net/AuthDB?retryWrites=true&w=majority`,{ useCreateIndex:true, useNewUrlParser : true, useUnifiedTopology: true });
-const connection = mongoose.connection;
-connection.once("open",()=>{
-  serverLog.info(`Auth Database is online.`);
+mongoose.connect(`mongodb+srv://${process.env.UNAME}:${process.env.PASS}@cluster0-qkpve.mongodb.net/AuthDB?retryWrites=true&w=majority`,{ useCreateIndex:true, useNewUrlParser : true, useUnifiedTopology: true },(err)=>{
+  if(err){
+    serverLog.error(`Unable to connect to AuthDB -> ${err}`);
+  }
+  else{
+    serverLog.info(`Auth Database is online.`);
+  }
 });
+
 
 //dummy home route
 app.get("/", (req, res) => {
