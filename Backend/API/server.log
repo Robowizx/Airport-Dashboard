@@ -1,0 +1,32 @@
+2020-07-10T16:44:25+05:30@info: Server listening at http://localhost:4000
+2020-07-10T16:44:28+05:30@info: Database is online.
+2020-07-10T16:44:59+05:30@info: Requested all responses time series chart with Airport=Bhopal, Type=EI, SDate=2020-03-04, EDate=2020-04-04
+2020-07-10T16:45:29+05:30@info: Requested response time series chart with Airport=Bhopal, Section=by_device, Type=EI, SDate=2020-03-04, EDate=2020-04-04
+2020-07-10T16:45:54+05:30@info: REQUESTED Response Dynamic chart with Airport=Bhopal, Section=by_device, Date=2020-03-04, Type=undefined
+2020-07-10T16:45:55+05:30@warn: Res_Dyn chart DATA NOT FOUND with Airport=Bhopal, Section=by_device, Type=undefined, Date=2020-03-04
+2020-07-10T16:47:00+05:30@info: REQUESTED Response Dynamic chart with Airport=Bhopal, Section=by_device, Date=2020-03-04, Type=EI
+2020-07-10T16:47:08+05:30@info: REQUESTED Response histogram chart with Airport=Bhopal, Section=by_device, Date=2020-03-04, Type=EI
+2020-07-10T16:47:09+05:30@warn: Response hitogram chart DATA NOT FOUND with Airport=Bhopal, Section=by_device, Type=EI, Date=2020-03-04
+2020-07-10T16:48:14+05:30@info: REQUESTED Response histogram chart with Airport=Bhopal, Section=by_device, Date=2020-03-05, Type=EI
+2020-07-10T16:48:14+05:30@warn: Response hitogram chart DATA NOT FOUND with Airport=Bhopal, Section=by_device, Type=EI, Date=2020-03-05
+2020-07-10T16:48:24+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=EI
+2020-07-10T16:48:24+05:30@warn: Response hitogram chart DATA NOT FOUND with Airport=Kolkata, Section=by_device, Type=EI, Date=2020-03-05
+2020-07-10T16:50:38+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=SC
+2020-07-10T16:50:38+05:30@warn: Response hitogram chart DATA NOT FOUND with Airport=Kolkata, Section=by_device, Type=SC, Date=2020-03-05
+2020-07-10T16:50:42+05:30@info: REQUESTED Response Dynamic chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=SC
+2020-07-10T16:52:03+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=SC
+2020-07-10T16:52:03+05:30@warn: Response hitogram chart DATA NOT FOUND with Airport=Kolkata, Section=by_device, Type=SC, Date=2020-03-05
+2020-07-10T16:54:24+05:30@info: Server listening at http://localhost:4000
+2020-07-10T16:54:27+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=SC
+2020-07-10T16:54:27+05:30@info: Database is online.
+2020-07-10T16:54:28+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=SC
+2020-07-10T16:54:30+05:30@warn: Response hitogram chart DATA NOT FOUND with Airport=Kolkata, Section=by_device, Type=SC, Date=2020-03-05
+2020-07-10T17:00:32+05:30@info: Server listening at http://localhost:4000
+2020-07-10T17:00:35+05:30@info: Database is online.
+2020-07-10T17:00:37+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=SC
+2020-07-10T17:00:39+05:30@warn: Response hitogram chart DATA NOT FOUND with Airport=Kolkata, Section=by_device, Type=SC, Date=2020-03-05
+2020-07-10T17:05:25+05:30@info: Server listening at http://localhost:4000
+2020-07-10T17:05:25+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=undefined
+2020-07-10T17:05:25+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=undefined
+2020-07-10T17:05:27+05:30@info: Database is online.
+2020-07-10T17:05:28+05:30@info: REQUESTED Response histogram chart with Airport=Kolkata, Section=by_device, Date=2020-03-05, Type=undefined
