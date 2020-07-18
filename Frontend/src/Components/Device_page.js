@@ -33,8 +33,8 @@ class SimpleTabs extends Component{
       value:0,
       open:false,
       date:moment().format('YYYY-MM-DD'),
-      sdate: moment().format('YYYY-MM-DD'),
-      edate:moment().add(3, 'days')
+      sdate:moment().subtract(3, "days"),
+      edate:moment().format('YYYY-MM-DD')
   };
   this.state = {...this.state, url1:`http://localhost:4000/Kolkata/exp/${this.state.sec}/?date=${this.state.date}&type=EI`}
   this.state = {...this.state, url1_1:`http://localhost:4000/Kolkata/res_donut/?date=${this.state.date}&type=EI`}
