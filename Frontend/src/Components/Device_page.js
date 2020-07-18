@@ -40,11 +40,11 @@ class SimpleTabs extends Component{
   this.state = {...this.state, url1_1:`http://localhost:4000/Kolkata/res_donut/?date=${this.state.date}&type=EI`}
   this.state = {...this.state, url1_2:`http://localhost:4000/Kolkata/top_and_least/?date=${this.state.date}&type=EI`}
   this.state = {...this.state, url1_3:`http://localhost:4000/Kolkata/res/${this.state.sec}/?date=${this.state.date}&type=EI`}
-  this.state = {...this.state, url2:`http://localhost:4000/Kolkata/exp_series/${this.state.sec_t}/?sdate=${this.state.sdate}&edate=${this.state.edate.format('YYYY-MM-DD')}&type=EI`}
-  this.state = {...this.state, url2_1:`http://localhost:4000/Kolkata/allRes_TS/?sdate=${this.state.sdate}&edate=${this.state.edate.format('YYYY-MM-DD')}&type=EI`}
-  this.state = {...this.state, url2_2:`http://localhost:4000/Kolkata/exp_till_date/?sdate=${this.state.sdate}&edate=${this.state.edate.format('YYYY-MM-DD')}&type=EI`}
-  this.state = {...this.state, url2_3:`http://localhost:4000/Kolkata/top_least_timeseries/${this.state.sec_t}/?sdate=${this.state.sdate}&edate=${this.state.edate.format('YYYY-MM-DD')}&type=EI`}
-   this.state = {...this.state, url2_4:`http://localhost:4000/Kolkata/restime/${this.state.sec_t}/?sdate=${this.state.sdate}&edate=${this.state.edate.format('YYYY-MM-DD')}&type=EI`}
+   this.state = {...this.state, url2:`http://localhost:4000/Kolkata/exp_series/${this.state.sec_t}/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`}
+  this.state = {...this.state, url2_1:`http://localhost:4000/Kolkata/allRes_TS/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`}
+  this.state = {...this.state, url2_2:`http://localhost:4000/Kolkata/exp_till_date/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`}
+  this.state = {...this.state, url2_3:`http://localhost:4000/Kolkata/top_least_timeseries/${this.state.sec_t}/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`}
+   this.state = {...this.state, url2_4:`http://localhost:4000/Kolkata/restime/${this.state.sec_t}/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`}
 
 
 }
@@ -83,11 +83,11 @@ handleSecChange1 = () => {
 }
 handleSecChange2 = () => {
   this.setState({ 
-    url2:`http://localhost:4000/Kolkata/exp_series/${this.state.sec_t}/?sdate=${this.state.sdate}&edate=${this.state.edate}&type=EI`,
-    url2_1:`http://localhost:4000/Kolkata/allRes_TS/?sdate=${this.state.sdate}&edate=${this.state.edate}&type=EI`,
-    url2_2:`http://localhost:4000/Kolkata/exp_till_date/?sdate=${this.state.sdate}&edate=${this.state.edate}&type=EI`,
-    url2_3:`http://localhost:4000/Kolkata/top_least_timeseries/${this.state.sec_t}/?sdate=${this.state.sdate}&edate=${this.state.edate}&type=EI`,
-    url2_4:`http://localhost:4000/Kolkata/restime/${this.state.sec_t}/?sdate=${this.state.sdate}&edate=${this.state.edate}&type=EI`
+   url2:`http://localhost:4000/Kolkata/exp_series/${this.state.sec_t}/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,
+    url2_1:`http://localhost:4000/Kolkata/allRes_TS/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,
+    url2_2:`http://localhost:4000/Kolkata/exp_till_date/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,
+    url2_3:`http://localhost:4000/Kolkata/top_least_timeseries/${this.state.sec_t}/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,
+    url2_4:`http://localhost:4000/Kolkata/restime/${this.state.sec_t}/?sdate=${this.state.sdate.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`
  });
   
 }
