@@ -5,7 +5,7 @@ const {Application} = require('../model');
 const serverlog = require('../logger');
 
 const GateKeeper = (req,res,next)=>{
-    if(req.headers.authorization && req.headers.authorization.split('')[0] == 'Basic'){
+    if(req.headers.authorization && req.headers.authorization.split(' ')[0] == 'Basic'){
         const key = Buffer.from(req.headers.authorization.split(' ')[1],'base64').toString('utf8');
         Application.findOne({oauth_secret: key},(err,doc)=>{
             if(err){
@@ -25,6 +25,7 @@ const GateKeeper = (req,res,next)=>{
         });
     }
     else{
+        console.log(req.headers.authorization);
         serverlog.warn(`GateKeeper NO AUTH HEADER OR INVALID AUTH TYPE from ${req.headers.host}/${req.headers.origin}`);
         res.status(401).send('error 401 Unauthorised');
     }

@@ -66,10 +66,10 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
           var leastArea = [];
           documents.forEach((d) => {
             date = d.date;
-            topArea.push(d.by_device.top.area);
-            leastArea.push(d.by_device.least.area);
-            topData.push([new Date(date).getTime(), d.by_device.top.exp]);
-            leastData.push([new Date(date).getTime(), d.by_device.least.exp]);
+            topArea.push(d[req.params.sec].top.area);
+            leastArea.push(d[req.params.sec].least.area);
+            topData.push([new Date(date).getTime(), d[req.params.sec].top.exp]);
+            leastData.push([new Date(date).getTime(), d[req.params.sec].least.exp]);
           });
           series.push(
             {
