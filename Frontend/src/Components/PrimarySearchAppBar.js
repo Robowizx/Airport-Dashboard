@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   fade,
   makeStyles,
@@ -462,7 +462,41 @@ export default function PrimarySearchAppBar() {
                 {["Upload"].map((text, index) => (
                   <ListItem button key={text}>
                     <ListItemIcon>
-                      {<PublishIcon color="secondary" />}
+                      {<PublishIcon color="primary" />}
+
+                      {
+                        <Fragment>
+                          <input
+                            accept="xls/*"
+                            className={classes.input}
+                            id="PublishIcon"
+                            type="file"
+                          />
+                          <label htmlFor="PublishIcon">
+                            <IconButton color="primary" component="span">
+                              <PublishIcon />
+                            </IconButton>
+                          </label>
+                        </Fragment>
+                        // <form
+                        //   id="PublishIcon"
+                        //   method="post"
+                        //   encType="multipart/form-data"
+                        // >
+                        //   <input
+                        //     type="file"
+                        //     id="PublshIcon"
+                        //     style="display: none;"
+                        //   />
+                        //   <Button
+                        //     htmlFor="PublishIcon"
+                        //     component="label"
+                        //     type={"submit"}
+                        //   >
+                        //     Upload
+                        //   </Button>
+                        // </form>
+                      }
                     </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
