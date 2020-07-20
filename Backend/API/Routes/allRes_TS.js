@@ -55,6 +55,7 @@ router.get("/:air/allRes_TS/", (req, res) => {
           var Average = [];
           var Poor = [];
           var Bad = [];
+          
           documents.forEach((d) => {
             Excellent.push([new Date(d.date).getTime(),d.general.all_responses[0].Excellent]);
             Good.push([new Date(d.date).getTime(),d.general.all_responses[0].Good]);
@@ -62,10 +63,6 @@ router.get("/:air/allRes_TS/", (req, res) => {
             Poor.push([new Date(d.date).getTime(),d.general.all_responses[0].Poor]);
             Bad.push([new Date(d.date).getTime(),d.general.all_responses[0].Bad]);
           });
-          console.log(Good);
-          console.log(Average);
-          console.log(Poor);
-          console.log(Bad);
 
           series.push(
             {
