@@ -12,7 +12,6 @@ export default function CardInfo(props) {
     },
   });
   let classes = useStyles();
-  console.log(Number(props.width));
   return (
     <div className="card">
       <Card className={classes.root}>

@@ -1,26 +1,28 @@
 .App {
   font-family: sans-serif;
+  background-image: url('./image/project-papper.png');
 }
 
 .map {
   position: absolute;
   margin: 45px 40px 40px 40px;
   left: 30px;
+
 }
 
-.svg{
+.svg {
   padding-left: 300px;
   width: auto;
   height: 600px;
   align-content: flex-start;
 }
 
-.stateName{
+.stateName {
   font-family: sans-serif;
   text-align: center;
 }
 
-.card{
+.card {
   position: absolute;
   z-index: 10;
   left: 600px;
