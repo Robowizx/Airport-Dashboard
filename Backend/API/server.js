@@ -34,6 +34,7 @@ const devexp = require('./Routes/devExp');
 const top_least_guage = require('./Routes/top_least_gauge');
 const exp_till_date = require('./Routes/exp_till_date_timeseries');
 const heatmap = require('./Routes/resp_heatmap');
+const airport = require('./Routes/best_worst_airport');
 const gateKeeper = require('./Routes/gateKeeper');
 
 //importing DB module
@@ -66,7 +67,8 @@ app.use(gateKeeper,
         devexp,
         exp_till_date,
         heatmap,
-        top_least_guage
+        top_least_guage,
+        airport
        );
 
 //checking connection to DB
