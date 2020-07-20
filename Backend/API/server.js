@@ -47,6 +47,9 @@ app.set("view cache", true);
 //declaring static resources
 app.use(express.static("./Public"));
 
+//adding cross origin resource sharing (cors) support
+app.use(require('cors')());
+
 //adding routes
 app.use(helmet());
 
