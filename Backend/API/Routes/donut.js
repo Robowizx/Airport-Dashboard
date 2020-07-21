@@ -1,6 +1,5 @@
 //importing express
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
 
 //importing logger
 const serverLog = require('../logger');
