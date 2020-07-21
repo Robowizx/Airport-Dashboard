@@ -1,10 +1,10 @@
 doctype html
 html
     head
-        script(src='/Javascript/apexcharts.min.js')
-        link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.js')
+        link(rel='stylesheet',type='text/css',href='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.css')
     body
-        div(id='chart',style="max-width:device-width; margin: 35px auto")
+        div(id='chart',style="max-width:650px; margin: 35px auto")
     script.
         var options = !{option};
         options.dataLabels['formatter'] = (val,{seriesIndex,dataPointIndex})=>{
@@ -25,6 +25,3 @@ html
         console.log(options.dataLabels.offsetX);
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-      
-      
-     
