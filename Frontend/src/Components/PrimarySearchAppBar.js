@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   fade,
   makeStyles,
@@ -22,7 +22,9 @@ import {
   Paper,
   Grid,
   useTheme,
+  Avatar,
 } from "@material-ui/core";
+// import IconButton from "@material-ui/core/IconButton";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
@@ -52,8 +54,29 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  badge: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  shape: {
+    backgroundColor: theme.palette.primary.main,
+    width: 40,
+    height: 40,
+  },
+  shapeCircle: {
+    borderRadius: "50%",
+  },
   root: {
     display: "flex",
+  },
+  upload: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  input: {
+    display: "none",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -280,11 +303,6 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 17 new notifications" color="inherit">
-          <Badge badgeContent={17} color="#f50057">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
         <p>Notifications</p>
       </MenuItem>
       <MenuItem>
@@ -355,14 +373,16 @@ export default function PrimarySearchAppBar() {
                       onClick={() => setDarkMode(!darkMode)}
                     />
                   </div>
-                  <IconButton
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                  >
-                    <Badge badgeContent={17} color="#f50057">
-                      <NotificationsIcon />
-                    </Badge>
-                  </IconButton>
+                  <div className={classes.badge}>
+                    <IconButton
+                      aria-label="show 10 new notifications"
+                      color="inherit"
+                    >
+                      <Badge badgeContent="10" color="#f50057" overlap="circle">
+                        <NotificationsIcon />
+                      </Badge>
+                    </IconButton>
+                  </div>
                   <IconButton
                     edge="end"
                     aria-label="account of current user"
@@ -413,7 +433,6 @@ export default function PrimarySearchAppBar() {
                   )}
                 </IconButton>
               </div>
-
               <List>
                 {["Home"].map((text, index) => (
                   <ListItem button key={text}>
@@ -423,7 +442,6 @@ export default function PrimarySearchAppBar() {
                     <ListItemText primary={text} />
                   </ListItem>
                 ))}
-
                 <ListItem button onClick={handleOpen}>
                   <ListItemIcon>
                     {<LocalAirportOutlinedIcon color="secondary" />}
@@ -462,41 +480,17 @@ export default function PrimarySearchAppBar() {
                 {["Upload"].map((text, index) => (
                   <ListItem button key={text}>
                     <ListItemIcon>
-                      {<PublishIcon color="primary" />}
-
-                      {
-                        <Fragment>
-                          <input
-                            accept="xls/*"
-                            className={classes.input}
-                            id="PublishIcon"
-                            type="file"
-                          />
-                          <label htmlFor="PublishIcon">
-                            <IconButton color="primary" component="span">
-                              <PublishIcon />
-                            </IconButton>
-                          </label>
-                        </Fragment>
-                        // <form
-                        //   id="PublishIcon"
-                        //   method="post"
-                        //   encType="multipart/form-data"
-                        // >
-                        //   <input
-                        //     type="file"
-                        //     id="PublshIcon"
-                        //     style="display: none;"
-                        //   />
-                        //   <Button
-                        //     htmlFor="PublishIcon"
-                        //     component="label"
-                        //     type={"submit"}
-                        //   >
-                        //     Upload
-                        //   </Button>
-                        // </form>
-                      }
+                      <input
+                        accept="xls/*"
+                        className={classes.input}
+                        id="PublishIcon"
+                        type="file"
+                      />
+                      <label htmlFor="PublishIcon">
+                        <IconButton color="secondary" component="span">
+                          <PublishIcon />
+                        </IconButton>
+                      </label>
                     </ListItemIcon>
                     <ListItemText primary={text} />
                   </ListItem>
