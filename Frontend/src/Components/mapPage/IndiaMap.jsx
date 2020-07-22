@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import * as topojson from "topojson-client";
 import places from './aaiList.json';
 
-import { Link, Route,BrowserRouter as Router } from "react-router-dom";
+import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 
 import "../../App.css";
 import CardInfo from './CardInfo';
@@ -144,11 +144,15 @@ export default class IndiaMap extends Component {
             .on('mouseout', (d, i, n) => {
               expTip.style("visibility", "hidden");
             })
-            .on('click', async(d) => {
-              await this.setState({clickState: `${d.city}`});
-              await this.props.updateState(this.state.clickState,this.state.date,this.state.device);
-              console.log(this.state.clickState,this.state.date,this.state.device);
-              document.getElementById('linkTest').click(); 
+            .on('click', async (d) => {
+              await this.setState({ clickState: `${d.city}` });
+              if (this.state.device === "All") { 
+                await this.props.updateState(this.state.clickState, this.state.date, "EI"); 
+              } else { 
+                await this.props.updateState(this.state.clickState, this.state.date, this.state.device) 
+              }
+              console.log(this.state.clickState, this.state.date, this.state.device);
+              document.getElementById('linkTest').click();
             });
         }
 
