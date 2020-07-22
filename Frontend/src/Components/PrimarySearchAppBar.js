@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,6 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Daily from "./daily.js"
+import TimeSeries from "./timeseries";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -109,6 +111,12 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
+          <Typography variant="h6" noWrap>
+            Dashboard
+          </Typography>
+          <Typography variant="h6" noWrap>
+            Dashboard
+          </Typography>
           <Typography variant="h6" noWrap>
             Dashboard
           </Typography>
