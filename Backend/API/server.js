@@ -1,6 +1,8 @@
 //importing express, https modules, certificates... and setting port
 const https = require('https');
 const express = require("express");
+const {graphqlHTTP} = require('express-graphql');
+const gqlschema = require("./GraphqlSchema");
 const app = express();
 const fs = require('fs');
 const privateKey = fs.readFileSync('backend_pkey.key','utf8');
@@ -54,6 +56,33 @@ app.use(require('cors')());
 //adding routes
 app.use(helmet());
 
+console.log(typeof(graphqlHTTP));
+
+//checking connection to DB
+db.connect((err) => {
+  if (err) {
+    serverLog.error(`Unable to connect to AirportDB -> ${err}`);
+    process.exit(0);
+  } else {
+    serverLog.info(`Airport Database is online.`);
+  }
+});
+
+mongoose.connect(`mongodb+srv://${process.env.UNAME}:${process.env.PASS}@cluster0-qkpve.mongodb.net/AuthDB?retryWrites=true&w=majority`,{ useCreateIndex:true, useNewUrlParser : true, useUnifiedTopology: true },(err)=>{
+  if(err){
+    serverLog.error(`Unable to connect to AuthDB -> ${err}`);
+    process.exit(0);
+  }
+  else{
+    serverLog.info(`Auth Database is online.`);
+  }
+});
+
+app.use('/graphql',graphqlHTTP({
+  schema: gqlschema,
+  graphiql: true
+}));
+
 app.use(gateKeeper,
         exp_chart,
         res_dyn,
@@ -70,24 +99,6 @@ app.use(gateKeeper,
         top_least_guage,
         airport
        );
-
-//checking connection to DB
-db.connect((err) => {
-  if (err) {
-    serverLog.error(`Unable to connect to AirportDB -> ${err}`);
-    process.exit(0);
-  } else {
-    serverLog.info(`Airport Database is online.`);
-  }
-});
-mongoose.connect(`mongodb+srv://${process.env.UNAME}:${process.env.PASS}@cluster0-qkpve.mongodb.net/AuthDB?retryWrites=true&w=majority`,{ useCreateIndex:true, useNewUrlParser : true, useUnifiedTopology: true },(err)=>{
-  if(err){
-    serverLog.error(`Unable to connect to AuthDB -> ${err}`);
-  }
-  else{
-    serverLog.info(`Auth Database is online.`);
-  }
-});
 
 
 //dummy home route
