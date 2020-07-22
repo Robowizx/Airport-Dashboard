@@ -3,7 +3,7 @@ import "./App.css";
 import { Route, BrowserRouter as Router} from "react-router-dom";
 
 import IndiaMap from "./Components/mapPage/IndiaMap.jsx";
-import AirportPage from "./Components/airportPage";
+import AirportPage from "./Components/airportPage/airportPage";
 import PrimarySearchAppBar from "./Components/menuBar/PrimarySearchAppBar";
 
 export default class App extends Component {
