@@ -2,7 +2,7 @@
 
  import React, { Component } from 'react';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
-
+import {Link} from 'react-router-dom';
 
  import {
     KeyboardDatePicker,
@@ -119,8 +119,12 @@ render(){
     textColor="primary"
     onChange={this.handleValueChange}
     aria-label="disabled tabs example">
-                  <Tab label="Daily"  icon={<TodayIcon />} disabled />
-                  <Tab label="Time Series"  icon={<TimelineIcon />} />
+      <Link to='/'>
+            <Tab label="Daily"  icon={<TodayIcon />} disabled/>
+      </Link>
+      <Link to='/TimeSeries'>
+            <Tab label="Time Series"  icon={<TimelineIcon />} />
+      </Link>
         
                </Tabs>
 
