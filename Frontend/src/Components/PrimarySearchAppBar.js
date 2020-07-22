@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import SimpleTabs from "./Device.js"
+import Daily from "./daily.js"
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -136,7 +136,7 @@ export default function MiniDrawer() {
       <Toolbar/>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-       <SimpleTabs/>
+       <Daily/>
       </main>
     </div>
   );
