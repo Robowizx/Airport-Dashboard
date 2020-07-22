@@ -38,22 +38,3 @@ export default class App extends Component {
     )
   }
 }
-
-
-
-
-// export default function App() {
-//   return (
-//     <div>
-//     <Router>
-//       <div>
-//       <PrimarySearchAppBar/>
-//       <Route path="/Home" component={mapHome} />
-//       <Route to="/airport" render={
-//         (props) => <airportPage {...props}/>
-//       }/>
-//       </div>
-//     </Router>
-//     </div>
-//   );
-// }

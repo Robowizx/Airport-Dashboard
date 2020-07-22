@@ -11,10 +11,30 @@ export default class airportPage extends Component {
       device: this.props.dev
     };
   }
+
+  componentDidMount(){
+
+  }
+
+  getContent(url1,idChart) {
+    const authToken =
+      "OWZHZGc3b2liUm1iRkJsTHY0c1Q5M2FVY2Iwc1d2amtHM2ZiTnNJZkZCeUhiZjVaaHdvUk45NHN5MEpBeVFsVA==";
+    const header = {
+      Authorization: "Basic " + authToken,
+    };
+    const iframe = document.getElementById(idChart);
+    fetch(url1, { method: "GET", headers: header })
+      .then((response) => response.text())
+      .then((data) => { iframe.contentDocument.write(data); })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <div className="map">
-        <h1>{ this.state.airport } + { this.state.date } + {this.state.device}</h1>
+        <iframe  width="50%" height="500" title="exp" id="ifm1" frameborder="0"></iframe>
       </div>
     )
   }
