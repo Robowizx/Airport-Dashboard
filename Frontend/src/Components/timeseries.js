@@ -191,14 +191,15 @@ render(){
                          <Divider/>
                           <Container style={{paddingtop:"50px"}}>
        
-        <iframe  width="50%" height="550" title="exp" id="ifm1" frameBorder="0"></iframe> 
+        
                           
         <iframe width="50%" height="550" title="res_donut" id="ifm2" frameBorder="0"></iframe>
         
         <iframe  width="50%" height="550" title="top_and_least" id="ifm3" frameBorder="0"></iframe>
             
-        <iframe  width="50%" height="550" title="res" id="ifm4" frameBorder="0"></iframe>
+        <iframe  width="75%" height="550" title="res" id="ifm4" frameBorder="0"></iframe>
         <iframe  width="50%" height="550" title="res" id="ifm5" frameBorder="0"></iframe>
+       <iframe  width="50%" height="550" title="exp" id="ifm1" frameBorder="0"></iframe> 
       </Container>
       </div>
     )
