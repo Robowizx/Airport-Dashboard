@@ -1,38 +1,59 @@
+import React, { Component } from 'react'
+import "./App.css";
+import { Route, BrowserRouter as Router} from "react-router-dom";
 
-import React, { Component } from "react";
+import IndiaMap from "./Components/mapPage/IndiaMap.jsx";
+import AirportPage from "./Components/airportPage";
+import PrimarySearchAppBar from "./Components/menuBar/PrimarySearchAppBar";
 
 export default class App extends Component {
   constructor(props) {
-    super(props);
-
+    super(props)
     this.state = {
-      data: null,
-    };
+       airName: "",
+       date: "",
+       device: ""
+    }
   }
 
-  componentDidMount() {
-    this.test_server();
+  updateState = async(n,d,dev)=>{
+    await this.setState({airName: n, date: d, device: dev},()=>{console.log("devil",this.state)});
   }
   
-  test_server(){
-    var test = document.getElementById("testChart");
-    const url = "https://localhost:4000/Bhopal/res/by_device?date=2020-03-04&type=EI";
-    fetch(url, {
-      method: "GET",
-      headers: {
-        Authorization:"Basic OWZHZGc3b2liUm1iRkJsTHY0c1Q5M2FVY2Iwc1d2amtHM2ZiTnNJZkZCeUhiZjVaaHdvUk45NHN5MEpBeVFsVA=="
-      },
-    })
-      .then((response) => response.text())
-      .then((data) => { test.contentDocument.write(data); }).catch((err)=>{return err});
-  }
-
-
-
-  render(){
-    return(
-    <div>
-      <iframe title="chart" id="testChart" width="600" height="600"></iframe>
-    </div>);
+  render() {
+    return (
+      <div>
+    <Router>
+      <div>
+      <PrimarySearchAppBar/>
+      </div>
+      <Route path="/Home" render={ (props)=> <IndiaMap {...props} updateState={this.updateState}/> } />
+      <Route path="/airport" render={
+        (props) => <AirportPage {...props} airState={this.state.airName}
+        date={ this.state.date}
+        dev={this.state.device}/>
+      }/>
+    </Router>
+    </div>
+    )
   }
 }
+
+
+
+
+// export default function App() {
+//   return (
+//     <div>
+//     <Router>
+//       <div>
+//       <PrimarySearchAppBar/>
+//       <Route path="/Home" component={mapHome} />
+//       <Route to="/airport" render={
+//         (props) => <airportPage {...props}/>
+//       }/>
+//       </div>
+//     </Router>
+//     </div>
+//   );
+// }
