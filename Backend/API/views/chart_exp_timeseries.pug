@@ -7,17 +7,15 @@ html
     body
         - var ar = JSON.parse(area);
           each item in ar
-            div(id=`${item}`,style="max-width:650px; margin: 5px auto; border: 1px solid #000;")
+            div(id=`${item}`,style="max-width:650px; margin: 35px auto")
     script.
         var options = !{option};
         var areas = !{area};
         var series = !{series};
-        var dtype = "#{device}";
-
         for(i=0;i<areas.length;i++){
-            let x = series.findIndex(a => a.id === areas[i]);
-            options.series = series[x].val;
-            options.title.text = `All Responses For ${areas[x]} ( ${dtype} )`;  
+            options.title.text = `Experience Index Time Series of ${areas[i]}`
+            let x = series.findIndex(a => a.name === areas[i]);
+            options.series = [series[x]]        
             var chart = new ApexCharts(document.getElementById(`${areas[i]}`), options);
             chart.render();
         }

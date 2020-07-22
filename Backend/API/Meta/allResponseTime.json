@@ -1,0 +1,69 @@
+{
+    "series": [],
+      "chart": {
+        "animations":{
+          "enabled":false
+        },
+      "height": 250,
+      "id": "test",
+      "group":"timeResponses",
+      "type": "line",
+      "dropShadow": {
+        "enabled": true,
+        "color": "#000",
+        "top": 18,
+        "left": 7,
+       "blur": 10,
+        "opacity": 0.2
+      },
+      "toolbar": {
+        "show": true
+      }
+    },
+    "colors": ["#77B6EA", "#9FD405","#ff6361","#bc5090","#ffa600"],
+    "dataLabels": {
+      "enabled": false
+    },
+    "stroke": {
+      "curve": "smooth",
+      "width": 2
+    },
+    "title": {
+      "text": "",
+      "align": "left"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7",
+      "row": {
+        "colors": ["#f3f3f3", "transparent"],
+        "opacity": 0.5
+      }
+    },
+    "markers": {
+      "size": 0,
+      "strokeColors": "#000",
+      "strokeWidth": 0.5
+    },
+    "xaxis": {
+      "type": "datetime",
+      "labels":{
+        "offsetX": 0,
+        "offsetY": 0,
+        "format": "dd MMM"
+      }
+    },
+    "yaxis": {
+      "min": 0,
+      "max": 100
+    },
+    "legend": {
+      "position": "bottom",
+     "horizontalAlign": "right",
+      "floating": false,
+      "offsetY": 4,
+      "offsetX": -5
+    },
+    "tooltip":{
+      "enabled": true
+    }
+  }

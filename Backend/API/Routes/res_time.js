@@ -1,12 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const moment = require("moment");
-const { allResponseTime } = require("../chart_metadata.json");
+const moment = require("moment-timezone");
+const serverLog = require('../logger');
+const allResponseTime = require('../Meta/allResponseTime.json');
 const db = require("../db");
 
 router.get("/:air/restime/:sec", (req, res) => {
   const type = req.params.sec + ".responses";
   const dev = req.query.type;
+  serverLog.info(`Requested response time series chart with Airport=${req.params.air}, `+
+                 `Section=${req.params.sec}, `+
+                 `Type=${req.query.type}, `+
+                 `SDate=${req.query.sdate}, `+
+                 `EDate=${req.query.edate}`
+                );
+
   db.getDB()
     .collection(req.params.air)
     .find(
@@ -22,7 +30,24 @@ router.get("/:air/restime/:sec", (req, res) => {
     .sort({ date: 1 })
     .project({ _id: 0, [type]: 1, date: 1 })
     .toArray((err, documents) => {
-      if (err) console.log(err);
+      if (err){
+        serverLog.error(`response time series chart DATABASE ERROR with Airport=${req.params.air}, `+
+                        `Section=${req.params.sec}, `+
+                        `Type=${req.query.type}, `+
+                        `SDate=${req.query.sdate}, `+
+                        `EDate=${req.query.edate} -> ${err}`
+                       );
+        res.status(400).send(err);               
+      }
+      else if(Object.keys(documents).length==0){
+        serverLog.warn(`response time series chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                        `Section=${req.params.sec}, `+
+                        `Type=${req.query.type}, `+
+                        `SDate=${req.query.sdate}, `+
+                        `EDate=${req.query.edate}`
+                       );
+        res.status(404).send("404 data not found");               
+      }
       else {
         let series = [],
           area = [];
@@ -67,7 +92,7 @@ router.get("/:air/restime/:sec", (req, res) => {
             }
           }
         }
-        res.render("chart_template_all_res_time", {
+        res.status(200).render("chart_template_all_res_time", {
           option: JSON.stringify(allResponseTime),
           series: JSON.stringify(series),
           area: JSON.stringify(area),
