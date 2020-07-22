@@ -26,7 +26,7 @@ class Time extends Component{
       airport:"",
       sec:"by_device",
       type:"",
-      date: moment().subtract(3, "days"),
+      date: moment().subtract(3, "days").format('YYYY-MM-DD'),
       edate: moment().format('YYYY-MM-DD'),
       value:1
   };
@@ -98,11 +98,11 @@ getContent(url1,idChart) {
 
 
 componentDidMount(){
-   this.getContent(`https://localhost:4000/Kolkata/exp_series/${this.state.sec}/?sdate=${this.state.date.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,"ifm1");
-  this.getContent(`https://localhost:4000/Kolkata/allRes_TS/?sdate=${this.state.date.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,"ifm2");
-  this.getContent(`https://localhost:4000/Kolkata/exp_till_date/?sdate=${this.state.date.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,"ifm3");
-  this.getContent(`https://localhost:4000/Kolkata/top_least_timeseries/${this.state.sec}/?sdate=${this.state.date.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,"ifm4")
-  this.getContent(`https://localhost:4000/Kolkata/restime/${this.state.sec}/?sdate=${this.state.date.format('YYYY-MM-DD')}&edate=${this.state.edate}&type=EI`,"ifm5");
+   this.getContent(`https://localhost:4000/Kolkata/exp_series/${this.state.sec}/?sdate=${this.state.date}&edate=${this.state.edate}&type=EI`,"ifm1");
+  this.getContent(`https://localhost:4000/Kolkata/allRes_TS/?sdate=${this.state.date}&edate=${this.state.edate}&type=EI`,"ifm2");
+  this.getContent(`https://localhost:4000/Kolkata/exp_till_date/?sdate=${this.state.date}&edate=${this.state.edate}&type=EI`,"ifm3");
+  this.getContent(`https://localhost:4000/Kolkata/top_least_timeseries/${this.state.sec}/?sdate=${this.state.date}&edate=${this.state.edate}&type=EI`,"ifm4")
+  this.getContent(`https://localhost:4000/Kolkata/restime/${this.state.sec}/?sdate=${this.state.date}&edate=${this.state.edate}&type=EI`,"ifm5");
   }
   handleValueChange = (event, newValue) => {
     
