@@ -165,7 +165,7 @@ render(){
                               <KeyboardDatePicker
                                   margin="normal"
                                   id="date-picker-dialog"
-                                  label="Date"
+                                  label="Start Date"
                                   format="yyyy-MM-dd"
                                   value={this.state.date}
                                   onChange={this.handleDateChange }
@@ -178,7 +178,7 @@ render(){
                               <KeyboardDatePicker
                                   margin="normal"
                                   id="date-picker-dialog"
-                                  label="Date"
+                                  label="End Date"
                                   format="yyyy-MM-dd"
                                   value={this.state.edate}
                                   onChange={this.handleDateChange1 }
