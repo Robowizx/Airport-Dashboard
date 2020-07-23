@@ -4,7 +4,7 @@ html
         script(src='/Javascript/apexcharts.min.js')
         link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
     body
-        div(id='chart',style="max-width:650px; margin: 35px auto")
+        div(id='chart',style="max-width:device-width")
     script.
         var options = !{option};
         options.dataLabels['formatter'] = (val,{seriesIndex,dataPointIndex})=>{

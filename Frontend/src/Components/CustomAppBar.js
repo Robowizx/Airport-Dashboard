@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Drawer,
          AppBar,
          Toolbar,
@@ -83,12 +83,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomAppBar(props) {
   const classes = useStyles();
-  const theme = useTheme();
+  //const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    if((props.menu.states.length!==0 || props.menu.airport.length!==0) || props.menu.device.length!==0)
+      setOpen(true);
   };
 
   const handleDrawerClose = () => {
@@ -120,29 +121,32 @@ export default function CustomAppBar(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
+      {
+        ((props.menu.states.length===0 && props.menu.airport.length===0) && props.menu.device.length===0)?null:(
+          <Drawer
+            variant="permanent"
+            className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-          }),
-        }}
-      > 
-        <div className={classes.toolbar}>
-          <Typography variant="h6" noWrap align="center" className={classes.typ} >Menu</Typography>  
-          <IconButton onClick={handleDrawerClose}>
-             <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <MenuList menu={props.menu} headers={props.headers} navOpen={handleDrawerOpen}/>
-      </Drawer>
-      
+            })}
+            classes={{
+              paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+              }),
+            }}
+          > 
+          <div className={classes.toolbar}>
+            <Typography variant="h6" noWrap align="center" className={classes.typ} >Menu</Typography>  
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <MenuList menu={props.menu} headers={props.headers} navOpen={handleDrawerOpen}/>
+        </Drawer>
+        )
+      }
     </React.Fragment>    
   );
 }

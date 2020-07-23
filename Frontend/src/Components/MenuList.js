@@ -11,7 +11,7 @@ import LocalAirportIcon from '@material-ui/icons/LocalAirport';
 import RoomServiceIcon from '@material-ui/icons/RoomService';
 import ExploreIcon from '@material-ui/icons/Explore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+//import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,13 +46,13 @@ export default function MenuList(props) {
             >
             <ListItemIcon>
                 {
-                    event =='states' ? <ExploreIcon /> : (
-                        event == 'airport' ? <LocalAirportIcon /> : <RoomServiceIcon/>
+                    event === 'states' ? <ExploreIcon /> : (
+                        event === 'airport' ? <LocalAirportIcon /> : <RoomServiceIcon/>
                     )
                 }
             </ListItemIcon>
             <ListItemText primary={marker}/>
-            {open[event] ? <ExpandLess /> : <ExpandMore />}
+            {open[event] ? <ExpandLess /> : null}
         </ListItem>
         <Collapse in={open[event]} key={marker+"-sublist"} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
