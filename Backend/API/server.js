@@ -83,7 +83,7 @@ app.use('/graphql',graphqlHTTP({
   graphiql: true
 }));
 
-app.use(gateKeeper,
+app.use(/*gateKeeper,*/ 
         exp_chart,
         res_dyn,
         res_stk,
