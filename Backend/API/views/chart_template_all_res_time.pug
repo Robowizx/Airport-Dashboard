@@ -7,7 +7,7 @@ html
     body
         - var ar = JSON.parse(area);
           each item in ar
-            div(id=`${item}`,style="max-width:650px; margin: 5px auto; border: 1px solid #000;")
+            div(id=`${item}`,style="max-width:device-width; margin: 5px auto; border: 1px solid #000;")
     script.
         var options = !{option};
         var areas = !{area};

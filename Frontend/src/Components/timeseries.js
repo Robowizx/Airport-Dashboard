@@ -137,7 +137,7 @@ render(){
             <Tab label="Daily"  icon={<TodayIcon />} />
       </Link>
       <Link to='/TimeSeries'>
-            <Tab label="Time Series"  icon={<TimelineIcon />} disabled/>
+            <Tab label="Time Series"  icon={<TimelineIcon />} />
       </Link>
          
                </Tabs>

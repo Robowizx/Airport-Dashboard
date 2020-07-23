@@ -5,8 +5,8 @@ html
         script(src='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.js')
         link(rel='stylesheet',type='text/css',href='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.css')
     body
-        div(id='chart',style="max-width:650px")
-        div(id='chart2',style="max-width:650px")
+        div(id='chart',style="max-width:device-width")
+        div(id='chart2',style="max-width:device-width")
     script.
         var options = !{option1};
         options.tooltip.y.formatter = (val,{seriesIndex,dataPointIndex})=>{

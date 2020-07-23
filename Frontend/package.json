@@ -12,11 +12,13 @@
     "@material-ui/icons": "4.9.1",
     "@material-ui/lab": "4.0.0-alpha.53",
     "@material-ui/pickers": "^3.2.10",
+    "@material-ui/system": "^4.9.14",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "date-fns": "2.13.0",
     "moment-timezone": "^0.5.31",
+    "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -26,7 +28,7 @@
     "typescript": "3.8.3"
   },
   "scripts": {
-    "start": "HTTPS=true SSL_CRT_FILE=frontend_certificate.crt SSL_KEY_FILE=frontend_pkey.key react-scripts start",
+    "start": " HTTPS=true SSL_CRT_FILE=frontend_certificate.crt SSL_KEY_FILE=frontend_pkey.key react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

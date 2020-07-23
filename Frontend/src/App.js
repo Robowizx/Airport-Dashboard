@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import "./App.css";
 import PrimarySearchAppBar from "./Components/PrimarySearchAppBar.js";
 import Daily from "./Components/daily.js"
