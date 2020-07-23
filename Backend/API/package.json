@@ -11,7 +11,7 @@
     "test": "nodemon server.js",
     "start": "node server.js"
   },
-  "author": "Maithri, Naveen, Omkar, Prathik, Rachita",
+  "author": "Harsh, Maithri, Naveen, Omkar, Prathik, Rachita",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "nodemon": "^2.0.4"
