@@ -52,7 +52,7 @@ router.get("/:air/restime/:sec", (req, res) => {
         let series = [],
           area = [];
         for (i = 0; i < documents.length; i++) {
-          let date = moment(documents[i].date).format("DD MMM");
+          let date = new Date(documents[i].date).getTime();
           let resp = documents[i][`${req.params.sec}`].responses;
           for (j = 0; j < resp.length; j += 2) {
             if (!area.includes(resp[j].area)) {

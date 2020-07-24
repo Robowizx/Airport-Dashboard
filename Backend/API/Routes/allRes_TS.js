@@ -55,14 +55,15 @@ router.get("/:air/allRes_TS/", (req, res) => {
           var Average = [];
           var Poor = [];
           var Bad = [];
+          
           documents.forEach((d) => {
-            date = moment(d.date).add(1, 'd');
-            Excellent.push([new Date(date).getTime(),d.general.all_responses[0].Excellent]);
-            Good.push([new Date(date).getTime(),d.general.all_responses[0].Good]);
-            Average.push([new Date(date).getTime(),d.general.all_responses[0].Average]);
-            Poor.push([new Date(date).getTime(),d.general.all_responses[0].Poor]);
-            Bad.push([new Date(date).getTime(),d.general.all_responses[0].Bad]);
+            Excellent.push([new Date(d.date).getTime(),d.general.all_responses[0].Excellent]);
+            Good.push([new Date(d.date).getTime(),d.general.all_responses[0].Good]);
+            Average.push([new Date(d.date).getTime(),d.general.all_responses[0].Average]);
+            Poor.push([new Date(d.date).getTime(),d.general.all_responses[0].Poor]);
+            Bad.push([new Date(d.date).getTime(),d.general.all_responses[0].Bad]);
           });
+
           series.push(
             {
               name: "Excellent",

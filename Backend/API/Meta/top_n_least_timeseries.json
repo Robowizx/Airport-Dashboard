@@ -1,109 +1,100 @@
 {
-  "line": {
-    "series": [
-      {
-        "name": "",
-        "data": []
-      },
-      {
-        "name": "",
-        "data": []
-      }
-    ],
-    "chart": {
-      "height": 300,
-      "type": "line",
-      "id": "chart1",
-      "dropShadow": {
-        "enabled": true,
-        "color": "#000",
-        "top": 18,
-        "left": 7,
-        "blur": 10,
-        "opacity": 0.2
-      },
-      "toolbar": {
-        "autoSelected": "pan",
-        "show": false
-      }
-    },
-    "colors": ["#008FFB", "#00E396"],
-    "stroke": {
-      "curve": "smooth"
-    },
-    "title": {
-      "text": "Top And Least Timeseries",
-      "align": "left"
-    },
-    "grid": {
-      "borderColor": "#e7e7e7",
-      "row": {
-        "colors": ["#f3f3f3", "transparent"],
-        "opacity": 0.5
-      }
-    },
-    "markers": {
-      "size": [5, 5],
-      "shape": "circle"
-    },
-    "xaxis": {
-      "type": "datetime",
-      "categories": []
-    },
-    "yaxis": {
-      "title": {
-        "text": "VALUES"
-      },
-      "min": 0,
-      "max": 100
-    },
-    "dataLabels": {
-      "enabled": false
-    },
-    "tooltip": {
-      "enabled": true,
-      "x": {
-        "format": "dd MMM yyyy"
-      },
-      "y": {
-        "formatter": null
-      }
-    },
-    "legend": {
-      "position": "top",
-      "horizontalAlign": "right"
-    }
-  },
-  "brush": {
-    "series": [],
-    "chart": {
-      "id": "chart2",
-      "height": 125,
-      "offsetY": -40,
-      "type": "area",
-      "brush": {
-        "target": "chart1",
-        "enabled": true
-      },
-      "selection": {
-        "enabled": true,
+    "line": {
+        "series": [
+          {
+            "name": "",
+            "data": []
+          },
+          {
+            "name": "",
+            "data": []
+          }
+        ],
+        "chart": {
+          "type": "line",
+          "id": "chart1",
+          "toolbar": {
+            "autoSelected":"pan",
+            "show": false
+          }
+        },
+        "colors": ["#008FFB", "#00E396"],
+        "stroke": {
+          "curve": "smooth"
+        },
+        "title": {
+          "text": "Top And Least Timeseries",
+          "align": "left"
+        },
+        "grid": {
+          "borderColor": "#e7e7e7",
+          "row": {
+            "colors": ["#f3f3f3", "transparent"],
+            "opacity": 0.5
+          }
+        },
+        "markers": {
+          "size": [5, 5],
+          "shape": "circle"
+        },
         "xaxis": {
-          "min": [],
-          "max": []
+          "type": "datetime",
+          "categories": []
+        },
+        "yaxis": {
+          "title": {
+            "text": "VALUES"
+          },
+          "min": 0,
+          "max": 100
+        },
+        "dataLabels": {
+          "enabled": false
+        },
+        "tooltip": {
+          "enabled": true,
+          "x":{
+            "format": "dd MMM yyyy"
+          },
+          "y": {
+            "formatter": null
+          }
+        },
+        "legend": {
+          "position": "top",
+          "horizontalAlign": "right"
         }
-      }
     },
-    "colors": ["#008FFB", "#00E396"],
-    "fill": {
-      "type": "gradient",
-      "gradient": {
-        "opacityFrom": 0.91,
-        "opacityTo": 0.1
-      }
-    },
-    "legend": {
-      "show": false
-    },
+    "brush": {
+        "series": [],
+        "chart": {
+          "id": "chart2",
+          "offsetY":-40,
+          "type": "area",
+          "brush": {
+            "target": "chart1",
+            "enabled": true
+          },
+          "selection": {
+            "enabled": true,
+            "xaxis": {
+              "min": null,
+              "max": null
+            }
+          }
+        },
+        "colors": ["#008FFB","#00E396"],
+        "fill": {
+          "type": "gradient",
+          "gradient": {
+            "opacityFrom": 0.91,
+            "opacityTo": 0.1
+          }
+        },
+        "legend": {
+          "show": false
+        },
+           
     "xaxis": {
       "type": "datetime",
       "title": {
