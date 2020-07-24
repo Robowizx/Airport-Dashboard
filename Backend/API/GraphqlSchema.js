@@ -4,7 +4,8 @@ const {GraphQLSchema,
        GraphQLInt,
        GraphQLList,
        GraphQLString,
-       GraphQLObjectType
+       GraphQLObjectType,
+       GraphQLNonNull
 } = require('graphql');
 
 require('dotenv').config();
@@ -15,11 +16,11 @@ const db = require('./db');
 const deviceType = new GraphQLObjectType({
     name:'device',
     fields:{
-        name:{ type: GraphQLString },
-        exp_till_date: { type: GraphQLFloat },
+        device_name:{ type: GraphQLString },
+        avg_exp_index: { type: GraphQLFloat },
         exp: { type: GraphQLFloat },
         rank: { type: GraphQLInt },
-        imp: {type: GraphQLFloat }
+        avg_imp_index: {type: GraphQLFloat }
     }
 });
 
@@ -28,6 +29,7 @@ const airportType = new GraphQLObjectType({
     fields: ()=>({
         name:{ type: GraphQLString },
         airport_name: { type: GraphQLString },
+        state: {type: GraphQLString },
         code: { type: GraphQLString },
         atype: { type: GraphQLString },
         location: {type: new GraphQLObjectType({
@@ -58,28 +60,6 @@ const air_resolve = async (parent,args)=>{
             .catch((err)=>{
                 console.log(err);
             });
-    if(Object.keys(res).length!=0){
-        await db.getDB()
-                .collection(res.name)
-                .find({date:args.date},{projection:{_id:0,type:1,general:1}})
-                .toArray()
-                .then((docs)=>{
-                    res.devices = [];
-                    res.num_of_devs = docs.length;
-                    for(let i=0;i<docs.length;i++){
-                        res.devices.push({
-                            name: docs[i].type,
-                            exp_till_date: docs[i].general.avg_exp_index,
-                            exp: docs[i].general.all_responses[0]['Exp Index'],
-                            rank: docs[i].general.rank,
-                            imp: docs[i].general.avg_imp_index
-                        });
-                    }
-                })
-                .catch((err)=>{
-                    console.log(err);
-                })
-    }
     return res;            
 };
 
@@ -89,16 +69,16 @@ const rootQueryType = new GraphQLObjectType({
         airport_name:{
             type: airportType,
             args: {
-                name:{ type: GraphQLString },
-                date:{ type: GraphQLString }
+                name:{ type: new GraphQLNonNull(GraphQLString) },
+                date:{ type: new GraphQLNonNull(GraphQLString) }
             },
             resolve: air_resolve
         },
         airport_code:{
             type: airportType,
             args: {
-                code:{ type: GraphQLString },
-                date:{ type: GraphQLString }
+                code:{ type: new GraphQLNonNull(GraphQLString) },
+                date:{ type: new GraphQLNonNull(GraphQLString) }
             },
             resolve: air_resolve
         },
@@ -113,6 +93,40 @@ const rootQueryType = new GraphQLObjectType({
                         .then((docs)=>{ res = docs})
                         .catch((err)=> console.log(err));
                 
+                return res;        
+            }
+        },
+        device_list:{
+            type: new GraphQLList(GraphQLString),
+            async resolve(parent,args){
+                let res;
+                await db.getDB()
+                        .collection('Meta')
+                        .findOne({_id:'device'},{projection:{devices:1,_id:0}})
+                        .then((doc)=>{
+                            res = doc.devices;
+                        })
+                        .catch((err)=>console.log(err));
+                return res;        
+            }
+        },
+        best_worst:{
+            type: new GraphQLList(airportType),
+            args: {
+                order: {type: new GraphQLNonNull(GraphQLInt)}
+            },
+            async resolve(parent,args){
+                let res;
+                await db.getDB()
+                        .collection('Meta')
+                        .find({_id:{$ne:'device'}})
+                        .sort({exp:args.order})
+                        .limit(5)
+                        .toArray()
+                        .then((docs)=>{
+                            res = docs;
+                        })
+                        .catch((err)=> console.log(err));
                 return res;        
             }
         }
