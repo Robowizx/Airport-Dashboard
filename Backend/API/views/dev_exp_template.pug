@@ -8,5 +8,10 @@ html
         div(id='chart',style="max-width:650px; margin: 35px 0px")
     script.
         var options = !{option};
+        options.tooltip.y = {
+            title:{
+                formatter: function (seriesName){ return 'Experience Index till date' }
+            }
+        };
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();

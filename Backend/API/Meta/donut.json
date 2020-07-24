@@ -2,5 +2,18 @@
     "series": [],
     "chart": {
         "type": "donut"
-    }   
+    },
+    "plotOptions": {
+        "pie": {
+          "donut": {
+            "labels": {
+              "show": true,
+              "total": {
+                "showAlways": true,
+                "show": true
+              }
+            }
+          }
+        }
+      }   
 }

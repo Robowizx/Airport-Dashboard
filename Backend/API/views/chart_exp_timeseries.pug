@@ -2,7 +2,11 @@
 doctype html
 html
     head
+<<<<<<< HEAD
         script(src='/Javascript/apexcharts.js')
+=======
+        script(src='/Javascript/apexcharts.min.js')
+>>>>>>> 2ea49fa4e6fbc487d6bedf0131ebe19965066249
         link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
     body
         - var ar = JSON.parse(area);
@@ -13,8 +17,14 @@ html
         var areas = !{area};
         var series = !{series};
         for(i=0;i<areas.length;i++){
+<<<<<<< HEAD
             let x = series.findIndex(a => a.name === areas[i]);
             options.series = [series[x]];   
+=======
+            options.title.text = `Experience Index Time Series of ${areas[i]}`
+            let x = series.findIndex(a => a.name === areas[i]);
+            options.series = [series[x]]        
+>>>>>>> 2ea49fa4e6fbc487d6bedf0131ebe19965066249
             var chart = new ApexCharts(document.getElementById(`${areas[i]}`), options);
             chart.render();
         }

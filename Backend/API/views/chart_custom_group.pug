@@ -1,7 +1,7 @@
 doctype html
 html
     head
-        script(src='/Javascript/apexcharts.js')
+        script(src='/Javascript/apexcharts.min.js')
         link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
     body
         div(id='chart',style="max-width:650px; margin: 35px auto")
@@ -25,6 +25,3 @@ html
         console.log(options.dataLabels.offsetX);
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-      
-      
-     

@@ -29,16 +29,23 @@ router.get('/:air/exp/:sec',(req,res)=>{
                             `Date=${req.query.date}, `+
                             `Type=${req.query.type} -> ${err}`
                            );
-            res.status(400).send(err);
-        }    
+            res.status(500).send(err);
+        }
+        else if(Object.keys(documents).length==0){
+            serverLog.warn(`Exp/Imp chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                            `Section=${req.params.sec}, `+
+                            `Type=${req.query.type}, `+
+                            `EDate=${req.query.date}`
+                           );
+            res.status(404).send("404 data not found");               
+          }    
         else{
-
-            //console.log(documents[0][`${req.params.sec}`]);
-            let resp = documents[0][`${req.params.sec}`].responses;
-            let expdata=[];
+            let expdata = [];
             let impdata = [];
             let area = [];
             let series = [];
+            //console.log(documents[0][`${req.params.sec}`]);
+            let resp = documents[0][`${req.params.sec}`].responses;
 
             for (i=0;i<resp.length;i+=2){
                 // console.log(resp[i]);
@@ -59,10 +66,10 @@ router.get('/:air/exp/:sec',(req,res)=>{
                         });
 
             if(req.params.sec == 'by_device'){
-                series.push({
-                            name:'Improvement Index',
-                            data: impdata
-                           });        
+            series.push({
+                        name:'Improvement Index',
+                        data: impdata
+                        });        
             }
 
             group_column.series = series;

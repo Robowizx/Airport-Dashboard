@@ -38,7 +38,7 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
     })
     .toArray((err, documents) => {
       {
-        if (err) {
+        if (err){
           serverLog.error(
             `Top_Least time series chart DATABASE ERROR with Airport=${req.params.air}, ` +
               `Section=${req.params.sec}, ` +
@@ -47,7 +47,17 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
               `Type=${req.query.type} -> ${err}`
           );
           res.status(400).send(err);
-        } else {
+        }
+        else if(Object.keys(documents).length==0){
+          serverLog.warn(`Top_Least time series chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                          `Section=${req.params.sec}, `+
+                          `Type=${req.query.type}, `+
+                          `SDate=${req.query.sdate}, `+
+                          `EDate=${req.query.edate}`
+                         );
+          res.status(404).send("404 data not found");               
+        } 
+        else{
           var topData = [];
           var leastData = [];
           var series = [];

@@ -1,19 +1,9 @@
 {
- 
-  "line_chart":{
-    
-    "series": [
-      {
-        "name": "",
-        "data": []
-      }
-    
-    ],
+  "allRes_TS": {
+    "series": [],
     "chart": {
       "height": 350,
       "type": "line",
-      "id": "chart1",
-      "group": "social",
       "dropShadow": {
         "enabled": true,
         "color": "#000",
@@ -23,46 +13,41 @@
         "opacity": 0.2
       },
       "toolbar": {
-        "show": false
+        "show": true
       }
     },
+    "colors": ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
     "stroke": {
       "curve": "smooth"
     },
     "title": {
-      "text": "Experience Index Timeseries",
-      "align": "left"
+      "text": ".",
+      "align": "center"
     },
-   
+    "grid": {
+      "borderColor": "#e7e7e7",
+      "row": {
+        "colors": ["#f3f3f3", "transparent"],
+        "opacity": 0.5
+      }
+    },
     "markers": {
-      "size": [4, 7],
-      "shape": "circle"
+      "size": 1
     },
     "xaxis": {
       "type": "datetime"
     },
     "yaxis": {
       "title": {
-        "text": "Experience Index"
-      }
-     
-    },
-    "dataLabels": {
-      "enabled": true
-    },
-    "tooltip": {
-      "enabled": true,
-      "y": {
-        "formatter": null
+        "text": "Responses"
       }
     },
     "legend": {
       "position": "top",
-      "horizontalAlign": "right",
-      "floating": true,
+      "horizontalAlign": "center",
+      "floating": false,
       "offsetY": -25,
       "offsetX": -5
     }
   }
- 
 }
