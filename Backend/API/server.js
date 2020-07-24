@@ -37,6 +37,8 @@ const top_least_guage = require('./Routes/top_least_gauge');
 const exp_till_date = require('./Routes/exp_till_date_timeseries');
 const heatmap = require('./Routes/resp_heatmap');
 const airport = require('./Routes/best_worst_airport');
+const spark_line=require('./Routes/spark_line');
+const spark_donut=require('./Routes/spark_donut');
 const gateKeeper = require('./Routes/gateKeeper');
 
 //importing DB module
@@ -97,7 +99,9 @@ app.use(/*gateKeeper,*/
         exp_till_date,
         heatmap,
         top_least_guage,
-        airport
+        airport,
+        spark_line,
+        spark_donut
        );
 
 

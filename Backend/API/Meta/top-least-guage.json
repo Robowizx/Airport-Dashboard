@@ -1,67 +1,67 @@
 {
-    "series":[],
-    "chart":{
-        "type":"radialBar"
-    },
-    "plotOptions":{
-        "radialBar":{
-            "startAngle":-175,
-            "endAngle":175,
-            "hollow":{
-                "margin":0,
-                "size":"60%",
-                "background":"#fff",
-                "position":"front",
-                "dropShadow":{
-                    "enabled":true,
-                    "top":3,
-                    "left":0,
-                    "blur":4,
-                    "opacity":0.24
-                }
-            },
-            "track":{
-                "background":"#fff",
-                "strokeWidth":"67%",
-                "margin":0,
-                "dropShadow":{
-                    "enabled":true,
-                    "top":-3,
-                    "left":0,
-                    "blur":4,
-                    "opacity":0.35
-                }
-            },
-            "dataLabels":{
-                "show":true,
-                "name":{
-                    "offsetY":-10,
-                    "show":true,
-                    "color":"#888",
-                    "fontSize":"36px"
-                },
-                "value":{
-                    "color":"#111",
-                    "fontSize":"36px",
-                    "show":true
-                }
-            }
+  "series": [],
+  "chart": {
+    "type": "radialBar"
+  },
+  "plotOptions": {
+    "radialBar": {
+      "startAngle": -175,
+      "endAngle": 175,
+      "hollow": {
+        "margin": 0,
+        "size": "60%",
+        "background": "#fff",
+        "position": "front",
+        "dropShadow": {
+          "enabled": true,
+          "top": 3,
+          "left": 0,
+          "blur": 4,
+          "opacity": 0.24
         }
-    },
-    "fill":{
-        "type":"solid",
-        "colors":[]
-    },
-    "stroke":{
-        "lineCap":"round"
-    },
-    "labels":[],
-    "title":{
-        "text":"",
-        "align":"left",
-        "margin":10,
-        "style":{
-            "fontSize":"24px"
+      },
+      "track": {
+        "background": "#fff",
+        "strokeWidth": "67%",
+        "margin": 0,
+        "dropShadow": {
+          "enabled": true,
+          "top": -3,
+          "left": 0,
+          "blur": 4,
+          "opacity": 0.35
         }
+      },
+      "dataLabels": {
+        "show": true,
+        "name": {
+          "offsetY": -10,
+          "show": true,
+          "color": "#888",
+          "fontSize": "22px"
+        },
+        "value": {
+          "color": "#111",
+          "fontSize": "22px",
+          "show": true
+        }
+      }
     }
+  },
+  "fill": {
+    "type": "solid",
+    "colors": []
+  },
+  "stroke": {
+    "lineCap": "round"
+  },
+  "labels": [],
+  "title": {
+    "text": "",
+    "align": "left",
+    "margin": 10,
+    "style": {
+      "fontSize": "15px"
+    }
+  }
 }

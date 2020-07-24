@@ -2,12 +2,8 @@
 doctype html
 html
     head
-<<<<<<< HEAD
-        script(src='/Javascript/apexcharts.js')
-=======
-        script(src='/Javascript/apexcharts.min.js')
->>>>>>> 2ea49fa4e6fbc487d6bedf0131ebe19965066249
-        link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.min.css')
         link(rel='stylesheet',type='text/css',href='/CSS/dynamic_chart.css')
     script.
         Apex = {
@@ -88,8 +84,8 @@ html
             }
         }
     body
-        div(id='wrap',style="max-width:device-width")
-            div(id='chart' )
+        div(id='wrap')
+            div(id='chart')
             div(id='chart-quarter')
     script.
         var device = "#{dtype}";

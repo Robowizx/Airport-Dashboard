@@ -1,18 +1,18 @@
 {   "heatmap" : {
-    "series": [],
-    "chart": {
-    "height": 350,
-    "type": "heatmap"
-    },
-    "dataLabels": {
-    "enabled": false
-    },
-    "colors": ["#008FFB"],
-    "title": {
-    "text": "HeatMap Chart (Single color)"
-    },
-    "xaxis": {
-        "type": "datetime"
-      }
+  "series": [],
+  "chart": {
+  "height": 350,
+  "type": "heatmap"
+  },
+  "dataLabels": {
+  "enabled": false
+  },
+  "colors": ["#F86624"],
+  "title": {
+  "text": "HeatMap Chart (Single color)"
+  },
+  "xaxis": {
+      "type": "datetime"
     }
+  }
 }
