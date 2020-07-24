@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import * as topojson from "topojson-client";
 import places from './aaiList.json';
 
-import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "../../App.css";
 import CardInfo from './CardInfo';
@@ -15,6 +15,18 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Grid from '@material-ui/core/Grid';
+
+const deviceList = [
+  "CM",
+  "DF",
+  "EI",
+  "EV",
+  "FG",
+  "RF",
+  "RT",
+  "SC",
+  "TP",
+  "TR"];
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -78,6 +90,8 @@ export default class IndiaMap extends Component {
 
   drawMap() {
 
+    let t = "";
+
     let width = 600;
     let height = 560;
 
@@ -87,9 +101,10 @@ export default class IndiaMap extends Component {
       .style("z-index", "1")
       .style("padding", "10px")
       .style("visibility", "hidden")
-      .style("background", "#ffffff")
-      .style("color", "#000")
-      .style("border", "1px solid black")
+      .style("background", "#818181")
+      .style("color", "#ffffff")
+      .style("border-radius", "5px")
+      .style("border", "1px solid #818181")
       .style("box-shadow", "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)")
       .text("");
 
@@ -111,7 +126,7 @@ export default class IndiaMap extends Component {
             .data(places)
             .enter()
             .append("circle", ".pin")
-            .attr("r", 3)
+            .attr("r", 2.8)
             .attr("fill", (d) => {
               if (this.state.device === "All") {
                 return "red"
@@ -140,16 +155,19 @@ export default class IndiaMap extends Component {
               d3.select(document.getElementById('airname')).text(`${d.airName}`);
               d3.select(document.getElementById('exp')).text(`Exp-Index : ${d.Exp}`)
               expTip.style("visibility", "visible");
+              t = n[i].style.fill;
+              n[i].style.fill = '#818181';
             })
             .on('mouseout', (d, i, n) => {
               expTip.style("visibility", "hidden");
+              n[i].style.fill = t;
             })
             .on('click', async (d) => {
               await this.setState({ clickState: `${d.city}` });
-              if (this.state.device === "All") { 
-                await this.props.updateState(this.state.clickState, this.state.date, "EI"); 
-              } else { 
-                await this.props.updateState(this.state.clickState, this.state.date, this.state.device) 
+              if (this.state.device === "All") {
+                await this.props.updateState(this.state.clickState, this.state.date, "EI");
+              } else {
+                await this.props.updateState(this.state.clickState, this.state.date, this.state.device)
               }
               console.log(this.state.clickState, this.state.date, this.state.device);
               document.getElementById('linkTest').click();
@@ -268,17 +286,8 @@ export default class IndiaMap extends Component {
                       inputProps={{ 'aria-label': 'Without label' }}
                     >
                       <MenuItem value="" disabled>Device</MenuItem>
-                      <MenuItem value={"All"}>All</MenuItem>
-                      <MenuItem value={"CM"}>CM</MenuItem>
-                      <MenuItem value={"DF"}>DF</MenuItem>
-                      <MenuItem value={"EI"}>EI</MenuItem>
-                      <MenuItem value={"EV"}>EV</MenuItem>
-                      <MenuItem value={"FG"}>FG</MenuItem>
-                      <MenuItem value={"RF"}>RF</MenuItem>
-                      <MenuItem value={"RT"}>RT</MenuItem>
-                      <MenuItem value={"SC"}>SC</MenuItem>
-                      <MenuItem value={"TP"}>TP</MenuItem>
-                      <MenuItem value={"TR"}>TR</MenuItem>
+                      <MenuItem value="All">All</MenuItem>
+                      {deviceList.map((obj, i) => <MenuItem value={obj} key={i}>{obj}</MenuItem>)}
                     </Select>
                   </FormControl>
                 </Grid>
@@ -286,7 +295,7 @@ export default class IndiaMap extends Component {
                 <div className={useStyles.root}>
                   <ButtonGroup size="small" color="primary" aria-label="outlined primary button group">
                     <Button onClick={() => { return this.setState({ airType: "All" }) }}>All</Button>
-                    <Button onClick={() => { return this.setState({ airType: "National" }) }}>National</Button>
+                    <Button onClick={() => { return this.setState({ airType: "DOMESTIC" }) }}>Domestic</Button>
                     <Button onClick={() => { return this.setState({ airType: "International" }) }}>International</Button>
                   </ButtonGroup>
                 </div>

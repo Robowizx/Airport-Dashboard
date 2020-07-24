@@ -6,6 +6,24 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import TodayIcon from '@material-ui/icons/Today';
+import TimelineIcon from '@material-ui/icons/Timeline';
+
+const deviceList = [
+"CM",
+"DF",
+"EI",
+"EV",
+"FG",
+"RF",
+"RT",
+"SC",
+"TP",
+"TR"];
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
@@ -22,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
   },
 }));
 
@@ -33,6 +52,7 @@ export default class airportPage extends Component {
       airport: this.props.airState,
       date: this.props.date,
       device: this.props.dev,
+      w: window.innerWidth
     };
   }
 
@@ -77,7 +97,13 @@ export default class airportPage extends Component {
 
   render() {
     return (
-      <div className="map">
+
+      <div className="air" style={{ width: this.state.w}}>
+      <Paper>
+        <Tabs aria-label="simple tabs example">
+          <Tab label="Daily" icon={<TodayIcon />}/>
+          <Tab label="Time Series" icon={<TimelineIcon />}/>
+        </Tabs>
         <FormControl
           size="small"
           variant="outlined"
@@ -97,19 +123,17 @@ export default class airportPage extends Component {
             <MenuItem value="" disabled>
               Device
             </MenuItem>
-            <MenuItem value={"All"}>All</MenuItem>
-            <MenuItem value={"CM"}>CM</MenuItem>
-            <MenuItem value={"DF"}>DF</MenuItem>
-            <MenuItem value={"EI"}>EI</MenuItem>
-            <MenuItem value={"EV"}>EV</MenuItem>
-            <MenuItem value={"FG"}>FG</MenuItem>
-            <MenuItem value={"RF"}>RF</MenuItem>
-            <MenuItem value={"RT"}>RT</MenuItem>
-            <MenuItem value={"SC"}>SC</MenuItem>
-            <MenuItem value={"TP"}>TP</MenuItem>
-            <MenuItem value={"TR"}>TR</MenuItem>
+            {deviceList.map((obj,i) => <MenuItem value={obj} key={i}>{obj}</MenuItem> )}
           </Select>
         </FormControl>
+        </Paper>
+        <iframe
+          width="600"
+          height="500"
+          title="exp"
+          id="ifm1"
+          frameborder="0"
+        ></iframe>
         <iframe
           width="600"
           height="500"
