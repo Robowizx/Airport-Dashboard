@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(1),
       width: '20vw',
-      height:'15vw',
+      height:'24vw',
     },
   },
   paper: {
@@ -45,24 +45,33 @@ function ChartAPI(chart,query,element){
             iframe.close();
          });
 }  
-
 export default function Daily() {
   const classes = useStyles();
   ChartAPI('exp','by_device?date=2020-03-01&type=EI','exp1')
-
+  ChartAPI('res_donut','?date=2020-03-01&type=EI','donut')
+  ChartAPI('top_and_least','?date=2020-03-01&type=EI','top')
+  ChartAPI('res','by_device?date=2020-03-01&type=EI','res')
   return (
     <div className={classes.root}>
       <div className={classes.root2}>
         <Paper></Paper>
-        <Paper></Paper>
-        <Paper></Paper>
-        <Paper></Paper>
+        <Paper>
+        
+        </Paper>
+        <Paper>
+        <iframe height='100%' width='100%' frameBorder='0' id='top' scrolling='off'></iframe>
+        </Paper>
+        <Paper>
+        <iframe height='100%' width='100%' frameBorder='0' id='donut' scrolling='off'></iframe>
+        </Paper>
       </div>
       <div className={classes.root1}>
           <Paper>
           <iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe>
           </Paper>
-          <Paper></Paper>
+          <Paper>
+          <iframe height='100%' width='window.innerWidth' frameBorder='0' id='res' scrolling='off'></iframe>
+          </Paper>
       </div>
     </div>
   );

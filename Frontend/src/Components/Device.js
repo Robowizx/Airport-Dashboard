@@ -66,7 +66,7 @@ export default function Device() {
   };
 
   return (
-    <React.Fragment>  
+    <React.Fragment >  
     <h1 style={{textAlign:'center',margin:'0px 0px 1vw 0px'}}>Kolkata Airport</h1>
     <div className={classes.root}>
       <AppBar position="static">
