@@ -15,5 +15,10 @@
             }
           }
         }
-      }   
+      },
+  "title": {
+    "text": "All Responses",
+    "align": "left",
+    "floating": true
+  }
 }

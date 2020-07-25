@@ -44,7 +44,7 @@ router.get('/:air/guage/:type',(req,res)=>{
                 else{
                     let minmax =[],name=[];
                     minmax.push(documents[0].general.avg_exp_index);
-
+                    name.push(documents[0].type);
                     documents.forEach(element => {
                         if(req.params.type=='maxExp'){
                             if(element.general.avg_exp_index > minmax){
