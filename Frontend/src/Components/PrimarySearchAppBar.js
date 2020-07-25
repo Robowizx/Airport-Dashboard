@@ -24,7 +24,6 @@ import {
   useTheme,
   Avatar,
 } from "@material-ui/core";
-// import IconButton from "@material-ui/core/IconButton";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
@@ -39,9 +38,7 @@ import Menu from "@material-ui/core/Menu";
 import LocalAirportOutlinedIcon from "@material-ui/icons/LocalAirportOutlined";
 import PublishIcon from "@material-ui/icons/Publish";
 import Brightness4 from "@material-ui/icons/Brightness4";
-import FullScreenDialog from "./Agartala Airport";
-import FullScreenDialog1 from "./Indore Airport";
-import FullScreenDialog2 from "./Kolkata Airport";
+import FullScreenDialog from "./test";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
@@ -70,13 +67,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
   },
+  input: {
+    margin: theme.spacing(1.5),
+  },
   upload: {
+    display: "none",
     "& > *": {
       margin: theme.spacing(1),
     },
-  },
-  input: {
-    display: "none",
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -201,6 +199,8 @@ const useStyles = makeStyles((theme) => ({
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const theme = useTheme();
+  const rectangle = <div className={classes.shape} />;
+  const circle = <div className={clsx(classes.shape, classes.shapeCircle)} />;
   const [darkMode, setDarkMode] = React.useState(false);
   const darkTheme = createMuiTheme({
     palette: {
@@ -378,7 +378,7 @@ export default function PrimarySearchAppBar() {
                       aria-label="show 10 new notifications"
                       color="inherit"
                     >
-                      <Badge badgeContent="10" color="#f50057" overlap="circle">
+                      <Badge badgeContent={10} showZero color="error">
                         <NotificationsIcon />
                       </Badge>
                     </IconButton>
@@ -434,61 +434,47 @@ export default function PrimarySearchAppBar() {
                 </IconButton>
               </div>
               <List>
-                {["Home"].map((text, index) => (
-                  <ListItem button key={text}>
+                <div className={classes.input}>
+                  {["Home"].map((text, index) => (
+                    <ListItem button key={text}>
+                      <ListItemIcon>
+                        {<HomeIcon color="secondary" />}
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+                    </ListItem>
+                  ))}
+                  <ListItem button onClick={handleClose}>
                     <ListItemIcon>
-                      {<HomeIcon color="secondary" />}
+                      {<LocalAirportOutlinedIcon color="secondary" />}
                     </ListItemIcon>
-                    <ListItemText primary={text} />
+                    <ListItemText primary="Airports" />
+                    {open ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
-                ))}
-                <ListItem button onClick={handleOpen}>
-                  <ListItemIcon>
-                    {<LocalAirportOutlinedIcon color="secondary" />}
-                  </ListItemIcon>
-                  <ListItemText primary="Airports" />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <MenuItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <FullScreenDialog />
-                        </ListItemIcon>
-                      </ListItem>
-                    </MenuItem>
 
-                    <MenuItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <FullScreenDialog1 />
-                        </ListItemIcon>
-                      </ListItem>
-                    </MenuItem>
-
-                    <MenuItem>
-                      <ListItem>
-                        <ListItemIcon>
-                          <FullScreenDialog2 />
-                        </ListItemIcon>
-                      </ListItem>
-                    </MenuItem>
-                  </List>
-                </Collapse>
-
+                  <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      <MenuItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <FullScreenDialog />
+                          </ListItemIcon>
+                        </ListItem>
+                      </MenuItem>
+                    </List>
+                  </Collapse>
+                </div>
                 {["Upload"].map((text, index) => (
                   <ListItem button key={text}>
                     <ListItemIcon>
                       <input
                         accept="xls/*"
-                        className={classes.input}
+                        className={classes.upload}
                         id="PublishIcon"
                         type="file"
                       />
                       <label htmlFor="PublishIcon">
-                        <IconButton color="secondary" component="span">
-                          <PublishIcon />
+                        <IconButton component="span">
+                          <PublishIcon color="primary" />
                         </IconButton>
                       </label>
                     </ListItemIcon>
