@@ -47,20 +47,21 @@ const useStyles = makeStyles((theme) => ({
 export default class airportPage extends Component {
   constructor(props) {
     super(props);
-    console.log("safsfdqsa", props);
     this.state = {
       airport: this.props.airState,
       date: this.props.date,
       device: this.props.dev,
-      w: window.innerWidth
+      w: window.innerWidth,
+      isLoading: true
     };
   }
 
-  componentDidMount() {
-    this.getContent(
+  async componentDidMount() {
+   await this.getContent(
       `https://localhost:4000/${this.state.airport}/res/by_device?date=${this.state.date}&type=${this.state.device}`,
       "ifm1"
     );
+    this.setState({isLoading: false});
   }
 
   componentDidUpdate(prevProps,prevState,snapshot){
@@ -97,7 +98,6 @@ export default class airportPage extends Component {
 
   render() {
     return (
-
       <div className="air" style={{ width: this.state.w}}>
       <Paper>
         <Tabs aria-label="simple tabs example">

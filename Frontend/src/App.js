@@ -17,12 +17,11 @@ export default class App extends Component {
   }
 
   updateState = async(n,d,dev)=>{
-    await this.setState({airName: n, date: d, device: dev},()=>{console.log("devil",this.state)});
+    await this.setState({airName: n, date: d, device: dev});
   }
   
   render() {
     return (
-      <div>
     <Router>
       <div>
       <PrimarySearchAppBar/>
@@ -34,7 +33,6 @@ export default class App extends Component {
         dev={this.state.device}/>
       }/>
     </Router>
-    </div>
     )
   }
 }
