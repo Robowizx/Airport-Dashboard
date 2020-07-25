@@ -20,7 +20,8 @@ const deviceType = new GraphQLObjectType({
         avg_exp_index: { type: GraphQLFloat },
         exp: { type: GraphQLFloat },
         rank: { type: GraphQLInt },
-        avg_imp_index: {type: GraphQLFloat }
+        avg_imp_index: { type: GraphQLFloat },
+
     }
 });
 
