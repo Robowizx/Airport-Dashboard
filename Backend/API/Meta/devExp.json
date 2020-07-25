@@ -13,8 +13,7 @@
     }],
     "colors":["#33cc33","#e6e600","#e60000"],
     "chart":{
-        "type":"bar",
-        "height":350
+        "type":"bar"
     },
     "legend":{
         "show":true,
@@ -93,6 +92,9 @@
                 "fontSize":"14px"
             }
         }
+    },
+    "title":{
+        "text":"Facilities Exp Index Chart"
     },
     "tooltip":{
         "marker":{

@@ -44,14 +44,14 @@ export default function MenuList(props) {
                 setOpen(obj);
             }}
             >
-            <ListItemIcon>
+            <ListItemIcon key={marker+'-icon'}>
                 {
                     event === 'states' ? <ExploreIcon /> : (
                         event === 'airport' ? <LocalAirportIcon /> : <RoomServiceIcon/>
                     )
                 }
             </ListItemIcon>
-            <ListItemText primary={marker}/>
+            <ListItemText key={marker+'-text'} primary={marker}/>
             {open[event] ? <ExpandLess /> : null}
         </ListItem>
         <Collapse in={open[event]} key={marker+"-sublist"} timeout="auto" unmountOnExit>
@@ -59,7 +59,7 @@ export default function MenuList(props) {
             {
                props.menu[event].map((text)=>(
                 <ListItem button key={text} className={classes.nested}>
-                    <ListItemText primary={text} /> 
+                    <ListItemText key={text+'-text'}primary={text} /> 
                 </ListItem>       
                ))
             }

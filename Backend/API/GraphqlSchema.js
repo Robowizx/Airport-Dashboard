@@ -57,6 +57,7 @@ const air_resolve = async (parent,args)=>{
             .findOne(filter)
             .then((document)=>{
                 res = document;
+                res.num_of_devs = res.devices.length;
             })
             .catch((err)=>{
                 console.log(err);
@@ -93,7 +94,9 @@ const rootQueryType = new GraphQLObjectType({
                         .toArray()
                         .then((docs)=>{ res = docs})
                         .catch((err)=> console.log(err));
-                
+
+                for(let i=0;i<res.length;i++)
+                    res[i].num_of_devs = res[i].devices.length;
                 return res;        
             }
         },

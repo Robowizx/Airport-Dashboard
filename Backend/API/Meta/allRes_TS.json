@@ -2,10 +2,12 @@
   "allRes_TS": {
     "series": [],
     "chart": {
-      "height": 350,
       "type": "line",
       "toolbar": {
         "show": true
+      },
+      "animations":{
+        "enabled":false
       }
     },
     "colors": ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
