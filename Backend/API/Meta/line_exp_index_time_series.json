@@ -10,7 +10,6 @@
     
     ],
     "chart": {
-      "height": 350,
       "type": "line",
       "id": "chart1",
       "group": "social",

@@ -7,7 +7,7 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import Container from '@material-ui/core/Container';
-import {Grid,AppBar,Divider,Toolbar} from '@material-ui/core';
+import {Grid,AppBar,Toolbar} from '@material-ui/core';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TodayIcon from '@material-ui/icons/Today';
@@ -192,7 +192,7 @@ render(){
                          </AppBar> 
                          <Toolbar>
                          </Toolbar> 
-                         <Divider/>
+                        
                           <Container style={{paddingtop:"50px"}}>
        
         
@@ -201,7 +201,7 @@ render(){
         
         <iframe  width="50%" height="550" title="top_and_least" id="ifm3" frameBorder="0"></iframe>
             
-        <iframe  width="75%" height="550" title="res" id="ifm4" frameBorder="0"></iframe>
+        <iframe  width="70%" height="550" title="res" id="ifm4" frameBorder="0"></iframe>
         <iframe  width="50%" height="550" title="res" id="ifm5" frameBorder="0"></iframe>
        <iframe  width="50%" height="550" title="exp" id="ifm1" frameBorder="0"></iframe> 
       </Container>

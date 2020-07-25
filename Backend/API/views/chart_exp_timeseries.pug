@@ -2,12 +2,12 @@
 doctype html
 html
     head
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.js')
-        link(rel='stylesheet',type='text/css',href='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.css')
+        script(src='https://localhost:4000/Javascript/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
     body
         - var ar = JSON.parse(area);
           each item in ar
-            div(id=`${item}`,style="max-width:device-width; margin: 35px auto")
+            div(id=`${item}`)
     script.
         var options = !{option};
         var areas = !{area};

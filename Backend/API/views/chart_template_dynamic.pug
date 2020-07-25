@@ -2,154 +2,90 @@
 doctype html
 html
     head
-        script(src='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.js')
-        link(rel='stylesheet',type='text/css',href='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.css')
-        style.
-            #wrap {
-              margin: 45px auto;
-              max-width: 800px;
-              position: relative;
-            }
-
-            .chart-box {
-              padding-left: 0;
-            }
-
-            #chart,
-            #chart-quarter {
-              width: 96%;
-              max-width: 48%;
-              box-shadow: none;
-              padding-left: 0;
-              padding-top: 20px;
-              background: #fff;
-              border: 1px solid #ddd;
-            }
-
-            #chart {
-              float: left;
-              position: relative;
-              transition: 1s ease transform;
-              z-index: 3;
-            }
-
-            #chart.chart-quarter-activated {
-              transform: translateX(0);
-              transition: 1s ease transform;
-            }
-
-            #chart-quarter {
-              float: left;
-              position: relative;
-              z-index: -2;
-              transition: 1s ease transform;
-            }
-
-            #chart-quarter.active {
-              transition: 1.1s ease-in-out transform;
-              transform: translateX(0);
-              z-index: 1;
-            }
-
-            @media screen and (min-width: 480px) {
-              #chart {
-                transform: translateX(50%);
-              }
-              #chart-quarter {
-                transform: translateX(-50%);
-              }
-            }
-
-            select#model {
-              display: none;
-              position: absolute;
-              top: -40px;
-              left: 0;
-              z-index: 2;
-              cursor: pointer;
-              transform: scale(0.8);
-            }
-        script.
-            Apex = {
-                chart:{
-                    toolbar:{
-                        show: false
-                    }
-                },
-                tooltip:{
-                    shared: false
-                },
-                legend:{
+        script(src='https://localhost:4000/Javascript/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/dynamic_chart.css')
+    script.
+        Apex = {
+            chart:{
+                toolbar:{
                     show: false
                 }
-            };
-    
-            var colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0'];
-    
-            //Set data from router here
-            var arrayData = !{option};
-    
-            function makeData() {
-            var dataSet = arrayData;
-        
-            var dataYearSeries = [{
-                  x: "Bad",
-                  y: dataSet[0].y,
-                  color: colors[0],
-                  quarters: dataSet[0].quarters
-                }, {
-                  x: "Poor",
-                  y: dataSet[1].y,
-                  color: colors[1],
-                  quarters: dataSet[1].quarters
-                }, {
-                  x: "Average",
-                  y: dataSet[2].y,
-                  color: colors[2],
-                  quarters: dataSet[2].quarters
-                }, {
-                  x: "Good",
-                  y: dataSet[3].y,
-                  color: colors[3],
-                  quarters: dataSet[3].quarters
-                }, {
-                  x: "Excellent",
-                  y: dataSet[4].y,
-                  color: colors[4],
-                  quarters: dataSet[4].quarters
-                }];
-                return dataYearSeries;
-            } 
-    
-            function updateQuarterChart(sourceChart, destChartIDToUpdate) {
-            var series = [];
-            var seriesIndex = 0;
-            var colors = []; 
-            if (sourceChart.w.globals.selectedDataPoints[0]) {
-              var selectedPoints = sourceChart.w.globals.selectedDataPoints;
-              for (var i = 0; i < selectedPoints[seriesIndex].length; i++) {
-                var selectedIndex = selectedPoints[seriesIndex][i];
-                var yearSeries = sourceChart.w.config.series[seriesIndex];
-                series.push({
-                  name: yearSeries.data[selectedIndex].x,
-                  data: yearSeries.data[selectedIndex].quarters
-                });
-                colors.push(yearSeries.data[selectedIndex].color);
-              }
-        
-              if (series.length === 0) series = [{ data: [] }]
-        
-              return ApexCharts.exec(destChartIDToUpdate, 'updateOptions', {
-                  series: series,
-                  colors: colors,
-                  fill: {
-                    colors: colors
-                  }});
-                }
+            },
+            tooltip:{
+                shared: false
+            },
+            legend:{
+                show: false
             }
+        };
+
+        var colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0'];
+
+        //Set data from router here
+        var arrayData = !{option};
+
+        function makeData() {
+        var dataSet = arrayData;
+    
+        var dataYearSeries = [{
+              x: "Bad",
+              y: dataSet[0].y,
+              color: colors[0],
+              quarters: dataSet[0].quarters
+            }, {
+              x: "Poor",
+              y: dataSet[1].y,
+              color: colors[1],
+              quarters: dataSet[1].quarters
+            }, {
+              x: "Average",
+              y: dataSet[2].y,
+              color: colors[2],
+              quarters: dataSet[2].quarters
+            }, {
+              x: "Good",
+              y: dataSet[3].y,
+              color: colors[3],
+              quarters: dataSet[3].quarters
+            }, {
+              x: "Excellent",
+              y: dataSet[4].y,
+              color: colors[4],
+              quarters: dataSet[4].quarters
+            }];
+            return dataYearSeries;
+        } 
+
+        function updateQuarterChart(sourceChart, destChartIDToUpdate) {
+        var series = [];
+        var seriesIndex = 0;
+        var colors = []; 
+        if (sourceChart.w.globals.selectedDataPoints[0]) {
+          var selectedPoints = sourceChart.w.globals.selectedDataPoints;
+          for (var i = 0; i < selectedPoints[seriesIndex].length; i++) {
+            var selectedIndex = selectedPoints[seriesIndex][i];
+            var yearSeries = sourceChart.w.config.series[seriesIndex];
+            series.push({
+              name: yearSeries.data[selectedIndex].x,
+              data: yearSeries.data[selectedIndex].quarters
+            });
+            colors.push(yearSeries.data[selectedIndex].color);
+          }
+    
+          if (series.length === 0) series = [{ data: [] }]
+    
+          return ApexCharts.exec(destChartIDToUpdate, 'updateOptions', {
+              series: series,
+              colors: colors,
+              fill: {
+                colors: colors
+              }});
+            }
+        }
     body
-        div(id='wrap')
-            div(id='chart')
+        div(id='wrap',style="max-width:device-width")
+            div(id='chart' )
             div(id='chart-quarter')
     script.
         var device = "#{dtype}";

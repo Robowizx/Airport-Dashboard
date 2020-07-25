@@ -40,10 +40,10 @@ handleDateChange = date => {
     date: dates,
  });
   console.log(this.state);
-  this.getContent(`https://localhost:4000/Kolkata/exp/${this.state.sec}/?date=${dates}&type=EI`,"ifm1");
-  this.getContent(`https://localhost:4000/Kolkata/res_donut/?date=${dates}&type=EI`,"ifm2");
-  this.getContent(`https://localhost:4000/Kolkata/top_and_least/?date=${dates}&type=EI`,"ifm3");
-  this.getContent(`https://localhost:4000/Kolkata/res/${this.state.sec}/?date=${dates}&type=EI`,"ifm4");
+  this.getContent(`https://localhost:4000/Kolkata/exp/${this.state.sec}?date=${dates}&type=EI`,"ifm1");
+  this.getContent(`https://localhost:4000/Kolkata/res_donut?date=${dates}&type=EI`,"ifm2");
+  this.getContent(`https://localhost:4000/Kolkata/top_and_least?date=${dates}&type=EI`,"ifm3");
+  this.getContent(`https://localhost:4000/Kolkata/res/${this.state.sec}?date=${dates}&type=EI`,"ifm4");
 }
 handleChange = event => {
     var section = (event.target.value);
@@ -51,10 +51,10 @@ handleChange = event => {
     sec: section,
  });
   console.log(this.state);
-  this.getContent(`https://localhost:4000/Kolkata/exp/${section}/?date=${this.state.date}&type=EI`,"ifm1");
-  this.getContent(`https://localhost:4000/Kolkata/res_donut/?date=${this.state.date}&type=EI`,"ifm2");
-  this.getContent(`https://localhost:4000/Kolkata/top_and_least/?date=${this.state.date}&type=EI`,"ifm3");
-  this.getContent(`https://localhost:4000/Kolkata/res/${section}/?date=${this.state.date}&type=EI`,"ifm4");
+  this.getContent(`https://localhost:4000/Kolkata/exp/${section}?date=${this.state.date}&type=EI`,"ifm1");
+  this.getContent(`https://localhost:4000/Kolkata/res_donut?date=${this.state.date}&type=EI`,"ifm2");
+  this.getContent(`https://localhost:4000/Kolkata/top_and_least?date=${this.state.date}&type=EI`,"ifm3");
+  this.getContent(`https://localhost:4000/Kolkata/res/${section}?date=${this.state.date}&type=EI`,"ifm4");
 }
 handleClose = () => {
     this.setState({open:false});
@@ -76,9 +76,11 @@ getContent(url1,idChart) {
     fetch(url1, { method: "GET", headers: header })
       .then((response) => response.text())
       .then((data) => { 
+         console.log(data)
         iframe.contentDocument.write(data);
         iframe.contentDocument.close();
       })
+
       .catch((error) => {
         console.log(error);
       });
@@ -86,10 +88,10 @@ getContent(url1,idChart) {
 
 
 componentDidMount(){
-    this.getContent(`https://localhost:4000/Kolkata/exp/${this.state.sec}/?date=${this.state.date}&type=EI`,"ifm1");
-    this.getContent(`https://localhost:4000/Kolkata/res_donut/?date=${this.state.date}&type=EI`,"ifm2");
-    this.getContent(`https://localhost:4000/Kolkata/top_and_least/?date=${this.state.date}&type=EI`,"ifm3");
-    this.getContent(`https://localhost:4000/Kolkata/res/${this.state.sec}/?date=${this.state.date}&type=EI`,"ifm4");
+    this.getContent(`https://localhost:4000/Kolkata/exp/${this.state.sec}?date=${this.state.date}&type=EI`,"ifm1");
+    this.getContent(`https://localhost:4000/Kolkata/res_donut?date=${this.state.date}&type=EI`,"ifm2");
+    this.getContent(`https://localhost:4000/Kolkata/top_and_least?date=${this.state.date}&type=EI`,"ifm3");
+    this.getContent(`https://localhost:4000/Kolkata/res/${this.state.sec}?date=${this.state.date}&type=EI`,"ifm4");
   }
  handleValueChange = (event, newValue) => {
     
