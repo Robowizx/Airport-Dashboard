@@ -50,13 +50,14 @@ export default function Daily() {
   ChartAPI('exp_series','by_device?sdate=2020-03-05&edate=2020-03-15&type=EI','exp1')
   ChartAPI('allRes_TS','?sdate=2020-03-05&edate=2020-03-15&type=EI','allRes')
   ChartAPI('exp_till_date','?sdate=2020-03-05&edate=2020-03-15&type=EI','exp_till')
-  ChartAPI('res','by_device?date=2020-03-01&type=EI','res')
+  ChartAPI('top_least_timeseries','by_device?sdate=2020-03-05&edate=2020-03-15&type=EI','top')
+  ChartAPI('restime','by_device?sdate=2020-03-05&edate=2020-03-15&type=EI','restime')
   return (
     <div className={classes.root}>
       <div className={classes.root2}>
         <Paper></Paper>
         <Paper>
-        
+        <iframe height='100%' width='100%' frameBorder='0' id='top' scrolling='off'></iframe>
         </Paper>
         <Paper>
         <iframe height='100%' width='100%' frameBorder='0' id='exp_till' scrolling='off'></iframe>
@@ -70,7 +71,7 @@ export default function Daily() {
           <iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe>
           </Paper>
           <Paper>
-          <iframe height='100%' width='window.innerWidth' frameBorder='0' id='res' scrolling='off'></iframe>
+          <iframe height='100%' width='100%' frameBorder='0' id='restime' scrolling='off'></iframe>
           </Paper>
       </div>
     </div>
