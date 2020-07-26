@@ -11,9 +11,6 @@ const { line, brush } = require("../Meta/top_n_least_timeseries.json");
 //importing DB module
 const db = require("../db");
 
-//importing moment for date computation
-const moment = require("moment-timezone");
-
 //top_least_series chart route code
 router.get("/:air/top_least_timeseries/:sec", (req, res) => {
   serverLog.info(
@@ -93,12 +90,6 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
           );
 
           line.series = series;
-          brush.chart.selection.xaxis.min = moment(req.query.sdate).format(
-            "DD MMM YYYY"
-          );
-          brush.chart.selection.xaxis.max = moment(req.query.edate).format(
-            "DD MMM YYYY"
-          );
           brush.series = seriesBrush;
           // console.log(topData, leastData);
           // console.log(topArea, leastArea);

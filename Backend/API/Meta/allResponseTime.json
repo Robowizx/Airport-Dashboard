@@ -1,21 +1,10 @@
 {
     "series": [],
       "chart": {
-        "animations":{
-          "enabled":false
-        },
       "height": 250,
       "id": "test",
       "group":"timeResponses",
       "type": "line",
-      "dropShadow": {
-        "enabled": true,
-        "color": "#000",
-        "top": 18,
-        "left": 7,
-       "blur": 10,
-        "opacity": 0.2
-      },
       "toolbar": {
         "show": true
       }
@@ -40,7 +29,7 @@
       }
     },
     "markers": {
-      "size": 0,
+      "size": 0.4,
       "strokeColors": "#000",
       "strokeWidth": 0.5
     },

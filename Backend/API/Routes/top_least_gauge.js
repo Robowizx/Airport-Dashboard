@@ -35,7 +35,7 @@ router.get('/:air/guage/:type',(req,res)=>{
                     res.status(500).send(err);               
                 }
                 else if(Object.keys(documents).length==0){
-                    serverLog.warn(`DevExp chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                    serverLog.warn(`top-least-guage chart DATA NOT FOUND with Airport=${req.params.air}, `+
                                    `Type=${req.params.type}, `+
                                    `Date=${req.query.date}`
                                    );

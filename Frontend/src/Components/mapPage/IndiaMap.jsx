@@ -307,6 +307,14 @@ export default class IndiaMap extends Component {
                 </Grid>
               </div>
               <hr />
+              <table>
+                <tr>
+                  
+                </tr>
+                <tr>
+
+                </tr>
+              </table>
             </CardInfo>
           </div>
         }

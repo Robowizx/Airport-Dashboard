@@ -38,11 +38,11 @@
                     "offsetY":-10,
                     "show":true,
                     "color":"#888",
-                    "fontSize":"36px"
+                    "fontSize":"7vw"
                 },
                 "value":{
                     "color":"#111",
-                    "fontSize":"36px",
+                    "fontSize":"7vw",
                     "show":true
                 }
             }
@@ -61,7 +61,7 @@
         "align":"left",
         "margin":10,
         "style":{
-            "fontSize":"24px"
+            "fontSize":"10pt"
         }
     }
 }
