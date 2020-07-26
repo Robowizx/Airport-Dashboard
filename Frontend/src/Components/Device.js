@@ -14,6 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import Daily from './Daily';
+import TimeSeries from './TimeSeries';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -79,7 +80,7 @@ export default function Device() {
         <Daily/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <TimeSeries />
       </TabPanel>
     </div>
     </React.Fragment>

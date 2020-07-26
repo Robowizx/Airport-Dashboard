@@ -4,7 +4,7 @@ html
     head
         script(src='https://localhost:4000/Javascript/apexcharts.min.js')
         link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
-        link(rel='stylesheet',type='text/css',href='/CSS/dynamic_chart.css')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/dynamic_chart.css')
     script.
         Apex = {
             chart:{
@@ -83,7 +83,7 @@ html
               }});
             }
         }
-    body
+    body(style="margin:0; padding:0")
         div(id='wrap',style="max-width:device-width")
             div(id='chart' )
             div(id='chart-quarter')
@@ -95,7 +95,7 @@ html
         }],
           chart: {
           id: 'barYear',
-          height: 400,
+          height: 285,
           width: '100%',
           type: 'bar',
           toolbar: {
@@ -209,7 +209,7 @@ html
         }],
           chart: {
           id: 'barQuarter',
-          height: 400,
+          height: 285,
           width: '100%',
           type: 'bar',
           zoom: {

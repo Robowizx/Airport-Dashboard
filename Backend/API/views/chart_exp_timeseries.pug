@@ -6,6 +6,7 @@ html
         link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
     body
         - var ar = JSON.parse(area);
+        div(id='chart',style="max-width:device-width")
           each item in ar
             div(id=`${item}`)
     script.
