@@ -41,8 +41,8 @@ export default function App() {
   return (
     <React.Fragment>
       <CssBaseline />
+      <CustomAppBar menu={menu} headers={headers} />
       <div className={classes.root}>
-        <CustomAppBar menu={menu} headers={headers} />
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Device />
