@@ -13,7 +13,8 @@
     }],
     "colors":["#33cc33","#e6e600","#e60000"],
     "chart":{
-        "type":"bar"
+        "type":"bar",
+        "height":"600"
     },
     "legend":{
         "show":true,
@@ -79,7 +80,7 @@
             "enabled": true
         },
         "title":{
-            "text":"Devices",
+            "text":"Facilities",
             "style":{
                 "fontSize":"14px"
             }
