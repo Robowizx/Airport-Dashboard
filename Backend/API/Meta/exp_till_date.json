@@ -1,0 +1,70 @@
+{
+ 
+    "line_chart":{
+      
+      "series": [
+        {
+          "name": "",
+          "data": []
+        }
+      
+      ],
+      "chart": {
+        "height": 350,
+        "type": "line",
+        "id": "chart1",
+        "group": "social",
+        "toolbar": {
+          "show": true
+        }
+      },
+      "colors":["#00BCD4","#009688"],
+      "stroke": {
+        "curve": "straight"
+      },
+      "title": {
+        "text": "Experience Index Timeseries",
+        "align": "left"
+      },
+     
+      "markers": {
+        "size": [4, 7],
+        "shape": "circle"
+      },
+      "xaxis": {
+        "title": {
+          "text": "Dates",
+          "offsetY":12
+          
+        },
+        "type": "datetime"
+            
+            
+
+      },
+      "yaxis": {
+        "title": {
+          "text": "Experience Index"
+        }
+       
+      },
+      "dataLabels": {
+        "enabled": true
+      },
+      "tooltip": {
+        "enabled": true,
+        "y": {
+          "formatter": null
+        }
+      },
+      "legend": {
+        "position": "top",
+        "horizontalAlign": "center",
+        "floating": true,
+        "offsetY": -25,
+        "offsetX": -5
+      }
+    }
+   
+  }
+  

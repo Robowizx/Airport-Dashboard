@@ -10,15 +10,17 @@
     
     ],
     "chart": {
+      "height": 350,
       "type": "line",
       "id": "chart1",
       "group": "social",
       "toolbar": {
-        "show": false
+        "show": true
       }
     },
+    "colors":["#00BCD4"],
     "stroke": {
-      "curve": "smooth"
+      "curve": "straight"
     },
     "title": {
       "text": "Experience Index Timeseries",
@@ -30,6 +32,11 @@
       "shape": "circle"
     },
     "xaxis": {
+      
+      "title": {
+        "text": "Dates",
+        "offsetY":12
+      },
       "type": "datetime"
     },
     "yaxis": {

@@ -3,8 +3,8 @@ doctype html
 html
     head
         script(src='https://localhost:4000/Javascript/apexcharts.min.js')
-        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
-        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/dynamic_chart.css')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='/CSS/dynamic_chart.css')
     script.
         Apex = {
             chart:{
@@ -16,11 +16,12 @@ html
                 shared: false
             },
             legend:{
-                show: false
+                show:false,
+               
             }
         };
 
-        var colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0'];
+        var colors = ["#E74C3C", "#E67E22","#F1C40F","#2ECC71" ,"#3498DB"];
 
         //Set data from router here
         var arrayData = !{option};
@@ -84,8 +85,8 @@ html
             }
         }
     body
-        div(id='wrap',style="max-width:device-width")
-            div(id='chart' )
+        div(id='wrap')
+            div(id='chart')
             div(id='chart-quarter')
     script.
         var device = "#{dtype}";
@@ -139,22 +140,22 @@ html
             }
           }
         },
-        dataLabels: {
+          dataLabels: {
           enabled: true,
           textAnchor: 'start',
           style: {
-            colors: ['#fff']
+            colors: ['#000']
           },
           formatter: function (val, opt) {
             return opt.w.globals.labels[opt.dataPointIndex];
           },
           offsetX: 0,
-          dropShadow: {
-            enabled: true,
-            color: '#000',
-            blur: 2.5,
-            opacity: 1
-          }
+          //- dropShadow: {
+          //-   enabled: false,
+          //-   color: '#fff',
+          //-   blur: 2.5,
+          //-   opacity: 1
+          //- }
         },
         
         colors: colors,
@@ -186,8 +187,9 @@ html
           }
         },
         title: {
-          text: 'All Responses for Device '+device,
-          offsetX: 15
+          text: 'ALL RESPONSES FOR '+device+' FACILITY',
+          offsetX: 15,
+         
         },
         subtitle: {
           text: '(Click on bar to see details)',
@@ -197,7 +199,9 @@ html
           labels: {
             show: false
           }
-        }
+        },
+          
+        
         };
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
@@ -246,6 +250,13 @@ html
             show: true
           }
         },
+          dataLabels: {
+          enabled: true,
+          textAnchor: 'start',
+          style: {
+            colors: ['#000']
+          }
+          },
         title: {
           text: 'By Area Responses',
           offsetX: 10

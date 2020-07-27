@@ -1,57 +1,61 @@
 {
-    "series": [
-      {
-        "data": []
-      },
-      {
-        "data": []
-      }
-    ],
-    "colors": ["#F47B20", "#005596"],
-    "chart": {
-      "type": "bar",
-      "height": 430
+  "series": [
+    {
+      "data": []
     },
-    "plotOptions": {
-      "bar": {
-        "horizontal": true,
-        "dataLabels": {
-          "position": "top"
-        }
+    {
+      "data": []
+    }
+  ],
+  "colors": ["#21759b", "#d4526e"],
+  "chart": {
+    "type": "bar",
+    "height": 430
+  },
+  "plotOptions": {
+    "bar": {
+      "horizontal": true,
+      "dataLabels": {
+        "position": "top"
       }
-    },
-    "dataLabels": {
-      "enabled": true,
+    }
+  },
+  "dataLabels": {
+    "enabled": true,
 
-      "offsetX": -6,
-      "style": {
-        "fontSize": "10px",
-        "colors": ["#000"]
-      }
+    "offsetX": -6,
+    "style": {
+      "fontSize": "10px",
+      "colors": ["#000"]
+    }
+  },
+  "tooltip": {
+    "enabled": true,
+    "y": {
+      "formatter": null
+    }
+  },
+  "stroke": {
+    "show": true,
+    "width": 1,
+    "colors": ["#fff"]
+  },
+  "xaxis": {
+    "categories": []
+  },
+  "legend": {
+    "onItemHover": {
+      "highlightDataSeries": true
     },
-    "tooltip": {
-      "enabled": true,
-      "y": {
-        "formatter": null
-      }
-    },
-    "stroke": {
-      "show": true,
-      "width": 1,
-      "colors": ["#fff"]
-    },
-    "xaxis": {
-      "categories": []
-    },
-    "legend": {
-      "onItemHover": {
-        "highlightDataSeries": true
-      },
-      "position": "bottom"
-    },
-    "title": {
-      "text": "Top and Least Device",
-      "align": "left",
-      "floating": true
+    "position": "top",
+    "horizontalAlign": "center"
+  },
+  "title": {
+    "text": "Top and Least Facilty",
+    "align": "left",
+    "floating": true,
+    "style":{
+      "fontSize":"16px"
     }
   }
+}

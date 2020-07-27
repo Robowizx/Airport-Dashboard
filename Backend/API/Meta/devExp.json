@@ -14,12 +14,13 @@
     "colors":["#33cc33","#e6e600","#e60000"],
     "chart":{
         "type":"bar",
-        "height":"600"
+        "height":350
     },
     "legend":{
         "show":true,
         "showForNullSeries":true,
-        "position":"right",
+        "position": "top",
+        "horizontalAlign": "center",       
         "onItemClick":{
             "toggleDataSeries": false
         },
@@ -37,17 +38,17 @@
                     {
                        "from":0,
                        "to":33,
-                       "color":"#e60000" 
+                       "color":"#E74C3C" 
                     },
                     {
                         "from":34,
                         "to":66,
-                        "color":"#e6e600" 
+                        "color":"#F1C40F" 
                     },
                     {
                         "from":67,
                         "to":100,
-                        "color":"#33cc33" 
+                        "color":"#2ECC71" 
                     }
                 ]
             }
@@ -80,7 +81,7 @@
             "enabled": true
         },
         "title":{
-            "text":"Facilities",
+            "text":"Devices",
             "style":{
                 "fontSize":"14px"
             }

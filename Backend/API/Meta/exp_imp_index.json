@@ -4,6 +4,7 @@
     "type": "bar",
     "height": 430
   },
+  "colors":["#00BCD4","#009688"],
   "plotOptions": {
     "bar": {
       "horizontal": true,
@@ -39,10 +40,11 @@
     "onItemHover": {
       "highlightDataSeries": true
     },
-    "position": "bottom"
+    "position": "top",
+    "horizontalAlign": "center"
   },
   "title": {
-    "text": "Exp and Imp Index",
+    "text": "Experience Index and Improvement Index",
     "align": "left",
     "floating": true
   }

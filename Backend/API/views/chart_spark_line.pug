@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        script(src='https://localhost:4000/Javascript/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.min.js')
+    body
+        div(id='chart',style="max-width:device-width; margin: 35px auto")
+    script.
+        var options = !{option};     
+
+        options.tooltip.y.title.formatter = (val,{seriesIndex,dataPointIndex})=>{
+            if(seriesIndex)
+                return `${val}`; 
+            else
+                return `${val}`;
+        };
+      
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+      
+     

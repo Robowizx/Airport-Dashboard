@@ -1,0 +1,32 @@
+{
+  "series": [],
+  "chart": {
+    "type": "donut",
+    "width": 40,
+    "height": 40,
+    "sparkline": {
+      "enabled": true
+    }
+  },
+  "colors":["#3498DB", "#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"],
+  "stroke": {
+    "width": 1
+  },
+  "plotOptions": {
+    "pie": {
+      "donut": {
+        "labels": {
+          "show": true
+        }
+      }
+    }
+  },
+  "datlabels":{
+    "enabled":false
+  },
+  "tooltip": {
+    "fixed": {
+      "enabled": true
+    }
+  }
+}
