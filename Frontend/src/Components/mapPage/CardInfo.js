@@ -8,11 +8,12 @@ export default function CardInfo(props) {
     root: {
       width: Number(props.width),
       height: Number(props.height),
+      cn: props.cname,
     },
   });
   let classes = useStyles();
   return (
-    <div className="card">
+    <div className={props.cn}>
       <Card className={classes.root}>
         <CardContent>{props.children}</CardContent>
       </Card>

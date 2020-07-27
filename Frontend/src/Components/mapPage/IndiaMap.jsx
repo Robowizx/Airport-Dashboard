@@ -11,9 +11,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+// import Button from '@material-ui/core/Button';
+// import ButtonGroup from '@material-ui/core/ButtonGroup';
+
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -61,7 +65,7 @@ export default class IndiaMap extends Component {
       prevState: null,
       airState: "All",
       device: "All",
-      airType: "All",
+      airType: "all",
       clickState: "",
       deviceList: [
         "CM",
@@ -75,7 +79,10 @@ export default class IndiaMap extends Component {
         "TP",
         "TR"],
       stateList: [],
-      jsonData: []
+      jsonData: [],
+      topAir: [],
+      lestAir: [],
+      b_alignment: "all",
     };
   }
 
@@ -103,10 +110,38 @@ export default class IndiaMap extends Component {
       }` }),
     });
     const data = await respones.json();
-    console.log("test", data.data.air_list[0].devices[0].device_name);
+    // console.log("test", data.data.air_list[0].devices[0].device_name);
     await data.data.air_list.forEach((e) => this.state.stateList.push(e.state));
     this.state.stateList = this.state.stateList.sort();
+    this.state.stateList = Array.from(new Set(this.state.stateList));
     this.setState({ jsonData: data.data.air_list });
+    const respones1 = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `{
+          best_worst(order: 1) {
+            airport_name
+            state
+          }
+        }` }),
+    });
+    const data1 = await respones1.json();
+    await data1.data.best_worst.forEach((e) => this.state.lestAir.push(e.airport_name));
+    const respones2 = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `{
+          best_worst(order: -1) {
+            airport_name
+            state
+          }
+        }` }),
+    });
+    const data2 = await respones2.json();
+    await data2.data.best_worst.forEach((e) => this.state.topAir.push(e.airport_name));
+    console.log(this.state.lestAir);
     this.setState({ isLoading: false });
     this.drawMap();
   }
@@ -159,7 +194,12 @@ export default class IndiaMap extends Component {
             .attr("r", 2.8)
             .attr("fill", (d) => {
               if (this.state.device === "All") {
-                return "red"
+                if (d.exp >= 0 && d.exp <= 50)
+                  return "red"
+                if (d.exp >= 50 && d.exp <= 70)
+                  return "orange"
+                if (d.exp >= 70 && d.exp <= 100)
+                  return "green"
               }
               for (var i = 0; i < d.devices.length; i++) {
                 if (d.devices[i].device_name === this.state.device) {
@@ -169,13 +209,13 @@ export default class IndiaMap extends Component {
             })
             .attr("transform", (d) => {
               if (this.state.airState === "All") {
-                if (this.state.airType === "All")
+                if (this.state.airType === "all")
                   return (`translate(${projection([d.location.long, d.location.lat])})`);
                 if (this.state.airType === d.atype)
                   return (`translate(${projection([d.location.long, d.location.lat])})`);
               }
               if (this.state.airState === d.state) {
-                if (this.state.airType === "All")
+                if (this.state.airType === "all")
                   return (`translate(${projection([d.location.long, d.location.lat])})`);
                 if (this.state.airType === d.atype)
                   return (`translate(${projection([d.location.long, d.location.lat])})`);
@@ -246,16 +286,20 @@ export default class IndiaMap extends Component {
 
   deviceChange = event => {
     this.setState({ device: (event.target.value) });
-    console.log(this.state.device);
   };
+
+  handleAlignment = (event, value) => {
+    this.setState({ airType: (value) });
+    this.setState({ b_alignment: (value) });
+  }
 
   render() {
 
     return (
       <div className="mainMapPage">
-        {this.state.isLoading ? <div>Loading....</div> :
+        {this.state.isLoading ? <div><CircularProgress className="centered" /></div> :
           <div ref={this.myref} className="map">
-            <CardInfo width="600" height="300">
+            <CardInfo width="600" height="460" cn="card">
               <div className={useStyles.root}>
                 <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
                   <Grid item xs>
@@ -298,23 +342,38 @@ export default class IndiaMap extends Component {
                   </Grid>
                   <Grid item xs></Grid>
                   <div className={useStyles.root}>
-                    <ButtonGroup size="small" color="primary" aria-label="outlined primary button group">
-                      <Button onClick={() => { return this.setState({ airType: "All" }) }}>All</Button>
+                    {/* 
+                      <ButtonGroup size="small" color="primary" aria-label="outlined primary button group" value={this.state.airType}>
+                      <Button onClick={() => this.buttonClickState("All")}>All</Button>
                       <Button onClick={() => { return this.setState({ airType: "dom" }) }}>Domestic</Button>
                       <Button onClick={() => { return this.setState({ airType: "int" }) }}>International</Button>
-                    </ButtonGroup>
+                    </ButtonGroup> */}
+                    <ToggleButtonGroup value={this.state.b_alignment} exclusive size="small" onChange={this.handleAlignment}>
+                      <ToggleButton value="all">All</ToggleButton>
+                      <ToggleButton value="dom">Domestic</ToggleButton>
+                      <ToggleButton value="int">International</ToggleButton>
+                    </ToggleButtonGroup>
                   </div>
                 </Grid>
               </div>
               <hr />
-              <table>
-                <tr>
-                  
-                </tr>
-                <tr>
-
-                </tr>
-              </table>
+              <h3>Best Airport</h3>
+              <Grid container direction="row" justify="space-evenly" alignItems="baseline" spacing={0}>
+                {this.state.topAir.map((e, i) => <Grid item xs key={i}>
+                  <CardInfo width="100" heigth="110">
+                    <p className="textP">{e}</p>
+                  </CardInfo>
+                </Grid>)}
+              </Grid>
+              <hr />
+              <h3>Worst Airport</h3>
+              <Grid container direction="row" justify="space-evenly" alignItems="baseline" spacing={1}>
+                {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
+                  <CardInfo width="100" heigth="110">
+                    <p className="textP">{e}</p>
+                  </CardInfo>
+                </Grid>)}
+              </Grid>
             </CardInfo>
           </div>
         }
