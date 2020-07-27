@@ -47,10 +47,10 @@ export default function Daily() {
         </Grid>
         <Grid container xs={12} spacing={4}>
         <Grid item xs={6}>
-          <Paper style ={{height:"700px"}}><iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe></Paper>
+          <Paper style ={{height:"1400px"}}><iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe></Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper style ={{height:"700px"}}><iframe height='100%' width='100%' frameBorder='0' id='restime' scrolling='off'></iframe></Paper>
+          <Paper style ={{height:"1400px"}}><iframe height='100%' width='100%' frameBorder='0' id='restime' scrolling='off'></iframe></Paper>
         </Grid>
         </Grid>
       </Grid>
