@@ -10,7 +10,6 @@
     
     ],
     "chart": {
-      "height":"250px",
       "type": "line",
       "id": "chart1",
       "group": "social",

@@ -68,7 +68,7 @@
     "brush": {
         "series": [],
         "chart": {
-          "height":"180",
+          "height":"110",
           "id": "chart2",
           "offsetY":-40,
           "type": "area",

@@ -2,7 +2,7 @@
   "allRes_TS": {
     "series": [],
     "chart": {
-      "height": 350,
+    
       "type": "line",
       "toolbar": {
         "show": true

@@ -2,32 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display:'flex',
     flexWrap: 'wrap',
-  },
-  root1:{
-      display:'flex',
-      flexWrap: 'wrap',
-      width:'50%',
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '30vw',
-        height:'42vw',
-      },
-  },
-  root2: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent:'center',
-    width:'50%',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '30vw',
-      height:'24vw',
-    },
+    direction:'row'
   },
   paper: {
     padding: theme.spacing(2),
@@ -53,27 +34,32 @@ export default function Daily() {
   ChartAPI('top_least_timeseries','by_device?sdate=2020-03-05&edate=2020-03-15&type=EI','top')
   ChartAPI('restime','by_device?sdate=2020-03-05&edate=2020-03-15&type=EI','restime')
   return (
-    <div className={classes.root}>
-      <div className={classes.root2}>
-        <Paper></Paper>
-        <Paper>
-        <iframe height='100%' width='100%' frameBorder='0' id='top' scrolling='off'></iframe>
-        </Paper>
-        <Paper>
-        <iframe height='100%' width='100%' frameBorder='0' id='exp_till' scrolling='off'></iframe>
-        </Paper>
-        <Paper>
-        <iframe height='100%' width='100%' frameBorder='0' id='allRes' scrolling='on'></iframe>
-        </Paper>
-      </div>
-      <div className={classes.root1}>
-          <Paper>
-          <iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe>
-          </Paper>
-          <Paper>
-          <iframe height='100%' width='100%' frameBorder='0' id='restime' scrolling='off'></iframe>
-          </Paper>
-      </div>
-    </div>
+    <React.Fragment>
+      <Grid container alignContent="center" spacing={4}>
+        <Grid item xs={4}>
+          <Paper style ={{height:"360px"}}><iframe height='350.022px' width='100%' frameBorder='0' id='top' scrolling='off'></iframe></Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper style ={{height:"360px"}}><iframe height='100%' width='100%' frameBorder='0' id='exp_till' scrolling='off'></iframe></Paper>
+        </Grid>
+        <Grid item xs = {4}>
+          <Paper style ={{height:"360px"}}><iframe height='350.022px' width='100%' frameBorder='0' id='allRes' scrolling='off'></iframe></Paper>
+        </Grid>
+        <Grid container xs={12} spacing={4}>
+        <Grid item xs={6}>
+          <Paper style ={{height:"700px"}}><iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe></Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper style ={{height:"700px"}}><iframe height='100%' width='100%' frameBorder='0' id='restime' scrolling='off'></iframe></Paper>
+        </Grid>
+        </Grid>
+      </Grid>
+    </React.Fragment>
   );
 }
+{/* <iframe height='100%' width='100%' frameBorder='0' id='top' scrolling='off'></iframe> 
+<iframe height='100%' width='100%' frameBorder='0' id='exp_till' scrolling='off'></iframe>
+<iframe height='100%' width='100%' frameBorder='0' id='allRes' scrolling='on'></iframe>
+<iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe>
+<iframe height='100%' width='100%' frameBorder='0' id='restime' scrolling='off'></iframe>
+*/}
