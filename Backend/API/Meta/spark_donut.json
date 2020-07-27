@@ -1,0 +1,28 @@
+{
+  "series": [],
+  "chart": {
+    "type": "donut",
+    "width": 40,
+    "height": 40,
+    "sparkline": {
+      "enabled": true
+    }
+  },
+  "stroke": {
+    "width": 1
+  },
+  "plotOptions": {
+    "pie": {
+      "donut": {
+        "labels": {
+          "show": true
+        }
+      }
+    }
+  },
+  "tooltip": {
+    "fixed": {
+      "enabled": true
+    }
+  }
+}

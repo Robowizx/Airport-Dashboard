@@ -86,8 +86,8 @@ router.get("/:air/top_and_least/", (req, res) => {
             documents[0].by_survey.least.area,
             documents[0].by_group.least.area
           );
-          for(let i=0;i<3;i++){
-            if(topData[i]<10.0 || leastData[i]<10.0){
+          for (let i = 0; i < 3; i++) {
+            if (topData[i] < 10.0 || leastData[i] < 10.0) {
               custom_group.dataLabels.offsetX = 36;
               custom_group.dataLabels.style.colors = ["#000"];
               break;
@@ -100,7 +100,7 @@ router.get("/:air/top_and_least/", (req, res) => {
 
           res.status(200).render("chart_custom_group", {
             option: JSON.stringify(custom_group),
-            area: JSON.stringify({ leastArea: leastArea, topArea: topArea })
+            area: JSON.stringify({ leastArea: leastArea, topArea: topArea }),
           });
         }
       }

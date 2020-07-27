@@ -94,21 +94,22 @@
         "legend": {
           "show": false
         },
-        "xaxis": {
-          "type": "datetime",
-          "title": {
-            "text": "DATES",
-            "offsetY": 15
-          },
-          "tooltip": {
-            "enabled": false
-          }
-        },
-        "yaxis": {
-          "title": {
-            "text": "VALUES"
-          },
-          "tickAmount": 3
-        }
+           
+    "xaxis": {
+      "type": "datetime",
+      "title": {
+        "text": "DATES",
+        "offsetY": 15
+      },
+      "tooltip": {
+        "enabled": false
       }
+    },
+    "yaxis": {
+      "title": {
+        "text": "VALUES"
+      },
+      "tickAmount": 3
+    }
+  }
 }

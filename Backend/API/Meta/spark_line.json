@@ -1,0 +1,34 @@
+{
+  "series": [
+    {
+      "data": []
+    }
+  ],
+  "chart": {
+    "type": "line",
+    "width": 100,
+    "height": 35,
+    "sparkline": {
+      "enabled": true
+    }
+  },
+  "tooltip": {
+    "fixed": {
+      "enabled": false
+    },
+    "x": {
+      "show": false
+    },
+    "y": {
+      "title": {
+        "formatter": ""
+      }
+    }
+  },
+  "stroke": {
+    "width": 2
+  },
+  "marker": {
+    "show": false
+  }
+}
