@@ -8,13 +8,8 @@ html
     script.
         var options = !{option};     
 
-        options.tooltip.y.title.formatter = (val,{seriesIndex,dataPointIndex})=>{
-            if(seriesIndex)
-                return `${val}`; 
-            else
-                return `${val}`;
-        };
-      
+        options.tooltip.y.title.formatter =(seriesName) => {return ""};
+
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
       

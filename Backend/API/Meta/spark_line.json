@@ -1,6 +1,6 @@
 {
   "series": [
-    {
+    {"name":"Exp",
       "data": []
     }
   ],
@@ -13,18 +13,21 @@
     }
   },
   "tooltip": {
-    "fixed": {
-      "enabled": false
-    },
+    
+      "enabled": true,
+ 
     "x": {
       "show": false
-    },
-    "y": {
-      "title": {
-        "formatter": ""
+    },"y":{
+      "title":{
+        "formatter":""
       }
+      
     }
-  },
+
+    },
+   
+  
   "stroke": {
     "width": 2
   },

@@ -4,7 +4,7 @@
     "type": "bar",
     "height": 430
   },
-  "colors":["#00BCD4","#009688"],
+  "colors":["#9C27B0","#a15548"],
   "plotOptions": {
     "bar": {
       "horizontal": true,

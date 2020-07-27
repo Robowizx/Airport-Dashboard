@@ -11,7 +11,7 @@
         "name":"Bad",
         "data":[]
     }],
-    "colors":["#33cc33","#e6e600","#e60000"],
+    
     "chart":{
         "type":"bar",
         "height":350

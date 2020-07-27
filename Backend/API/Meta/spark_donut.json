@@ -16,7 +16,7 @@
     "pie": {
       "donut": {
         "labels": {
-          "show": true
+          "show": false
         }
       }
     }

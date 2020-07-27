@@ -18,7 +18,7 @@
         "show": true
       }
     },
-    "colors":["#00BCD4"],
+    "colors":["#9C27B0"],
     "stroke": {
       "curve": "straight"
     },
@@ -46,7 +46,7 @@
      
     },
     "dataLabels": {
-      "enabled": true
+      "enabled": false
     },
     "tooltip": {
       "enabled": true,

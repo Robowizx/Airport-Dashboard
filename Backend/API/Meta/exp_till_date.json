@@ -18,7 +18,7 @@
           "show": true
         }
       },
-      "colors":["#00BCD4","#009688"],
+      "colors":["#9C27B0","#a15548"],
       "stroke": {
         "curve": "straight"
       },
@@ -28,7 +28,7 @@
       },
      
       "markers": {
-        "size": [4, 7],
+        "size": [4, 4],
         "shape": "circle"
       },
       "xaxis": {
@@ -49,7 +49,7 @@
        
       },
       "dataLabels": {
-        "enabled": true
+        "enabled": false
       },
       "tooltip": {
         "enabled": true,

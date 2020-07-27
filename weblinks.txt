@@ -14,7 +14,7 @@ Donut-
 https://localhost:4000/Kolkata/res_donut/?date=2020-09-08&type=SC
 
 exp series-
-https://localhost:4000/Kolkata/exp/by_device/?sdate=2020-08-09&edate=2020-09-07&type=SC
+https://localhost:4000/Kolkata/exp/by_device/?date=2020-09-07&type=SC
 
 Exp till date
 https://localhost:4000/Kolkata/exp_till_date/?sdate=2020-03-01&edate=2020-03-06&type=EI
