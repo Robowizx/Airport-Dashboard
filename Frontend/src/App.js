@@ -3,7 +3,6 @@ import "./App.css";
 //import Device_page from "./Components/device_page";
 import CustomAppBar from "./Components/CustomAppBar";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import AirportPage from './Components/AirportPage';
 
@@ -31,13 +30,13 @@ export default function App() {
 
   const classes = useStyles();
   const menu = {
-    airport:['Bangalore','Mysore'],
+    airport:['Kolkata',''],
     states:[],
     device:['EI','CM']
   };
   const headers = {
-    state:'Karnataka',
-    airport:'Mysore'
+    state:'West Bengal',
+    airport:'Kolkata'
   }
 
 
@@ -48,7 +47,7 @@ export default function App() {
       <div className={classes.root}>
         <CustomAppBar menu={menu} headers={headers} />
         <div className={classes.content}>
-          <div className={classes.toolbar} />
+          {/* <div className={classes.toolbar} /> */}
           <AirportPage/>
         </div>
       </div> 

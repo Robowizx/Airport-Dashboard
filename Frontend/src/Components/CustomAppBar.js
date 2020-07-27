@@ -140,20 +140,18 @@ export default function CustomAppBar(props) {
 
   const handleDrawerOpen = () => {
     if((props.menu.states.length!==0 || props.menu.airport.length!==0) || props.menu.device.length!==0)
-      setOpen(true);
+      setOpen(!open);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleSubNavOpen = () => {
+    setOpen(true);
   };
 
   return (
    <React.Fragment>  
       <AppBar
         position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
+        className={classes.appBar}
       >
         <Toolbar>
           <IconButton
@@ -161,9 +159,7 @@ export default function CustomAppBar(props) {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
+            className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
@@ -218,12 +214,12 @@ export default function CustomAppBar(props) {
           > 
           <div className={classes.toolbar}>
             <Typography variant="h6" noWrap align="center" className={classes.typ} >Menu</Typography>  
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton>
               <ChevronLeftIcon />
             </IconButton>
           </div>
           <Divider />
-          <MenuList menu={props.menu} headers={props.headers} navOpen={handleDrawerOpen}/>
+          <MenuList menu={props.menu} headers={props.headers} navOpen={handleSubNavOpen}/>
         </Drawer>
         )
       }

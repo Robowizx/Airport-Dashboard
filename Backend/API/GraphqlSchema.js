@@ -49,19 +49,39 @@ const airportType = new GraphQLObjectType({
 const air_resolve = async (parent,args)=>{
     let res={},filter={};
     if(args.code)
-        filter.code = args.code;
+        filter.code= args.code;                
     else
         filter.name = args.name;
     await db.getDB()
             .collection('Meta')
-            .findOne(filter)
-            .then((document)=>{
-                res = document;
-                res.num_of_devs = res.devices.length;
+            .findOne(filter,{projection:{_id:0,name:1,airport_name:1,code:1,atype:1,location:1}})
+            .then((doc)=>{
+                res = doc;
             })
-            .catch((err)=>{
-                console.log(err);
-            });
+            .catch((err)=>console.log(err));
+
+    await db.getDB()
+            .collection(res.name)
+            .find({date:args.date},{projection:{_id:0,general:1,type:1}})
+            .toArray()
+            .then((document)=>{
+              let ex=0;  
+              res.num_of_devs = document.length;
+              res.devices=[];
+              for(let i=0;i<document.length;i++){
+                  ex += document[i].general.avg_exp_index;
+                  res.devices.push({
+                      device_name:document[i].type,
+                      avg_exp_index: document[i].general.avg_exp_index,
+                      exp: document[i].general.all_responses[0]['Exp Index'],
+                      rank: document[i].general.rank,
+                      avg_imp_index: document[i].general.avg_imp_index
+                  });
+              }
+              ex /= document.length;
+              res.exp = ex;
+            })
+            .catch((err)=> console.log(err)); 
     return res;            
 };
 
