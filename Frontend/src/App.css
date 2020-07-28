@@ -2,37 +2,41 @@
   font-family: sans-serif;
 }
 
-.map {
-  position: absolute;
-  margin: 40px 10px 10px 40px;
-  left: 30px;
-  top: 30px;
-}
-
 .air {
   position: absolute;
   top: 50px;
-}
-
-.svg {
-  padding-left: 300px;
-  width: auto;
-  height: 600px;
-  align-content: flex-start;
 }
 
 .stateName {
   font-family: sans-serif;
   text-align: center;
 }
-
+@media screen{
 .card {
   position: absolute;
   z-index: 1;
-  left: 600px;
-  top: 0px;
+  left: 51vw;
+  align-self: center;
 }
 
+.mainMapPage {
+  height: auto;
+  width: 100vw;
+  background: #f8f0e8;
+}
+
+.map {
+  position: absolute;
+  margin-top: 40px;
+  left: 10px;
+  top: 30px;
+}
+.pageCard{
+  position: absolute;
+  margin-top: 40px;
+  top: 30px;
+}
+}
 .toolTip {
   width: auto;
   height: 60px;
@@ -53,12 +57,6 @@
   font-size: 12px;
 }
 
-.mainMapPage {
-  height: 630px;
-  width: auto;
-  background: #f8f0e8;
-}
-
 .pp{
   text-align: center;
 }
@@ -67,9 +65,4 @@
   position: fixed; 
   top: 50%;
   left: 50%;
-}
-
-.subCard{
-  margin: 0px;
-  padding: 0px;
 }

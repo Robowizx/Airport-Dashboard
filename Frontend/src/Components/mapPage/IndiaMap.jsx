@@ -47,19 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const color = {
-  "CM": "#0000FF",
-  "DF": "#f7ba59",
-  "EI": "#f75b8d",
-  "EV": "#44c2fd",
-  "FG": "#f7eb5b",
-  "RF": "#ff8f66",
-  "RT": "#647d32",
-  "SC": "#ccff66",
-  "TP": "#8c61ff",
-  "TR": "#40ad6c"
-};
-
 export default class IndiaMap extends Component {
 
   constructor(props) {
@@ -109,6 +96,7 @@ export default class IndiaMap extends Component {
           state
           devices {
             device_name
+            exp
           }
           atype
           location {
@@ -130,7 +118,7 @@ export default class IndiaMap extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `{
-          best_worst(order: 1) {
+          best_worst(order: -1) {
             airport_name
             state
             atype
@@ -149,7 +137,7 @@ export default class IndiaMap extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `{
-          best_worst(order: -1) {
+          best_worst(order: 1) {
             airport_name
             state
             atype
@@ -177,8 +165,9 @@ export default class IndiaMap extends Component {
 
     let t = "";
 
-    let width = 600;
-    let height = 560;
+    console.log(Number(window.innerWidth / 2), Number(window.innerHeight / 2));
+    let width = Number(window.innerWidth / 2);
+    let height = Number(window.innerHeight) - 90;
 
     let tooltip = d3.select(this.myref.current)
       .append("div")
@@ -225,7 +214,12 @@ export default class IndiaMap extends Component {
               }
               for (var i = 0; i < d.devices.length; i++) {
                 if (d.devices[i].device_name === this.state.device) {
-                  return color[this.state.device];
+                  if (d.devices[i].exp >= 0 && d.devices[i].exp <= 50)
+                    return "red"
+                  if (d.devices[i].exp >= 50 && d.devices[i].exp <= 70)
+                    return "orange"
+                  if (d.devices[i].exp >= 70 && d.devices[i].exp <= 100)
+                    return "green"
                 }
               }
             })
@@ -293,7 +287,7 @@ export default class IndiaMap extends Component {
             cp();
           })
           .on('mousemove', () => {
-            tooltip.style("top", `${d3.event.pageY - 50}px`)
+            tooltip.style("top", `${d3.event.pageY - 30}px`)
               .style("left", `${d3.event.pageX - 50}px`);
             cp();
           })
@@ -320,111 +314,117 @@ export default class IndiaMap extends Component {
     return (
       <div className="mainMapPage">
         {this.state.isLoading ? <div><CircularProgress className="centered" /></div> :
-          <div ref={this.myref} className="map">
-            <CardInfo width="680" height="550" cn="card">
-              <div className={useStyles.root}>
-                <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
-                  <Grid item xs>
-                    <FormControl size="small" className={useStyles.formControl}>
-                      <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        label="State"
-                        displayEmpty
-                        value={this.state.airState}
-                        className={useStyles.selectEmpty}
-                        onChange={this.statesChange}
-                        inputProps={{ 'aria-label': 'Without label' }}
-                      >
-                        <MenuItem value="" disabled>State</MenuItem>
-                        <MenuItem value={"All"}>All</MenuItem>
-                        {this.state.stateList.map((e, i) => <MenuItem value={e} key={i}>{e}</MenuItem>)}
-                      </Select>
-                    </FormControl>
+          <div>
+            <div ref={this.myref} className="map">
+            </div>
+            <div className="pageCard">
+              <CardInfo width={Number(window.innerWidth) / 2 - 60} height="auto" cn="card">
+                <div className={useStyles.root}>
+                  <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
+                    <Grid item xs>
+                      <FormControl size="small" className={useStyles.formControl}>
+                        <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-outlined-label"
+                          id="demo-simple-select-outlined"
+                          label="State"
+                          displayEmpty
+                          value={this.state.airState}
+                          className={useStyles.selectEmpty}
+                          onChange={this.statesChange}
+                          inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                          <MenuItem value="" disabled>State</MenuItem>
+                          <MenuItem value={"All"}>All</MenuItem>
+                          {this.state.stateList.map((e, i) => <MenuItem value={e} key={i}>{e}</MenuItem>)}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs>
+                      <FormControl size="small" className={useStyles.formControl}>
+                        <InputLabel id="demo-simple-select-outlined-label">Facilites</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-outlined-label"
+                          id="demo-simple-select-outlined"
+                          label="Device"
+                          displayEmpty
+                          value={this.state.device}
+                          className={useStyles.selectEmpty}
+                          onChange={this.deviceChange}
+                          inputProps={{ 'aria-label': 'Without label' }}
+                        >
+                          <MenuItem value="" disabled>Facilites</MenuItem>
+                          <MenuItem value="All">All</MenuItem>
+                          {this.state.deviceList.map((obj, i) => <MenuItem value={obj} key={i}>{obj}</MenuItem>)}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs></Grid>
+                    <div className={useStyles.root}>
+                      <ToggleButtonGroup value={this.state.b_alignment} exclusive size="small" onChange={this.handleAlignment}>
+                        <ToggleButton value="all">All</ToggleButton>
+                        <ToggleButton value="dom">Domestic</ToggleButton>
+                        <ToggleButton value="int">International</ToggleButton>
+                      </ToggleButtonGroup>
+                    </div>
                   </Grid>
-                  <Grid item xs>
-                    <FormControl size="small" className={useStyles.formControl}>
-                      <InputLabel id="demo-simple-select-outlined-label">Device</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-outlined-label"
-                        id="demo-simple-select-outlined"
-                        label="Device"
-                        displayEmpty
-                        value={this.state.device}
-                        className={useStyles.selectEmpty}
-                        onChange={this.deviceChange}
-                        inputProps={{ 'aria-label': 'Without label' }}
-                      >
-                        <MenuItem value="" disabled>Device</MenuItem>
-                        <MenuItem value="All">All</MenuItem>
-                        {this.state.deviceList.map((obj, i) => <MenuItem value={obj} key={i}>{obj}</MenuItem>)}
-                      </Select>
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs></Grid>
-                  <div className={useStyles.root}>
-                    <ToggleButtonGroup value={this.state.b_alignment} exclusive size="small" onChange={this.handleAlignment}>
-                      <ToggleButton value="all">All</ToggleButton>
-                      <ToggleButton value="dom">Domestic</ToggleButton>
-                      <ToggleButton value="int">International</ToggleButton>
-                    </ToggleButtonGroup>
+                </div>
+                <br />
+                {this.state.airState === "All" ?
+                  <div>
+                    <GridList cellHeight={"auto"} className={useStyles.gridList} cols={2}>
+                      <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
+                        <h3>Best Airports</h3>
+                        {this.state.topAir.map((e, i) => <Grid item xs key={i}>
+                          <CardInfo width={(Number(window.innerWidth) / 2) / 2.5}>
+                            <p className="textP">{e.airport_name}</p>
+                            <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
+                            <p className="textP">{e.state}</p>
+                            <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
+                          </CardInfo>
+                        </Grid>)}
+                      </Grid>
+                      <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
+                        <h3>Worst Airports</h3>
+                        {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
+                          <CardInfo width={(Number(window.innerWidth) / 2) / 2.5}>
+                            <p className="textP">{e.airport_name}</p>
+                            <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
+                            <p className="textP">{e.state}</p>
+                            <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
+                          </CardInfo>
+                        </Grid>)}
+                      </Grid>
+                    </GridList>
                   </div>
-                </Grid>
-              </div>
-              <br />
-              {this.state.airState === "All" ?
-                <div>
-                  <GridList cellHeight={"auto"} className={useStyles.gridList} cols={2}>
-                    <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
-                      {this.state.topAir.map((e, i) => <Grid item xs key={i}>
-                        <CardInfo width="280" heigth="150" cn="subCard">
-                          <p className="textP">{e.airport_name}</p>
-                          <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
-                          <p className="textP">{e.state}</p>
-                          <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
-                        </CardInfo>
-                      </Grid>)}
-                    </Grid>
-                    <Grid container direction="column" justify="flex-end" alignItems="center" spacing={1}>
-                      {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
-                        <CardInfo width="280" heigth="150">
-                          <p className="textP">{e.airport_name}</p>
-                          <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
-                          <p className="textP">{e.state}</p>
-                          <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
-                        </CardInfo>
-                      </Grid>)}
-                    </Grid>
-                  </GridList>
-                </div>
-                :
-                <div>
-                  <Grid container direction="column" justify="flex-end" alignItems="flex-start" spacing={1}>
-                    {this.state.jsonData.map((e, i) => {
-                      if (e.state === this.state.airState) 
-                        return (
-                          <Grid item xs key={i}>
-                            <CardInfo width="280" heigth="150">
-                              <p className="textP">{e.airport_name}</p>
-                              <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
-                              <p className="textP">{e.state}</p>
-                              <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
-                            </CardInfo>
-                          </Grid>);
+                  :
+                  <div>
+                    <Grid container direction="column" justify="flex-end" alignItems="flex-start" spacing={1}>
+                      {this.state.jsonData.map((e, i) => {
+                        if (e.state === this.state.airState)
+                          return (
+                            <Grid item xs key={i}>
+                              <CardInfo>
+                                <p className="textP">{e.airport_name}</p>
+                                <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
+                                <p className="textP">{e.state}</p>
+                                <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
+                              </CardInfo>
+                            </Grid>);
                       }
-                  )}
-                  </Grid>
-                </div>
-              }
-            </CardInfo>
+                      )}
+                    </Grid>
+                  </div>
+                }
+              </CardInfo>
+            </div>
+            <div ref={this.myref2} className="toolTip">
+              <p id="airname" className="textP"></p>
+              <p id="exp" className="textP"></p>
+            </div>
+            <Link to="/airport" id="linkTest" ></Link>
           </div>
         }
-        <div ref={this.myref2} className="toolTip">
-          <p id="airname" className="textP"></p>
-          <p id="exp" className="textP"></p>
-        </div>
-        <Link to="/airport" id="linkTest" ></Link>
       </div>
     );
   }
