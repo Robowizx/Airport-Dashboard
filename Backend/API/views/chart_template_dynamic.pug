@@ -83,9 +83,9 @@ html
               }});
             }
         }
-    body
-        div(id='wrap')
-            div(id='chart')
+    body(style="margin:0; padding:0")
+        div(id='wrap',style="max-width:device-width")
+            div(id='chart' )
             div(id='chart-quarter')
     script.
         var device = "#{dtype}";
@@ -95,7 +95,7 @@ html
         }],
           chart: {
           id: 'barYear',
-          height: 400,
+          height: 365,
           width: '100%',
           type: 'bar',
           toolbar: {
@@ -209,7 +209,7 @@ html
         }],
           chart: {
           id: 'barQuarter',
-          height: 400,
+          height: 365,
           width: '100%',
           type: 'bar',
           zoom: {

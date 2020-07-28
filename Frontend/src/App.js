@@ -5,6 +5,7 @@ import CustomAppBar from "./Components/CustomAppBar";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import AirportPage from './Components/AirportPage';
+import Device from './Components/Device';
 
 const useStyles = makeStyles((theme)=>({
   root:{
@@ -48,7 +49,7 @@ export default function App() {
         <CustomAppBar menu={menu} headers={headers} />
         <div className={classes.content}>
           {/* <div className={classes.toolbar} /> */}
-          <AirportPage/>
+          <Device/>
         </div>
       </div> 
     </React.Fragment>

@@ -20,6 +20,13 @@ const totalType = new GraphQLObjectType({
         active: {type: GraphQLInt}
     }
 });
+const surveyType = new GraphQLObjectType({
+    name:'survey',
+    fields:{
+        num: {type: GraphQLInt},
+        completed: {type: GraphQLInt}
+    }
+});
 
 const surveyType = new GraphQLObjectType({
     name:'survey',
