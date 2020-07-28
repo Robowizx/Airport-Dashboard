@@ -4,13 +4,13 @@ import {Paper,
         Divider,
         Card,
         CardActionArea,
-        CardContent,
-        Box
+        CardContent
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider,DatePicker } from '@material-ui/pickers';
 import moment from 'moment-timezone';
 import MomentUtils from '@date-io/moment';
+import {orderBy} from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -111,7 +111,7 @@ export default function AirportPage(props){
             .then((response)=> response.json())
             .then((data)=>{
                 document.getElementById('exp_value').innerHTML = Math.floor(data.data.airport_name.exp)+'%';
-                setDevice(data.data.airport_name.devices);
+                setDevice(orderBy(data.data.airport_name.devices,['rank'],['asc']));
             })
             .catch((err)=>{
                 console.log(err);

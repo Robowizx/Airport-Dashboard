@@ -30,7 +30,7 @@ export default function App() {
 
   const classes = useStyles();
   const menu = {
-    airport:['Kolkata',''],
+    airport:['Kolkata'],
     states:[],
     device:['EI','CM']
   };

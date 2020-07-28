@@ -11,6 +11,8 @@ import LocalAirportIcon from '@material-ui/icons/LocalAirport';
 import RoomServiceIcon from '@material-ui/icons/RoomService';
 import ExploreIcon from '@material-ui/icons/Explore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import HomeIcon from '@material-ui/icons/Home';
 //import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,14 +54,14 @@ export default function MenuList(props) {
                 }
             </ListItemIcon>
             <ListItemText key={marker+'-text'} primary={marker}/>
-            {open[event] ? <ExpandLess /> : null}
+            {open[event] ? <ExpandLess /> :<ExpandMoreIcon />}
         </ListItem>
         <Collapse in={open[event]} key={marker+"-sublist"} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
             {
                props.menu[event].map((text)=>(
                 <ListItem button key={text} className={classes.nested}>
-                    <ListItemText key={text+'-text'}primary={text} /> 
+                    <ListItemText key={text+'-text'}secondary={text} /> 
                 </ListItem>       
                ))
             }
@@ -75,7 +77,10 @@ export default function MenuList(props) {
             component="nav"
             aria-labelledby="nested-list-subheader"
             className={classes.root}
-        >{[
+        >{[ (<ListItem button key='home'>
+                <ListItemIcon><HomeIcon /></ListItemIcon>
+                <ListItemText key='home_text' primary="Home"/>
+            </ListItem>),
             props.menu.states.length > 0 ? listout("States",'states'):null,
             props.menu.airport.length > 0 ? listout(props.headers.state+" - Airports ",'airport'):null,
             props.menu.device.length > 0 ? listout(props.headers.airport+" - Facilities",'device'):null            
