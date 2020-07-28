@@ -23,7 +23,7 @@
           "curve": "straight"
         },
         "title": {
-          "text": "Top and Least Timeseries",
+          "text": "Top and Least Facility Timeseries",
           "align": "left",
           "style":{
             "fontSize":"16px"
