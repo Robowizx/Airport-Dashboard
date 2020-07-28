@@ -1,7 +1,7 @@
 {
   "series": [],
   "chart": {
-    "type": "donut",
+    "type": "pie",
     "width": 40,
     "height": 40,
     "sparkline": {
@@ -10,15 +10,6 @@
   },
   "stroke": {
     "width": 1
-  },
-  "plotOptions": {
-    "pie": {
-      "donut": {
-        "labels": {
-          "show": true
-        }
-      }
-    }
   },
   "tooltip": {
     "fixed": {

@@ -51,7 +51,7 @@ router.get("/:air/spark_donut/:type", (req, res) => {
           spark_donut.series = data;
           spark_donut.labels = ["Excellent", "Good", "Average", "Poor", "Bad"];
 
-          res.status(200).render("chart_template", {
+          res.status(200).render("spark_pie", {
             option: JSON.stringify(spark_donut),
           });
         }

@@ -1,7 +1,8 @@
 {
     "series":[],
     "chart":{
-        "type":"radialBar"
+        "type":"radialBar",
+        "height":225
     },
     "plotOptions":{
         "radialBar":{
@@ -61,7 +62,7 @@
         "align":"left",
         "margin":10,
         "style":{
-            "fontSize":"10pt"
+            "fontSize":"11pt"
         }
       },
       "dataLabels": {

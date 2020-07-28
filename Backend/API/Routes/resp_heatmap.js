@@ -16,7 +16,7 @@ const db = require('../db');
 const moment = require("moment-timezone");
 
 //exp time series chart route code
-router.get('/:air/total_resp/:sec',(req,res)=>{
+router.get('/:air/total_resp',(req,res)=>{
     serverLog.info(`REQUESTED Top_Least time series chart with Airport=${req.params.air}, `+
                  `Section=${req.params.sec}, `+
                  `SDate=${req.query.sdate}, `+

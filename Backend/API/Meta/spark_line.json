@@ -1,11 +1,12 @@
 {
   "series": [
     {
+      "name":"Exp",
       "data": []
     }
   ],
   "chart": {
-    "type": "line",
+    "type": "area",
     "width": 100,
     "height": 35,
     "sparkline": {
@@ -16,13 +17,19 @@
     "fixed": {
       "enabled": false
     },
+    "style":{
+      "fontSize":"10px"
+    },
     "x": {
       "show": false
     },
     "y": {
       "title": {
-        "formatter": ""
+        "formatter": "Exp"
       }
+    },
+    "marker":{
+      "show":false
     }
   },
   "stroke": {

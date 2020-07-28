@@ -9,6 +9,9 @@
     },
     "colors": ["#ffa64d"],
     "title": {
+      "style":{
+        "fontSize":"11pt"
+      },
     "text": "Total Responses Heatmap"
     },
     "xaxis": {
