@@ -14,6 +14,7 @@ const db = require('../db');
 
 //importing moment for date computation
 const moment = require("moment-timezone");
+const { max, min } = require('moment-timezone');
 
 //exp time series chart route code
 router.get('/:air/total_resp/:sec',(req,res)=>{
@@ -53,6 +54,7 @@ router.get('/:air/total_resp/:sec',(req,res)=>{
                 date = moment(d.date).add(1, 'd');
                 // date = moment(d.date).format('DD MMM YYYY');
                 // resdata.push([new Date(date).getTime(),d.general.all_responses[0]['Total Responses']]);
+              
                 if(!dev.includes(d.type)){
                    
                     dev.push(d.type);
@@ -71,8 +73,8 @@ router.get('/:air/total_resp/:sec',(req,res)=>{
                     
                     }
              })
-
-        heatmap.series = series;  
+            
+            heatmap.series = series;  
         res.status(200).render("chart_template",{option: JSON.stringify(heatmap)});                                    
         }
     })

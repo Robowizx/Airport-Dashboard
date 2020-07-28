@@ -1,7 +1,7 @@
 {   "heatmap" : {
     "series": [],
     "chart": {
-    "height": 350,
+    "height": 340,
     "type": "heatmap",
     
       "zoom":{
@@ -12,46 +12,16 @@
       },
       "selection":{
         "enabled": false
-    }
-     
-  
-    },
-    "plotOptions": {
-     "heatmap": {
-        "shadeIntensity": 0.5,
-        "radius": 0,
-        "useFillColorAsStroke": true,
-        "colorScale": {
-          "ranges": [{
-              "from": 0,
-              "to": 1667,
-              "name": "low",
-              "color": "#00A100"
-            },
-            {
-              "from": 1668,
-              "to": 3335,
-             "name": "medium",
-              "color": "#FFB200"
-            },
-            {
-              "from": 3336,
-              "to": 5002,
-              "name": "high",
-              "color": "#FF0000" 
-            }
-            
-          ]
-        }
-      }
-    },
+    }  
+    }, 
     "dataLabels": {
       "enabled": false
-    },
+      },
+      "colors": ["#E65100"], 
     
     "title": {
-    "text": "HeatMap Chart (Single color)"
-    },
+    "text": "Total Responses Heatmap" 
+     },
     "xaxis": {
       "title":{
         "text":"Dates",
@@ -59,7 +29,7 @@
           "fontSize":"12px"
       },
         "offsetY":10
-      },
+      }, 
         "type": "datetime"
       },
       "yaxis":{
