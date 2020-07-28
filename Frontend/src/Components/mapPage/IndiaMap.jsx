@@ -11,8 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-// import Button from '@material-ui/core/Button';
-// import ButtonGroup from '@material-ui/core/ButtonGroup';
+import GridList from '@material-ui/core/GridList';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -35,6 +34,16 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     flexGrow: 1,
+  },
+  gridList: {
+    width: 500,
+    height: 450,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
   },
 }));
 
@@ -115,6 +124,7 @@ export default class IndiaMap extends Component {
     this.state.stateList = this.state.stateList.sort();
     this.state.stateList = Array.from(new Set(this.state.stateList));
     this.setState({ jsonData: data.data.air_list });
+
     const respones1 = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -123,11 +133,17 @@ export default class IndiaMap extends Component {
           best_worst(order: 1) {
             airport_name
             state
+            atype
+            exp
+            num_of_devs
           }
         }` }),
     });
     const data1 = await respones1.json();
-    await data1.data.best_worst.forEach((e) => this.state.lestAir.push(e.airport_name));
+    // await data1.data.best_worst.forEach((e) => this.state.lestAir.push(e.airport_name));
+    await this.setState({ topAir: data1.data.best_worst });
+    console.log(this.state.best_worst);
+
     const respones2 = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -136,11 +152,15 @@ export default class IndiaMap extends Component {
           best_worst(order: -1) {
             airport_name
             state
+            atype
+            exp
+            num_of_devs
           }
         }` }),
     });
     const data2 = await respones2.json();
-    await data2.data.best_worst.forEach((e) => this.state.topAir.push(e.airport_name));
+    // await data2.data.best_worst.forEach((e) => this.state.topAir.push(e.airport_name));
+    await this.setState({ lestAir: data2.data.best_worst });
     console.log(this.state.lestAir);
     this.setState({ isLoading: false });
     this.drawMap();
@@ -191,7 +211,9 @@ export default class IndiaMap extends Component {
             .data(this.state.jsonData)
             .enter()
             .append("circle", ".pin")
-            .attr("r", 2.8)
+            .attr("r", 3)
+            .style("stroke", "#000")
+            .style("stroke-width", 0.3)
             .attr("fill", (d) => {
               if (this.state.device === "All") {
                 if (d.exp >= 0 && d.exp <= 50)
@@ -225,7 +247,7 @@ export default class IndiaMap extends Component {
               expTip.style("top", `${d3.event.pageY - 80}px`)
                 .style("left", `${d3.event.pageX - 50}px`);
               d3.select(document.getElementById('airname')).text(`${d.airport_name}`);
-              d3.select(document.getElementById('exp')).text(`Exp-Index : ${d.exp}`)
+              d3.select(document.getElementById('exp')).text(`Exp-Index : ${parseFloat(d.exp).toFixed(2)}`)
               expTip.style("visibility", "visible");
               t = n[i].style.fill;
               n[i].style.fill = '#818181';
@@ -299,11 +321,11 @@ export default class IndiaMap extends Component {
       <div className="mainMapPage">
         {this.state.isLoading ? <div><CircularProgress className="centered" /></div> :
           <div ref={this.myref} className="map">
-            <CardInfo width="600" height="460" cn="card">
+            <CardInfo width="680" height="550" cn="card">
               <div className={useStyles.root}>
                 <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
                   <Grid item xs>
-                    <FormControl size="small" variant="outlined" className={useStyles.formControl}>
+                    <FormControl size="small" className={useStyles.formControl}>
                       <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
                       <Select
                         labelId="demo-simple-select-outlined-label"
@@ -322,7 +344,7 @@ export default class IndiaMap extends Component {
                     </FormControl>
                   </Grid>
                   <Grid item xs>
-                    <FormControl size="small" variant="outlined" className={useStyles.formControl}>
+                    <FormControl size="small" className={useStyles.formControl}>
                       <InputLabel id="demo-simple-select-outlined-label">Device</InputLabel>
                       <Select
                         labelId="demo-simple-select-outlined-label"
@@ -342,12 +364,6 @@ export default class IndiaMap extends Component {
                   </Grid>
                   <Grid item xs></Grid>
                   <div className={useStyles.root}>
-                    {/* 
-                      <ButtonGroup size="small" color="primary" aria-label="outlined primary button group" value={this.state.airType}>
-                      <Button onClick={() => this.buttonClickState("All")}>All</Button>
-                      <Button onClick={() => { return this.setState({ airType: "dom" }) }}>Domestic</Button>
-                      <Button onClick={() => { return this.setState({ airType: "int" }) }}>International</Button>
-                    </ButtonGroup> */}
                     <ToggleButtonGroup value={this.state.b_alignment} exclusive size="small" onChange={this.handleAlignment}>
                       <ToggleButton value="all">All</ToggleButton>
                       <ToggleButton value="dom">Domestic</ToggleButton>
@@ -356,24 +372,51 @@ export default class IndiaMap extends Component {
                   </div>
                 </Grid>
               </div>
-              <hr />
-              <h3>Best Airport</h3>
-              <Grid container direction="row" justify="space-evenly" alignItems="baseline" spacing={0}>
-                {this.state.topAir.map((e, i) => <Grid item xs key={i}>
-                  <CardInfo width="100" heigth="110">
-                    <p className="textP">{e}</p>
-                  </CardInfo>
-                </Grid>)}
-              </Grid>
-              <hr />
-              <h3>Worst Airport</h3>
-              <Grid container direction="row" justify="space-evenly" alignItems="baseline" spacing={1}>
-                {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
-                  <CardInfo width="100" heigth="110">
-                    <p className="textP">{e}</p>
-                  </CardInfo>
-                </Grid>)}
-              </Grid>
+              <br />
+              {this.state.airState === "All" ?
+                <div>
+                  <GridList cellHeight={"auto"} className={useStyles.gridList} cols={2}>
+                    <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
+                      {this.state.topAir.map((e, i) => <Grid item xs key={i}>
+                        <CardInfo width="280" heigth="150" cn="subCard">
+                          <p className="textP">{e.airport_name}</p>
+                          <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
+                          <p className="textP">{e.state}</p>
+                          <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
+                        </CardInfo>
+                      </Grid>)}
+                    </Grid>
+                    <Grid container direction="column" justify="flex-end" alignItems="center" spacing={1}>
+                      {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
+                        <CardInfo width="280" heigth="150">
+                          <p className="textP">{e.airport_name}</p>
+                          <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
+                          <p className="textP">{e.state}</p>
+                          <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
+                        </CardInfo>
+                      </Grid>)}
+                    </Grid>
+                  </GridList>
+                </div>
+                :
+                <div>
+                  <Grid container direction="column" justify="flex-end" alignItems="flex-start" spacing={1}>
+                    {this.state.jsonData.map((e, i) => {
+                      if (e.state === this.state.airState) 
+                        return (
+                          <Grid item xs key={i}>
+                            <CardInfo width="280" heigth="150">
+                              <p className="textP">{e.airport_name}</p>
+                              <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
+                              <p className="textP">{e.state}</p>
+                              <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
+                            </CardInfo>
+                          </Grid>);
+                      }
+                  )}
+                  </Grid>
+                </div>
+              }
             </CardInfo>
           </div>
         }
