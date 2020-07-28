@@ -197,8 +197,6 @@ export default function CustomAppBar(props) {
           </div>
         </Toolbar>
       </AppBar>
-      {
-        ((props.menu.states.length===0 && props.menu.airport.length===0) && props.menu.device.length===0)?null:(
           <Drawer
             variant="permanent"
             className={clsx(classes.drawer, {
@@ -221,8 +219,6 @@ export default function CustomAppBar(props) {
           <Divider />
           <MenuList menu={props.menu} headers={props.headers} navOpen={handleSubNavOpen}/>
         </Drawer>
-        )
-      }
     </React.Fragment>    
   );
 }

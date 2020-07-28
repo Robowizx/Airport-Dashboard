@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Device() {
+export default function Device(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [open, setState] = React.useState();

@@ -6,6 +6,11 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import AirportPage from './Components/AirportPage';
 import Device from './Components/Device';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme)=>({
   root:{
@@ -40,44 +45,43 @@ export default function App() {
       state:null,
       airport:null
     },
-    page:'airport',
     airport:'Kolkata',
-    device:null,
-    date:null,
+    device: null,
+    date: null,
   });
 
   const changePage = (options)=>{
-      setState((prevState)=>{
-        if(options.menu){
-          prevState.menu.airport = options.menu.airport ? options.menu.airport : prevState.menu.airport;
-          prevState.menu.states = options.menu.states ? options.menu.states : prevState.menu.states;
-          prevState.menu.device = options.menu.device ? options.menu.device : prevState.menu.device;
-        }
-        if(options.headers){
-          prevState.headers.airport = options.headers.airport ? options.headers.airport : prevState.headers.airport;
-          prevState.headers.state = options.headers.state ? options.headers.state : prevState.headers.state;
-        }
-        prevState.page = options.page ? options.page : prevState.page;
-        prevState.airport = options.airport ? options.airport : prevState.airport;
-        prevState.device = options.device ? options.device : prevState.device;
-        prevState.date = options.date ? options.date : prevState.date;
-        
-        return prevState;
-      });
+      let prevState = {...state};
+      if(options.menu){
+            prevState.menu.airport = options.menu.airport ? options.menu.airport : prevState.menu.airport;
+            prevState.menu.states = options.menu.states ? options.menu.states : prevState.menu.states;
+            prevState.menu.device = options.menu.device ? options.menu.device : prevState.menu.device;
+      }
+      if(options.headers){
+        prevState.headers.airport = options.headers.airport ? options.headers.airport : prevState.headers.airport;
+        prevState.headers.state = options.headers.state ? options.headers.state : prevState.headers.state;
+      }
+      prevState.airport = options.airport ? options.airport : prevState.airport;
+      prevState.device = options.device ? options.device : prevState.device;
+      prevState.date = options.date ? options.date : prevState.date;
+      setState(prevState);
   }
 
-
+  console.log(state);
   return (
     <React.Fragment>
+      <Router>
       <CssBaseline />
       <div className={classes.root}>
         <CustomAppBar menu={state.menu} headers={state.headers} />
         <div className={classes.content}>
-          {
-            state.page ==='airport' ? <AirportPage  air={state.airport} change={changePage}/> : <Device  air={state.airport} type={state.device} change={changePage}/>
-          }
+          <Switch>
+            <Route path='/' exact render={()=> <AirportPage air={state.airport} change={changePage}/>}/>
+            <Route path='/device' exact component={Device}/>
+          </Switch>
         </div>
       </div> 
+      </Router>
     </React.Fragment>
   );
 }

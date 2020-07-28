@@ -28,14 +28,6 @@ const surveyType = new GraphQLObjectType({
     }
 });
 
-const surveyType = new GraphQLObjectType({
-    name:'survey',
-    fields:{
-        num: {type: GraphQLInt},
-        completed: {type: GraphQLInt}
-    }
-});
-
 const deviceType = new GraphQLObjectType({
     name:'device',
     fields:()=>({
@@ -154,7 +146,7 @@ const rootQueryType = new GraphQLObjectType({
                 let res;
                 await db.getDB()
                         .collection('Meta')
-                        .findOne({_id:'device'},{projection:{devices_names:1,_id:0}})
+                        .findOne({_id:'device'},{projection:{device_names:1,_id:0}})
                         .then((doc)=>{
                             res = doc.devices_names;
                         })

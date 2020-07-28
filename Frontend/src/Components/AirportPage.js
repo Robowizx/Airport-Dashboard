@@ -11,6 +11,7 @@ import { MuiPickersUtilsProvider,DatePicker } from '@material-ui/pickers';
 import moment from 'moment-timezone';
 import MomentUtils from '@date-io/moment';
 import {orderBy} from 'lodash';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -118,24 +119,24 @@ export default function AirportPage(props){
             })
         };
 
-        ChartAPI('Kolkata','guage',`/maxExp?date=${date.format('yyyy-MM-DD')}`,'guage1');
-        ChartAPI('Kolkata','guage',`/minExp?date=${date.format('yyyy-MM-DD')}`,'guage2');
-        ChartAPI('Kolkata','devExp',`?date=${date.format('yyyy-MM-DD')}`,'dev_exp');
-        ChartAPI('Kolkata','total_resp',`?sdate=${moment(date).subtract('7','days').format('yyyy-MM-DD')}&edate=${date.format('yyyy-MM-DD')}`,'heatmap');
+        ChartAPI(props.air,'guage',`/maxExp?date=${date.format('yyyy-MM-DD')}`,'guage1');
+        ChartAPI(props.air,'guage',`/minExp?date=${date.format('yyyy-MM-DD')}`,'guage2');
+        ChartAPI(props.air,'devExp',`?date=${date.format('yyyy-MM-DD')}`,'dev_exp');
+        ChartAPI(props.air,'total_resp',`?sdate=${moment(date).subtract('7','days').format('yyyy-MM-DD')}&edate=${date.format('yyyy-MM-DD')}`,'heatmap');
         getData();
     },[date]);
 
     React.useEffect(()=>{
         for(let i=0;i<Device.length;i++){
-            ChartAPI('Kolkata','spark_line',`/${Device[i].device_name}?sdate=${moment(date).subtract('7','days').format('yyyy-MM-DD')}&edate=${date.format('yyyy-MM-DD')}`,'frame0'+i);
-            ChartAPI('Kolkata','spark_donut',`/${Device[i].device_name}?date=${date.format('yyyy-MM-DD')}`,'frame1'+i);
+            ChartAPI(props.air,'spark_line',`/${Device[i].device_name}?sdate=${moment(date).subtract('7','days').format('yyyy-MM-DD')}&edate=${date.format('yyyy-MM-DD')}`,'frame0'+i);
+            ChartAPI(props.air,'spark_donut',`/${Device[i].device_name}?date=${date.format('yyyy-MM-DD')}`,'frame1'+i);
         }
     },[Device]);
     
     return (
        <React.Fragment>
            <div className={classes.sticky}> 
-                <Typography variant="h2" style={{textAlign:'center',paddingTop:'2%',paddingLeft:'5%'}}>Kolkata Airport</Typography>
+    <Typography variant="h2" style={{textAlign:'center',paddingTop:'2%',paddingLeft:'5%'}}>{props.air+" Airport"}</Typography>
                 <div style={{position:'fixed',right:'5%',top:'13%'}}>
                      <MuiPickersUtilsProvider  utils={MomentUtils}>
                          <DatePicker 
@@ -178,31 +179,39 @@ export default function AirportPage(props){
            <div style={{display:'flex',flexFlow:'row wrap',justifyContent:'center',alignContent:'flex-start'}}>
                {
                    Device.map((element,index)=>(
-                      <Card className={classes.device} zIndex='modal' key={element.device_name} elevation={3}>
-                            <CardActionArea>
-                                <CardContent>
-                                    <Typography variant="h3" style={{textAlign:'center'}}>{element.device_name}</Typography>
-                                    <div style={{display:'flex',flexFlow:'row wrap',alignItems:'flex-start',justifyContent:'center'}}>
-                                        <iframe id={"frame0"+index} style={{width:'9vw',height:'5vw',paddingTop:'1.5vw'}}  frameBorder='0' scrolling='no'></iframe>
-                                        <iframe style={{width:'8vw',height:'4.5vw',paddingLeft:'1vw'}} id={"frame1"+index} frameBorder='0' scrolling='no'></iframe>
-                                        <p style={{width:'9vw',height:'1vw',fontSize:'10pt',textAlign:'center',margin:0}}>Experience</p>
-                                        <p style={{width:'9vw',height:'1vw',fontSize:'10pt',textAlign:'center',margin:0,paddingLeft:'1vw'}}>Responses</p>
-                                        <div style={{display:'flex',flexFlow:'column wrap',justifyContent:'center',paddingRight:'2vw',paddingLeft:'0.5vw',paddingTop:'1vw'}}>
-                                            <p style={{fontSize:'18pt',margin:0}}>Exp Index</p>
-                                            <p style={{fontSize:'16pt',margin:0,textAlign:'center',color:(element.avg_exp_index < 34.0 ?"red":(element.avg_exp_index < 67.0?"#ff9933":"green"))}}>{element.avg_exp_index}</p>
-                                        </div>
-                                        <div style={{display:'flex',flexFlow:'column wrap',justifyContent:'center',paddingLeft:'2vw',paddingRight:'0.5vw',paddingTop:'1vw'}}>
-                                            <p style={{fontSize:'18pt',margin:0}}>Imp Index</p>
-                                            <p style={{fontSize:'16pt',margin:0,textAlign:'center',color:(element.avg_imp_index < 0.0?"red":"green")}}>{element.avg_imp_index}</p>
-                                        </div>
-                                        <div style={{display:'flex',flexFlow:'column wrap',justifyContent:'center',paddingBottom:'1vw',paddingTop:'1vw'}}>
-                                            <p style={{fontSize:'18pt',margin:0}}>Rank</p>
-                                            <p style={{fontSize:'16pt',margin:0,textAlign:'center'}}>#{element.rank}</p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </CardActionArea>
-                      </Card>    
+                        <Card className={classes.device} zIndex='modal' key={element.device_name} elevation={3}>
+                            <Link to='/device' style={{textDecoration:'none',color:'#000'}} onClick={()=>{
+                                let options={
+                                    device: element.device_name,
+                                    date: date
+                                };
+                                props.change(options);
+                            }}>
+                                <CardActionArea>
+                                    <CardContent>
+                                        <Typography variant="h3" style={{textAlign:'center'}}>{element.device_name}</Typography>
+                                            <div style={{display:'flex',flexFlow:'row wrap',alignItems:'flex-start',justifyContent:'center'}}>
+                                                <iframe id={"frame0"+index} style={{width:'9vw',height:'5vw',paddingTop:'1.5vw'}}  frameBorder='0' scrolling='no'></iframe>
+                                                <iframe style={{width:'8vw',height:'4.5vw',paddingLeft:'1vw'}} id={"frame1"+index} frameBorder='0' scrolling='no'></iframe>
+                                                <p style={{width:'9vw',height:'1vw',fontSize:'10pt',textAlign:'center',margin:0}}>Experience</p>
+                                                <p style={{width:'9vw',height:'1vw',fontSize:'10pt',textAlign:'center',margin:0,paddingLeft:'1vw'}}>Responses</p>
+                                                <div style={{display:'flex',flexFlow:'column wrap',justifyContent:'center',paddingRight:'2vw',paddingLeft:'0.5vw',paddingTop:'1vw'}}>
+                                                    <p style={{fontSize:'18pt',margin:0}}>Exp Index</p>
+                                                    <p style={{fontSize:'16pt',margin:0,textAlign:'center',color:(element.avg_exp_index < 34.0 ?"red":(element.avg_exp_index < 67.0?"#ff9933":"green"))}}>{element.avg_exp_index}</p>
+                                                </div>
+                                                 <div style={{display:'flex',flexFlow:'column wrap',justifyContent:'center',paddingLeft:'2vw',paddingRight:'0.5vw',paddingTop:'1vw'}}>
+                                                    <p style={{fontSize:'18pt',margin:0}}>Imp Index</p>
+                                                    <p style={{fontSize:'16pt',margin:0,textAlign:'center',color:(element.avg_imp_index < 0.0?"red":"green")}}>{element.avg_imp_index}</p>
+                                                </div>
+                                                <div style={{display:'flex',flexFlow:'column wrap',justifyContent:'center',paddingBottom:'1vw',paddingTop:'1vw'}}>
+                                                    <p style={{fontSize:'18pt',margin:0}}>Rank</p>
+                                                    <p style={{fontSize:'16pt',margin:0,textAlign:'center'}}>#{element.rank}</p>
+                                                </div>
+                                            </div>
+                                    </CardContent>
+                                </CardActionArea>
+                            </Link>
+                        </Card>    
                    ))
                }
            </div>   
