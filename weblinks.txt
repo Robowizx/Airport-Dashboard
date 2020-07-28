@@ -1,11 +1,12 @@
 
-All responses timeseries-
-https://localhost:4000/Kolkata/allRes_TS/?sdate=2020-09-07&edate=2020-09-29&type=SC
 Best Airport-
 https://localhost:4000/Kolkata/prog/maxExp?date=2020-09-08
 
 Worst Airport-
 https://localhost:4000/Kolkata/prog/minExp?date=2020-09-08
+ 
+ All responses timeseries-
+https://localhost:4000/Kolkata/allRes_TS/?sdate=2020-09-07&edate=2020-09-29&type=SC
 
 device exp-
 https://localhost:4000/Kolkata/devExp/?date=2020-09-08
@@ -35,7 +36,7 @@ Maxexp guage-
 https://localhost:4000/Kolkata/guage/maxExp?date=2020-09-08
 
 Minexp guage-
-https://localhost:4000/Kolkata/guage/maxExp?date=2020-09-08
+https://localhost:4000/Kolkata/guage/minExp?date=2020-09-08
 
 Top and least-
 https://localhost:4000/Kolkata/top_and_least/?date=2020-08-08&type=EI

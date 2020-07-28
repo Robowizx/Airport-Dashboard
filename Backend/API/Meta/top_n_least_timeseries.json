@@ -105,6 +105,9 @@
           "type": "datetime",
           "title": {
             "text": "Dates",
+            "style":{
+              "fontSize":"12px"
+            },
             "offsetY": 15
           },
           "tooltip": {
@@ -113,7 +116,10 @@
         },
         "yaxis": {
           "title": {
-            "text": "Values"
+            "text": "Values",
+            "style":{
+              "fontSize":"12px"
+            }
           },
           "tickAmount": 3
         }

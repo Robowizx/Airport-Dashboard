@@ -35,13 +35,19 @@
       
       "title": {
         "text": "Dates",
+        "style":{
+          "fontSize":"12px"
+      },
         "offsetY":12
       },
       "type": "datetime"
     },
     "yaxis": {
       "title": {
-        "text": "Experience Index"
+        "text": "Experience Index",
+        "style":{
+          "fontSize":"12px"
+      }
       }
      
     },

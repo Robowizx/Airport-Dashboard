@@ -83,7 +83,7 @@
         "title":{
             "text":"Devices",
             "style":{
-                "fontSize":"14px"
+                "fontSize":"12px"
             }
         }
     },
@@ -91,12 +91,15 @@
         "title":{
             "text":"Experience Index till date",
             "style":{
-                "fontSize":"14px"
+                "fontSize":"12px"
             }
         }
     },
     "title":{
-        "text":"Facilities Exp Index Chart"
+        "text":"Facilities Exp Index Chart",
+        "style":{
+            "fontSize":"16px"
+        }
     },
     "tooltip":{
         "marker":{

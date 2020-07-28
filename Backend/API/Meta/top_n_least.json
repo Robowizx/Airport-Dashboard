@@ -41,7 +41,13 @@
     "colors": ["#fff"]
   },
   "xaxis": {
-    "categories": []
+    "categories": [],
+    "title": {
+      "text": "Values",
+      "style":{
+        "fontSize":"12px"
+      }
+    }
   },
   "legend": {
     "onItemHover": {

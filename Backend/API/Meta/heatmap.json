@@ -55,9 +55,20 @@
     "xaxis": {
       "title":{
         "text":"Dates",
+        "style":{
+          "fontSize":"12px"
+      },
         "offsetY":10
       },
         "type": "datetime"
+      },
+      "yaxis":{
+        "title":{
+          "text":"Devices",
+          "style":{
+            "fontSize":"12px"
+        }
+        }
       }
     }
 }

@@ -23,9 +23,13 @@
         "curve": "straight"
       },
       "title": {
-        "text": "Experience Index Timeseries",
-        "align": "left"
+        "text": "Experience And Improvement Index Till Date Timeseries",
+        "align": "left" ,
+          "style":{
+              "fontSize":"16px"
+          }
       },
+  
      
       "markers": {
         "size": [4, 4],
@@ -34,6 +38,9 @@
       "xaxis": {
         "title": {
           "text": "Dates",
+          "style":{
+            "fontSize":"12px"
+        },
           "offsetY":12
           
         },
@@ -44,7 +51,10 @@
       },
       "yaxis": {
         "title": {
-          "text": "Experience Index"
+          "text": "Exp and Imp Index Index",
+          "style":{
+            "fontSize":"12px"
+        }
         }
        
       },
@@ -65,6 +75,7 @@
         "offsetX": -5
       }
     }
-   
   }
+   
+  
   
