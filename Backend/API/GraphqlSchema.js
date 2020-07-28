@@ -13,16 +13,26 @@ require('dotenv').config();
 //importing db module
 const db = require('./db');
 
+const totalType = new GraphQLObjectType({
+    name:'total',
+    fields:{
+        num: {type: GraphQLInt},
+        active: {type: GraphQLInt}
+    }
+});
+
 const deviceType = new GraphQLObjectType({
     name:'device',
-    fields:{
+    fields:()=>({
         device_name:{ type: GraphQLString },
         avg_exp_index: { type: GraphQLFloat },
         exp: { type: GraphQLFloat },
         rank: { type: GraphQLInt },
         avg_imp_index: { type: GraphQLFloat },
-
-    }
+        total_devices: {type: totalType },
+        active_surveys: {type: totalType},
+        total_resp_till_date: {type: GraphQLInt}
+    })
 });
 
 const airportType = new GraphQLObjectType({
@@ -75,7 +85,10 @@ const air_resolve = async (parent,args)=>{
                       avg_exp_index: document[i].general.avg_exp_index,
                       exp: document[i].general.all_responses[0]['Exp Index'],
                       rank: document[i].general.rank,
-                      avg_imp_index: document[i].general.avg_imp_index
+                      avg_imp_index: document[i].general.avg_imp_index,
+                      total_devices: document[i].total_devices,
+                      active_surveys: document[i].active_surveys,
+                      total_resp_till_date: document[i].total_resp_till_date
                   });
               }
               ex /= document.length;
@@ -149,6 +162,32 @@ const rootQueryType = new GraphQLObjectType({
                         .toArray()
                         .then((docs)=>{
                             res = docs;
+                        })
+                        .catch((err)=> console.log(err));
+                return res;        
+            }
+        },
+        device_name:{
+            type: deviceType,
+            args:{
+                air:{type: new GraphQLNonNull(GraphQLString)},
+                name:{type: new GraphQLNonNull(GraphQLString)},
+                date:{type: new GraphQLNonNull(GraphQLString)}
+            },
+            async resolve(parent,args){
+                let res;
+                await db.getDB()
+                        .collection(args.air)
+                        .findOne({date:args.date,type:args.name},{projection:{_id:0,type:1,general:1}})
+                        .then((doc)=>{
+                            res.device_name=doc.type;
+                            res.avg_exp_index=doc.general.avg_exp_index;
+                            res.exp=doc.general.all_responses[0]['Exp Index'];
+                            res.rank= doc.general.rank;
+                            res.avg_imp_index= doc.general.avg_imp_index;
+                            res.total_devices= doc.total_devices;
+                            res.active_surveys= doc.active_surveys;
+                            res.total_resp_till_date= doc.total_resp_till_date;
                         })
                         .catch((err)=> console.log(err));
                 return res;        
