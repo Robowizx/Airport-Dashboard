@@ -46,11 +46,11 @@ export default function App() {
     <React.Fragment>
       <CssBaseline />
       <div className={classes.root}>
-      <CustomAppBar menu={menu} headers={headers} />
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Device />
-        </main>
+        <CustomAppBar menu={menu} headers={headers} />
+        <div className={classes.content}>
+          {/* <div className={classes.toolbar} /> */}
+          <Device/>
+        </div>
       </div> 
     </React.Fragment>
   );

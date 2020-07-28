@@ -106,9 +106,10 @@ export default function Device() {
       request(`https://localhost:4000/graphql`, query, variables)
       .then(data => {
         setData(data.airport_name.devices);
+        console.log(data.airport_name.devices.find((ele)=>{if(type==ele.device_name){return ele.device_name}}))
     });
     }
-  }, [state])
+  }, [])
 
   const handleChartChange = (event, newValue) => {
     setValue(newValue);
@@ -137,6 +138,7 @@ export default function Device() {
 
   return (
     <React.Fragment >  
+      <div position="fixed">
     <h1 style={{textAlign:'center',margin:'0px 0px 1vw 0px'}}>Kolkata Airport</h1>
     <div className={classes.root}>
       <AppBar color="info" position="static">
@@ -189,11 +191,12 @@ export default function Device() {
           </Grid>
         </Grid>
       </AppBar>
+      </div>
       <TabPanel value={value} index={0}>
         <Daily sec={sec} type={type} change={change}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TimeSeries sec={sec} type={type} change={change}/>
+        <TimeSeries sec={sec} type={type} change={change} />
       </TabPanel>
     </div>
     </React.Fragment>

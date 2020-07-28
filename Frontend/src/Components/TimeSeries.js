@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function ChartAPI(chart,query,element){
-    fetch(`https://localhost:4000/Kolkata/${chart}/${query}`,{method:'GET'})
+function ChartAPI(air,chart,query,element){
+    fetch(`https://localhost:4000/${air}/${chart}/${query}`,{method:'GET'})
          .then((res)=> res.text())
          .then((out)=>{
             const iframe = document.getElementById(element).contentDocument;
@@ -73,16 +73,16 @@ export default function Daily(props) {
     let edate = moment(state.endDate).format('yyyy-MM-DD')
  
     if( prevType !== type || prevDate !== state){
-      ChartAPI('exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
-      ChartAPI('allRes_TS',`?sdate=${sdate}&edate=${edate}&type=${type}`,'allRes')
-      ChartAPI('exp_till_date',`?sdate=${sdate}&edate=${edate}&type=${type}`,'exp_till')
-      ChartAPI('top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
-      ChartAPI('restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
+      ChartAPI('Kolkata','exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
+      ChartAPI('Kolkata','allRes_TS',`?sdate=${sdate}&edate=${edate}&type=${type}`,'allRes')
+      ChartAPI('Kolkata','exp_till_date',`?sdate=${sdate}&edate=${edate}&type=${type}`,'exp_till')
+      ChartAPI('Kolkata','top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
+      ChartAPI('Kolkata','restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
     }
     if( prevSec !== sec ){
-      ChartAPI('restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
-      ChartAPI('top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
-      ChartAPI('exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
+      ChartAPI('Kolkata','restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
+      ChartAPI('Kolkata','top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
+      ChartAPI('Kolkata','exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
     }
   }, [state, type, sec])
   

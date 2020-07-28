@@ -20,6 +20,13 @@ const totalType = new GraphQLObjectType({
         active: {type: GraphQLInt}
     }
 });
+const surveyType = new GraphQLObjectType({
+    name:'survey',
+    fields:{
+        num: {type: GraphQLInt},
+        completed: {type: GraphQLInt}
+    }
+});
 
 const deviceType = new GraphQLObjectType({
     name:'device',
@@ -30,7 +37,7 @@ const deviceType = new GraphQLObjectType({
         rank: { type: GraphQLInt },
         avg_imp_index: { type: GraphQLFloat },
         total_devices: {type: totalType },
-        active_surveys: {type: totalType},
+        active_surveys: {type: surveyType},
         total_resp_till_date: {type: GraphQLInt}
     })
 });
@@ -86,9 +93,9 @@ const air_resolve = async (parent,args)=>{
                       exp: document[i].general.all_responses[0]['Exp Index'],
                       rank: document[i].general.rank,
                       avg_imp_index: document[i].general.avg_imp_index,
-                      total_devices: document[i].total_devices,
-                      active_surveys: document[i].active_surveys,
-                      total_resp_till_date: document[i].total_resp_till_date
+                      total_devices: document[i].general.total_devices,
+                      active_surveys: document[i].general.active_surveys,
+                      total_resp_till_date: document[i].general.total_resp_till_date
                   });
               }
               ex /= document.length;
@@ -175,7 +182,7 @@ const rootQueryType = new GraphQLObjectType({
                 date:{type: new GraphQLNonNull(GraphQLString)}
             },
             async resolve(parent,args){
-                let res;
+                let res = {};
                 await db.getDB()
                         .collection(args.air)
                         .findOne({date:args.date,type:args.name},{projection:{_id:0,type:1,general:1}})
@@ -185,9 +192,9 @@ const rootQueryType = new GraphQLObjectType({
                             res.exp=doc.general.all_responses[0]['Exp Index'];
                             res.rank= doc.general.rank;
                             res.avg_imp_index= doc.general.avg_imp_index;
-                            res.total_devices= doc.total_devices;
-                            res.active_surveys= doc.active_surveys;
-                            res.total_resp_till_date= doc.total_resp_till_date;
+                            res.total_devices= doc.general.total_devices;
+                            res.active_surveys= doc.general.active_surveys;
+                            res.total_resp_till_date= doc.general.total_resp_till_date;
                         })
                         .catch((err)=> console.log(err));
                 return res;        
