@@ -30,26 +30,52 @@ const useStyles = makeStyles((theme)=>({
 export default function App() {
 
   const classes = useStyles();
-  const menu = {
-    airport:['Kolkata'],
-    states:[],
-    device:['EI','CM']
-  };
-  const headers = {
-    state:'West Bengal',
-    airport:'Kolkata'
-  }
+  const [state,setState] = React.useState({
+    menu:{
+      airport:[],
+      states:[],
+      device:[]
+    },
+    headers:{
+      state:null,
+      airport:null
+    },
+    page:'airport',
+    airport:'Kolkata',
+    device:null,
+    date:null,
+  });
 
+  const changePage = (options)=>{
+      setState((prevState)=>{
+        if(options.menu){
+          prevState.menu.airport = options.menu.airport ? options.menu.airport : prevState.menu.airport;
+          prevState.menu.states = options.menu.states ? options.menu.states : prevState.menu.states;
+          prevState.menu.device = options.menu.device ? options.menu.device : prevState.menu.device;
+        }
+        if(options.headers){
+          prevState.headers.airport = options.headers.airport ? options.headers.airport : prevState.headers.airport;
+          prevState.headers.state = options.headers.state ? options.headers.state : prevState.headers.state;
+        }
+        prevState.page = options.page ? options.page : prevState.page;
+        prevState.airport = options.airport ? options.airport : prevState.airport;
+        prevState.device = options.device ? options.device : prevState.device;
+        prevState.date = options.date ? options.date : prevState.date;
+        
+        return prevState;
+      });
+  }
 
 
   return (
     <React.Fragment>
       <CssBaseline />
       <div className={classes.root}>
-        <CustomAppBar menu={menu} headers={headers} />
+        <CustomAppBar menu={state.menu} headers={state.headers} />
         <div className={classes.content}>
-          {/* <div className={classes.toolbar} /> */}
-          <Device/>
+          {
+            state.page ==='airport' ? <AirportPage  air={state.airport} change={changePage}/> : <Device  air={state.airport} type={state.device} change={changePage}/>
+          }
         </div>
       </div> 
     </React.Fragment>

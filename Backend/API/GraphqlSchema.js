@@ -154,9 +154,9 @@ const rootQueryType = new GraphQLObjectType({
                 let res;
                 await db.getDB()
                         .collection('Meta')
-                        .findOne({_id:'device'},{projection:{devices:1,_id:0}})
+                        .findOne({_id:'device'},{projection:{devices_names:1,_id:0}})
                         .then((doc)=>{
-                            res = doc.devices;
+                            res = doc.devices_names;
                         })
                         .catch((err)=>console.log(err));
                 return res;        
