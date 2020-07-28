@@ -18,7 +18,9 @@
     "date-fns": "^2.13.0",
     "graphql-request": "^2.0.0",
     "moment": "^2.27.0",
+    "moment-range": "^4.0.2",
     "react": "^16.13.1",
+    "react-daterange-picker": "^2.0.1",
     "react-dom": "^16.13.1",
     "react-google-flight-datepicker": "^0.1.9",
     "react-scripts": "3.4.1"

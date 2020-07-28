@@ -2,45 +2,33 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { Button } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import {request} from 'graphql-request';
 import {
   DatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import moment from 'moment';
+import { Typography } from '@material-ui/core';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display:'flex',
-    flexWrap: 'wrap',
+    minWidth: 275,
+    minHeight: 450
   },
-  root1:{
-      display:'flex',
-      flexWrap: 'wrap',
-      width:'50%',
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '40vw',
-        height:'24vw',
-      },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
   },
-  root2: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent:'center',
-    width:'50%',
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '20vw',
-      height:'24vw',
-    },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
   },
   paper: {
     padding: theme.spacing(2),
@@ -59,129 +47,118 @@ function ChartAPI(chart,query,element){
          });
 }  
 
-
-export default function Daily() {
-  const classes = useStyles();
-  const [open, setState] = React.useState();
-  const [sec, setSec] = React.useState("by_device");
-  const [type, setType] = React.useState("EI");
-  const [change, setChange] = React.useState(true);
+export default function Daily(props) {
+  const { sec, type, change} = props;
   const [selectedDate, changeDate] = React.useState(new Date());
+  const prevType = usePrevious(type);
+  const prevSec = usePrevious(sec);
+  const prevDate = usePrevious(selectedDate);
+  const [state, setState] = React.useState([])
+  
+  function usePrevious(value) {
+    const ref = React.useRef();
+    React.useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+  
+  const query = `
+  query($name:String!,$date:String!){
+    airport_name (name:$name,date:$date){
+      devices {
+        device_name
+        avg_exp_index
+        exp
+        rank
+        avg_imp_index
+      }
+    }
+  }
+  `
 
-  const handleClose = () => {
-    setState(false);
-    setChange(false);
+  React.useEffect(() => {
+    var pick = moment(selectedDate).format('yyyy-MM-DD')
+    const variables = {
+      "name": "Kolkata",
+      "date": pick
     }
-  const handleOpen = () => {
-    setState(true);
-    setChange(false);
-  }
-  const handleSecChange = (event)=>{
-    if(event.target.value != sec){
-      setSec(event.target.value)
-      ChartAPI('exp',`${event.target.value}?date=${moment(selectedDate).format('yyyy-MM-DD')}&type=EI`,'exp1');
-      ChartAPI('res',`${event.target.value}?date=${moment(selectedDate).format('yyyy-MM-DD')}&type=EI`,'res');
+    if( prevType !== type || prevDate !== selectedDate){
+      ChartAPI('exp',`${sec}?date=${pick}&type=${type}`,'exp1')
+      ChartAPI('res_donut',`?date=${pick}&type=${type}`,'donut')
+      ChartAPI('top_and_least',`?date=${pick}&type=${type}`,'top')
+      ChartAPI('res',`${sec}?date=${pick}&type=${type}`,'res')
+      request(`https://localhost:4000/graphql`, query, variables)
+      .then(data => {
+        setState(data.airport_name.devices.find((ele)=>{
+          if(ele.device_name == type){
+            return ele
+          }
+        }));
+    });
     }
-  }
-  const handleDevChange = (event) =>{
-    if(event.target.value != type){
-      setType(event.target.value)
-      ChartAPI('exp',`${sec}?date=${moment(selectedDate).format('yyyy-MM-DD')}&type=${event.target.value}`,'exp1');
-      ChartAPI('res',`${sec}?date=${moment(selectedDate).format('yyyy-MM-DD')}&type=${event.target.value}`,'res');
-      ChartAPI('res_donut',`?date=${moment(selectedDate).format('yyyy-MM-DD')}&type=${event.target.value}`,'donut')
-      ChartAPI('top_and_least',`?date=${moment(selectedDate).format('yyyy-MM-DD')}&type=${event.target.value}`,'top')
+    if( prevSec !== sec ){
+      ChartAPI('exp',`${sec}?date=${pick}&type=${type}`,'exp1')
+      ChartAPI('res',`${sec}?date=${pick}&type=${type}`,'res')
     }
-  }
+  }, [selectedDate, type, sec])
+  const classes = useStyles();
+
+
   const handleDateChange = (date)=>{
     if(date != selectedDate){
       changeDate(date)
-      var pick = moment(date).format('yyyy-MM-DD')
-      ChartAPI('exp',`${sec}?date=${pick}&type=EI`,'exp1')
-      ChartAPI('res_donut',`?date=${pick}&type=EI`,'donut')
-      ChartAPI('top_and_least',`?date=${pick}&type=EI`,'top')
-      ChartAPI('res',`${sec}?date=${pick}&type=EI`,'res')
     }
-    else setChange(false);
   }
-  if(change){
-    var pick = moment(selectedDate).format('yyyy-MM-DD')
-    ChartAPI('exp',`${sec}?date=${pick}&type=EI`,'exp1')
-    ChartAPI('res_donut',`?date=${pick}&type=EI`,'donut')
-    ChartAPI('top_and_least',`?date=${pick}&type=EI`,'top')
-    ChartAPI('res',`${sec}?date=${pick}&type=EI`,'res')
-  }
+
   return (
     <React.Fragment>
-      <FormControl >
-        <Grid container direction="row" spacing={1}>
-          <Grid item>
-          <InputLabel id="demo-controlled-open-select-label">Section</InputLabel>
-            <Select
-            labelId="demo-controlled-open-select-label"
-            id="demo-controlled-open-select"
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={sec}
-            onChange={handleSecChange }
-            >
-
-              <MenuItem value={"by_device"}>By device</MenuItem>
-              <MenuItem value={"by_survey"}>By survey</MenuItem>
-              <MenuItem value={"by_group"}>By group</MenuItem>
-          </Select>
-          </Grid>
-          <Grid item>
-          <InputLabel id="demo"></InputLabel>
-            <Select
-            labelId="demo"
-            id="demo-controlled-open-select"
-            open={open}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={type}
-            onChange={handleDevChange }
-            >
-
-              <MenuItem value={"EI"}>EI</MenuItem>
-              <MenuItem value={"SC"}>SC</MenuItem>
-              <MenuItem value={"RT"}>RT</MenuItem>
-              <MenuItem value={"RF"}>RF</MenuItem>
-              <MenuItem value={"DF"}>DF</MenuItem>
-              <MenuItem value={"TP"}>TP</MenuItem>
-              <MenuItem value={"TR"}>TR</MenuItem>
-              <MenuItem value={"EV"}>EV</MenuItem>
-              <MenuItem value={"FG"}>FG</MenuItem>
-              <MenuItem value={"CM"}>CM</MenuItem>
-          </Select>
-          </Grid>
-          </Grid>
-    </FormControl>
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <DatePicker value={selectedDate} onChange={handleDateChange} variant='inline' style={{float:"right"}}/>
-    </MuiPickersUtilsProvider>
-    <div className={classes.root}>
-      <div className={classes.root2}>
-        <Paper></Paper>
-        <Paper>
-        
-        </Paper>
-        <Paper>
-        <iframe height='100%' width='100%' frameBorder='0' id='top' scrolling='off'></iframe>
-        </Paper>
-        <Paper>
-        <iframe height='100%' width='100%' frameBorder='0' id='donut' scrolling='off' style={{marginTop:"50px"}}></iframe>
-        </Paper>
-      </div>
-      <div className={classes.root1}>
-          <Paper>
-          <iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe>
-          </Paper>
-          <Paper>
-          <iframe height='100%' width='100%' frameBorder='0' id='res'  scrolling='off'></iframe>
-          </Paper>
-      </div>
-    </div>
+    <Grid container direction="column">
+      <Grid item xs={12}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <DatePicker value={selectedDate} onChange={handleDateChange} variant='inline' style={{float:"right"}}/>
+        </MuiPickersUtilsProvider>
+      </Grid>
+    </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={3}>
+  <Paper style={{height:"450px"}}>
+  <Card className={classes.root}>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          Type of Facility
+        </Typography>
+        <Typography variant="h2" component="h2">
+          {state.device_name}
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          adjective
+        </Typography>
+        <Typography variant="body2" component="p">
+          well meaning and kindly.
+          <br />
+          {'"a benevolent smile"'}
+        </Typography>
+      </CardContent>
+    </Card>
+  </Paper>
+      </Grid>
+      <Grid item xs={3}>
+        <Paper style={{height:"450px"}}></Paper>
+      </Grid>
+      <Grid item xs={3}>
+        <Paper style={{height:"450px"}}><iframe height='100%' width='100%' frameBorder='0' id='donut' scrolling='off' style={{marginTop:"50px"}}></iframe></Paper>
+      </Grid>
+      <Grid item xs={3}>
+        <Paper style={{height:"450px"}}><iframe height='100%' width='100%' frameBorder='0' id='top' scrolling='off'></iframe></Paper>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper style={{height:"450px"}}><iframe height='100%' width='100%' frameBorder='0' id='exp1' scrolling='off'></iframe></Paper>
+      </Grid>
+      <Grid item xs={6}>
+        <Paper style={{height:"450px"}}><iframe height='100%' width='100%' frameBorder='0' id='res'  scrolling='off'></iframe></Paper>
+      </Grid>
+    </Grid>
     </React.Fragment>
   );
 }
