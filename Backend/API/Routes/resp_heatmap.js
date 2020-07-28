@@ -59,7 +59,7 @@ router.get('/:air/total_resp',(req,res)=>{
                     series.push(
                               {
                                   name:d.type,
-                                  data:[[new Date(date).getTime(),d.general.all_responses[0]['Total Responses']]]
+                                  data:[[new Date(d.date).getTime(),d.general.all_responses[0]['Total Responses']]]
                               });
                   
                    }
@@ -67,7 +67,7 @@ router.get('/:air/total_resp',(req,res)=>{
                 else{
                                 
                     let x = series.findIndex(x => x.name === d.type);
-                    series[x].data.push([new Date(date).getTime(),d.general.all_responses[0]['Total Responses']]);
+                    series[x].data.push([new Date(d.date).getTime(),d.general.all_responses[0]['Total Responses']]);
                     
                     }
              })

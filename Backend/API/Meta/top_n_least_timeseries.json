@@ -11,6 +11,7 @@
           }
         ],
         "chart": {
+          "height":250,
           "type": "line",
           "id": "chart1",
           "toolbar": {
@@ -38,8 +39,7 @@
           "shape": "circle"
         },
         "xaxis": {
-          "type": "datetime",
-          "categories": []
+          "type": "datetime"
         },
         "yaxis": {
           "title": {
@@ -68,6 +68,7 @@
     "brush": {
         "series": [],
         "chart": {
+          "height":"110",
           "id": "chart2",
           "offsetY":-40,
           "type": "area",

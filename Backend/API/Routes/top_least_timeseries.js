@@ -91,6 +91,9 @@ router.get("/:air/top_least_timeseries/:sec", (req, res) => {
 
           line.series = series;
           brush.series = seriesBrush;
+          brush.chart.selection.xaxis.min = new Date(req.query.sdate);
+          brush.chart.selection.xaxis.max = new Date(req.query.edate);
+
           // console.log(topData, leastData);
           // console.log(topArea, leastArea);
           res.status(200).render("chart_top_least_timeseries", {
