@@ -71,7 +71,6 @@ export default function Device() {
   const [open, setState] = React.useState();
   const [sec, setSec] = React.useState("by_device");
   const [type, setType] = React.useState("EI");
-  const [change, setChange] = React.useState(true);
   const [state, setData] = React.useState([])
   const prevState = usePrevious(state)
   const query = `
@@ -117,22 +116,18 @@ export default function Device() {
 
   const handleClose = () => {
     setState(false);
-    setChange(false);
     }
   const handleOpen = () => {
     setState(true);
-    setChange(false);
   }
   const handleSecChange = (event)=>{
     if(event.target.value != sec){
       setSec(event.target.value);
-      setChange(true);
     }
   }
   const handleDevChange = (event) =>{
     if(event.target.value != type){
       setType(event.target.value);
-      setChange(true);
     }
   }
 
@@ -193,10 +188,10 @@ export default function Device() {
       </AppBar>
       </div>
       <TabPanel value={value} index={0}>
-        <Daily sec={sec} type={type} change={change}/>
+        <Daily sec={sec} type={type} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TimeSeries sec={sec} type={type} change={change} />
+        <TimeSeries sec={sec} type={type}  />
       </TabPanel>
     </div>
     </React.Fragment>

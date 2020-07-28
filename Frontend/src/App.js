@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import AirportPage from './Components/AirportPage';
 import Device from './Components/Device';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({
   root:{
@@ -44,14 +45,19 @@ export default function App() {
 
   return (
     <React.Fragment>
+      <Router>
       <CssBaseline />
       <div className={classes.root}>
         <CustomAppBar menu={menu} headers={headers} />
         <div className={classes.content}>
           {/* <div className={classes.toolbar} /> */}
-          <Device/>
+          <Switch>
+            <Route path="/" exact component={AirportPage} />
+            <Route path="/device" exact component={Device} />
+          </Switch>
         </div>
       </div> 
+      </Router>
     </React.Fragment>
   );
 }

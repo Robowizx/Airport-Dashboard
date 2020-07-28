@@ -43,7 +43,7 @@ function ChartAPI(air,chart,query,element){
 }  
 
 export default function Daily(props) {
-  const { sec, type, data} = props;
+  const { sec, type} = props;
   const [selectedDate, changeDate] = React.useState(new Date());
   const prevType = usePrevious(type);
   const prevSec = usePrevious(sec);

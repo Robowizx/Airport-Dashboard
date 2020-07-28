@@ -11,6 +11,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider,DatePicker } from '@material-ui/pickers';
 import moment from 'moment-timezone';
 import MomentUtils from '@date-io/moment';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -179,6 +180,7 @@ export default function AirportPage(props){
                {
                    Device.map((element,index)=>(
                       <Card className={classes.device} zIndex='modal' key={element.device_name} elevation={3}>
+                          <Link to='/device'>
                             <CardActionArea>
                                 <CardContent>
                                     <Typography variant="h3" style={{textAlign:'center'}}>{element.device_name}</Typography>
@@ -202,6 +204,7 @@ export default function AirportPage(props){
                                     </div>
                                 </CardContent>
                             </CardActionArea>
+                            </Link>
                       </Card>    
                    ))
                }
