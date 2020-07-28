@@ -139,7 +139,7 @@ export default function Device() {
     <React.Fragment >  
     <h1 style={{textAlign:'center',margin:'0px 0px 1vw 0px'}}>Kolkata Airport</h1>
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar color="info" position="static">
         <Grid container spacing={2}>
           <Grid item xs={4} style={{paddingLeft:"25px", paddingRight:"25px",paddingTop:"25px"}}>
               <FormControl >
