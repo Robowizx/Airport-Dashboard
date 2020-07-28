@@ -2,18 +2,12 @@
   "allRes_TS": {
     "series": [],
     "chart": {
-      "height": 350,
       "type": "line",
-      "dropShadow": {
-        "enabled": true,
-        "color": "#000",
-        "top": 18,
-        "left": 7,
-        "blur": 10,
-        "opacity": 0.2
-      },
       "toolbar": {
         "show": true
+      },
+      "animations":{
+        "enabled":false
       }
     },
     "colors": ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],

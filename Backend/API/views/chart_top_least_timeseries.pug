@@ -2,11 +2,11 @@
 doctype html
 html
     head
-        script(src='/Javascript/apexcharts.min.js')
-        link(rel='stylesheet',type='text/css',href='/CSS/apexcharts.css')
+        script(src='https://localhost:4000/Javascript/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
     body
-        div(id='chart',style="max-width:650px")
-        div(id='chart2',style="max-width:650px")
+        div(id='chart',style="max-width:device-width")
+        div(id='chart2',style="max-width:device-width")
     script.
         var options = !{option1};
         options.tooltip.y.formatter = (val,{seriesIndex,dataPointIndex})=>{

@@ -1,18 +1,21 @@
 {   "heatmap" : {
     "series": [],
     "chart": {
-    "height": 350,
+    "height": 340,
     "type": "heatmap"
     },
     "dataLabels": {
     "enabled": false
     },
-    "colors": ["#008FFB"],
+    "colors": ["#ffa64d"],
     "title": {
-    "text": "HeatMap Chart (Single color)"
+      "style":{
+        "fontSize":"11pt"
+      },
+    "text": "Total Responses Heatmap"
     },
     "xaxis": {
         "type": "datetime"
       }
     }
-}
+  }

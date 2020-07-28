@@ -11,9 +11,6 @@ const {line_chart} = require('../Meta/line_exp_index_time_series.json');
 //importing DB module
 const db = require('../db');
 
-//importing moment for date computation
-const moment = require("moment-timezone");
-
 //exp time series chart route code
 router.get('/:air/exp_series/:sec',(req,res)=>{
     serverLog.info(`REQUESTED Top_Least time series chart with Airport=${req.params.air}, `+
@@ -53,8 +50,6 @@ router.get('/:air/exp_series/:sec',(req,res)=>{
             let series = [];
              var seriesBrush = [];
             documents.forEach(d=>{
-                date = moment(d.date).add(1, 'd');
-                // date = moment(d.date).format('DD MMM YYYY');
                
                 let resp = d[`${req.params.sec}`].responses;
                 
@@ -66,7 +61,7 @@ router.get('/:air/exp_series/:sec',(req,res)=>{
                     series.push(
                               {
                                   name:resp[i].area,
-                                  data:[[new Date(date).getTime(),resp[i]['Exp Index']]]
+                                  data:[[new Date(d.date).getTime(),resp[i]['Exp Index']]]
                               });
                   
                    }
@@ -74,7 +69,7 @@ router.get('/:air/exp_series/:sec',(req,res)=>{
                 else{
                                 
                     let x = series.findIndex(x => x.name === resp[i].area);
-                    series[x].data.push([new Date(date).getTime(),resp[i]['Exp Index']]);
+                    series[x].data.push([new Date(d.date).getTime(),resp[i]['Exp Index']]);
                     
                                 
                     }

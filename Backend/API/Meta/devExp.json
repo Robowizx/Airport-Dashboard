@@ -14,7 +14,7 @@
     "colors":["#33cc33","#e6e600","#e60000"],
     "chart":{
         "type":"bar",
-        "height":350
+        "height":"600"
     },
     "legend":{
         "show":true,
@@ -80,9 +80,9 @@
             "enabled": true
         },
         "title":{
-            "text":"Devices",
+            "text":"Facilities",
             "style":{
-                "fontSize":"14px"
+                "fontSize":"11pt"
             }
         }
     },
@@ -93,6 +93,9 @@
                 "fontSize":"14px"
             }
         }
+    },
+    "title":{
+        "text":"Facilities Exp Index Chart"
     },
     "tooltip":{
         "marker":{

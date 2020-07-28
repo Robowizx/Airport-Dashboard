@@ -35,16 +35,15 @@ router.get('/:air/guage/:type',(req,res)=>{
                     res.status(500).send(err);               
                 }
                 else if(Object.keys(documents).length==0){
-                    serverLog.warn(`DevExp chart DATA NOT FOUND with Airport=${req.params.air}, `+
+                    serverLog.warn(`top-least-guage chart DATA NOT FOUND with Airport=${req.params.air}, `+
                                    `Type=${req.params.type}, `+
                                    `Date=${req.query.date}`
                                    );
                     res.status(404).send('404 DATA NOT FOUND');
                 }
                 else{
-                    let minmax =[],name=[];
+                    let minmax =[],name=[documents[0].type];
                     minmax.push(documents[0].general.avg_exp_index);
-
                     documents.forEach(element => {
                         if(req.params.type=='maxExp'){
                             if(element.general.avg_exp_index > minmax){
@@ -71,9 +70,9 @@ router.get('/:air/guage/:type',(req,res)=>{
                         options.fill.colors = ["#ff4d4d"];
 
                     if(req.params.type == 'maxExp')
-                        options.title.text = "Top Device Experience Index"; 
+                        options.title.text = "Top Facility Exp. Index"; 
                     else
-                        options.title.text = "Least Device Experience Index";
+                        options.title.text = "Least Facility Exp. Index";
 
                     res.status(200).render('radial_template',{option: JSON.stringify(options)});
                 }

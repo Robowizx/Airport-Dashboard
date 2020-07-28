@@ -72,7 +72,6 @@ router.get('/:air/total_resp',(req,res)=>{
                     }
              })
 
-        console.log(series)
         heatmap.series = series;  
         res.status(200).render("chart_template",{option: JSON.stringify(heatmap)});                                    
         }
