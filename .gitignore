@@ -8,7 +8,7 @@
 #env file
 /Backend/API/.env
 #logs
-
+/Backend/API/server.log
 
 # dependencies
 /Frontend/node_modules
