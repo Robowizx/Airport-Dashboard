@@ -77,7 +77,7 @@ export default function App() {
         <div className={classes.content}>
           <Switch>
             <Route path='/' exact render={()=> <AirportPage air={state.airport} change={changePage}/>}/>
-            <Route path='/device' exact component={Device}/>
+            <Route path='/device' exact render={()=><Device air={state.airport} date={state.date} type={state.device}/>}/>
           </Switch>
         </div>
       </div> 

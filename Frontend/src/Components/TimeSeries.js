@@ -39,7 +39,7 @@ export default function Daily(props) {
   
   const [state, changeDate] = React.useState({
       startDate : prev_date,
-      endDate : new Date()
+      endDate : new Date(props.date)
   });
   const prevType = usePrevious(type);
   const prevSec = usePrevious(sec);
