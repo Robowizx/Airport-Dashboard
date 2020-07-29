@@ -28,8 +28,8 @@
 .pageCard{
   display: flex;
   position: absolute;
-  margin-top: 15vh;
-  left: 52vw;
+  margin-top: 10vh;
+  left: 50vw;
   align-items: center;
 }
 
@@ -98,7 +98,8 @@
   background: #ffffff;
   margin: 3px;
   border-radius: 5px;
-  box-shadow: 1px 1px 1px grey;
+  border: 1px grey solid;
+  box-shadow: 2px 2px 1px grey;
 }
 
 .f-card :hover{

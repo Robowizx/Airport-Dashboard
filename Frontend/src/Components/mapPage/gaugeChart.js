@@ -82,7 +82,7 @@ class GaugeChart extends Component {
                   stroke: {
                     lineCap: 'round'
                   },
-                  labels: ['Percent'],
+                  labels: ['Exp'],
                   },
             series: [this.props.exp]
         }

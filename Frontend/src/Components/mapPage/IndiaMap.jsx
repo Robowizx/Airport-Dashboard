@@ -392,7 +392,7 @@ export default class IndiaMap extends Component {
                                     <GaugeChart exp={parseFloat(e.exp).toFixed(2)}/>
                                   </div>
                                   <div className="flex-card-2">
-                                    <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
+                                    <p className="textP"><b>{e.name} Airport, {e.state}</b></p>
                                     {/* <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p> */}
                                   </div>
                                 </div>
@@ -411,7 +411,7 @@ export default class IndiaMap extends Component {
                                   <GaugeChart exp={parseFloat(e.exp).toFixed(2)}/>
                                 </div>
                                 <div className="flex-card-2">
-                                  <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
+                                  <p className="textP"><b>{e.name} Airport, {e.state}</b></p>
                                   {/* <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p> */}
                                 </div>
                               </div>
@@ -423,7 +423,7 @@ export default class IndiaMap extends Component {
                   </div>
                   :
                   <div>
-                    <Grid container direction="column" justify="flex-end" alignItems="flex-start" spacing={1}>
+                    <Grid container direction="column" justify="flex-start" alignItems="stretch" spacing={1}>
                       {this.state.jsonData.map((e, i) => {
                         if (e.state === this.state.airState)
                           return (
@@ -434,7 +434,7 @@ export default class IndiaMap extends Component {
                                   <GaugeChart exp={parseFloat(e.exp).toFixed(2)}/>
                                 </div>
                                 <div className="flex-card-2">
-                                  <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
+                                  <p className="textP"><b>{e.name} Airport, {e.state}</b></p>
                                   {/* <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p> */}
                                 </div>
                               </div>
