@@ -4,6 +4,7 @@
     "type": "bar",
     "height": 430
   },
+  "colors":["#9C27B0","#a15548"],
   "plotOptions": {
     "bar": {
       "horizontal": true,
@@ -33,16 +34,23 @@
     "colors": ["#fff"]
   },
   "xaxis": {
-    "categories": []
+    "categories": [],
+     "title":{
+      "text":"Values",
+      "style":{
+          "fontSize":"12px"
+      }
+  }
   },
   "legend": {
     "onItemHover": {
       "highlightDataSeries": true
     },
-    "position": "bottom"
+    "position": "top",
+    "horizontalAlign": "center"
   },
   "title": {
-    "text": "Exp and Imp Index",
+    "text": "Experience Index and Improvement Index",
     "align": "left",
     "floating": true
   }

@@ -1,0 +1,81 @@
+{
+ 
+    "line_chart":{
+      
+      "series": [
+        {
+          "name": "",
+          "data": []
+        }
+      
+      ],
+      "chart": {
+        "height": 350,
+        "type": "line",
+        "id": "chart1",
+        "group": "social",
+        "toolbar": {
+          "show": true
+        }
+      },
+      "colors":["#9C27B0","#a15548"],
+      "stroke": {
+        "curve": "straight"
+      },
+      "title": {
+        "text": "Experience And Improvement Index Till Date Timeseries",
+        "align": "left" ,
+          "style":{
+              "fontSize":"16px"
+          }
+      },
+  
+     
+      "markers": {
+        "size": [4, 4],
+        "shape": "circle"
+      },
+      "xaxis": {
+        "title": {
+          "text": "Dates",
+          "style":{
+            "fontSize":"12px"
+        },
+          "offsetY":12
+          
+        },
+        "type": "datetime"
+            
+            
+
+      },
+      "yaxis": {
+        "title": {
+          "text": "Exp and Imp Index Index",
+          "style":{
+            "fontSize":"12px"
+        }
+        }
+       
+      },
+      "dataLabels": {
+        "enabled": false
+      },
+      "tooltip": {
+        "enabled": true,
+        "y": {
+          "formatter": null
+        }
+      },
+      "legend": {
+        "position": "top",
+        "horizontalAlign": "center",
+        "floating": true,
+        "offsetY": -25,
+        "offsetX": -5
+      }
+    }
+  }
+   
+  
+  

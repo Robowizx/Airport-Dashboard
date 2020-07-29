@@ -9,12 +9,12 @@
         "show": true
       }
     },
-    "colors": ["#77B6EA", "#9FD405","#ff6361","#bc5090","#ffa600"],
+    "colors": ["#3498DB", "#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"],
     "dataLabels": {
       "enabled": false
     },
     "stroke": {
-      "curve": "smooth",
+      "curve": "straight",
       "width": 2
     },
     "title": {
@@ -34,6 +34,12 @@
       "strokeWidth": 0.5
     },
     "xaxis": {
+      "title":{
+        "text":"Dates",
+        "style":{
+          "fontSize":"12px"
+      }
+      },
       "type": "datetime",
       "labels":{
         "offsetX": 0,
@@ -43,11 +49,17 @@
     },
     "yaxis": {
       "min": 0,
-      "max": 100
+      "max": 100,
+      "title":{
+        "text":"Values",
+        "style":{
+          "fontSize":"12px"
+      }
+      }
     },
     "legend": {
-      "position": "bottom",
-     "horizontalAlign": "right",
+      "position": "top",
+      "horizontalAlign": "center",
       "floating": false,
       "offsetY": 4,
       "offsetX": -5

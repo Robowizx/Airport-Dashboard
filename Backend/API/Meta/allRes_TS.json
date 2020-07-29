@@ -2,21 +2,22 @@
   "allRes_TS": {
     "series": [],
     "chart": {
+      "height": 350,
       "type": "line",
       "toolbar": {
         "show": true
-      },
-      "animations":{
-        "enabled":false
       }
     },
-    "colors": ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+    "colors": ["#3498DB", "#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"],
     "stroke": {
-      "curve": "smooth"
+      "curve": "straight"
     },
     "title": {
-      "text": ".",
-      "align": "center"
+      "text": "All Response Timeseries",
+      "align": "left",
+      "style":{
+        "fontSize":"16px"
+    }
     },
     "grid": {
       "borderColor": "#e7e7e7",
@@ -29,11 +30,21 @@
       "size": 1
     },
     "xaxis": {
+      "title": {
+        "text": "Dates",
+        "style":{
+          "fontSize":"12px"
+      },
+        "offsetY":10
+      }, 
       "type": "datetime"
     },
     "yaxis": {
       "title": {
-        "text": "Responses"
+        "text": "Responses",
+        "style":{
+          "fontSize":"12px"
+      }
       }
     },
     "legend": {

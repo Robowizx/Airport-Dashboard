@@ -15,17 +15,19 @@
           "type": "line",
           "id": "chart1",
           "toolbar": {
-            "autoSelected":"pan",
-            "show": false
+          "show": true
           }
         },
-        "colors": ["#008FFB", "#00E396"],
+        "colors":  ["#21759b", "#d4526e"],
         "stroke": {
-          "curve": "smooth"
+          "curve": "straight"
         },
         "title": {
-          "text": "Top And Least Timeseries",
-          "align": "left"
+          "text": "Top and Least Facility Timeseries",
+          "align": "left",
+          "style":{
+            "fontSize":"16px"
+        }
         },
         "grid": {
           "borderColor": "#e7e7e7",
@@ -43,7 +45,7 @@
         },
         "yaxis": {
           "title": {
-            "text": "VALUES"
+            "text": "Values"
           },
           "min": 0,
           "max": 100
@@ -62,14 +64,14 @@
         },
         "legend": {
           "position": "top",
-          "horizontalAlign": "right"
+          "horizontalAlign": "center"
         }
     },
     "brush": {
         "series": [],
         "chart": {
-          "height":"110",
           "id": "chart2",
+          "height": 125,
           "offsetY":-40,
           "type": "area",
           "brush": {
@@ -79,12 +81,15 @@
           "selection": {
             "enabled": true,
             "xaxis": {
-              "min": null,
-              "max": null
+              "min": [],
+              "max": []
             }
           }
         },
-        "colors": ["#008FFB","#00E396"],
+        "colors": ["#21759b", "#d4526e"],
+        "stroke":{
+          "curve":"straight"
+        },
         "fill": {
           "type": "gradient",
           "gradient": {
@@ -95,22 +100,27 @@
         "legend": {
           "show": false
         },
-           
-    "xaxis": {
-      "type": "datetime",
-      "title": {
-        "text": "DATES",
-        "offsetY": 15
-      },
-      "tooltip": {
-        "enabled": false
+        "xaxis": {
+          "type": "datetime",
+          "title": {
+            "text": "Dates",
+            "style":{
+              "fontSize":"12px"
+            },
+            "offsetY": 15
+          },
+          "tooltip": {
+            "enabled": false
+          }
+        },
+        "yaxis": {
+          "title": {
+            "text": "Values",
+            "style":{
+              "fontSize":"12px"
+            }
+          },
+          "tickAmount": 3
+        }
       }
-    },
-    "yaxis": {
-      "title": {
-        "text": "VALUES"
-      },
-      "tickAmount": 3
     }
-  }
-}

@@ -70,9 +70,9 @@ router.get('/:air/guage/:type',(req,res)=>{
                         options.fill.colors = ["#ff4d4d"];
 
                     if(req.params.type == 'maxExp')
-                        options.title.text = "Top Facility Exp. Index"; 
+                        options.title.text = "Top Facility Experience Index"; 
                     else
-                        options.title.text = "Least Facility Exp. Index";
+                        options.title.text = "Least Facility Experience Index";
 
                     res.status(200).render('radial_template',{option: JSON.stringify(options)});
                 }

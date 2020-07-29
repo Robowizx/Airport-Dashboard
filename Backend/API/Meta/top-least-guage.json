@@ -39,11 +39,11 @@
                     "offsetY":-10,
                     "show":true,
                     "color":"#888",
-                    "fontSize":"7vw"
+                    "fontSize":"18px"
                 },
                 "value":{
                     "color":"#111",
-                    "fontSize":"7vw",
+                    "fontSize":"18px",
                     "show":true
                 }
             }
