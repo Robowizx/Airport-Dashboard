@@ -1,6 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 #certificates and keys
+/Backend/API/backend_certificate.crt
+/Backend/API/backend_pkey.key
+/Frontend/frontend_certificate.crt
+/Frontend/frontend_pkey.key
+#env file
+/Backend/API/.env
+#logs
 
 
 # dependencies
