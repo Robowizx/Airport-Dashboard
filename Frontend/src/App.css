@@ -12,12 +12,6 @@
   text-align: center;
 }
 @media screen{
-.card {
-  position: absolute;
-  z-index: 1;
-  left: 51vw;
-  align-self: center;
-}
 
 .mainMapPage {
   height: auto;
@@ -32,10 +26,17 @@
   top: 30px;
 }
 .pageCard{
+  display: flex;
   position: absolute;
-  margin-top: 40px;
-  top: 30px;
+  margin-top: 10vh;
+  left: 50vw;
+  align-items: center;
 }
+
+.card{
+  flex:1;
+}
+
 }
 .toolTip {
   width: auto;
@@ -65,4 +66,12 @@
   position: fixed; 
   top: 50%;
   left: 50%;
+}
+
+.flex-list-con{
+  display: flex;
+}
+
+.flex-list{
+  flex: 1;
 }

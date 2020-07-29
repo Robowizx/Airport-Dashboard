@@ -11,6 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import GridList from '@material-ui/core/GridList';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -62,7 +63,17 @@ export default class IndiaMap extends Component {
       device: "All",
       airType: "all",
       clickState: "",
-      deviceList: [],
+      deviceList: [
+        "CM",
+        "DF",
+        "EI",
+        "EV",
+        "FG",
+        "RF",
+        "RT",
+        "SC",
+        "TP",
+        "TR"],
       stateList: [],
       jsonData: [],
       topAir: [],
@@ -119,6 +130,7 @@ export default class IndiaMap extends Component {
     const data1 = await respones1.json();
     // await data1.data.best_worst.forEach((e) => this.state.lestAir.push(e.airport_name));
     await this.setState({ topAir: data1.data.best_worst });
+    console.log(this.state.best_worst);
 
     const respones2 = await fetch(url, {
       method: "POST",
@@ -137,36 +149,28 @@ export default class IndiaMap extends Component {
     const data2 = await respones2.json();
     // await data2.data.best_worst.forEach((e) => this.state.topAir.push(e.airport_name));
     await this.setState({ lestAir: data2.data.best_worst });
-    // console.log(this.state.lestAir);
-
-    const respones3 = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        query: `
-        {
-          device_list
-        }` }),
-    });
-    const data3 = await respones3.json();
-    await this.setState({ deviceList: data3.data.device_list.sort() });
-    // console.log(this.state.deviceList);
+    console.log(this.state.lestAir);
+    
     this.setState({ isLoading: false });
     this.drawMap();
+    this.drawMapPoint();
   }
 
   componentDidUpdate(prevProps, preState, snapshot) {
-    if (this.state.airState !== preState.airState || this.state.device !== preState.device || this.state.airType !== preState.airType) {
+    if (this.state.device !== preState.device) {
+      d3.select(this.myref.current).select("svg").select("g").remove();
+      this.drawMapPoint();
+    }
+    if (this.state.airState !== preState.airState || this.state.airType !== preState.airType){
       d3.select(this.myref.current).select("svg").remove();
       this.drawMap();
+      this.drawMapPoint();
     }
   }
 
   drawMap() {
 
-    let t = "";
-
-    // console.log(Number(window.innerWidth / 2), Number(window.innerHeight / 2));
+    console.log(Number(window.innerWidth / 2), Number(window.innerHeight / 2));
     let width = Number(window.innerWidth / 2);
     let height = Number(window.innerHeight) - 90;
 
@@ -183,9 +187,8 @@ export default class IndiaMap extends Component {
       .style("box-shadow", "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)")
       .text("");
 
-    let expTip = d3.select(this.myref2.current);
-
-    let svg = d3.select(this.myref.current).append("svg")
+    let svg = d3.select(this.myref.current)
+      .append("svg")
       .attr("width", width)
       .attr("height", height);
 
@@ -195,9 +198,56 @@ export default class IndiaMap extends Component {
         const projection = d3.geoMercator().fitSize([+svg.attr('width'), +svg.attr('height')], indb);
         const path = d3.geoPath().projection(projection);
 
-        let cp = () => {
-          let statePoints = svg.append("g");
-          statePoints.selectAll(".pin")
+        svg.selectAll('path')
+          .data(indb.features)
+          .enter()
+          .append('path')
+          .attr('id', (d) => d.id)
+          .attr('stroke-width', 0.5)
+          .attr('style', 'stroke: black; fill: #f7fbfd')
+          .attr('d', path)
+          .on('mouseover', (d, i, n) => {
+            n[i].style.stroke = 'blue';
+            n[i].style.fill = 'lightblue';
+            if(!this.state.isLoading){
+            this.drawMapPoint();}
+            tooltip.text(`${d.id}`);
+            tooltip.style("visibility", "visible");
+          })
+          .on('mouseout', (d, i, n) => {
+            if (n[i] !== this.state.prevState) {
+              if(!this.state.isLoading){
+              this.drawMapPoint();}
+              n[i].style.stroke = 'black';
+              n[i].style.fill = '#f7fbfd';
+            }
+            tooltip.style("visibility", "hidden");
+          })
+          .on('mousemove', () => {
+            tooltip.style("top", `${d3.event.pageY - 30}px`)
+              .style("left", `${d3.event.pageX - 50}px`);
+          })
+      });
+  }
+
+  drawMapPoint() {
+
+    let t = "";
+    console.log(Number(window.innerWidth / 2), Number(window.innerHeight / 2));
+    let width = Number(window.innerWidth / 2);
+    let height = Number(window.innerHeight) - 90;
+
+    let expTip = d3.select(this.myref2.current);
+
+    let svg = d3.select(this.myref.current)
+      .select("svg");
+
+    d3.json('india.json')
+      .then((indb) => {
+        indb = topojson.feature(indb, indb.objects['india-states']);
+        const projection = d3.geoMercator().fitSize([+svg.attr('width'), +svg.attr('height')], indb);
+        let statePoints = svg.append("g");
+        statePoints.selectAll(".pin")
             .data(this.state.jsonData)
             .enter()
             .append("circle", ".pin")
@@ -246,6 +296,7 @@ export default class IndiaMap extends Component {
               expTip.style("visibility", "visible");
               t = n[i].style.fill;
               n[i].style.fill = '#818181';
+
             })
             .on('mouseout', (d, i, n) => {
               expTip.style("visibility", "hidden");
@@ -261,41 +312,8 @@ export default class IndiaMap extends Component {
               console.log(this.state.clickState, this.state.date, this.state.device);
               document.getElementById('linkTest').click();
             });
-        }
-
-        svg.selectAll('path')
-          .data(indb.features)
-          .enter()
-          .append('path')
-          .attr('id', (d) => d.id)
-          .attr('stroke-width', 0.5)
-          .attr('style', 'stroke: black; fill: #f7fbfd')
-          .attr('d', path)
-          .on('mouseover', (d, i, n) => {
-            n[i].style.stroke = 'blue';
-            n[i].style.fill = 'lightblue';
-            // n[i].parentElement.appendChild(n[i]);
-            tooltip.text(`${d.id}`);
-            tooltip.style("visibility", "visible");
-            cp();
-          })
-          .on('mouseout', (d, i, n) => {
-            if (n[i] !== this.state.prevState) {
-              n[i].style.stroke = 'black';
-              n[i].style.fill = '#f7fbfd';
-            }
-            tooltip.style("visibility", "hidden");
-            cp();
-          })
-          .on('mousemove', () => {
-            tooltip.style("top", `${d3.event.pageY - 20}px`)
-              .style("left", `${d3.event.pageX - 0}px`);
-            cp();
-          })
-        cp();
-      });
+          });
   }
-
 
   statesChange = event => {
     this.setState({ airState: (event.target.value) });
@@ -320,7 +338,7 @@ export default class IndiaMap extends Component {
             </div>
             <div className="pageCard">
               <CardInfo width={Number(window.innerWidth) / 2 - 60} height="auto" cn="card">
- 
+                <div className={useStyles.root}>
                   <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
                     <Grid item xs>
                       <FormControl size="small" className={useStyles.formControl}>
@@ -360,18 +378,20 @@ export default class IndiaMap extends Component {
                         </Select>
                       </FormControl>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs></Grid>
+                    <div className={useStyles.root}>
                       <ToggleButtonGroup value={this.state.b_alignment} exclusive size="small" onChange={this.handleAlignment}>
                         <ToggleButton value="all">All</ToggleButton>
                         <ToggleButton value="dom">Domestic</ToggleButton>
                         <ToggleButton value="int">International</ToggleButton>
                       </ToggleButtonGroup>
+                    </div>
                   </Grid>
-                  </Grid>
+                </div>
+                <br />
                 {this.state.airState === "All" ?
                   <div>
-                    <div className="flex-list-con">
-                      <div className="flex-list">
+                    <GridList cellHeight={"auto"} className={useStyles.gridList} cols={2}>
                       <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
                         <h3>Best Airports</h3>
                         {this.state.topAir.map((e, i) => <Grid item xs key={i}>
@@ -383,8 +403,6 @@ export default class IndiaMap extends Component {
                           </CardInfo>
                         </Grid>)}
                       </Grid>
-                      </div>
-                      <div className="flex-list">
                       <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
                         <h3>Worst Airports</h3>
                         {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
@@ -396,8 +414,7 @@ export default class IndiaMap extends Component {
                           </CardInfo>
                         </Grid>)}
                       </Grid>
-                    </div>
-                    </div>
+                    </GridList>
                   </div>
                   :
                   <div>
