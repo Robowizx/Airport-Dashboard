@@ -14,7 +14,7 @@
     
     "chart":{
         "type":"bar",
-        "height":600
+        "height":700
     },
     "legend":{
         "show":true,

@@ -30,7 +30,10 @@ function ChartAPI(air,chart,query,element){
             const iframe = document.getElementById(element).contentDocument;
             iframe.write(out);
             iframe.close();
-         });
+         })
+         .catch((err)=>{
+          console.log(err);
+        })
 }  
 export default function Daily(props) {
   const { sec, type, air, date} = props;

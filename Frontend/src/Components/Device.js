@@ -115,8 +115,10 @@ export default function Device(props) {
       request(`https://localhost:4000/graphql`, query, variables)
       .then(data => {
         setData(data.airport_name.devices);
-        console.log(data.airport_name.devices.find((ele)=>{if(type==ele.device_name){return ele.device_name}}))
-    });
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     }
   }, [])
 

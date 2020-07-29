@@ -95,7 +95,7 @@ html
         }],
           chart: {
           id: 'barYear',
-          height: 285,
+          height: 400,
           width: '100%',
           type: 'bar',
           toolbar: {
@@ -143,18 +143,12 @@ html
           enabled: true,
           textAnchor: 'start',
           style: {
-            colors: ['#fff']
+            colors: ['#000']
           },
           formatter: function (val, opt) {
             return opt.w.globals.labels[opt.dataPointIndex];
           },
-          offsetX: 0,
-          dropShadow: {
-            enabled: true,
-            color: '#000',
-            blur: 2.5,
-            opacity: 1
-          }
+          offsetX: 0
         },
         
         colors: colors,
@@ -187,10 +181,7 @@ html
         },
         title: {
           text: 'All Responses for Device '+device,
-          offsetX: 15,
-          style:{
-            fontSize: '13px'
-          }
+          offsetX: 15
         },
         subtitle: {
           text: '(Click on bar to see details)',
@@ -212,7 +203,7 @@ html
         }],
           chart: {
           id: 'barQuarter',
-          height: 285,
+          height: 400,
           width: '100%',
           type: 'bar',
           zoom: {

@@ -39,7 +39,10 @@ function ChartAPI(air,chart,query,element){
             const iframe = document.getElementById(element).contentDocument;
             iframe.write(out);
             iframe.close();
-         });
+         })
+         .catch((err)=>{
+          console.log(err);
+        })
 }  
 
 export default function Daily(props) {
@@ -104,8 +107,10 @@ export default function Daily(props) {
       request(`https://localhost:4000/graphql`, query, variables)
       .then(data => {
         setState(data.device_name);
-        console.log("active"+data.device_name.total_devices.active);
-    });
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
     }
   }, [selectedDate, type, sec])
   const classes = useStyles();

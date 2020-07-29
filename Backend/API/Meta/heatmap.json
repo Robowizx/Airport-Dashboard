@@ -1,7 +1,7 @@
 {   "heatmap" : {
     "series": [],
     "chart": {
-    "height": 340,
+    "height": 400,
     "type": "heatmap",
     
       "zoom":{
@@ -26,14 +26,9 @@
     "text": "Total Responses Heatmap"
     },
     "xaxis": {
-      "title":{
-        "text":"Dates",
-        "style":{
-          "fontSize":"12px"
-      }
-      }, 
       "labels":{
-        "format": "dd-MMM-yy"
+        "format": "dd-MMM-yy",
+        "offSetY": -10
       },
         "type": "datetime"
       },
