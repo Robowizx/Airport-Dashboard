@@ -5,8 +5,9 @@ import { Route, BrowserRouter as Router} from "react-router-dom";
 import IndiaMap from "./Components/mapPage/IndiaMap.jsx";
 import AirportPage from "./Components/airportPage/airportPage";
 import PrimarySearchAppBar from "./Components/menuBar/PrimarySearchAppBar";
+import GaugeChart from "./Components/mapPage/gaugeChart"
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,7 +24,7 @@ export default class App extends Component {
   render() {
     return (
     <Router>
-      <div>
+      <div className="App">
       <PrimarySearchAppBar/>
       </div>
       <Route path="/Home" render={ (props)=> <IndiaMap {...props} updateState={this.updateState}/> } />
@@ -36,3 +37,5 @@ export default class App extends Component {
     )
   }
 }
+
+export default App;

@@ -22,13 +22,13 @@
 .map {
   position: absolute;
   margin-top: 40px;
-  left: 10px;
+  left: 20px;
   top: 30px;
 }
 .pageCard{
   display: flex;
   position: absolute;
-  margin-top: 20vh;
+  margin-top: 15vh;
   left: 52vw;
   align-items: center;
 }
@@ -97,7 +97,6 @@
 .f-card{
   background: #ffffff;
   margin: 3px;
-  padding: 3px;
   border-radius: 5px;
   box-shadow: 1px 1px 1px grey;
 }
@@ -107,12 +106,13 @@
 }
 
 .flex-card-1{
+  margin: 1px;
   flex:1;
   order: 1;
 }
 
 .flex-card-2{
-  margin-left: 2px;
+  margin: 5px;
   flex:2;
   order: 2;
 }
@@ -124,4 +124,10 @@
 
 .test{
   padding-top: 20px;
+}
+
+#chart {
+  padding: 3px;
+  max-width: 150px;
+  margin: auto;
 }
