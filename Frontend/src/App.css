@@ -1,4 +1,127 @@
 .App {
   font-family: sans-serif;
+}
+
+.air {
+  position: absolute;
+  top: 50px;
+}
+
+.stateName {
+  font-family: sans-serif;
   text-align: center;
+}
+@media screen{
+
+.mainMapPage {
+  height: auto;
+  width: 100vw;
+  background: #f8f0e8;
+}
+
+.map {
+  position: absolute;
+  margin-top: 40px;
+  left: 10px;
+  top: 30px;
+}
+.pageCard{
+  display: flex;
+  position: absolute;
+  margin-top: 20vh;
+  left: 52vw;
+  align-items: center;
+}
+
+.card{
+  flex:1;
+}
+
+}
+.toolTip {
+  width: auto;
+  height: 60px;
+  position: absolute;
+  z-index: 55;
+  padding: 8px 8px 8px 8px;
+  visibility: hidden;
+  background: #818181;
+  color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #818181;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.textP {
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.pp{
+  text-align: center;
+}
+
+.centered {
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+}
+
+.flex-list-con{
+  display: flex;
+}
+
+.flex-list{
+  flex: 1;
+}
+.imgLogo{
+  margin: auto;
+  display: block;
+  width: 60%;
+  height: 60%;
+}
+
+.flex-card{
+  display: flex;
+  align-items: center;
+}
+
+.f-card{
+  background: #ffffff;
+  margin: 3px;
+  padding: 3px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px grey;
+}
+
+.f-card :hover{
+  background-color: #dddddd;
+}
+
+.flex-card-1{
+  flex:1;
+  order: 1;
+}
+
+.flex-card-2{
+  margin-left: 2px;
+  flex:2;
+  order: 2;
+}
+
+.h3{
+  padding: 10px;
+  margin: auto;
+}
+
+.test{
+  padding-top: 20px;
 }

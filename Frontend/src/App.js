@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from 'react'
 import "./App.css";
 //import Device_page from "./Components/device_page";
 import CustomAppBar from "./Components/CustomAppBar";
