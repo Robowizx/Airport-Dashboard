@@ -149,19 +149,6 @@ export default function Device(props) {
     <React.Fragment >  
       <div className={classes.sticky}> 
     <Typography variant="h2" style={{textAlign:'center',paddingTop:'2%',paddingLeft:'5%'}}>{props.air+" Airport"}</Typography>
-                <div style={{position:'fixed',right:'5%',top:'13%'}}>
-                     {/* <MuiPickersUtilsProvider  utils={MomentUtils}>
-                         <DatePicker 
-                             variant="inline" 
-                             label="Date" 
-                             style={{paddingRight:'10%'}} 
-                             format="DD-MMM-yyyy" 
-                             value={date} 
-                             onChange={(d)=>{
-                                 setDate(d);
-                         }} />
-                     </MuiPickersUtilsProvider> */}
-                </div> 
                 <Divider style={{marginTop:'0.6%'}}/>
            
     <div className={classes.root} style={{marginTop:'-4.5%'}}>
