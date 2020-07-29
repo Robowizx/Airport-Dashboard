@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import AirportPage from './Components/AirportPage';
 import Device from './Components/Device';
+import IndiaMap from './Components/mapPage/IndiaMap';
 import {
   BrowserRouter as Router,
   Switch,
@@ -76,7 +77,8 @@ export default function App() {
         <CustomAppBar menu={state.menu} headers={state.headers} />
         <div className={classes.content}>
           <Switch>
-            <Route path='/' exact render={()=> <AirportPage air={state.airport} change={changePage}/>}/>
+            <Route path='/' exact render={()=> <IndiaMap />}/>
+            <Route path='/airport' exact render={()=> <AirportPage air={state.airport} change={changePage}/>}/>
             <Route path='/device' exact render={()=><Device air={state.airport} date={state.date} type={state.device}/>}/>
           </Switch>
         </div>
