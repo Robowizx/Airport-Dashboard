@@ -377,11 +377,11 @@ export default class IndiaMap extends Component {
                   </Grid>
                 </Grid>
                 {this.state.airState === "All" ?
-                  <div>
+                  <div className="test">
                     <div className="flex-list-con">
                       <div className="flex-list">
                         <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
-                          <h3>Best Airports</h3>
+                          <h3 className="h3">Best Airports</h3>
                           {this.state.topAir.map((e, i) =>
                             <Grid item xs key={i}>
                               <div width={(Number(window.innerWidth) / 2) / 2.5} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
@@ -400,7 +400,7 @@ export default class IndiaMap extends Component {
                       </div>
                       <div className="flex-list">
                         <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
-                          <h3>Worst Airports</h3>
+                          <h3 className="h3">Worst Airports</h3>
                           {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
                             <div width={(Number(window.innerWidth) / 2) / 2.5} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
                               <div className="flex-card">

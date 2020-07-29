@@ -116,3 +116,12 @@
   flex:2;
   order: 2;
 }
+
+.h3{
+  padding: 10px;
+  margin: auto;
+}
+
+.test{
+  padding-top: 20px;
+}
