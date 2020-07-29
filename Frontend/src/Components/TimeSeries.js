@@ -72,34 +72,38 @@ export default function Daily(props) {
     let sdate = moment(state.startDate).format('yyyy-MM-DD')
     let edate = moment(state.endDate).format('yyyy-MM-DD')
  
-    if( prevType !== type || prevDate !== state){
+    if( prevType !== type || prevDate !== state || prevSec !== sec){
       ChartAPI('Kolkata','exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
       ChartAPI('Kolkata','allRes_TS',`?sdate=${sdate}&edate=${edate}&type=${type}`,'allRes')
       ChartAPI('Kolkata','exp_till_date',`?sdate=${sdate}&edate=${edate}&type=${type}`,'exp_till')
       ChartAPI('Kolkata','top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
       ChartAPI('Kolkata','restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
     }
-    if( prevSec !== sec ){
-      ChartAPI('Kolkata','restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
-      ChartAPI('Kolkata','top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
-      ChartAPI('Kolkata','exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
-    }
   }, [state, type, sec])
   
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Grid container direction="column">
+      <div style={{marginTop:'9.0%'}}>
+      <Grid container>
         <Grid item xs={12}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker value={state.endDate} onChange={handleEndDateChange} variant='inline' style={{float:"right"}}/>
-          </MuiPickersUtilsProvider>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker value={state.startDate} onChange={handleStartDateChange} variant='inline' style={{float:"right"}}/>
+            <DatePicker 
+                value={state.endDate} 
+                onChange={handleEndDateChange} 
+                variant='inline' 
+                style={{float:"right"}} 
+                label="End Date"/>
+            <DatePicker 
+                value={state.startDate} 
+                onChange={handleStartDateChange} 
+                variant='inline' label="Date" 
+                style={{paddingRight:'1%',float:"right"}} 
+                label="Start Date"/>
           </MuiPickersUtilsProvider>
         </Grid>
       </Grid>
-      <Grid container alignContent="center" spacing={4}>
+      <Grid container alignContent="center" spacing={4} style={{marginT:'-9.5%'}}>
         <Grid item xs={4}>
           <Paper style ={{height:"360px"}}><iframe height='350.022px' width='100%' frameBorder='0' id='top' scrolling='off'></iframe></Paper>
         </Grid>
@@ -118,6 +122,7 @@ export default function Daily(props) {
         </Grid>
         </Grid>
       </Grid>
+      </div>
     </React.Fragment>
   );
 }

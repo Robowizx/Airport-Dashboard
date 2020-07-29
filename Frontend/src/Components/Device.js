@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { Button } from '@material-ui/core';
+import { Button, Divider} from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
@@ -62,7 +62,16 @@ const useStyles = makeStyles((theme) => ({
   },
   MenuItem: {
     color: "white"
-  }
+  },
+  sticky:{
+    position:'fixed',
+    height:'12.0%',
+    width:'95.65%',
+    backgroundColor:'rgb(251,251,251)',
+    top:'6.5%',
+    right:'0',
+    zIndex:2
+}
 }));
 
 export default function Device(props) {
@@ -138,10 +147,24 @@ export default function Device(props) {
 
   return (
     <React.Fragment >  
-      <div position="fixed">
-    <h1 style={{textAlign:'center',margin:'0px 0px 1vw 0px'}}>Kolkata Airport</h1>
-    <div className={classes.root}>
-      <AppBar color="info" position="static">
+      <div className={classes.sticky}> 
+    <Typography variant="h2" style={{textAlign:'center',paddingTop:'2%',paddingLeft:'5%'}}>{props.air+" Airport"}</Typography>
+                <div style={{position:'fixed',right:'5%',top:'13%'}}>
+                     {/* <MuiPickersUtilsProvider  utils={MomentUtils}>
+                         <DatePicker 
+                             variant="inline" 
+                             label="Date" 
+                             style={{paddingRight:'10%'}} 
+                             format="DD-MMM-yyyy" 
+                             value={date} 
+                             onChange={(d)=>{
+                                 setDate(d);
+                         }} />
+                     </MuiPickersUtilsProvider> */}
+                </div> 
+                <Divider style={{marginTop:'0.6%'}}/>
+           
+    <div className={classes.root} style={{marginTop:'-4.5%'}}>
         <Grid container spacing={2}>
           <Grid item xs={4} style={{paddingLeft:"25px", paddingRight:"25px",paddingTop:"25px"}}>
               <FormControl >
@@ -190,7 +213,7 @@ export default function Device(props) {
           </Tabs>
           </Grid>
         </Grid>
-      </AppBar>
+      </div>
       </div>
       <TabPanel value={value} index={0}>
         <Daily sec={sec} type={type} change={change}/>
@@ -198,7 +221,6 @@ export default function Device(props) {
       <TabPanel value={value} index={1}>
         <TimeSeries sec={sec} type={type} change={change} />
       </TabPanel>
-    </div>
     </React.Fragment>
   );
 }

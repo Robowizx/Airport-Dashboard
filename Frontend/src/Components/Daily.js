@@ -96,7 +96,7 @@ export default function Daily(props) {
       "name": type,
       "date": pick
     }
-    if( prevType !== type || prevDate !== selectedDate){
+    if( prevType !== type || prevDate !== selectedDate || prevSec !== sec){
       ChartAPI('Kolkata','exp',`${sec}?date=${pick}&type=${type}`,'exp1')
       ChartAPI('Kolkata','res_donut',`?date=${pick}&type=${type}`,'donut')
       ChartAPI('Kolkata','top_and_least',`?date=${pick}&type=${type}`,'top')
@@ -106,10 +106,6 @@ export default function Daily(props) {
         setState(data.device_name);
         console.log("active"+data.device_name.total_devices.active);
     });
-    }
-    if( prevSec !== sec ){
-      ChartAPI('Kolkata','exp',`${sec}?date=${pick}&type=${type}`,'exp1')
-      ChartAPI('Kolkata','res',`${sec}?date=${pick}&type=${type}`,'res')
     }
   }, [selectedDate, type, sec])
   const classes = useStyles();
@@ -123,10 +119,16 @@ export default function Daily(props) {
 
   return (
     <React.Fragment>
+      <div style={{marginTop:'9.0%'}}>
     <Grid container direction="column">
       <Grid item xs={12}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <DatePicker value={selectedDate} onChange={handleDateChange} variant='inline' style={{float:"right"}}/>
+          <DatePicker 
+              value={selectedDate} 
+              onChange={handleDateChange} 
+              variant='inline' 
+              style={{float:"right"}}
+              label="Date"/>
         </MuiPickersUtilsProvider>
       </Grid>
     </Grid>
@@ -218,6 +220,7 @@ export default function Daily(props) {
         <Paper style={{height:"450px", paddingTop:"25px", paddingLeft:"65px"}}><iframe height='100%' width='100%' frameBorder='0' id='res'  scrolling='off'></iframe></Paper>
       </Grid>
     </Grid>
+    </div>
     </React.Fragment>
   );
 }
