@@ -28,7 +28,7 @@
 .pageCard{
   display: flex;
   position: absolute;
-  margin-top: 10vh;
+  margin-top: 20vh;
   left: 50vw;
   align-items: center;
 }
@@ -55,7 +55,14 @@
 .textP {
   margin: 0px;
   padding: 0px;
-  font-size: 12px;
+  font-size: 14px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 .pp{
@@ -74,4 +81,38 @@
 
 .flex-list{
   flex: 1;
+}
+.imgLogo{
+  margin: auto;
+  display: block;
+  width: 60%;
+  height: 60%;
+}
+
+.flex-card{
+  display: flex;
+  align-items: center;
+}
+
+.f-card{
+  background: #ffffff;
+  margin: 3px;
+  padding: 3px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px grey;
+}
+
+.f-card :hover{
+  background-color: #dddddd;
+}
+
+.flex-card-1{
+  flex:1;
+  order: 1;
+}
+
+.flex-card-2{
+  margin-left: 2px;
+  flex:2;
+  order: 2;
 }

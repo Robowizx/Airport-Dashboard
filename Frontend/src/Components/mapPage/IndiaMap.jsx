@@ -38,12 +38,6 @@ const useStyles = makeStyles((theme) => ({
     width: 500,
     height: 450,
   },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-  },
 }));
 
 export default class IndiaMap extends Component {
@@ -108,6 +102,7 @@ export default class IndiaMap extends Component {
       body: JSON.stringify({
         query: `{
           best_worst(order: -1) {
+            name
             airport_name
             state
             atype
@@ -126,6 +121,7 @@ export default class IndiaMap extends Component {
       body: JSON.stringify({
         query: `{
           best_worst(order: 1) {
+            name
             airport_name
             state
             atype
@@ -310,6 +306,18 @@ export default class IndiaMap extends Component {
     this.setState({ b_alignment: (value) });
   }
 
+  async handleLink(event){
+    await this.setState({ clickState: event });
+    if (this.state.device === "All") {
+      await this.props.updateState(this.state.clickState, this.state.date, "EI");
+    } else {
+      await this.props.updateState(this.state.clickState, this.state.date, this.state.device)
+    }
+    console.log(this.state.clickState, this.state.date, this.state.device);
+    document.getElementById('linkTest').click();
+    // console.log(event);
+  }
+
   render() {
 
     return (
@@ -320,83 +328,94 @@ export default class IndiaMap extends Component {
             </div>
             <div className="pageCard">
               <CardInfo width={Number(window.innerWidth) / 2 - 60} height="auto" cn="card">
- 
-                  <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
-                    <Grid item xs>
-                      <FormControl size="small" className={useStyles.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-outlined-label"
-                          id="demo-simple-select-outlined"
-                          label="State"
-                          displayEmpty
-                          value={this.state.airState}
-                          className={useStyles.selectEmpty}
-                          onChange={this.statesChange}
-                          inputProps={{ 'aria-label': 'Without label' }}
-                        >
-                          <MenuItem value="" disabled>State</MenuItem>
-                          <MenuItem value={"All"}>All</MenuItem>
-                          {this.state.stateList.map((e, i) => <MenuItem value={e} key={i}>{e}</MenuItem>)}
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs>
-                      <FormControl size="small" className={useStyles.formControl}>
-                        <InputLabel id="demo-simple-select-outlined-label">Facilites</InputLabel>
-                        <Select
-                          labelId="demo-simple-select-outlined-label"
-                          id="demo-simple-select-outlined"
-                          label="Device"
-                          displayEmpty
-                          value={this.state.device}
-                          className={useStyles.selectEmpty}
-                          onChange={this.deviceChange}
-                          inputProps={{ 'aria-label': 'Without label' }}
-                        >
-                          <MenuItem value="" disabled>Facilites</MenuItem>
-                          <MenuItem value="All">All</MenuItem>
-                          {this.state.deviceList.map((obj, i) => <MenuItem value={obj} key={i}>{obj}</MenuItem>)}
-                        </Select>
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs>
-                      <ToggleButtonGroup value={this.state.b_alignment} exclusive size="small" onChange={this.handleAlignment}>
-                        <ToggleButton value="all">All</ToggleButton>
-                        <ToggleButton value="dom">Domestic</ToggleButton>
-                        <ToggleButton value="int">International</ToggleButton>
-                      </ToggleButtonGroup>
+
+                <Grid container direction="row" justify="flex-end" alignItems="center" spacing={1}>
+                  <Grid item xs>
+                    <FormControl size="small" className={useStyles.formControl}>
+                      <InputLabel id="demo-simple-select-outlined-label">State</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        label="State"
+                        displayEmpty
+                        value={this.state.airState}
+                        className={useStyles.selectEmpty}
+                        onChange={this.statesChange}
+                        inputProps={{ 'aria-label': 'Without label' }}
+                      >
+                        <MenuItem value="" disabled>State</MenuItem>
+                        <MenuItem value={"All"}>All</MenuItem>
+                        {this.state.stateList.map((e, i) => <MenuItem value={e} key={i}>{e}</MenuItem>)}
+                      </Select>
+                    </FormControl>
                   </Grid>
+                  <Grid item xs>
+                    <FormControl size="small" className={useStyles.formControl}>
+                      <InputLabel id="demo-simple-select-outlined-label">Facilites</InputLabel>
+                      <Select
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        label="Device"
+                        displayEmpty
+                        value={this.state.device}
+                        className={useStyles.selectEmpty}
+                        onChange={this.deviceChange}
+                        inputProps={{ 'aria-label': 'Without label' }}
+                      >
+                        <MenuItem value="" disabled>Facilites</MenuItem>
+                        <MenuItem value="All">All</MenuItem>
+                        {this.state.deviceList.map((obj, i) => <MenuItem value={obj} key={i}>{obj}</MenuItem>)}
+                      </Select>
+                    </FormControl>
                   </Grid>
+                  <Grid item xs>
+                    <ToggleButtonGroup value={this.state.b_alignment} exclusive size="small" onChange={this.handleAlignment}>
+                      <ToggleButton value="all">All</ToggleButton>
+                      <ToggleButton value="dom">Domestic</ToggleButton>
+                      <ToggleButton value="int">International</ToggleButton>
+                    </ToggleButtonGroup>
+                  </Grid>
+                </Grid>
                 {this.state.airState === "All" ?
                   <div>
                     <div className="flex-list-con">
                       <div className="flex-list">
-                      <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
-                        <h3>Best Airports</h3>
-                        {this.state.topAir.map((e, i) => <Grid item xs key={i}>
-                          <CardInfo width={(Number(window.innerWidth) / 2) / 2.5}>
-                            <p className="textP">{e.airport_name}</p>
-                            <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
-                            <p className="textP">{e.state}</p>
-                            <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
-                          </CardInfo>
-                        </Grid>)}
-                      </Grid>
+                        <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
+                          <h3>Best Airports</h3>
+                          {this.state.topAir.map((e, i) =>
+                            <Grid item xs key={i}>
+                              <div width={(Number(window.innerWidth) / 2) / 2.5} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
+                                <div className="flex-card">
+                                  <div className="flex-card-1">
+                                    <img src={require('../image/logo.png')} className="imgLogo" alt="complex" />
+                                  </div>
+                                  <div className="flex-card-2">
+                                    <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
+                                    <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </Grid>)}
+                        </Grid>
                       </div>
                       <div className="flex-list">
-                      <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
-                        <h3>Worst Airports</h3>
-                        {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
-                          <CardInfo width={(Number(window.innerWidth) / 2) / 2.5}>
-                            <p className="textP">{e.airport_name}</p>
-                            <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
-                            <p className="textP">{e.state}</p>
-                            <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
-                          </CardInfo>
-                        </Grid>)}
-                      </Grid>
-                    </div>
+                        <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
+                          <h3>Worst Airports</h3>
+                          {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
+                            <div width={(Number(window.innerWidth) / 2) / 2.5} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
+                              <div className="flex-card">
+                                <div className="flex-card-1">
+                                  <img src={require('../image/logo.png')} className="imgLogo" alt="complex" />
+                                </div>
+                                <div className="flex-card-2">
+                                  <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
+                                  <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </Grid>)}
+                        </Grid>
+                      </div>
                     </div>
                   </div>
                   :
@@ -406,12 +425,17 @@ export default class IndiaMap extends Component {
                         if (e.state === this.state.airState)
                           return (
                             <Grid item xs key={i}>
-                              <CardInfo>
-                                <p className="textP">{e.airport_name}</p>
-                                <p className="textP">{e.atype === "int" ? "International" : "Domestic"}</p>
-                                <p className="textP">{e.state}</p>
-                                <p className="textP">{parseFloat(e.exp).toFixed(2)}</p>
-                              </CardInfo>
+                              <div  className="f-card" onClick={() => this.handleLink(e.name)}>
+                              <div className="flex-card">
+                              <div className="flex-card-1">
+                                  <img src={require('../image/logo.png')} className="imgLogo" alt="complex" />
+                                </div>
+                                <div className="flex-card-2">
+                                  <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
+                                  <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p>
+                                </div>
+                              </div>
+                            </div>
                             </Grid>);
                       }
                       )}
