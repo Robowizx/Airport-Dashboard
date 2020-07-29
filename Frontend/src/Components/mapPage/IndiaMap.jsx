@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import * as topojson from "topojson-client";
 
 import { Link } from "react-router-dom";
+import GaugeChart from "./gaugeChart";
 
 import "../../App.css";
 import CardInfo from './CardInfo';
@@ -380,18 +381,19 @@ export default class IndiaMap extends Component {
                   <div className="test">
                     <div className="flex-list-con">
                       <div className="flex-list">
-                        <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
+                        <Grid container direction="column" justify="flex-start" alignItems="stretch" spacing={1}>
                           <h3 className="h3">Best Airports</h3>
                           {this.state.topAir.map((e, i) =>
                             <Grid item xs key={i}>
-                              <div width={(Number(window.innerWidth) / 2) / 2.5} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
+                              <div width={(Number(window.innerWidth) / 2) / 2} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
                                 <div className="flex-card">
                                   <div className="flex-card-1">
-                                    <img src={require('../image/logo.png')} className="imgLogo" alt="complex" />
+                                    {/* <img src={require('../image/logo.png')} className="imgLogo" alt="complex" /> */}
+                                    <GaugeChart exp={parseFloat(e.exp).toFixed(2)}/>
                                   </div>
                                   <div className="flex-card-2">
-                                    <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
-                                    <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p>
+                                    <p className="textP"><b>{e.name} Airport, {e.state}</b></p>
+                                    {/* <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p> */}
                                   </div>
                                 </div>
                               </div>
@@ -399,17 +401,18 @@ export default class IndiaMap extends Component {
                         </Grid>
                       </div>
                       <div className="flex-list">
-                        <Grid container direction="column" justify="flex-start" alignItems="center" spacing={1}>
+                        <Grid container direction="column" justify="flex-start" alignItems="stretch" spacing={1}>
                           <h3 className="h3">Worst Airports</h3>
                           {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
-                            <div width={(Number(window.innerWidth) / 2) / 2.5} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
+                            <div width={(Number(window.innerWidth) / 2) / 2} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
                               <div className="flex-card">
                                 <div className="flex-card-1">
-                                  <img src={require('../image/logo.png')} className="imgLogo" alt="complex" />
+                                  {/* <img src={require('../image/logo.png')} className="imgLogo" alt="complex" /> */}
+                                  <GaugeChart exp={parseFloat(e.exp).toFixed(2)}/>
                                 </div>
                                 <div className="flex-card-2">
-                                  <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
-                                  <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p>
+                                  <p className="textP"><b>{e.name} Airport, {e.state}</b></p>
+                                  {/* <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p> */}
                                 </div>
                               </div>
                             </div>
@@ -420,7 +423,7 @@ export default class IndiaMap extends Component {
                   </div>
                   :
                   <div>
-                    <Grid container direction="column" justify="flex-end" alignItems="flex-start" spacing={1}>
+                    <Grid container direction="column" justify="flex-start" alignItems="stretch" spacing={1}>
                       {this.state.jsonData.map((e, i) => {
                         if (e.state === this.state.airState)
                           return (
@@ -428,11 +431,11 @@ export default class IndiaMap extends Component {
                               <div  className="f-card" onClick={() => this.handleLink(e.name)}>
                               <div className="flex-card">
                               <div className="flex-card-1">
-                                  <img src={require('../image/logo.png')} className="imgLogo" alt="complex" />
+                                  <GaugeChart exp={parseFloat(e.exp).toFixed(2)}/>
                                 </div>
                                 <div className="flex-card-2">
-                                  <p className="textP"><b>{e.airport_name}, {e.state}</b></p>
-                                  <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p>
+                                  <p className="textP"><b>{e.name} Airport, {e.state}</b></p>
+                                  {/* <p className="textP">Experience index : {parseFloat(e.exp).toFixed(2)}</p> */}
                                 </div>
                               </div>
                             </div>
