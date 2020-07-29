@@ -43,8 +43,8 @@ function ChartAPI(air,chart,query,element){
 }  
 
 export default function Daily(props) {
-  const { sec, type, data} = props;
-  const [selectedDate, changeDate] = React.useState(new Date());
+  const { sec, type, date, air} = props;
+  const [selectedDate, changeDate] = React.useState(new Date(date));
   const prevType = usePrevious(type);
   const prevSec = usePrevious(sec);
   const prevDate = usePrevious(selectedDate);
@@ -92,15 +92,15 @@ export default function Daily(props) {
   React.useEffect(() => {
     var pick = moment(selectedDate).format('yyyy-MM-DD')
     const variables = {
-      "air": "Kolkata",
+      "air": air,
       "name": type,
       "date": pick
     }
     if( prevType !== type || prevDate !== selectedDate || prevSec !== sec){
-      ChartAPI('Kolkata','exp',`${sec}?date=${pick}&type=${type}`,'exp1')
-      ChartAPI('Kolkata','res_donut',`?date=${pick}&type=${type}`,'donut')
-      ChartAPI('Kolkata','top_and_least',`?date=${pick}&type=${type}`,'top')
-      ChartAPI('Kolkata','res',`${sec}?date=${pick}&type=${type}`,'res')
+      ChartAPI(`${air}`,'exp',`${sec}?date=${pick}&type=${type}`,'exp1')
+      ChartAPI(`${air}`,'res_donut',`?date=${pick}&type=${type}`,'donut')
+      ChartAPI(`${air}`,'top_and_least',`?date=${pick}&type=${type}`,'top')
+      ChartAPI(`${air}`,'res',`${sec}?date=${pick}&type=${type}`,'res')
       request(`https://localhost:4000/graphql`, query, variables)
       .then(data => {
         setState(data.device_name);

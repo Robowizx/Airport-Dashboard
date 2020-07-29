@@ -79,7 +79,7 @@ export default function Device(props) {
   const [value, setValue] = React.useState(0);
   const [open, setState] = React.useState();
   const [sec, setSec] = React.useState("by_device");
-  const [type, setType] = React.useState("EI");
+  const [type, setType] = React.useState(props.type);
   const [change, setChange] = React.useState(true);
   const [state, setData] = React.useState([])
   const prevState = usePrevious(state)
@@ -203,10 +203,10 @@ export default function Device(props) {
       </div>
       </div>
       <TabPanel value={value} index={0}>
-        <Daily sec={sec} type={type} change={change}/>
+        <Daily sec={sec} type={type} date={props.date} air={props.air}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TimeSeries sec={sec} type={type} change={change} />
+        <TimeSeries sec={sec} type={type} date={props.date} air={props.air}/>
       </TabPanel>
     </React.Fragment>
   );
