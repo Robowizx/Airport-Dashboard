@@ -1,10 +1,19 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+#certificates and keys
+/Backend/API/backend_certificate.crt
+/Backend/API/backend_pkey.key
+/Frontend/front_certificate.crt
+/Frontend/front_pkey.key
+#env file
+/Backend/API/.env
+#logs
+/Backend/API/server.log
 
 # dependencies
 /Frontend/node_modules
 /Backend/API/node_modules
 /Frontend/.pnp
 /Frontend/.pnp.js
+/Backend/Cleanup/venv
 
 # testing
 /Frontend/coverage
@@ -18,6 +27,7 @@
 /Frontend/.env.development.local
 /Frontend/.env.test.local
 /Frontend/.env.production.local
+/Backend/Cleanup/.env
 
 /Frontend/npm-debug.log*
 /Frontend/yarn-debug.log*
