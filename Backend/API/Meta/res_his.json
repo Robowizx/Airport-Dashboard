@@ -25,29 +25,27 @@
       }
     },
     "dataLabels": {
-      "enabled": true,      
-      "position":"top",
-      "horizontalAlign": "center"
+      "enabled": true,
+      "textAnchor": "middle"
     },
     "xaxis": {
       "categories": []
     },
     "legend": {
-      "position": "top",
-      "horizontalAlign": "center",
+      "position": "right",
       "offsetX": 0,
       "offsetY": 150,
       "markers":{
-        "fillColors":["#3498DB", "#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"]
+        "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
       }
     },
     "fill": {
       "opacity": 1,
-      "colors":["#3498DB", "#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"]
+      "colors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
     },
     "tooltip":{
       "marker":{
-        "fillColors":["#3498DB", "#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"]
+        "fillColors": ["#ffc4a3","#ff9a76","#f96d80","#bb596b","#e7305b"]
       }
     }
 }

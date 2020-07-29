@@ -1,23 +1,7 @@
 {
     "series": [],
     "chart": {
-        "type": "donut",
-        "toolbar":{
-          "show":true
-    
-        }
-    },
-    "colors":["#3498DB", "#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"],
-    "title":{
-      "text":"All Responses",
-      "align": "left",
-      "style":{
-        "fontSize":"16px"
-    }
-    },
-    "legend":{
-      "position": "top",
-      "horizontalAlign": "center"
+        "type": "donut"
     },
     "plotOptions": {
         "pie": {

@@ -46,9 +46,10 @@ export default function App() {
       state:null,
       airport:null
     },
-    airport:'Kolkata',
+    airport:null,
     device: null,
     date: null,
+    home_state:null
   });
 
   const changePage = (options)=>{
@@ -74,10 +75,10 @@ export default function App() {
       <Router>
       <CssBaseline />
       <div className={classes.root}>
-        <CustomAppBar menu={state.menu} headers={state.headers} />
+        <CustomAppBar menu={state.menu} headers={state.headers} change={changePage}/>
         <div className={classes.content}>
           <Switch>
-            <Route path='/' exact render={()=> <IndiaMap />}/>
+            <Route path='/' exact render={()=> <IndiaMap change={changePage} curstate={state.home_state}/>}/>
             <Route path='/airport' exact render={()=> <AirportPage air={state.airport} change={changePage}/>}/>
             <Route path='/device' exact render={()=><Device air={state.airport} date={state.date} type={state.device}/>}/>
           </Switch>

@@ -33,13 +33,13 @@ function ChartAPI(air,chart,query,element){
          });
 }  
 export default function Daily(props) {
-  const { sec, type} = props;
-  const prev_date = new Date();
+  const { sec, type, air, date} = props;
+  const prev_date = new Date(date);
   prev_date.setDate(prev_date.getDate() - 7);
   
   const [state, changeDate] = React.useState({
       startDate : prev_date,
-      endDate : new Date(props.date)
+      endDate : new Date(date)
   });
   const prevType = usePrevious(type);
   const prevSec = usePrevious(sec);
@@ -73,11 +73,11 @@ export default function Daily(props) {
     let edate = moment(state.endDate).format('yyyy-MM-DD')
  
     if( prevType !== type || prevDate !== state || prevSec !== sec){
-      ChartAPI('Kolkata','exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
-      ChartAPI('Kolkata','allRes_TS',`?sdate=${sdate}&edate=${edate}&type=${type}`,'allRes')
-      ChartAPI('Kolkata','exp_till_date',`?sdate=${sdate}&edate=${edate}&type=${type}`,'exp_till')
-      ChartAPI('Kolkata','top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
-      ChartAPI('Kolkata','restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
+      ChartAPI(air,'exp_series',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'exp1')
+      ChartAPI(air,'allRes_TS',`?sdate=${sdate}&edate=${edate}&type=${type}`,'allRes')
+      ChartAPI(air,'exp_till_date',`?sdate=${sdate}&edate=${edate}&type=${type}`,'exp_till')
+      ChartAPI(air,'top_least_timeseries',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'top')
+      ChartAPI(air,'restime',`${sec}?sdate=${sdate}&edate=${edate}&type=${type}`,'restime')
     }
   }, [state, type, sec])
   

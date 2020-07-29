@@ -7,7 +7,7 @@
       "data": []
     }
   ],
-  "colors": ["#21759b", "#d4526e"],
+  "colors": ["#F47B20", "#005596"],
   "chart": {
     "type": "bar",
     "height": 430
@@ -22,7 +22,6 @@
   },
   "dataLabels": {
     "enabled": true,
-
     "offsetX": -6,
     "style": {
       "fontSize": "10px",
@@ -41,27 +40,17 @@
     "colors": ["#fff"]
   },
   "xaxis": {
-    "categories": [],
-    "title": {
-      "text": "Values",
-      "style":{
-        "fontSize":"12px"
-      }
-    }
+    "categories": []
   },
   "legend": {
     "onItemHover": {
       "highlightDataSeries": true
     },
-    "position": "top",
-    "horizontalAlign": "center"
+    "position": "bottom"
   },
   "title": {
-    "text": "Top and Least Facilty",
+    "text": "Top and Least Device",
     "align": "left",
-    "floating": true,
-    "style":{
-      "fontSize":"11pt"
-    }
+    "floating": true
   }
 }

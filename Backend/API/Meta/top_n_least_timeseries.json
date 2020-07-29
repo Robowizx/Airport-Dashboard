@@ -15,19 +15,17 @@
           "type": "line",
           "id": "chart1",
           "toolbar": {
-          "show": true
+            "autoSelected":"pan",
+            "show": false
           }
         },
-        "colors":  ["#21759b", "#d4526e"],
+        "colors": ["#008FFB", "#00E396"],
         "stroke": {
-          "curve": "straight"
+          "curve": "smooth"
         },
         "title": {
-          "text": "Top and Least Facility Timeseries",
-          "align": "left",
-          "style":{
-            "fontSize":"16px"
-        }
+          "text": "Top And Least Timeseries",
+          "align": "left"
         },
         "grid": {
           "borderColor": "#e7e7e7",
@@ -45,7 +43,7 @@
         },
         "yaxis": {
           "title": {
-            "text": "Values"
+            "text": "VALUES"
           },
           "min": 0,
           "max": 100
@@ -64,14 +62,14 @@
         },
         "legend": {
           "position": "top",
-          "horizontalAlign": "center"
+          "horizontalAlign": "right"
         }
     },
     "brush": {
         "series": [],
         "chart": {
+          "height":"110",
           "id": "chart2",
-          "height": 125,
           "offsetY":-40,
           "type": "area",
           "brush": {
@@ -81,15 +79,12 @@
           "selection": {
             "enabled": true,
             "xaxis": {
-              "min": [],
-              "max": []
+              "min": null,
+              "max": null
             }
           }
         },
-        "colors": ["#21759b", "#d4526e"],
-        "stroke":{
-          "curve":"straight"
-        },
+        "colors": ["#008FFB","#00E396"],
         "fill": {
           "type": "gradient",
           "gradient": {
@@ -100,27 +95,22 @@
         "legend": {
           "show": false
         },
-        "xaxis": {
-          "type": "datetime",
-          "title": {
-            "text": "Dates",
-            "style":{
-              "fontSize":"12px"
-            },
-            "offsetY": 15
-          },
-          "tooltip": {
-            "enabled": false
-          }
-        },
-        "yaxis": {
-          "title": {
-            "text": "Values",
-            "style":{
-              "fontSize":"12px"
-            }
-          },
-          "tickAmount": 3
-        }
+           
+    "xaxis": {
+      "type": "datetime",
+      "title": {
+        "text": "DATES",
+        "offsetY": 15
+      },
+      "tooltip": {
+        "enabled": false
       }
+    },
+    "yaxis": {
+      "title": {
+        "text": "VALUES"
+      },
+      "tickAmount": 3
     }
+  }
+}

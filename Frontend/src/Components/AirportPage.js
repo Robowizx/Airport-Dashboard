@@ -82,9 +82,12 @@ export default function AirportPage(props){
              .then((res)=> res.text())
              .then((out)=>{
                 const iframe = document.getElementById(element).contentDocument;
-                iframe.write(out);
-                iframe.close();
-             });
+                if(iframe){
+                    iframe.write(out);
+                    iframe.close();
+                }
+             })
+             .catch((err)=> console.log(err));
     };
 
     React.useEffect(()=>{
@@ -124,14 +127,14 @@ export default function AirportPage(props){
         ChartAPI(props.air,'devExp',`?date=${date.format('yyyy-MM-DD')}`,'dev_exp');
         ChartAPI(props.air,'total_resp',`?sdate=${moment(date).subtract('7','days').format('yyyy-MM-DD')}&edate=${date.format('yyyy-MM-DD')}`,'heatmap');
         getData();
-    },[date]);
+    },[date,props]);
 
     React.useEffect(()=>{
         for(let i=0;i<Device.length;i++){
             ChartAPI(props.air,'spark_line',`/${Device[i].device_name}?sdate=${moment(date).subtract('7','days').format('yyyy-MM-DD')}&edate=${date.format('yyyy-MM-DD')}`,'frame0'+i);
             ChartAPI(props.air,'spark_donut',`/${Device[i].device_name}?date=${date.format('yyyy-MM-DD')}`,'frame1'+i);
         }
-    },[Device]);
+    },[Device,props]);
     
     return (
        <React.Fragment>
@@ -161,7 +164,7 @@ export default function AirportPage(props){
                             <iframe height='90%' width='100%' title='guage min' scrolling='no' frameBorder='0' id='guage2'></iframe>
                         </Paper>
                         <Paper  elevation={3} className={classes.paper_sm}>
-                            <p style={{margin:'4%',paddingLeft:'3%',width:'100%',height:'20%',fontSize:'11pt',fontWeight:'bold'}}>Exp. Index</p>
+                            <p style={{margin:'4%',paddingLeft:'3%',width:'100%',height:'20%',fontSize:'11pt',fontWeight:'bold'}}>Exp Index</p>
                             <p id='exp_value'style={{textAlign:'right',verticalAlign:'bottom',fontSize:'6.5em',margin:'20% 5% 5%'}}></p>
                         </Paper>
                         <Paper elevation={3} className={classes.paper_lg}>

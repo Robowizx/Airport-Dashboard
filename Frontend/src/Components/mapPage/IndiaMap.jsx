@@ -53,7 +53,7 @@ export default class IndiaMap extends Component {
       tooltipName: "",
       date: "2020-03-04",
       prevState: null,
-      airState: "All",
+      airState: props.curstate!==null? props.curstate:"All",
       device: "All",
       airType: "all",
       clickState: "",
@@ -63,6 +63,17 @@ export default class IndiaMap extends Component {
       topAir: [],
       lestAir: [],
       b_alignment: "all",
+    };
+    this.option = React.createRef();
+    this.option.current ={
+      menu:{
+        airport:[],
+        states:[]
+      },
+      headers:{
+        state:null
+      },
+      airport:null
     };
   }
 
@@ -203,20 +214,20 @@ export default class IndiaMap extends Component {
             .style("stroke-width", 0.3)
             .attr("fill", (d) => {
               if (this.state.device === "All") {
-                if (d.exp >= 0 && d.exp <= 50)
+                if (d.exp >= 0 && d.exp <34)
                   return "red"
-                if (d.exp >= 50 && d.exp <= 70)
+                if (d.exp >= 34 && d.exp < 67)
                   return "orange"
-                if (d.exp >= 70 && d.exp <= 100)
+                if (d.exp >= 67 && d.exp <= 100)
                   return "green"
               }
               for (var i = 0; i < d.devices.length; i++) {
                 if (d.devices[i].device_name === this.state.device) {
-                  if (d.devices[i].exp >= 0 && d.devices[i].exp <= 50)
+                  if (d.devices[i].exp >= 0 && d.devices[i].exp < 34)
                     return "red"
-                  if (d.devices[i].exp >= 50 && d.devices[i].exp <= 70)
+                  if (d.devices[i].exp >= 34 && d.devices[i].exp < 67)
                     return "orange"
-                  if (d.devices[i].exp >= 70 && d.devices[i].exp <= 100)
+                  if (d.devices[i].exp >= 67 && d.devices[i].exp <= 100)
                     return "green"
                 }
               }
@@ -250,10 +261,11 @@ export default class IndiaMap extends Component {
             })
             .on('click', async (d) => {
               await this.setState({ clickState: `${d.name}` });
-              if (this.state.device === "All") {
-                await this.props.updateState(this.state.clickState, this.state.date, "EI");
-              } else {
-                await this.props.updateState(this.state.clickState, this.state.date, this.state.device)
+              this.option.current.headers.state = d.state;
+              this.option.current.airport = d.name;
+              for(let i=0;i<this.state.jsonData.length;i++){
+                if(this.state.jsonData[i].state == d.state)
+                  this.option.current.menu.airport.push(this.state.jsonData[i].name);
               }
               console.log(this.state.clickState, this.state.date, this.state.device);
               document.getElementById('linkTest').click();
@@ -307,12 +319,13 @@ export default class IndiaMap extends Component {
     this.setState({ b_alignment: (value) });
   }
 
-  async handleLink(event){
-    await this.setState({ clickState: event });
-    if (this.state.device === "All") {
-      await this.props.updateState(this.state.clickState, this.state.date, "EI");
-    } else {
-      await this.props.updateState(this.state.clickState, this.state.date, this.state.device)
+  async handleLink(state,name){
+
+    this.option.current.headers.state = state;
+    this.option.current.airport = name;
+    for(let i=0;i<this.state.jsonData.length;i++){
+      if(this.state.jsonData[i].state == state)
+        this.option.current.menu.airport.push(this.state.jsonData[i].name);
     }
     console.log(this.state.clickState, this.state.date, this.state.device);
     document.getElementById('linkTest').click();
@@ -385,7 +398,7 @@ export default class IndiaMap extends Component {
                           <h3 className="h3">Best Airports</h3>
                           {this.state.topAir.map((e, i) =>
                             <Grid item xs key={i}>
-                              <div width={(Number(window.innerWidth) / 2) / 2} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
+                              <div width={(Number(window.innerWidth) / 2) / 2} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.state,e.name)}>
                                 <div className="flex-card">
                                   <div className="flex-card-1">
                                     {/* <img src={require('../image/logo.png')} className="imgLogo" alt="complex" /> */}
@@ -404,7 +417,7 @@ export default class IndiaMap extends Component {
                         <Grid container direction="column" justify="flex-start" alignItems="stretch" spacing={1}>
                           <h3 className="h3">Worst Airports</h3>
                           {this.state.lestAir.map((e, i) => <Grid item xs key={i}>
-                            <div width={(Number(window.innerWidth) / 2) / 2} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.name)}>
+                            <div width={(Number(window.innerWidth) / 2) / 2} height={(Number(window.innerheigth) / 2) / 5} className="f-card" onClick={() => this.handleLink(e.state,e.name)}>
                               <div className="flex-card">
                                 <div className="flex-card-1">
                                   {/* <img src={require('../image/logo.png')} className="imgLogo" alt="complex" /> */}
@@ -428,7 +441,7 @@ export default class IndiaMap extends Component {
                         if (e.state === this.state.airState)
                           return (
                             <Grid item xs key={i}>
-                              <div  className="f-card" onClick={() => this.handleLink(e.name)}>
+                              <div  className="f-card" onClick={() => this.handleLink(e.state,e.name)}>
                               <div className="flex-card">
                               <div className="flex-card-1">
                                   <GaugeChart exp={parseFloat(e.exp).toFixed(2)}/>
@@ -451,7 +464,9 @@ export default class IndiaMap extends Component {
               <p id="airname" className="textP"></p>
               <p id="exp" className="textP"></p>
             </div>
-            <Link to="/airport" id="linkTest" ></Link>
+            <Link to="/airport" id="linkTest"  onClick={()=>{
+              this.props.change(this.option.current);
+            }}></Link>
           </div>
         }
       </div>

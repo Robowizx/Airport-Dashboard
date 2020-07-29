@@ -17,7 +17,7 @@ const moment = require("moment-timezone");
 const { max, min } = require('moment-timezone');
 
 //exp time series chart route code
-router.get('/:air/total_resp/:sec',(req,res)=>{
+router.get('/:air/total_resp',(req,res)=>{
     serverLog.info(`REQUESTED Heat map series chart with Airport=${req.params.air}, `+
                  `Section=${req.params.sec}, `+
                  `SDate=${req.query.sdate}, `+

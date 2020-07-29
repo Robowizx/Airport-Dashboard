@@ -139,7 +139,6 @@ export default function CustomAppBar(props) {
   
 
   const handleDrawerOpen = () => {
-    if((props.menu.states.length!==0 || props.menu.airport.length!==0) || props.menu.device.length!==0)
       setOpen(!open);
   };
 
@@ -217,7 +216,7 @@ export default function CustomAppBar(props) {
             </IconButton>
           </div>
           <Divider />
-          <MenuList menu={props.menu} headers={props.headers} navOpen={handleSubNavOpen}/>
+          <MenuList menu={props.menu} headers={props.headers} navOpen={handleSubNavOpen} change={props.change}/>
         </Drawer>
     </React.Fragment>    
   );

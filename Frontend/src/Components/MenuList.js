@@ -13,7 +13,8 @@ import ExploreIcon from '@material-ui/icons/Explore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import HomeIcon from '@material-ui/icons/Home';
-//import ExpandMore from '@material-ui/icons/ExpandMore';
+import {Link} from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +61,34 @@ export default function MenuList(props) {
             <List component="div" disablePadding>
             {
                props.menu[event].map((text)=>(
-                <ListItem button key={text} className={classes.nested}>
+                <ListItem button key={text} className={classes.nested} onClick={marker==='States'?
+                ()=>{
+                  let option={
+                    menu:{
+                      airport:[],
+                      device:[],
+                      states:[]
+                    },
+                    headers:{
+                      state:null,
+                      airport: null,
+                    },
+                    airport:null,
+                    device:null,
+                    date:null,
+                    home_state:text
+                  }
+                  props.change(option);
+                  document.getElementById('home_link').click();
+                }:()=>{
+                  let option={
+                    airport:text,
+                    device:null,
+                    date:null,
+                    home_state:null
+                  }
+                  props.change(option);
+                }}>
                     <ListItemText key={text+'-text'}secondary={text} /> 
                 </ListItem>       
                ))
@@ -72,13 +100,38 @@ export default function MenuList(props) {
   }
 
   return (
+    <React.Fragment>
+     <Link to='/' id='home_link'/> 
     <ClickAwayListener onClickAway={handleClickAway}>
         <List
             component="nav"
             aria-labelledby="nested-list-subheader"
             className={classes.root}
-        >{[ (<ListItem button key='home'>
-                <ListItemIcon><HomeIcon /></ListItemIcon>
+        >{[ (<ListItem button key='home'
+               onClick={()=>{
+                    let option={
+                      menu:{
+                        airport:[],
+                        device:[],
+                        states:[]
+                      },
+                      headers:{
+                        state:null,
+                        airport: null,
+                      },
+                      airport:null,
+                      device:null,
+                      date:null,
+                      home_state:null
+                    }
+                    if(open)
+                      setOpen(!open);
+                    props.change(option);
+                    document.getElementById('home_link').click();
+                  }}>
+                <ListItemIcon>
+                    <HomeIcon />
+                </ListItemIcon>
                 <ListItemText key='home_text' primary="Home"/>
             </ListItem>),
             props.menu.states.length > 0 ? listout("States",'states'):null,
@@ -87,5 +140,6 @@ export default function MenuList(props) {
         ]}
         </List>
     </ClickAwayListener>
+    </React.Fragment>
   );
 }

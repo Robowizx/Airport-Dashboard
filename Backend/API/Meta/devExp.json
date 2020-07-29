@@ -14,19 +14,21 @@
     
     "chart":{
         "type":"bar",
-        "height":350
+        "height":600
     },
     "legend":{
         "show":true,
-        "showForNullSeries":true,
         "position": "top",
-        "horizontalAlign": "center",       
-        "onItemClick":{
+        "horizontalAlign": "center", 
+        "markers":{
+            "fillColors":["#2ECC71","#F1C40F","#E74C3C"]
+        },
+        "onItemClick": {
             "toggleDataSeries": false
         },
-        "onItemHover":{
-            "highlightDataSeries":false
-        }
+        "onItemHover": {
+            "highlightDataSeries": false
+        }      
     },
     "plotOptions":{
         "bar":{

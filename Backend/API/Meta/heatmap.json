@@ -30,9 +30,11 @@
         "text":"Dates",
         "style":{
           "fontSize":"12px"
-      },
-        "offsetY":10
+      }
       }, 
+      "labels":{
+        "format": "dd-MMM-yy"
+      },
         "type": "datetime"
       },
       "yaxis":{

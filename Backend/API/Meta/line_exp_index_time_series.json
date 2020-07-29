@@ -10,17 +10,15 @@
     
     ],
     "chart": {
-      "height": 350,
       "type": "line",
       "id": "chart1",
       "group": "social",
       "toolbar": {
-        "show": true
+        "show": false
       }
     },
-    "colors":["#9C27B0"],
     "stroke": {
-      "curve": "straight"
+      "curve": "smooth"
     },
     "title": {
       "text": "Experience Index Timeseries",
@@ -32,27 +30,16 @@
       "shape": "circle"
     },
     "xaxis": {
-      
-      "title": {
-        "text": "Dates",
-        "style":{
-          "fontSize":"12px"
-      },
-        "offsetY":12
-      },
       "type": "datetime"
     },
     "yaxis": {
       "title": {
-        "text": "Experience Index",
-        "style":{
-          "fontSize":"12px"
-      }
+        "text": "Experience Index"
       }
      
     },
     "dataLabels": {
-      "enabled": false
+      "enabled": true
     },
     "tooltip": {
       "enabled": true,
