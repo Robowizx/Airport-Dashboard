@@ -95,7 +95,7 @@ html
         }],
           chart: {
           id: 'barYear',
-          height: 365,
+          height: 285,
           width: '100%',
           type: 'bar',
           toolbar: {
@@ -187,7 +187,10 @@ html
         },
         title: {
           text: 'All Responses for Device '+device,
-          offsetX: 15
+          offsetX: 15,
+          style:{
+            fontSize: '13px'
+          }
         },
         subtitle: {
           text: '(Click on bar to see details)',
@@ -209,7 +212,7 @@ html
         }],
           chart: {
           id: 'barQuarter',
-          height: 365,
+          height: 285,
           width: '100%',
           type: 'bar',
           zoom: {
