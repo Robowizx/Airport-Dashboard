@@ -42,7 +42,7 @@ export default function MenuList(props) {
             <ListItem button key={marker} onClick={()=>{
                 let obj ={airport:open.airport,states:open.states,device:open.device};
                 if(!open[event])
-                    props.navOpen();
+                    props.navOpen(true);
                 obj[event] = !obj[event];
                 setOpen(obj);
             }}
@@ -54,7 +54,7 @@ export default function MenuList(props) {
                     )
                 }
             </ListItemIcon>
-            <ListItemText key={marker+'-text'} primary={marker}/>
+              <ListItemText key={marker+'-text'} style={{whiteSpace:'wrap',overflowWrap:'break-word',wordBreak:'break-word'}}>{marker}</ListItemText>
             {open[event] ? <ExpandLess /> :<ExpandMoreIcon />}
         </ListItem>
         <Collapse in={open[event]} key={marker+"-sublist"} timeout="auto" unmountOnExit>
@@ -88,6 +88,8 @@ export default function MenuList(props) {
                     home_state:null
                   }
                   props.change(option);
+                  props.navOpen(false);
+                  document.getElementById('air_link').click();
                 }}>
                     <ListItemText key={text+'-text'}secondary={text} /> 
                 </ListItem>       
@@ -102,6 +104,7 @@ export default function MenuList(props) {
   return (
     <React.Fragment>
      <Link to='/' id='home_link'/> 
+     <Link to='/airport' id='air_link'/>
     <ClickAwayListener onClickAway={handleClickAway}>
         <List
             component="nav"
@@ -124,9 +127,9 @@ export default function MenuList(props) {
                       date:null,
                       home_state:null
                     }
-                    if(open)
-                      setOpen(!open);
+                    
                     props.change(option);
+                    props.navOpen(false);
                     document.getElementById('home_link').click();
                   }}>
                 <ListItemIcon>

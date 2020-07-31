@@ -175,8 +175,8 @@ export default class IndiaMap extends Component {
     let t = "";
 
     // console.log(Number(window.innerWidth / 2), Number(window.innerHeight / 2));
-    let width = Number(window.innerWidth / 2);
-    let height = Number(window.innerHeight) - 90;
+    let width = Number(window.innerWidth / 1.9);
+    let height = Number(window.innerHeight)/1.15;
 
     let tooltip = d3.select(this.myref.current)
       .append("div")
@@ -195,7 +195,8 @@ export default class IndiaMap extends Component {
 
     let svg = d3.select(this.myref.current).append("svg")
       .attr("width", width)
-      .attr("height", height);
+      .attr("height",height)
+      .style("padding-top",'3vh');
 
     d3.json('india.json')
       .then((indb) => {

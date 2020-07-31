@@ -25,9 +25,9 @@ router.get('/:air/total_resp',(req,res)=>{
                 );
 
 
-    let db_query = { _id:0,date:1, type:1, 'general.all_responses.Total Responses':1 };
+    let db_query = { _id:0, type:1, 'general.all_responses.Total Responses':1 };
     
-    db.getDB().collection(req.params.air).find({date: {$gte:req.query.sdate,$lt:req.query.edate}}).project(db_query).toArray((err,documents)=>{
+    db.getDB().collection(req.params.air).find({date: {$gte:req.query.sdate,$lte:req.query.edate}}).project(db_query).toArray((err,documents)=>{
         if(err){
                 serverLog.error(`Heat map series chart DATABASE ERROR with Airport=${req.params.air}, `+
                  `Section=${req.params.sec}, `+
@@ -47,11 +47,11 @@ router.get('/:air/total_resp',(req,res)=>{
         else{
 
             // console.log(documents);
-            let resdata = [];
+            let categories = [];
             let series = [];
             let dev = [];
             documents.forEach(d=>{
-                date = moment(d.date).add(1, 'd');
+                //date = moment(d.date).add(1, 'd');
                 // date = moment(d.date).format('DD MMM YYYY');
                 // resdata.push([new Date(date).getTime(),d.general.all_responses[0]['Total Responses']]);
               
@@ -61,7 +61,7 @@ router.get('/:air/total_resp',(req,res)=>{
                     series.push(
                               {
                                   name:d.type,
-                                  data:[[new Date(d.date).getTime(),d.general.all_responses[0]['Total Responses']]]
+                                  data:[d.general.all_responses[0]['Total Responses']]
                               });
                   
                    }
@@ -69,12 +69,17 @@ router.get('/:air/total_resp',(req,res)=>{
                 else{
                                 
                     let x = series.findIndex(x => x.name === d.type);
-                    series[x].data.push([new Date(d.date).getTime(),d.general.all_responses[0]['Total Responses']]);
+                    series[x].data.push(d.general.all_responses[0]['Total Responses']);
                     
                     }
-             })
-            
-            heatmap.series = series;  
+             });
+
+             for(let s=moment(req.query.sdate);s<=moment(req.query.edate);s=s.add(1,'days')){
+                 categories.push(s.format('DD-MMM-YY'));
+             }
+
+            heatmap.series = series; 
+            heatmap.xaxis.categories = categories; 
         res.status(200).render("chart_template",{option: JSON.stringify(heatmap)});                                    
         }
     })

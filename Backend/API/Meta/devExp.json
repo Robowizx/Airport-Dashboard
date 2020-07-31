@@ -14,7 +14,7 @@
     
     "chart":{
         "type":"bar",
-        "height":700
+        "height":625
     },
     "legend":{
         "show":true,
@@ -85,7 +85,7 @@
         "title":{
             "text":"Devices",
             "style":{
-                "fontSize":"11pt"
+                "fontSize":"10pt"
             }
         }
     },
@@ -93,7 +93,7 @@
         "title":{
             "text":"Experience Index till date",
             "style":{
-                "fontSize":"12px"
+                "fontSize":"10pt"
             }
         }
     },

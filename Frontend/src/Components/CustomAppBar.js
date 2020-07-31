@@ -19,7 +19,7 @@ import MenuList from './MenuList';
 
 
 
-const drawerWidth = 280;
+const drawerWidth = 345;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace:'nowrap'
   },
   drawerOpen: {
     width: drawerWidth,
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
+      width: theme.spacing(7) + 1,
     },
   },
   toolbar: {
@@ -142,8 +142,8 @@ export default function CustomAppBar(props) {
       setOpen(!open);
   };
 
-  const handleSubNavOpen = () => {
-    setOpen(true);
+  const handleSubNav = (val) => {
+    setOpen(val);
   };
 
   return (
@@ -216,7 +216,7 @@ export default function CustomAppBar(props) {
             </IconButton>
           </div>
           <Divider />
-          <MenuList menu={props.menu} headers={props.headers} navOpen={handleSubNavOpen} change={props.change}/>
+          <MenuList menu={props.menu} headers={props.headers} navOpen={handleSubNav} change={props.change}/>
         </Drawer>
     </React.Fragment>    
   );

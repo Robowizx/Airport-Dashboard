@@ -165,7 +165,7 @@ export default function AirportPage(props){
                         </Paper>
                         <Paper  elevation={3} className={classes.paper_sm}>
                             <p style={{margin:'4%',paddingLeft:'3%',width:'100%',height:'20%',fontSize:'11pt',fontWeight:'bold'}}>Exp Index</p>
-                            <p id='exp_value'style={{textAlign:'right',verticalAlign:'bottom',fontSize:'6.5em',margin:'20% 5% 5%'}}></p>
+                            <p id='exp_value'style={{textAlign:'center',fontSize:'6.5em',margin:'5% 5% 5%'}}></p>
                         </Paper>
                         <Paper elevation={3} className={classes.paper_lg}>
                             <iframe height='100%' width='100%' scrolling='no' title='response heatmap' frameBorder='0' id='heatmap'></iframe>
