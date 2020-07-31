@@ -5,6 +5,7 @@
 /Frontend/front_pkey.key
 #env file
 /Backend/API/.env
+/Backend/Cleanup/.env
 #logs
 /Backend/API/server.log
 
