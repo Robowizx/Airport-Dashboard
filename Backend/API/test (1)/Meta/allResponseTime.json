@@ -1,0 +1,58 @@
+{
+    "series": [],
+      "chart": {
+      "height": 250,
+      "id": "test",
+      "group":"timeResponses",
+      "type": "line",
+      "toolbar": {
+        "show": true
+      }
+    },
+    "theme":{
+      "mode":"dark"
+    },
+    "colors": ["#25aedb", "#00b300", "#FFFF00", "#FF722F","#e53434"],
+    "dataLabels": {
+      "enabled": false
+    },
+    "stroke": {
+      "curve": "smooth",
+      "width": 2
+    },
+    "title": {
+      "text": "",
+      "align": "left"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7"
+     
+    },
+    "markers": {
+      "size": 0.4,
+      "strokeColors": "#000",
+      "strokeWidth": 0.5
+    },
+    "xaxis": {
+      "type": "datetime",
+      "labels":{
+        "offsetX": 0,
+        "offsetY": 0,
+        "format": "dd MMM"
+      }
+    },
+    "yaxis": {
+      "min": 0,
+      "max": 100
+    },
+    "legend": {
+      "position": "bottom",
+     "horizontalAlign": "right",
+      "floating": false,
+      "offsetY": 4,
+      "offsetX": -5
+    },
+    "tooltip":{
+      "enabled": true
+    }
+  }

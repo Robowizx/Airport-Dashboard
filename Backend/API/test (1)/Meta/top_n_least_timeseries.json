@@ -1,0 +1,128 @@
+{
+  "line": {
+    "series": [
+      {
+        "name": "",
+        "data": []
+      },
+      {
+        "name": "",
+        "data": []
+      }
+    ],
+    "chart": {
+      "height": 230,
+      "type": "line",
+      "id": "chart1",
+      "toolbar": {
+        "autoSelected": "pan",
+        "show": true
+      }
+    },
+    "theme":{
+      "mode":"dark"
+    },
+    "colors": ["#c7417b", "#46ce8c"],
+    "stroke": {
+      "curve": "smooth"
+    },
+    "title": {
+      "text": "Top And Least Timeseries",
+      "align": "left"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7"
+     
+    },
+    "markers": {
+      "size": [1,1],
+      "shape": "circle"
+    },
+    "xaxis": {
+      "type": "datetime"
+    },
+    "yaxis": {
+      "title": {
+        "text": "VALUES"
+      },
+      "min": 0,
+      "max": 100
+    },
+    "dataLabels": {
+      "enabled": false
+    },
+    "tooltip": {
+      "enabled": true,
+      "x": {
+        "format": "dd MMM yyyy"
+      },
+      "y": {
+        "formatter": null
+      }
+    },
+    "legend": {
+      "show": false
+    }
+  },
+  "brush": {
+    "series": [],
+    "chart": {
+      "height": "130",
+      "offsetY":-40,
+      "id": "chart2",
+      "type": "area",
+      "brush": {
+        "target": "chart1",
+        "enabled": true
+      },
+      "selection": {
+        "enabled": true,
+        "xaxis": {
+          "min": null,
+          "max": null
+        }
+      }
+    },
+    "theme":{
+      "mode":"dark"
+    },
+    "colors": ["#c7417b", "#46ce8c"],
+    "fill": {
+      "type": "gradient",
+      "gradient": {
+        "opacityFrom": 0.91,
+        "opacityTo": 0.1
+      }
+    },
+   "legend": {
+      "position": "bottom",
+      "horizontalAlign": "center",
+      "floating": false,
+      "offsetY":0,
+      "offsetX":0
+    },
+
+    "xaxis": {
+      "type": "datetime",
+      "title": {
+        "text": "DATES",
+        "style":{
+          "color":"#fff"
+        },
+        "offsetY":7
+      },
+      "tooltip": {
+        "enabled": false
+      }
+    },
+    "yaxis": {
+      "title": {
+        "text": "VALUES",
+        "style":{
+          "color":"#fff"
+        }
+      },
+      "tickAmount": 3
+    }
+  }
+}

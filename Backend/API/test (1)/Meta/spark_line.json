@@ -1,0 +1,45 @@
+{
+  "series": [
+    {
+      "name":"Exp",
+      "data": []
+    }
+  ],
+  "chart": {
+    "type": "area",
+    "width": 100,
+    "height": 35,
+    "sparkline": {
+      "enabled": true
+    }
+  },
+  "colors":["#00FFFF"],
+  "theme":{
+    "mode":"dark"
+  },
+  "tooltip": {
+    "fixed": {
+      "enabled": false
+    },
+    "style":{
+      "fontSize":"10px"
+    },
+    "x": {
+      "show": false
+    },
+    "y": {
+      "title": {
+        "formatter": "Exp"
+      }
+    },
+    "marker":{
+      "show":false
+    }
+  },
+  "stroke": {
+    "width": 2
+  },
+  "marker": {
+    "show": false
+  }
+}

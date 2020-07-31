@@ -1,0 +1,114 @@
+{
+    "series":[{
+        "name":"Good",
+        "data":[]
+    },
+    {
+        "name":"Average",
+        "data":[]
+    },
+    {
+        "name":"Bad",
+        "data":[]
+    }],
+    
+    "chart":{
+        "type":"bar",
+        "height":700
+    },
+    "theme":{
+        "mode":"dark"
+      },
+    "legend":{
+        "show":true,
+        "position": "bottom",
+        "horizontalAlign": "center", 
+        "markers":{
+            "fillColors":["#A7E509","#FFFF00","#e53434"]
+        },
+        "onItemClick": {
+            "toggleDataSeries": false
+        },
+        "onItemHover": {
+            "highlightDataSeries": false
+        }      
+    },
+    "plotOptions":{
+        "bar":{
+            "dataLabels":{
+                "position":"top"
+            },
+            "colors":{
+                "ranges":[
+                    {
+                       "from":0,
+                       "to":33,
+                       "color":"#e53434"
+                    },
+                    {
+                        "from":34,
+                        "to":66,
+                        "color":"#FFFF00" 
+                    },
+                    {
+                        "from":67,
+                        "to":100,
+                        "color":"#A7E509"
+                    }
+                ]
+            }
+        }
+    },
+    "dataLabels":{
+        "enabled":true,
+        "style":{
+            "fontSize":"12px",
+            "colors":["#fff"]
+        },
+        "offsetY":-20
+    },
+    "xaxis":{
+        "categories":[],
+        "position": "bottom",
+        "crosshairs":{
+            "fill":{
+                "type":"gradient",
+                "gradient":{
+                    "colorForm":"#D8E3F0",
+                    "colorTo":"#BED1E6",
+                    "stops":[0,100],
+                    "opacityFrom":0.4,
+                    "opacityTo":0.5
+                }
+            }
+        },
+        "tooltip":{
+            "enabled": true
+        },
+        "title":{
+            "text":"Devices",
+            "style":{
+                "fontSize":"11pt"
+            }
+        }
+    },
+    "yaxis":{
+        "title":{
+            "text":"Experience Index till date",
+            "style":{
+                "fontSize":"12px"
+            }
+        }
+    },
+    "title":{
+        "text":"Facilities Exp Index Chart",
+        "style":{
+            "fontSize":"16px"
+        }
+    },
+    "tooltip":{
+        "marker":{
+            "show":false
+        }
+    }
+}

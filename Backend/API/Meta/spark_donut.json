@@ -1,0 +1,23 @@
+{
+  "series": [],
+  "chart": {
+    "type": "pie",
+    "width": 40,
+    "height": 40,
+    "sparkline": {
+      "enabled": true
+    }
+  },
+  "theme":{
+    "mode":"dark"
+  },
+  "colors": ["#25aedb", "#00b300", "#FFFF00", "#FF722F","#e53434"],
+  "stroke": {
+    "width": 1
+  },
+  "tooltip": {
+    "fixed": {
+      "enabled": true
+    }
+  }
+}

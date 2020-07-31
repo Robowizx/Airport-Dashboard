@@ -1,0 +1,23 @@
+//chart template
+doctype html
+html
+    head
+        script(src='https://localhost:4000/Javascript/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
+    body
+        div(id='chart',style="max-width:device-width")
+        div(id='chart2',style="max-width:device-width")
+    script.
+        var options = !{option1};
+        options.tooltip.y.formatter = (val,{seriesIndex,dataPointIndex})=>{
+            let area = !{area};
+            if(seriesIndex)
+                return `${val}(${area.leastArea[dataPointIndex]})`; 
+            else
+                return `${val}(${area.topArea[dataPointIndex]})`;
+        };
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+        var options2 = !{option2};
+        var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+        chart2.render();

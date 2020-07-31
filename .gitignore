@@ -1,0 +1,44 @@
+#certificates and keys
+/Backend/API/backend_certificate.crt
+/Backend/API/backend_pkey.key
+/Frontend/front_certificate.crt
+/Frontend/front_pkey.key
+#env file
+/Backend/API/.env
+#logs
+/Backend/API/server.log
+
+#certificates and keys
+/Backend/API/backend_certificate.crt
+/Backend/API/backend_pkey.key
+/Frontend/frontend_certificate.crt
+/Frontend/frontend_pkey.key
+#env file
+/Backend/API/.env
+#logs
+/Backend/API/server.log
+
+# dependencies
+/Frontend/node_modules
+/Backend/API/node_modules
+/Frontend/.pnp
+/Frontend/.pnp.js
+/Backend/Cleanup/venv
+
+# testing
+/Frontend/coverage
+
+# production
+/Frontend/build
+
+# misc
+/Frontend/.DS_Store
+/Frontend/.env.local
+/Frontend/.env.development.local
+/Frontend/.env.test.local
+/Frontend/.env.production.local
+/Backend/Cleanup/.env
+
+/Frontend/npm-debug.log*
+/Frontend/yarn-debug.log*
+/Frontend/yarn-error.log*

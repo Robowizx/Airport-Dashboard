@@ -1,0 +1,48 @@
+{
+  "allRes_TS": {
+    "series": [],
+    "chart": {
+      "type": "line",
+      "toolbar": {
+        "show": true
+      },
+      "animations":{
+        "enabled":false
+      }
+    },
+    "theme":{
+      "mode":"dark"
+    },
+    "colors": ["#25aedb", "#00b300", "#FFFF00", "#FF722F","#e53434"],
+    "stroke": {
+      "curve": "smooth"
+    },
+    "title": {
+      "text": "All Responses",
+      "align": "left"
+    },
+    "grid": {
+      "borderColor": "#e7e7e7"
+      
+    },
+    "markers": {
+      "size": 1
+    },
+    "xaxis": {
+      "type": "datetime"
+
+    },
+    "yaxis": {
+      "title": {
+        "text": "Responses"
+      }
+    },
+    "legend": {
+      "position": "bottom",
+      "horizontalAlign": "center",
+      "floating": false,
+      "offsetY": 5,
+      "offsetX": -5
+    }
+  }
+}

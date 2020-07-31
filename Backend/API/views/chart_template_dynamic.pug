@@ -1,0 +1,309 @@
+//chart template
+doctype html
+html
+    head
+        script(src='https://localhost:4000/Javascript/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/dynamic_chart.css')
+    script.
+        Apex = {
+            chart:{
+                toolbar:{
+                    show: false
+                }
+            },
+            tooltip:{
+                shared: false
+            },
+            legend:{
+                show: false
+            }
+        };
+
+        var colors=["#25aedb", "#00b300", "#FFFF00", "#FF722F","#e53434"];
+
+        //Set data from router here
+        var arrayData = !{option};
+
+        function makeData() {
+        var dataSet = arrayData;
+    
+        var dataYearSeries = [{
+              x: "Excellent",
+              y: dataSet[4].y,
+              color: colors[4],
+              quarters: dataSet[4].quarters
+            }, {
+              x: "Good",
+              y: dataSet[3].y,
+              color: colors[3],
+              quarters: dataSet[3].quarters
+            }, {
+              x: "Average",
+              y: dataSet[2].y,
+              color: colors[2],
+              quarters: dataSet[2].quarters
+            }, {
+              x: "Poor",
+              y: dataSet[1].y,
+              color: colors[1],
+              quarters: dataSet[1].quarters
+            }, {
+              x: "Bad",
+              y: dataSet[0].y,
+              color: colors[0],
+              quarters: dataSet[0].quarters
+            }];
+            return dataYearSeries;
+        } 
+
+        function updateQuarterChart(sourceChart, destChartIDToUpdate) {
+        var series = [];
+        var seriesIndex = 0;
+        var colors = []; 
+        if (sourceChart.w.globals.selectedDataPoints[0]) {
+          var selectedPoints = sourceChart.w.globals.selectedDataPoints;
+          for (var i = 0; i < selectedPoints[seriesIndex].length; i++) {
+            var selectedIndex = selectedPoints[seriesIndex][i];
+            var yearSeries = sourceChart.w.config.series[seriesIndex];
+            series.push({
+              name: yearSeries.data[selectedIndex].x,
+              data: yearSeries.data[selectedIndex].quarters
+            });
+            colors.push(yearSeries.data[selectedIndex].color);
+          }
+    
+          if (series.length === 0) series = [{ data: [] }]
+    
+          return ApexCharts.exec(destChartIDToUpdate, 'updateOptions', {
+              series: series,
+              colors: colors,
+              fill: {
+                colors: colors
+              }});
+            }
+        }
+    body(style="margin:0; padding:0")
+        div(id='wrap',style="max-width:device-width")
+            div(id='chart' )
+            div(id='chart-quarter')
+    script.
+        var device = "#{dtype}";
+        var options = {
+          series: [{
+          data: makeData()
+        }],
+          chart: {
+          id: 'barYear',
+          height: 400,
+          width: '100%',
+          type: 'bar',
+          toolbar: {
+        show: true
+      },
+          events: {
+            dataPointSelection: function (e, chart, opts) {
+              var quarterChartEl = document.querySelector("#chart-quarter");
+              var yearChartEl = document.querySelector("#chart");
+        
+              if (opts.selectedDataPoints[0].length === 1) {
+                if (quarterChartEl.classList.contains("active")) {
+                  updateQuarterChart(chart, 'barQuarter');
+                } else {
+                  yearChartEl.classList.add("chart-quarter-activated");
+                  quarterChartEl.classList.add("active");
+                  updateQuarterChart(chart, 'barQuarter');
+                }
+              } else {
+                updateQuarterChart(chart, 'barQuarter');
+              }
+        
+              if (opts.selectedDataPoints[0].length === 0) {
+                yearChartEl.classList.remove("chart-quarter-activated");
+                quarterChartEl.classList.remove("active");
+              }
+        
+            },
+            updated:  function (chart) {
+              updateQuarterChart(chart, 'barQuarter');
+            }
+          }
+        },
+        plotOptions: {
+          bar: {
+            distributed: true,
+            horizontal: true,
+            barHeight: '75%',
+            dataLabels: {
+              position: 'bottom'
+            }
+          }
+        },
+        theme:{
+          mode:'dark'
+        },
+        dataLabels: {
+          enabled: true,
+          textAnchor: 'start',
+          style: {
+            colors: ['#fff']
+          },
+          formatter: function (val, opt) {
+            return opt.w.globals.labels[opt.dataPointIndex];
+          },
+          offsetX: 0
+        },
+        
+        colors: colors,
+        
+        states: {
+          normal: {
+            filter: {
+              type: 'desaturate'
+            }
+          },
+          active: {
+            allowMultipleDataPointsSelection: true,
+            filter: {
+              type: 'darken',
+              value: 1
+            }
+          }
+        },
+        tooltip: {
+          x: {
+            show: false
+          },
+          y: {
+            title: {
+              formatter: function (val, opts) {
+                return opts.w.globals.labels[opts.dataPointIndex];
+              }
+            }
+          }
+        },
+        title: {
+          text: 'All Responses for Device '+device,
+          offsetX: 15
+        },
+        subtitle: {
+          text: '(Click on bar to see details)',
+          offsetX: 15
+        },
+        yaxis: {
+          labels: {
+            show: false
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+        var optionsQuarter = {
+          series: [{
+          data: []
+        }],
+          chart: {
+          id: 'barQuarter',
+          height: 400,
+          width: '100%',
+          type: 'bar',
+          zoom: {
+              enabled: true
+          },
+          stacked: true,
+          toolbar: {
+        show: true
+      }
+        },
+        plotOptions: {
+          bar: {
+            columnWidth: '80%',
+            horizontal: false
+          }
+        },
+       dataLabels: {
+          enabled: true,
+          textAnchor: 'start',
+          style: {
+            colors: ['#fff']
+          }
+          },
+        theme:{
+          mode:'dark'
+        },
+        legend: {
+          show: false
+        },
+        grid: {
+          yaxis: {
+            lines: {
+              show: false,
+            }
+          },
+          xaxis: {
+            lines: {
+              show: true,
+            }
+          }
+        },
+        yaxis: {
+          labels: {
+            show: true
+          }
+        },
+        title: {
+          text: 'By Area Responses',
+          offsetX: 10
+        },
+        tooltip: {
+          x: {
+            formatter: function (val, opts) {
+              return opts.w.globals.seriesNames[opts.seriesIndex]
+            }
+          },
+          y: {
+            title: {
+              formatter: function (val, opts) {
+                //- return opts.w.globals.labels[opts.dataPointIndex]
+            let percent = opts.w.globals.seriesPercent[opts.seriesIndex][opts.dataPointIndex];
+            percentage =  percent.toFixed(0) + '%'
+            return (opts.w.globals.labels[opts.dataPointIndex] + " (" + percentage + ")");
+              }
+            }
+          }
+        }
+        };
+
+        var chartQuarter = new ApexCharts(document.querySelector("#chart-quarter"), optionsQuarter);
+        chartQuarter.render();
+      
+      
+        chart.addEventListener('dataPointSelection', function (e, chart, opts) {
+        var quarterChartEl = document.querySelector("#chart-quarter");
+        var yearChartEl = document.querySelector("#chart");
+      
+        if (opts.selectedDataPoints[0].length === 1) {
+          if(quarterChartEl.classList.contains("active")) {
+            updateQuarterChart(chart, 'barQuarter');
+          }
+          else {
+            yearChartEl.classList.add("chart-quarter-activated")
+            quarterChartEl.classList.add("active");
+            updateQuarterChart(chart, 'barQuarter');
+          }
+        } else {
+            updateQuarterChart(chart, 'barQuarter');
+        }
+      
+        if (opts.selectedDataPoints[0].length === 0) {
+          yearChartEl.classList.remove("chart-quarter-activated");
+          quarterChartEl.classList.remove("active");
+        }
+      
+      });
+      
+      chart.addEventListener('updated', function (chart) {
+        updateQuarterChart(chart, 'barQuarter');
+      });

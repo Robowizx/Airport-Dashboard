@@ -1,0 +1,48 @@
+{   "heatmap" : {
+    "series": [],
+    "chart": {
+    "height": 400,
+    "type": "heatmap",
+    
+      "zoom":{
+        "enabled":false
+      },
+      "pan":{
+        "enabled":false
+      },
+      "selection":{
+        "enabled": false
+    }  
+    }, 
+    
+    "theme":{
+      "mode":"dark"
+    },
+    "dataLabels": {
+      "enabled": false
+      },
+      "colors": ["#E65100"], 
+    
+    "title": {
+      "style":{
+        "fontSize":"11pt"
+      },
+    "text": "Total Responses Heatmap"
+    },
+    "xaxis": {
+      "labels":{
+        "format": "dd-MMM-yy",
+        "offSetY": -10
+      },
+        "type": "datetime"
+      },
+      "yaxis":{
+        "title":{
+          "text":"Devices",
+          "style":{
+            "fontSize":"12px"
+        }
+        }
+      }
+    }
+  }

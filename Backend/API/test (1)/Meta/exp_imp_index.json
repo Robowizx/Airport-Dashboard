@@ -1,0 +1,54 @@
+{
+    "series": [],
+    "chart": {
+    "type": "bar",
+    "height": 430
+  },
+  "theme":{
+    "mode":"dark"
+  },
+  "colors":["#fb7756","#f7af08"],
+  "plotOptions": {
+    "bar": {
+      "horizontal": true,
+      "dataLabels": {
+        "position": "top"
+      }
+    }
+  },
+  "dataLabels": {
+    "enabled": true,
+
+    "offsetX": -6,
+    "style": {
+      "fontSize": "10px",
+      "colors": ["#fff"]
+    }
+  },
+  "tooltip": {
+    "enabled": true,
+    "y": {
+      "formatter": null
+    }
+  },
+  "stroke": {
+    "show": true,
+    "width": 1,
+    "colors": ["#fff"]
+  },
+  "xaxis": {
+    "categories": []
+  },
+  "legend": {
+    "onItemHover": {
+      "highlightDataSeries": true
+    },
+    "position": "bottom",
+    "horizontalAlign": "center"
+  },
+  "title": {
+    "text": "Exp and Imp Index",
+    "align": "left",
+    "floating": true
+  }
+}

@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.min.css')
+    body(style="width:100px")
+        div(id='chart',style="max-width:100%; padding-left:15px")
+    script.
+        var options = !{option};     
+        options.tooltip.y.title.formatter = ()=> { return "Exp" };
+      
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+      
+     

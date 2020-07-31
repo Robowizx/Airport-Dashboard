@@ -1,0 +1,15 @@
+doctype html
+html
+    head
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.19.3/apexcharts.min.css')
+    body()
+        div(id='chart',style="max-width:40px; padding-left:28px; padding-top:20px")
+    script.
+        var options = !{option};     
+      
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+      
+      
+     

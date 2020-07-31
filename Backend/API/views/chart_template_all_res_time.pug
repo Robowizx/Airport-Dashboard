@@ -1,0 +1,24 @@
+//chart template
+doctype html
+html
+    head
+        script(src='https://localhost:4000/Javascript/apexcharts.min.js')
+        link(rel='stylesheet',type='text/css',href='https://localhost:4000/CSS/apexcharts.css')
+    body
+        div(style="max-width:device-width; display:grid;grid-template-columns:47.5vw 47.5vw; grid-column-gap:1vw; padding:1vw")
+            - var ar = JSON.parse(area);
+                each item in ar
+                    div(id=`${item}`,style="max-width:device-width")
+    script.
+        var options = !{option};
+        var areas = !{area};
+        var series = !{series};
+        var dtype = "#{device}";
+
+        for(i=0;i<areas.length;i++){
+            let x = series.findIndex(a => a.id === areas[i]);
+            options.series = series[x].val;
+            options.title.text = `All Responses For ${areas[x]} ( ${dtype} )`;  
+            var chart = new ApexCharts(document.getElementById(`${areas[i]}`), options);
+            chart.render();
+        }

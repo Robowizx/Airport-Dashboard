@@ -1,0 +1,64 @@
+
+Best Airport-
+https://localhost:4000/Kolkata/prog/maxExp?date=2020-09-08
+
+Worst Airport-
+https://localhost:4000/Kolkata/prog/minExp?date=2020-09-08
+ 
+ All responses timeseries-
+https://localhost:4000/Kolkata/allRes_TS/?sdate=2020-09-07&edate=2020-09-29&type=SC
+
+device exp-
+https://localhost:4000/Kolkata/devExp/?date=2020-09-08
+
+Donut-
+https://localhost:4000/Kolkata/res_donut/?date=2020-09-08&type=SC
+
+exp series-
+https://localhost:4000/Kolkata/exp/by_device/?date=2020-09-07&type=SC
+
+Exp till date
+https://localhost:4000/Kolkata/exp_till_date/?sdate=2020-03-01&edate=2020-03-06&type=EI
+
+exp time series-
+https://localhost:4000/Kolkata/exp_series/by_device/?sdate=2020-08-09&edate=2020-09-07&type=SC
+
+Dynamic-
+https://localhost:4000/Kolkata/res/by_device/?date=2020-09-08&type=EI
+
+restime time series-
+https://localhost:4000/Kolkata/restime/by_device/?sdate=2020-03-01&edate=2020-03-06&type=EI
+
+Heat map time series-
+https://localhost:4000/Kolkata/total_resp/by_device/?sdate=2020-09-08&edate=2020-09-27
+
+Maxexp guage-
+https://localhost:4000/Kolkata/guage/maxExp?date=2020-09-08
+
+Minexp guage-
+https://localhost:4000/Kolkata/guage/minExp?date=2020-09-08
+
+Top and least-
+https://localhost:4000/Kolkata/top_and_least/?date=2020-08-08&type=EI
+
+Top and least time series-
+https://localhost:4000/Kolkata/top_least_timeseries/by_device/?sdate=2020-09-08&edate=2020-09-27&type=SC
+
+Spark_donut-
+https://localhost:4000/Kolkata/spark_donut/EI/?date=2020-09-03
+
+Spark_line-
+https://localhost:4000/Kolkata/spark_line/EI/?sdate=2020-09-03&edate=2020-09-27
+
+
+
+
+
+
+
+
+
+
+
+
+
