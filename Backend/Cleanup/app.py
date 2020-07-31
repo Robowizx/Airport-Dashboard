@@ -89,6 +89,17 @@ def extract(excel):
             'avg_imp_index': avg_imp_index,
             'all_responses': all_resp
         }
+    
+    generals = {
+            'device_name': types,
+            'rank': rank,
+            'total_devices': total_devices,
+            'active_surveys': active_surveys,
+            'total_resp_till_date': total_resp_till_date,
+            'exp': all_resp[0]['Exp Index'],
+            'avg_exp_index': exp_index_till_date,
+            'avg_imp_index': avg_imp_index
+        }
 
     ### data ###
     data = {
@@ -152,6 +163,88 @@ def extract(excel):
     connect(airport_name,data)
 #     print(data)
 
+    ### Updating Meta and checking for airport Details ###
+    check_meta(airport_name,exp_index_till_date,dates,generals)
+
+    ### Updating the Meta function ###
+def check_meta(airport_name, expData, date,generals):
+    total = 0
+    c = 0
+    URL = ("mongodb+srv://{}:{}@cluster0-qkpve.mongodb.net/test?retryWrites=true&w=majority").format(os.environ.get("UNAME"),os.environ.get("PASS"))
+    cluster = MongoClient(URL)
+    db = cluster["AirportDB"]
+    mycol = db["Meta"]
+    x = mycol.find_one({"name":airport_name})
+    if(x):
+        counter = False
+        for dev in x['devices']:
+            if(dev['device_name']==generals['device_name']):
+                mycol.update_one({"name":airport_name,"devices":{"$elemMatch": { "device_name": generals['device_name']}}}, {"$set": {"devices.$": generals}})
+                counter = True
+            total = total + dev['avg_exp_index']       
+        if(not counter):
+            mycol.update_one({"name":airport_name},{"$push":{"devices":generals}})
+            total = total + expData
+            c = 1
+            
+        exp = total/(len(x['devices'])+c)       
+        myquery = {"name":airport_name}
+        newvalues = { "$set": { "exp": exp } }
+        mycol.update_one(myquery, newvalues)
+    else:
+        details = get_details(airport_name, expData, generals)
+        mycol.insert_one(details)
+    check_dev = mycol.find_one({"_id":"device"})
+    if generals['device_name'] not in check_dev['device_names']:
+        mycol.update_one({"_id":"device"},{"$push":{"device_names":generals['device_name']}})
+
+
+    ### Getting Details for airport from .txt file ###
+def search_string_in_file(file_name, string_to_search):
+    """Search for the given string in file and return lines containing that string,
+    along with line numbers"""
+    line_number = 0
+    list_of_results = []
+    # Open the file in read only mode
+    with open(file_name, 'r') as read_obj:
+        # Read all lines in the file one by one
+        for line in read_obj:
+            # For each line, check if line contains the string
+            line_number += 1
+            if string_to_search in line:
+                # If yes, then add the line number & line as a tuple in the list
+                list_of_results.append((line_number, line.rstrip()))
+    # Return list of tuples containing line numbers and lines where string is found
+    return list_of_results
+
+
+    ### Placing arranging details for Meta collection ###
+def get_details(airport, exp, generals):
+    txt = (search_string_in_file('./finalAirportDetails.txt',airport))
+    if(not txt):
+        print("doesnt exist")
+    else:
+        airports = (txt)[0][1].rsplit(",", -1)
+        if('International' in airports[1]):
+            atype = "int"
+        else:
+            atype = "dom"
+        data = {'name': airport,
+                'airport_name': airports[1].strip('"'),
+                'code':airports[4].strip('"'),
+                'atype': atype,
+                'location': {
+                    'lat': float(airports[6]),
+                    'long': float(airports[7])
+                  },
+                'state':airports[-1].strip('"'),
+                'exp':exp,
+                'devices': [generals]
+               }
+    return data
+
+
+    ### Cleaning data and removing NAN ###
 def cleanNull(data):
     cleanData = []
     for d in data:
@@ -169,13 +262,11 @@ def cleanNull(data):
         cleanData.append(clean)
     return cleanData
 
-
+    ### Connecting to mongodb collection airport ###
 def connect(airport_name,data):
-    URL = ("mongodb+srv://{}:{}@cluster0-qkpve.mongodb.net/test?retryWrites=true&w=majority").format(os.environ.get("user"),os.environ.get("pass"))
+    URL = ("mongodb+srv://{}:{}@cluster0-qkpve.mongodb.net/test?retryWrites=true&w=majority").format(os.environ.get("UNAME"),os.environ.get("PASS"))
     cluster = MongoClient(URL)
     db = cluster["AirportDB"]
     collection = db[airport_name]
     collection.insert_one(data)
 
-if __name__ == '__main__':
-    app.run()

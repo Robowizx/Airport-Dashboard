@@ -5,8 +5,10 @@
 /Frontend/front_pkey.key
 #env file
 /Backend/API/.env
+/Backend/Cleanup/.env
 #logs
 /Backend/API/server.log
+/Backend/Cleanup/__pycache__
 
 #certificates and keys
 /Backend/API/backend_certificate.crt
